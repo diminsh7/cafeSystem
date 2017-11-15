@@ -9,12 +9,6 @@ public class ContractService {
 	private ContractDao contractDao;
 	public int insertContract(Contract contract) {
 		
-		contract.setContractOwnerName(contract.getContractOwnerName());
-		contract.setContractShopName(contract.getContractShopName());
-		contract.setContractOwnerPhone(contract.getContractOwnerPhone());
-		contract.setContractStartDate(contract.getContractStartDate());
-		contract.setContractEndDate(contract.getContractEndDate());
-		contract.setContractPhoto(contract.getContractPhoto());
 		return contractDao.insertContract(contract);
 	}
 }
