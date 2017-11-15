@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+	"-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="layout" template="/WEB-INF/views/layout/layout.jsp">
+		<put-attribute name="menuquick" 	value="/WEB-INF/views/layout/menu_quickinfo.jsp" />
+		<put-attribute name="sidebar" 		value="/WEB-INF/views/layout/sidebar_menu.jsp" />
+		<put-attribute name="menufooter" 	value="/WEB-INF/views/layout/menu_footer_buttons.jsp" />
+		<put-attribute name="topnavi" 		value="/WEB-INF/views/layout/top_navigation.jsp"/>
+		<put-attribute name="footer" 		value="/WEB-INF/views/layout/footer_content.jsp"/>
+	</definition>
+	
+	<!-- 필요없는것 같아서 주석처리 -->
+	<!-- <definition name="/" extends="layout">
+		<put-attribute name="contents" value="/WEB-INF/views/home.jsp" />
+	</definition> -->
+	<definition name="*" extends="layout">
+		<put-attribute name="contents" value="/WEB-INF/views/{1}.jsp" />
+	</definition>
+	<definition name="*/*" extends="layout">
+		<put-attribute name="contents" value="/WEB-INF/views/{1}/{2}.jsp" />
+	</definition>
+	<definition name="*/*/*" extends="layout">
+		<put-attribute name="contents" value="/WEB-INF/views/{1}/{2}/{3}.jsp" />
+	</definition>
+</tiles-definitions>
+	

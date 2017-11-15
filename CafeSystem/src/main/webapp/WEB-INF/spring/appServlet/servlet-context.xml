@@ -6,9 +6,6 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing 
-		infrastructure -->
-
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<mvc:annotation-driven />
 
@@ -16,34 +13,45 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
-	<bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/views/" />
-		<property name="suffix" value=".jsp" />
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="0" />
 	</bean>
-	<!-- commons dbcp를 사용하여 커넥션 풀 생성 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${db.driver}" />
-		<property name="url" value="${db.url}" />
-		<property name="username" value="${db.username}" />
-		<property name="password" value="${db.password}" />
-	</bean>
-	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
-	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-		mybatis 세션생성시 사용할 dataSource주입
-		<property name="dataSource" ref="dataSource" />
-		mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정
-		<property name="mapperLocations">
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
 			<list>
-				<value>classpath:cafe/jjdev/ex05/dao/DicMapper.xml</value>
+				<value>/WEB-INF/tiles/definitions.xml</value>
 			</list>
 		</property>
-	</bean> -->
+	</bean>
+
+	<!-- tiles를 사용함으로써 이 부분은 필요없어져서 주석처리 -->
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<!-- <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"> 
+		<property name="prefix" value="/WEB-INF/views/" /> <property name="suffix" 
+		value=".jsp" /> <property name="order" value="1" /> </bean> -->
+
+	<!-- commons dbcp를 사용하여 커넥션 풀 생성 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url"
+			value="jdbc:mysql://192.168.123.174:3306/test_cafesystem" />
+		<property name="username" value="cafesystem" />
+		<property name="password" value="emdkdk25!" />
+	</bean>
+	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
+	<!-- <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+		mybatis 세션생성시 사용할 dataSource주입 <property name="dataSource" ref="dataSource" 
+		/> mybatis 세션생성후 쿼리를 실행시킬때 사용할 쿼리위치(메퍼)설정 <property name="mapperLocations"> 
+		<list> <value>classpath:cafe/jjdev/ex05/dao/DicMapper.xml</value> </list> 
+		</property> </bean> -->
 	<!-- mybatis를 사용하여 db에접속하여 쿼리를 보내는 주체인 SqlSessionTemplate빈 생성 -->
-<!-- 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg index="0" ref="sqlSessionFactory" />
-	</bean> -->
+	<!-- <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"> 
+		<constructor-arg index="0" ref="sqlSessionFactory" /> </bean> -->
 	<context:component-scan base-package="com.caffeesys.cafesystem" />
 </beans>
