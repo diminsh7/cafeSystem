@@ -8,6 +8,7 @@ public class AccountTitleService {
 	@Autowired
 	private AccountTitleDao accountTitleDao;
 	public int insertAccountTitle(AccountTitle accountTitle) {
+		System.out.println("AccountTitleService.java / AccountTitle Param accountTitle :" + accountTitle);
 		return accountTitleDao.insertAccountTitle(accountTitle);
 	}
 }
