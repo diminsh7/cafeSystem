@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.employee.service.BranchManagerMapper">
+	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManager" id="resultBranchManager">
+		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
+		<result property="localCategoryCode" column="local_category_code"/><!-- 지역코드 -->
+		<result property="shopCode" column="shop_code"/><!-- 매장코드 -->
+		<result property="positionCategoryCode" column="position_category_code"/><!-- 직급코드 -->
+		<result property="branchEmployeeId" column="branch_employee_id"/><!-- 아이디 -->
+		<result property="branchEmployeeName" column="branch_employee_name"/><!-- 이름 -->
+		<result property="branchEmployeeBirth" column="branch_employee_birth"/><!-- 생년월일 -->
+		<result property="branchEmployeePhone" column="branch_employee_phone"/><!-- 연락처 -->
+		<result property="branchEmployeeAddress" column="branch_employee_address"/><!-- 주소 -->
+		<result property="branchEmployeeCetificate" column="branch_employee_cetificate"/><!-- 보건증 -->
+		<result property="branchManagerWorknum" column="branch_manager_worknum"/><!-- 사업자번호 -->
+		<result property="branchManagerStart" column="branch_manager_start"/><!-- 사업시작일 -->
+		<result property="branchManagerBank" column="branch_manager_bank"/><!-- 사업계좌은행명 -->
+		<result property="branchManagerBanknum" column="branch_manager_banknum"/><!-- 사업계좌번호 -->
+	</resultMap>
+
+	<select id="selcetByLocalCode" resultMap="resultBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
+		SELECT DISTINCT 
+		category.category_small
+		FROM
+		shop INNER JOIN category
+		ON
+		shop.local_category_code = category.category_code
+	</select>
+
+</mapper>
