@@ -12,12 +12,12 @@
 <body>
 	<form action="./insertContract" method="post" align="center">
 		<table border="1" align="center">
-			<!-- 
+			
 			<tr>
 				<td>계약코드</td>
 				<td></td>
 			</tr>
-			 -->
+			 
 			<tr>
 				<td>소유자명</td>
 				<td><input type="text" name="contract_owner_name"></td>
