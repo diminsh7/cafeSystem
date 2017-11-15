@@ -51,7 +51,7 @@
 			<list>
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ContractMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
-				<!-- <value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value> -->
+				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
 			</list>
 		</property>
 	</bean>

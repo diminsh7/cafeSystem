@@ -22,7 +22,7 @@ public class AccountTitleController {
 	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.POST)
 	public String insertAccountTitle(AccountTitle accountTitle) {
 		System.out.println("[AccountTitleController.java / insertAccountTitle method] : insert proccess");
-		System.out.println("AccountTitle Param accountTitle : " + accountTitle);
+		System.out.println("AccountTitleController.java / AccountTitle Param accountTitle : " + accountTitle);
 		accountTitleService.insertAccountTitle(accountTitle);
 		return "redirect:/accountTitleList";	// = response.sendRedirect("/accountTitleList");
 	}
