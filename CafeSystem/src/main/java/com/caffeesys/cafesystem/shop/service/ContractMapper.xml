@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.shop.service.ContractMapper">
+	<resultMap type="com.caffeesys.cafesystem.shop.service.Contract" id="resultContract">
+		<result property="contractCode" column="contract_code" />
+		<result property="contractOwnerName" column="contract_owner_name" />
+		<result property="contractShopName" column="contract_shop_name" />
+		<result property="contractOwnerPhone" column="contract_owner_phone" />
+		<result property="contractStartDate" column="contract_start_date" />
+		<result property="contractEndDate" column="contract_end_date" />
+		<result property="contractPhoto" column="contract_photo" />
+	</resultMap>
+	<!-- 계약서등록 -->
+	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
+		INSERT INTO contract (contract_code, contract_owner_name, contract_shop_name, contract_owner_phone, contract_start_date, contract_end_date, contract_photo)
+		VALUES (#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}, contract_start_date, contract_end_date, #{contractPhoto})
+	</insert>
+	<!-- 계약서수정 -->
+	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
+		UPDATE contract
+		SET contract_owner_name=#{contractOwnerName}, contract_shop_name=#{contractShopName}, contract_owner_phone=#{contractOwnerPhone}
+		, contract_start_date=#{contractStartDate}, contract_end_date=#{contractEndDate}, contract_photo=#{contractPhoto}
+		WHERE contract_code=#{contractCode}
+	</update>
+	<!-- 전체게약서조회 -->
+	<select id="listContract" resultMap="resultContract">
+		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+		FROM contract
+	</select>
+	<!-- 선택지점계약서상세조회 -->
+	<select id="detailContract" resultMap="resultContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
+		SELECT * FROM contract
+		WHERE contract_code=#{contractCode}
+	</select>
+</mapper>
