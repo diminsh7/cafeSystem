@@ -15,7 +15,8 @@ public class AccountTitleController {
 	
 	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.GET)
 	public String insertAccountTitle() {
-		return "insertAccountTitle";
+		System.out.println("AccountTitleController.java / insertAccountTitle method get방식 ");
+		return "/account/accountTitleInsertForm";
 	}
 	
 	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.POST)
