@@ -14,6 +14,7 @@ public class AccountTitleDao {
 	
 	//계정과목 등록
 	public int insertAccountTitle(AccountTitle accountTitle) {
+		System.out.println("AccountTitleDao.java / insertAccountTitle Param accountTitle: "+accountTitle);
 		return sqlSessionTemplate.insert(NS+"insertAccountTitle", accountTitle);
 	}
 }
