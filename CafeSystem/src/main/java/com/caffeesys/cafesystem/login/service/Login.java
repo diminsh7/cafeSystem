@@ -1,9 +1,16 @@
 package com.caffeesys.cafesystem.login.service;
 
 public class Login {
+	private String division;
 	private String id;
 	private String pw;
 	
+	public String getDivision() {
+		return division;
+	}
+	public void setDivision(String division) {
+		this.division = division;
+	}
 	public String getId() {
 		return id;
 	}
@@ -19,6 +26,6 @@ public class Login {
 	
 	@Override
 	public String toString() {
-		return "Login [id=" + id + ", pw=" + pw + "]";
+		return "Login [division=" + division + ", id=" + id + ", pw=" + pw + "]";
 	}
 }
