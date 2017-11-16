@@ -17,4 +17,11 @@ public class AccountTitleDao {
 		System.out.println("AccountTitleDao.java / insertAccountTitle Param accountTitle: "+accountTitle);
 		return sqlSessionTemplate.insert(NS+"insertAccountTitle", accountTitle);
 	}
+	
+	//account_title_code의 최대값 갖고오기
+	public int selectAccountMax() {
+		System.out.println("AccountTitleDao.java / selectAccountMax method 확인");
+		
+		return sqlSessionTemplate.selectOne(NS+"selectAccountMax");
+	}
 }

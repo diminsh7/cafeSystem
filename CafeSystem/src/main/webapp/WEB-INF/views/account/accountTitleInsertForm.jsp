@@ -43,7 +43,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form action="./insertAccountTitle" method="post" class="form-horizontal form-label-left" novalidate>
+                    <form action="./selectAccountMax" method="post" class="form-horizontal form-label-left" novalidate>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">계정과목명<span class="required">*</span>
                         </label>
