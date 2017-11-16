@@ -20,13 +20,42 @@
 		<result property="branchManagerBanknum" column="branch_manager_banknum"/><!-- 사업계좌번호 -->
 	</resultMap>
 
-	<select id="selcetByLocalCode" resultMap="resultBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
-		SELECT DISTINCT 
-		category.category_small
-		FROM
-		shop INNER JOIN category
-		ON
-		shop.local_category_code = category.category_code
+	<select id="insertBranchImployeeB" resultMap="resultBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
+		INSERT INTO branch_employee
+			(branch_employee_code, local_category_code, shop_code, position_category_code, branch_employee_id, branch_employee_name, branch_employee_birth, branch_employee_phone, branch_employee_address, branch_employee_cetificate)
+		VALUES 
+			('#{branchEmployeeCode}', 
+			'#{localCategoryCode}', 
+			'#{shopCode}', 
+			'#{positionCategoryCode}', 
+			'#{branchEmployeeId}', 
+			'#{branchEmployeeName}', 
+			'#{branchEmployeeBirth}', 
+			'#{branchEmployeePhone}', 
+			'#{branchEmployeeAddress}', 
+			'#{branchEmployeeCetificate}')	
 	</select>
+	<select id="insertBranchManager" resultMap="resultBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
+		INSERT INTO branch_manager
+			(branch_employee_code, branch_manager_worknum, branch_manager_start, branch_manager_bank, branch_manager_banknum)
+		VALUES 
+			('#{branchEmployeeCode}', 
+			'#{branchManagerWorknum}', 
+			'#{branchManagerStart}', 
+			'#{branchManagerBank}', 
+			'#{branchManagerBanknum}')
+	</select>
+	
+	<select id="selectBranchEmployeeManager" resultMap="resultBranchManager">
+		SELECT 
+			branch_employee_code,
+			branch_employee_id,
+			branch_employee_name,
+			branch_employee_birth 
+		FROM 
+			branch_employee
+	</select>
+	
+	
 
 </mapper>
