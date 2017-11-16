@@ -22,7 +22,7 @@
 								Text areas<small>Sessions</small>
 							</h2>
 							<div class="clearfix"></div>
-						</div>
+						</div> 
 						<div class="form-group"> <!-- 카테고리&제목 입력  -->
 							<select class="col-md-1 col-sm-1 col-xs-12 form-control" name="claimCategoryCode">
 								<option>1</option>

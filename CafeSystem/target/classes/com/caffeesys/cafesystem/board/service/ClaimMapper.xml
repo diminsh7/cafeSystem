@@ -12,7 +12,7 @@
 		<result property="customerClaimDate" column="customer_claim_date"/>
 		<result property="customerClaimFile" column="customer_claim_file"/>
 		<result property="headEmployeeAdmin" column="head_employee_admin"/>
-	</resultMap>
+	</resultMap> 
 	
 	<select id="selectAllClaim" resultMap="resultClaim">
 		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin FROM customer_claim

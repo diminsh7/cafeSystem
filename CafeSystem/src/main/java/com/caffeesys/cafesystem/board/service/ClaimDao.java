@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ClaimDao {
+public class ClaimDao { 
 	private final String NS = "com.caffeesys.cafesystem.board.service.ClaimMapper.";
 	
 	@Autowired

@@ -12,7 +12,7 @@ import com.caffeesys.cafesystem.board.service.Claim;
 import com.caffeesys.cafesystem.board.service.ClaimDao;
 
 @Controller
-public class ClaimController {
+public class ClaimController { 
 	@Autowired
 	private ClaimDao claimDao;
 

@@ -6,7 +6,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>
-					CLAIM <small>고객 클레임</small>
+					CLAIM <small>고객 클레임</small> 
 				</h3>
 			</div>
 
