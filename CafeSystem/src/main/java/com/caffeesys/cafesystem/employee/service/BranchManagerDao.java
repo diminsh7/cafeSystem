@@ -15,10 +15,18 @@ public class BranchManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	// Áö¿ªÄÚµåÁ¶È¸
-	public List<BranchManager> selectBranchManagerbyLocalCode() {
-		System.out.println("[BranchManagerDao] ¸Å¼Òµå½ÇÇà");
-		return sqlSessionTemplate.selectList(NS + "selcetByLocalCode");
+	// ì§€ì ì¥ì…ë ¥
+	public int insertBranchManager(BranchManager branchManager) {
+		System.out.println("[BranchManagerDao] ì‹¤í–‰");
+		return sqlSessionTemplate.insert(NS + "insertBranchImployeeB");
 	}
+	
+	//ì§€ì ì¥ ë¦¬ìŠ¤íŠ¸
+	public List<BranchManager> selectBranchManager() {
+		System.out.println("[BranchManagerDao.selectBranchManager] ì‹¤í–‰");
+		return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeManager");
+	}
+
+	
 
 }

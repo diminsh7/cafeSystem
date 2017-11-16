@@ -2,22 +2,22 @@ package com.caffeesys.cafesystem.employee.service;
 
 public class BranchManager {
 
-	private String branchEmployeeCode; //Á÷¿øÄÚµå
-	private String localCategoryCode; //Áö¿ªÄÚµå
-	private String shopCode; //¸ÅÀåÄÚµå
-	private String positionCategoryCode; //Á÷±ŞÄÚµå
-	private String branchEmployeeId; //¾ÆÀÌµğ
-	private String branchEmployeeName; //ÀÌ¸§
-	private int branchEmployeeBirth; //»ı³â¿ùÀÏ
-	private String branchEmployeePhone; //¿¬¶ôÃ³
-	private String branchEmployeeAddress; //ÁÖ¼Ò
-	private String branchEmployeeCetificate; //º¸°ÇÁõ
-	private String branchManagerWorknum; //»ç¾÷ÀÚ¹øÈ£
-	private String branchManagerStart; //»ç¾÷½ÃÀÛÀÏ
-	private String branchManagerBank; //»ç¾÷°èÁÂÀºÇà¸í
-	private String branchManagerBanknum; //»ç¾÷°èÁÂ¹øÈ£
+	private String branchEmployeeCode; //ì§ì›ì½”ë“œ
+	private String localCategoryCode; //ì§€ì—­ì½”ë“œ
+	private String shopCode; //ë§¤ì¥ì½”ë“œ
+	private String positionCategoryCode; //ì§ê¸‰ì½”ë“œ
+	private String branchEmployeeId; //ì•„ì´ë””
+	private String branchEmployeeName; //ì´ë¦„
+	private int branchEmployeeBirth; //ìƒë…„ì›”ì¼
+	private String branchEmployeePhone; //ì—°ë½ì²˜
+	private String branchEmployeeAddress; //ì£¼ì†Œ
+	private String branchEmployeeCetificate; //ë³´ê±´ì¦
+	private String branchManagerWorknum; //ì‚¬ì—…ìë²ˆí˜¸
+	private String branchManagerStart; //ì‚¬ì—…ì‹œì‘ì¼
+	private String branchManagerBank; //ì‚¬ì—…ê³„ì¢Œì€í–‰ëª…
+	private String branchManagerBanknum; //ì‚¬ì—…ê³„ì¢Œ
 	
-	//°Ù¼Â
+	//ê²Ÿì…‹
 	public String getBranchEmployeeCode() {
 		return branchEmployeeCode;
 	}
