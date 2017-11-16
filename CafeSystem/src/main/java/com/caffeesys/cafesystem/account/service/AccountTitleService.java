@@ -23,7 +23,7 @@ public class AccountTitleService {
 				System.out.println("AccountTitleService.java/ insertAccountTitle result1 :"+result); //12
 				result = result + 1;
 				System.out.println("AccountTitleService.java/ insertAccountTitle result2 :"+result); //13
-				result_no = String.format("%03d", result);
+				result_no = String.format("%03d", result);//자리수 맞추기
 				System.out.println("AccountTitleService.java/ insertAccountTitle result3 :"+result_no); //013
 			}
 			accountcode = account_title_code_temp+ result_no; //ACNT_ + 013
