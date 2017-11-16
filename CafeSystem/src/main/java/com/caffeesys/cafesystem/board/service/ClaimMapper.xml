@@ -4,12 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.board.service.ClaimMapper">
 	<resultMap type="com.caffeesys.cafesystem.board.service.Claim" id="resultClaim">
-		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
+		<result property="customerClaimCode" column="customer_claim_code"/> <!-- 클레임 관리코드(PK) -->
+		<result property="claimCategoryCode" column="claim_category_code"/>
+		<result property="employeeCode" column="employee_code"/>
+		<result property="customerClaimTitle" column="customer_claim_title"/>
+		<result property="customerClaimContents" column="customer_claim_contents"/>
+		<result property="customerClaimDate" column="customer_claim_date"/>
+		<result property="customerClaimFile" column="customer_claim_file"/>
+		<result property="headEmployeeAdmin" column="head_employee_admin"/>
 	</resultMap>
+	
+	<select id="selectAllClaim" resultMap="resultClaim">
+		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin FROM customer_claim
+	</select>
 
 	<insert id="insertClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
 		INSERT INTO customer_claim 
-		(customer_claim_code, category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, ehead_employee_admin)
+		(customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin)
 		VALUES (#{customerClaimCode}, #{claimCategoryCode}, #{employeeCode}, #{customerClaimTitle}, #{customerClaimContents}, now(), #{customerClaimFile}, #{headEmployeeAdmin})
 	</insert>
 </mapper>
