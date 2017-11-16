@@ -10,14 +10,14 @@
 <title>Contract 가맹계약서 등록페이지</title>
 </head>
 <body>
-	<form action="./insertContract" method="post">
-		<table border="1">
-			<!-- 
+	<form action="./insertContract" method="post" align="center">
+		<table border="1" align="center">
+			
 			<tr>
 				<td>계약코드</td>
 				<td></td>
 			</tr>
-			 -->
+			 
 			<tr>
 				<td>소유자명</td>
 				<td><input type="text" name="contract_owner_name"></td>
@@ -41,10 +41,9 @@
 			<tr>
 				<td>계약서사진</td>
 				<td><input type="file" name="contract_photo"></td>
-			<tr>
-				<td colspan="4"><input type="submit" value="등록"></td>
 			</tr>
 		</table>
+		<input type="submit" value="등록">
 	</form>
 </body>
 </html>

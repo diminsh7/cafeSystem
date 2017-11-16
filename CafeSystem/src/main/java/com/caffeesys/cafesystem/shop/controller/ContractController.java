@@ -21,8 +21,8 @@ public class ContractController {
 	// 등록페이지 요청
 	@RequestMapping(value = "/insertContract", method = RequestMethod.GET)
 	public String insertContract() {
-		System.out.println("ContractController.java / insertContract form 요청");
-		return "shop/contract_insert_form";
+		System.out.println("ContractController.java / insertContract 폼 요청");
+		return "/shop/contractInsertForm";
 	}
 	// 등록(액션) 요청
 	@RequestMapping(value = "/insertContract", method = RequestMethod.POST)
