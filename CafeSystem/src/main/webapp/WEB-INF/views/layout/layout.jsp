@@ -21,6 +21,8 @@
 <link href="<c:url value="/resources/vendors/nprogress/nprogress.css" />" rel="stylesheet">
 <!-- iCheck -->
 <link href="<c:url value="/resources/vendors/iCheck/skins/flat/green.css" />" rel="stylesheet">
+<!-- Animate.css -->
+<link href="<c:url value="/resources/vendors/animate.css/animate.min.css" />" rel="stylesheet">
 <!-- bootstrap-progressbar -->
 <link href="<c:url value="/resources/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" />" rel="stylesheet">
 <!-- JQVMap -->
@@ -37,7 +39,7 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.html" class="site_title"><i class="fa fa-paw"></i>
+						<a href="index.html" class="site_title"><i class="fa fa-coffee"></i>
 							<span>Bean Place</span></a>
 					</div>
 
