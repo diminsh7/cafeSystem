@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<script>
+	$(document).ready(){
+		
+	}
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -14,7 +19,7 @@
 							Text areas<small>Sessions</small>
 						</h2>
 						<div class="col-md-12 col-sm-12 col-xs-12 form-group">
-                   			<input type="text" placeholder=".col-md-12" class="form-control">
+                   			<input type="text" placeholder="제목을 입력해주세요" class="form-control">
                		  	</div>
 						<div class="clearfix"></div>
 					</div>
@@ -80,14 +85,17 @@
 						</div>
 						<div id="editor-one" class="editor-wrapper"></div>
 						<textarea name="descr" id="descr" style="display:none;"></textarea>
+						<br/>
+						<button>취소</button>
+						<button>등록</button>
 						<br />
 
 						<div class="ln_solid"></div>
 
 						<div class="form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12">Comment</label>
-							<div class="col-md-9 col-sm-9 col-xs-12">
-								<textarea class="resizable_textarea form-control" placeholder="This text area automatically resizes its height as you fill in more text courtesy of autosize-master it out..."></textarea>
+							<label class="control-label col-md-2 col-sm-2 col-xs-12">Comment</label>
+							<div class="col-md-10 col-sm-10 col-xs-12">
+								<textarea class="resizable_textarea form-control" placeholder="담당자 입력"></textarea>
 							</div>
 						</div>
 					</div>

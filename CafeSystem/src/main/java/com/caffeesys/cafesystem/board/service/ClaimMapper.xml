@@ -3,10 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.board.service.ClaimMapper">
-	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManager" id="resultBranchManager">
+	<resultMap type="com.caffeesys.cafesystem.board.service.Claim" id="resultClaim">
 		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
 	</resultMap>
 
-	<select id="selcetByLocalCode" resultMap="resultBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
-	</select>
+	<insert id="insertClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+		INSERT INTO customer_claim 
+		(customer_claim_code, category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, ehead_employee_admin)
+		VALUES (#{customerClaimCode}, #{claimCategoryCode}, #{employeeCode}, #{customerClaimTitle}, #{customerClaimContents}, now(), #{customerClaimFile}, #{headEmployeeAdmin})
+	</insert>
 </mapper>
