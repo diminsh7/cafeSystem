@@ -13,13 +13,15 @@ public class AccountTitleController {
 	@Autowired
 	private AccountTitleService accountTitleService;
 	
-	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.GET)
+	@RequestMapping(value="/selectAccountMax", method = RequestMethod.GET)
 	public String insertAccountTitle() {
 		System.out.println("AccountTitleController.java / insertAccountTitle method get방식 ");
 		return "/account/accountTitleInsertForm";
 	}
 	
-	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.POST)
+	//폼에서 입력한것을 받아오면 accountTitleCode는 null값이고, 나머지는 입력한 값이 넘어온다. 
+	//계정과목 insert 작업
+	@RequestMapping(value="/selectAccountMax", method = RequestMethod.POST)
 	public String insertAccountTitle(AccountTitle accountTitle) {
 		System.out.println("[AccountTitleController.java / insertAccountTitle method] : insert proccess");
 		System.out.println("AccountTitleController.java / AccountTitle Param accountTitle : " + accountTitle);
