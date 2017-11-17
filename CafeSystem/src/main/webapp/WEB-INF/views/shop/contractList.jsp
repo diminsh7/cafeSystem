@@ -2,13 +2,8 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page isELIgnored="false" %>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Contract 가맹계약서 전체조회</title>
-</head>
 <%request.setCharacterEncoding("utf-8");%>
-<body>
+
 	<table border = "1">
 		<tr>
 			<th>계약코드</th>
@@ -34,5 +29,3 @@
 			</tr>	
 		</c:forEach>
 	</table>
-</body>
-</html>
