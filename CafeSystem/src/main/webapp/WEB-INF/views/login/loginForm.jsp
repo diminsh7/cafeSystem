@@ -1,10 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+		$('#loginButton').click(function(){
+			var len = $('input[name="division"]:checked').length;
+			if(len > 0){
+				$('#login').submit();
+			}else{
+				alert('본사 혹은 지점을 선택하세요.');
+				$('inpit[name="division"]').eq(0).focus();
+				return false;
+			}
+		});
+	});
+	
+</script>
+
 <div class="right_col" role="main">
 	<div class="login_wrapper">
 		<div class="animate form login_form">
 			<section class="login_content">
-				<form id="login" method="post">
+				<form id="login" action="/login" method="post" >
 					<h1>Login</h1>
 					<div>
 						<div>
@@ -31,7 +49,7 @@
 							placeholder="Password" />
 					</div>
 					<div>
-						<a class="btn btn-primary" href="javascript:login.submit();">log in</a>
+						<button type="button" class="btn btn-primary" id="loginButton" >log in</button>
 					</div>
 
 					<div class="clearfix"></div>

@@ -31,6 +31,9 @@
 <link href="<c:url value="/resources/vendors/bootstrap-daterangepicker/daterangepicker.css" />" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="<c:url value="/resources/build/css/custom.min.css" />" rel="stylesheet">
+<!-- jQuery -->
+<script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js" />"></script>
+
 </head>
 
 <body class="nav-md">
@@ -56,9 +59,7 @@
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
-	
-<!-- jQuery -->
-<script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js" />"></script>
+
 <!-- Bootstrap -->
 <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.min.js" />"></script>
 <!-- FastClick -->

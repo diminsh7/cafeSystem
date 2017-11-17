@@ -52,7 +52,8 @@
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ContractMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/board/service/ClaimMapper.xml</value> 
+				<value>classpath:com/caffeesys/cafesystem/board/service/ClaimMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
 			</list>
 		</property>
 	</bean>
