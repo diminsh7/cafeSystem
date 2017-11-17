@@ -28,11 +28,14 @@ public class ContractController {
 		contractService.insertContract(contract);
 		return "redirect:/contractList";
 	}
-	// 전체게약서조회	
+	// 전체게약서조회 상세전
 	@RequestMapping(value="/contractList")
 	public String listContract(Model model) {
 		System.out.println("ContractController.java / listContract method 확인");
 		contractService.listContract(model);
 		return "/shop/contractList";
 	}
+	// 계약서수정 페이지요청
+	
+	// 계약서수정 (액션)요청
 }

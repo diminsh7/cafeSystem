@@ -20,7 +20,6 @@
 		) VALUES (
 			#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}
 			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto})
-		<!-- date 유형변경 -->
 	</insert>
 	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 select -->
 	<select id="selectContractMax" resultType="Integer">
@@ -32,4 +31,12 @@
 		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
 		FROM contract
 	</select>
+	<!-- 계약서수정 -->
+	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
+		UPDATE contract
+		SET contract_owner_name = #{contractOwnerName}, contract_shop_name = #{contractShopName}
+		, contract_owner_phone = #{contractOwnerPhone}, contract_start_date = #{contractStartDate}
+		, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
+		WHERE contract_code = #{contractCode}
+	</update>
 </mapper>
