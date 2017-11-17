@@ -8,7 +8,7 @@
 		})
 	})
 </script>
-<form id="claimInsertForm" action="${pageContext.request.contextPath}/insertClaim" method="post">
+<form id="claimInsertForm" action="${pageContext.request.contextPath}/claimInsert" method="post">
 	<div class="right_col" role="main">
 		<div class="">
 			<div class="page-title">
@@ -18,9 +18,7 @@
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="x_panel">
 						<div class="x_title">
-							<h2>
-								Text areas<small>Sessions</small>
-							</h2>
+							<h2>Text areas<small>Sessions</small></h2>
 							<div class="clearfix"></div>
 						</div> 
 						<div class="form-group"> <!-- 카테고리&제목 입력  -->
@@ -91,7 +89,7 @@
 								</div>
 							</div>
 							<div id="editor-one" class="editor-wrapper"></div>
-							<textarea name="customerClaimContents" id="customerClaimContents" style="display:none;"></textarea>
+							<textarea id="customerClaimContents" name="customerClaimContents" style="display:none;"></textarea>
 							<br/>
 							<button>취소</button>
 							<button id="claimInsertButton">등록</button>

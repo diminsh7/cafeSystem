@@ -14,6 +14,26 @@
 		<result property="headEmployeeAdmin" column="head_employee_admin"/>
 	</resultMap> 
 	
+	<delete id="deleteClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+		DELETE FROM customer_claim
+		WHERE customer_claim_code = #{customerClaimCode}
+	</delete>
+	
+	<update id="updateClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+		UPDATE customer_claim 
+		SET claim_category_code = #{claimCategoryCode}
+		, customer_claim_title = #{customerClaimTitle}
+		, customerClaimContents = #{customerClaimContents}
+		, customerClaimFile = #{customer_claim_file}
+		WHERE customer_claim_code = #{customerClaimCode}
+	</update>
+	
+	<select id="selectOneForDetail" parameterType="Integer" resultMap="resultClaim">
+		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin
+		FROM customer_claim
+		WHERE customer_claim_code = #{customerClaimCode}
+	</select>
+	
 	<select id="selectAllClaim" resultMap="resultClaim">
 		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin FROM customer_claim
 	</select>
