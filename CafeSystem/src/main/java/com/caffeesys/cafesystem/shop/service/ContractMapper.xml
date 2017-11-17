@@ -14,29 +14,22 @@
 	</resultMap>
 	<!-- 계약서등록 -->
 	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		INSERT INTO contract (contract_code, contract_owner_name, contract_shop_name, contract_owner_phone, contract_start_date, contract_end_date, contract_photo)
-		VALUES (#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}, contract_start_date, contract_end_date, #{contractPhoto})
+		INSERT INTO contract (
+			contract_code, contract_owner_name, contract_shop_name, contract_owner_phone
+			, contract_start_date, contract_end_date, contract_photo
+		) VALUES (
+			#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}
+			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto})
+		<!-- date 유형변경 -->
 	</insert>
 	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 select -->
 	<select id="selectContractMax" resultType="Integer">
 		select max(CAST(substring(contract_code,6) AS DECIMAL))  
 		from contract
 	</select>
-	<!-- 계약서수정 -->
-	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		UPDATE contract
-		SET contract_owner_name=#{contractOwnerName}, contract_shop_name=#{contractShopName}, contract_owner_phone=#{contractOwnerPhone}
-		, contract_start_date=#{contractStartDate}, contract_end_date=#{contractEndDate}, contract_photo=#{contractPhoto}
-		WHERE contract_code=#{contractCode}
-	</update>
-	<!-- 전체게약서조회 -->
-	<select id="listContract" resultMap="resultContract">
+	<!-- 전체게약서조회 상세전-->
+	<select id="selectContractList" resultMap="resultContract">
 		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
 		FROM contract
-	</select>
-	<!-- 선택지점계약서상세조회 -->
-	<select id="detailContract" resultMap="resultContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		SELECT * FROM contract
-		WHERE contract_code=#{contractCode}
 	</select>
 </mapper>

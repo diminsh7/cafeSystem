@@ -42,7 +42,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form action="./selectContractMax" method="post"
+						<form action="./insertContract" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -101,13 +101,13 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약서사진<span class="required">*</span>
+									for="name">계약서사진 파일작업보류!<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractPhoto"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="file">
+										name="contractPhoto" required="required" type="text"><!-- file인데 일단 text로 테스트작업 -->
 								</div>
 							</div>
 							<div class="ln_solid"></div>
