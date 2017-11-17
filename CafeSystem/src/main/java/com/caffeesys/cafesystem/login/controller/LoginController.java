@@ -1,5 +1,8 @@
 package com.caffeesys.cafesystem.login.controller;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +24,22 @@ public class LoginController {
 		return "/login/loginForm";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Login login, HttpSession session) {
+	public String login(Login login, HttpSession session, HttpServletResponse response) throws Exception {
 		System.out.println("LoginController.java / login 액션 요청");
 		System.out.println(login);
 		String loginDiv = login.getDivision();
-		if(loginDiv.equals("head")) {
+		if("head".equals(loginDiv)) {
 			System.out.println("본사직원로그인");
-		} else if(loginDiv.equals("branch")) {
+		} else if("branch".equals(loginDiv)) {
 			System.out.println("지점직원로그인");
 		} else {
 			System.out.println("선택안함");
-			//경고메시지띄우기
+			// 본사/지점을 선택하지 않을 경우 선택하라는 경고창을 띄움
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+            out.println("<script>alert('본사 혹은 지점을 선택하세요.'); history.go(-1);</script>");
+            out.flush(); 
 		}
-		return "home";	//리턴위치바꾸기
+		return "redirect:/";
 	}
 }
