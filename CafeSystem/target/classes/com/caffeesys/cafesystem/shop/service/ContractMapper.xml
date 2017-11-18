@@ -12,6 +12,7 @@
 		<result property="contractEndDate" column="contract_end_date" />
 		<result property="contractPhoto" column="contract_photo" />
 	</resultMap>
+	
 	<!-- 계약서등록 -->
 	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
 		INSERT INTO contract (
@@ -26,17 +27,46 @@
 		select max(CAST(substring(contract_code,6) AS DECIMAL))  
 		from contract
 	</select>
-	<!-- 전체게약서조회 상세전-->
+	
+ 	<!-- 전체계약서조회 상세전-->
 	<select id="selectContractList" resultMap="resultContract">
 		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
 		FROM contract
+		ORDER BY contract_code DESC
 	</select>
+	<!-- 전체계약서조회 상세전-->
+	<!-- <select id="selectContractList" parameterType="java.util.Map" resultMap="resultContract">
+        SELECT 
+             contract_code AS contractCode, contract_owner_name AS contractOwnerName
+            , contract_shop_name AS contractShopName, contract_start_date AS contractStartDate
+            , contract_end_date AS contractEndDate
+        FROM contract 
+        ORDER BY contract_code DESC 
+        LIMIT #{beginRow}, #{pagePerRow}
+    </select> -->
+    <!-- 전체계약서조회 상세전2 -->
+     <!-- <select id="selectContractCount" resultType="Integer">
+        SELECT COUNT(*) FROM contract
+    </select>
+     -->
+     
 	<!-- 계약서수정 -->
 	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
 		UPDATE contract
 		SET contract_owner_name = #{contractOwnerName}, contract_shop_name = #{contractShopName}
-		, contract_owner_phone = #{contractOwnerPhone}, contract_start_date = #{contractStartDate}
-		, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
+			, contract_owner_phone = #{contractOwnerPhone}, contract_start_date = #{contractStartDate}
+			, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
 		WHERE contract_code = #{contractCode}
 	</update>
+	<!-- 계약서수정2 -->
+	<select id="selectContractUpdate" parameterType="String" resultMap="resultContract">
+        SELECT
+            contract_code AS contractCode, contract_owner_name AS contractOwnerName
+            , contract_shop_name AS contractShopName, contract_owner_phone AS contractOwnerPhone
+            , contract_start_date AS contractStartDate, contract_end_date AS contractEndDate
+            , contract_photo AS contractPhoto
+        FROM contract 
+        WHERE contract_code = #{contractCode}
+    </select>
+    
 </mapper>
