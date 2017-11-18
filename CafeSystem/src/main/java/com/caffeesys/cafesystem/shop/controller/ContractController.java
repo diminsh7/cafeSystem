@@ -17,6 +17,7 @@ import com.caffeesys.cafesystem.shop.service.ContractService;
 public class ContractController {
 	@Autowired
 	private ContractService contractService;
+	@Autowired
 	private ContractDao contractDao;
 	
 	// 계약서등록 페이지요청
@@ -34,16 +35,10 @@ public class ContractController {
 		return "redirect:/contractList";
 	}
 	// 전체계약서조회 상세전
-	@RequestMapping(value="/contractList")
-	public String listContract(Model model) {
-		System.out.println("ContractController.java / listContract method 확인");
-		contractService.listContract(model);
-		return "/shop/contractList";
-	}
-	/*// 전체계약서조회 상세전
 	@RequestMapping(value = { "/contractList" }, method = RequestMethod.GET)
 	public String listContract(Model model,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		System.out.println("ContractController.java / listContract method 확인");
 		int contractCount = contractDao.selectContractCount();
 		int pagePerRow = 10;
 		int lastPage = (int) (Math.ceil(contractCount / pagePerRow));
@@ -53,7 +48,7 @@ public class ContractController {
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("list", list);
 		return "/shop/contractList";
-	}*/
+	}
 	// 계약서수정 페이지요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.GET)
 	public String updateContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
@@ -65,7 +60,7 @@ public class ContractController {
 	// 계약서수정 (액션)요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.POST)
 	public String updateContract(Contract contract) {
-		System.out.println("ContractController.java / updateContract method : insert proccess");
+		System.out.println("ContractController.java / updateContract method : update proccess");
 		System.out.println("ContractController.java / Contract Param contract : " + contract);
 		contractDao.updateContract(contract);
 		return "redirect:/contractDetail?contractCode=" + contract.getContractCode();

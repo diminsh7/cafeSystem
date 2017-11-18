@@ -20,33 +20,28 @@ public class ContractDao {
 		System.out.println("ContractDao.java / insertContract Param contract: "+contract);
 		return sqlSessionTemplate.insert(NS+"insertContract", contract);
 	}
-	// contract_code의 최대값 갖고오기
+	// 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select
 	public int selectContractMax() {
 		System.out.println("ContractDao.java / selectContractMax method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectContractMax");
 	}
 	// 전체계약서조회 상세전
-	public List<Contract> selectContractList(){
-		System.out.println("ContractDao.java / selectContractList method 확인");
-		return sqlSessionTemplate.selectList(NS+"selectContractList");
-	}
-	/*// 전체계약서조회 상세전
 	public List<Contract> selectContractList(int currentPage, int pagePerRow) {
 	     Map<String, Integer> map = new HashMap<String, Integer>();
 	     map.put("beginRow", (currentPage-1)*pagePerRow);
 	     map.put("pagePerRow", pagePerRow);
 	     return sqlSessionTemplate.selectList(NS+"selectContractList", map);
 	}
-	// 전체계약서조회 상세전2
+	// 전체계약서조회 상세전에서 전체행의 수
 	public int selectContractCount() {
 		System.out.println("ContractDao.java / selectContractCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectContractCount");
-	}*/
+	}
 	// 계약서수정
 	public int updateContract(Contract contract) {
 		return sqlSessionTemplate.update(NS+"updateContract", contract);
 	}
-	// 계약서수정2
+	// 계약서수정 및 상세
 	public Contract selectContractUpdate(String contractCode) {
 		return sqlSessionTemplate.selectOne(NS+"selectContractUpdate", contractCode);
 	}

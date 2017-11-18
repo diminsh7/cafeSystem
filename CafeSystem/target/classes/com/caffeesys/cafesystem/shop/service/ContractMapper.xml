@@ -22,33 +22,23 @@
 			#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}
 			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto})
 	</insert>
-	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 select -->
+	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
 	<select id="selectContractMax" resultType="Integer">
 		select max(CAST(substring(contract_code,6) AS DECIMAL))  
 		from contract
 	</select>
 	
- 	<!-- 전체계약서조회 상세전-->
-	<select id="selectContractList" resultMap="resultContract">
-		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
-		FROM contract
-		ORDER BY contract_code DESC
-	</select>
 	<!-- 전체계약서조회 상세전-->
-	<!-- <select id="selectContractList" parameterType="java.util.Map" resultMap="resultContract">
-        SELECT 
-             contract_code AS contractCode, contract_owner_name AS contractOwnerName
-            , contract_shop_name AS contractShopName, contract_start_date AS contractStartDate
-            , contract_end_date AS contractEndDate
+	<select id="selectContractList" parameterType="java.util.Map" resultMap="resultContract">
+        SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract 
-        ORDER BY contract_code DESC 
+        ORDER BY contract_code DESC
         LIMIT #{beginRow}, #{pagePerRow}
-    </select> -->
-    <!-- 전체계약서조회 상세전2 -->
-     <!-- <select id="selectContractCount" resultType="Integer">
+    </select>
+    <!-- 전체계약서조회 상세전에서 전체행의 수 -->
+     <select id="selectContractCount" resultType="Integer">
         SELECT COUNT(*) FROM contract
     </select>
-     -->
      
 	<!-- 계약서수정 -->
 	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
@@ -58,8 +48,8 @@
 			, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
 		WHERE contract_code = #{contractCode}
 	</update>
-	<!-- 계약서수정2 -->
-	<select id="selectContractUpdate" parameterType="String" resultMap="resultContract">
+	<!-- 계약서수정 및 상세 -->
+	<select id="selectContract" parameterType="String" resultMap="resultContract">
         SELECT
             contract_code AS contractCode, contract_owner_name AS contractOwnerName
             , contract_shop_name AS contractShopName, contract_owner_phone AS contractOwnerPhone

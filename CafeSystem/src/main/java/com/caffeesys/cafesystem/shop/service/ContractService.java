@@ -37,12 +37,4 @@ public class ContractService {
 		System.out.println("ContractService.java/ contract:"+contract);
 		return contractDao.insertContract(contract);
 	}
-	// 전체게약서조회 상세전
-	public List<Contract> listContract(Model model) {
-		System.out.println("ContractService.java/ listContract method 확인");
-		List<Contract> list = contractDao.selectContractList();
-		model.addAttribute("contractlist", list);
-		System.out.println("ContractService.java/ listContract method의 리턴값list:"+list);
-		return list;
-	}
 }

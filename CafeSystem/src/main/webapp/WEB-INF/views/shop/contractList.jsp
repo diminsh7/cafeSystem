@@ -44,7 +44,7 @@
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">계약서리스트</p>
-						<div align="right">전체행의 수 : ${totalRowCount}</div>
+						<div align="right">전체행의 수 : ${contractCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -56,7 +56,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="contract" items="${contractlist}">
+								<c:forEach var="contract" items="${list}">
 									<tr>
 										<td>${contract.contractCode}</td>
 										<td>${contract.contractOwnerName}</td>
@@ -72,7 +72,7 @@
 								<li class="previous"><a
 									href="${pageContext.request.contextPath}/contractList?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
-							<c:if test="${currentPage < lastPage}">
+							<c:if test="${currentPage <= lastPage}">
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/contractList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
