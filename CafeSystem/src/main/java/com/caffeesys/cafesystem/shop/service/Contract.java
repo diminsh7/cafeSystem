@@ -89,4 +89,3 @@ public class Contract {
 				+ ", contractPhoto=" + contractPhoto + "]";
 	}
 }
-
