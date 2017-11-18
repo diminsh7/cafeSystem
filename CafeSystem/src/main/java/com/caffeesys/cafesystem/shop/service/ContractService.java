@@ -28,7 +28,7 @@ public class ContractService {
 			System.out.println("ContractService.java/ insertContract result1 :"+result);
 			result = result + 1;
 			System.out.println("ContractService.java/ insertContract result2 :"+result);
-			result_no = String.format("%04d", result); // 자리수 맞추기
+			result_no = String.format("%05d", result); // 자리수 맞추기
 			System.out.println("ContractService.java/ insertContract result3 :"+result_no);
 		}
 		contractcode = contract_code_temp+ result_no;
