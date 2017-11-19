@@ -37,12 +37,12 @@ public class ContractDao {
 		System.out.println("ContractDao.java / selectContractCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectContractCount");
 	}
+	// 계약서수정 및 계약서상세조회
+	public Contract selectContract(String contractCode) {
+		return sqlSessionTemplate.selectOne(NS+"selectContract", contractCode);
+	}
 	// 계약서수정
 	public int updateContract(Contract contract) {
 		return sqlSessionTemplate.update(NS+"updateContract", contract);
-	}
-	// 계약서수정 및 상세
-	public Contract selectContractUpdate(String contractCode) {
-		return sqlSessionTemplate.selectOne(NS+"selectContractUpdate", contractCode);
 	}
 }

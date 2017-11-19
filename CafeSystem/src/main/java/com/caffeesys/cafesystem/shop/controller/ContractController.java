@@ -26,7 +26,7 @@ public class ContractController {
 		System.out.println("ContractController.java / insertContract method get방식 ");
 		return "/shop/contractInsertForm";
 	}
-	// 계약서등록 (액션)요청
+	// 계약서등록(액션)요청
 	@RequestMapping(value="/insertContract", method = RequestMethod.POST)
 	public String insertContract(Contract contract) {
 		System.out.println("ContractController.java / insertContract method : insert proccess");
@@ -38,7 +38,7 @@ public class ContractController {
 	@RequestMapping(value = { "/contractList" }, method = RequestMethod.GET)
 	public String listContract(Model model,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		System.out.println("ContractController.java / listContract method 확인");
+		System.out.println("ContractController.java / contractList method 확인");
 		int contractCount = contractDao.selectContractCount();
 		int pagePerRow = 10;
 		int lastPage = (int) (Math.ceil(contractCount / pagePerRow));
@@ -49,15 +49,22 @@ public class ContractController {
 		model.addAttribute("list", list);
 		return "/shop/contractList";
 	}
+	// 계약서상세조회
+	@RequestMapping(value = "/contractDetail", method = RequestMethod.GET)
+	public String boardView(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+		Contract contract = contractDao.selectContract(contractCode);
+		model.addAttribute("contract", contract);
+		return "/shop/contractDetail";
+	}
 	// 계약서수정 페이지요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.GET)
 	public String updateContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
 		System.out.println("ContractController.java / updateContract method get방식 ");
-		Contract contract = contractDao.selectContractUpdate(contractCode);
+		Contract contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/updateContract";
 	}
-	// 계약서수정 (액션)요청
+	// 계약서수정(액션)요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.POST)
 	public String updateContract(Contract contract) {
 		System.out.println("ContractController.java / updateContract method : update proccess");

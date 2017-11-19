@@ -7,6 +7,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>계약서관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a>
 			</div>
 			<div class="title_right">
 				<div
@@ -113,8 +114,8 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">Cancel</button>
-									<button id="send" type="submit" class="btn btn-success">Submit</button>
+									<a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/contractList">취소</a>
+									<button id="send" type="submit" class="btn btn-success">등록</button>
 								</div>
 							</div>
 						</form>

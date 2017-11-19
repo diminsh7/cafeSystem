@@ -40,6 +40,13 @@
         SELECT COUNT(*) FROM contract
     </select>
      
+     <!-- 계약서수정 및 계약서상세조회 -->
+	<select id="selectContract" parameterType="String" resultMap="resultContract">
+        SELECT contract_code, contract_owner_name, contract_shop_name, contract_owner_phone
+            	, contract_start_date, contract_end_date, contract_photo
+        FROM contract 
+        WHERE contract_code = #{contractCode}
+    </select>
 	<!-- 계약서수정 -->
 	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
 		UPDATE contract
@@ -48,15 +55,5 @@
 			, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
 		WHERE contract_code = #{contractCode}
 	</update>
-	<!-- 계약서수정 및 상세 -->
-	<select id="selectContract" parameterType="String" resultMap="resultContract">
-        SELECT
-            contract_code AS contractCode, contract_owner_name AS contractOwnerName
-            , contract_shop_name AS contractShopName, contract_owner_phone AS contractOwnerPhone
-            , contract_start_date AS contractStartDate, contract_end_date AS contractEndDate
-            , contract_photo AS contractPhoto
-        FROM contract 
-        WHERE contract_code = #{contractCode}
-    </select>
     
 </mapper>
