@@ -72,4 +72,19 @@ public class ContractController {
 		contractDao.updateContract(contract);
 		return "redirect:/contractDetail?contractCode=" + contract.getContractCode();
 	}
+	// 계약서삭제 페이지요청(소유자명 입력)
+	@RequestMapping(value = "/deleteContract", method = RequestMethod.GET)
+	public String deleteContract(@RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ContractController.java / deleteContract method get방식 ");
+		return "/shop/contractDeleteForm";
+	}
+	// 계약서삭제(액션)요청
+	@RequestMapping(value = "/deleteContract", method = RequestMethod.POST)
+	public String deleteContract(@RequestParam(value = "contractCode", required = true) String contractCode,
+			@RequestParam(value = "contractOwnerName", required = true) String contractOwnerName) {
+		System.out.println("ContractController.java / deleteContract method : delete proccess");
+		System.out.println("ContractController.java / Contract Param contract : " + contractCode);
+		contractDao.deleteContract(contractCode, contractOwnerName);
+		return "redirect:/contractList";
+	}
 }

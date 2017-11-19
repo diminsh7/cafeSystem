@@ -45,4 +45,11 @@ public class ContractDao {
 	public int updateContract(Contract contract) {
 		return sqlSessionTemplate.update(NS+"updateContract", contract);
 	}
+	// 계약서삭제 소유자명확인하고 삭제
+	public int deleteContract(String contractCode, String contractOwnerName) {
+		Contract contract = new Contract();
+		contract.setContractCode(contractCode);
+		contract.setContractOwnerName(contractOwnerName);
+		return sqlSessionTemplate.delete(NS+"deleteContract", contract);
+	}
 }

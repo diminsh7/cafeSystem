@@ -133,7 +133,6 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button type="submit" class="btn btn-primary">취소</button>
 									<button id="send" type="submit" class="btn btn-success">수정</button>
 								</div>
 							</div>
@@ -144,3 +143,4 @@
 		</div>
 	</div>
 </div>
+<!-- /page content -->
