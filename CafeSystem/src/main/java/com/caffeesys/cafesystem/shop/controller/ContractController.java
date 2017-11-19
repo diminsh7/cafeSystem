@@ -51,7 +51,7 @@ public class ContractController {
 	}
 	// 계약서상세조회
 	@RequestMapping(value = "/contractDetail", method = RequestMethod.GET)
-	public String boardView(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+	public String detailContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
 		Contract contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/contractDetail";
@@ -62,7 +62,7 @@ public class ContractController {
 		System.out.println("ContractController.java / updateContract method get방식 ");
 		Contract contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
-		return "/shop/updateContract";
+		return "/shop/contractUpdateForm";
 	}
 	// 계약서수정(액션)요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.POST)
