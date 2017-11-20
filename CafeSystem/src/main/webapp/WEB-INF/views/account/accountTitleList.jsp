@@ -14,8 +14,7 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>지점장 리스트 <small></small></h2>
-                    
+                    <h2>지점장 리스트 <small></small></h2>      
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -28,6 +27,8 @@
                           <th>계정과목코드	</th>
                           <th>계정과목명</th>
                           <th>상세내용</th>
+                          <th>수정</th>
+                          <th>삭제</th>
                         </tr>
                       </thead><!--branchManagerList  -->
                       <tbody>
@@ -36,6 +37,8 @@
                           <td>${accountTitle.accountTitleCode}</td>
                           <td>${accountTitle.accountTitleName}</td>
                           <td>${accountTitle.accountTitleContent}</td>
+                          <td><a href ="${pageContext.request.contextPath}/accountTitleUpdateForm?accountTitleCode=${accountTitle.accountTitleCode}">수정</a></td>
+                          <td><a href =""></a></td>
                         </tr>
                       </c:forEach>                                                          
                       </tbody>

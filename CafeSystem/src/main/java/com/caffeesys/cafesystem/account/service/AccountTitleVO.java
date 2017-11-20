@@ -1,17 +1,16 @@
 package com.caffeesys.cafesystem.account.service;
 
-public class AccountTitle {
+public class AccountTitleVO {
 	private String accountTitleCode;
 	private String accountTitleName;
 	private String accountTitleContent;
 	
-	
-	public AccountTitle() {
+	public AccountTitleVO() {
 		super();
 		
 	}
 	
-	public AccountTitle( String accountTitleCode, String accountTitleName, String accountTitleContent) {
+	public AccountTitleVO( String accountTitleCode, String accountTitleName, String accountTitleContent) {
 		super();
 		this.accountTitleCode = accountTitleCode;
 		this.accountTitleName = accountTitleName;
