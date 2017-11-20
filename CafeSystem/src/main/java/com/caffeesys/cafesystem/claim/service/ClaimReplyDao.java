@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class ClaimReplyDao implements ClaimReplyInter {
+public class ClaimReplyDao implements ClaimReplyDaoInter {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ClaimReplyDao.class);
 	

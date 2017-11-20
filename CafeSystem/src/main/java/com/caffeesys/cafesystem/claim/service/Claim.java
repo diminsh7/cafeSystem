@@ -1,4 +1,4 @@
-package com.caffeesys.cafesystem.board.service;
+package com.caffeesys.cafesystem.claim.service;
 
 public class Claim {
 	private int customerClaimCode; //클레임 관리코드 (PK)

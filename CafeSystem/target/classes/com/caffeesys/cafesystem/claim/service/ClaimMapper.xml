@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caffeesys.cafesystem.board.service.ClaimMapper">
-	<resultMap type="com.caffeesys.cafesystem.board.service.Claim" id="resultClaim">
+<mapper namespace="com.caffeesys.cafesystem.claim.service.ClaimMapper">
+	<resultMap type="com.caffeesys.cafesystem.claim.service.Claim" id="resultClaim">
 		<result property="customerClaimCode" column="customer_claim_code"/> <!-- 클레임 관리코드(PK) -->
 		<result property="claimCategoryCode" column="claim_category_code"/>
 		<result property="employeeCode" column="employee_code"/>
@@ -14,12 +14,12 @@
 		<result property="headEmployeeAdmin" column="head_employee_admin"/>
 	</resultMap> 
 	
-	<delete id="deleteClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+	<delete id="deleteClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		DELETE FROM customer_claim
 		WHERE customer_claim_code = #{customerClaimCode}
 	</delete>
 	
-	<update id="updateClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+	<update id="updateClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		UPDATE customer_claim 
 		SET claim_category_code = #{claimCategoryCode}
 		, customer_claim_title = #{customerClaimTitle}
@@ -38,7 +38,7 @@
 		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin FROM customer_claim
 	</select>
 
-	<insert id="insertClaim" parameterType="com.caffeesys.cafesystem.board.service.Claim">
+	<insert id="insertClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		INSERT INTO customer_claim 
 		(customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin)
 		VALUES (#{customerClaimCode}, #{claimCategoryCode}, #{employeeCode}, #{customerClaimTitle}, #{customerClaimContents}, now(), #{customerClaimFile}, #{headEmployeeAdmin})
