@@ -1,7 +1,10 @@
 package com.caffeesys.cafesystem.employee.service;
   
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 @Service
 public class BranchManagerService {
@@ -9,6 +12,16 @@ public class BranchManagerService {
 	@Autowired
 	private BranchManagerDao branchManagerDao;
 	
+	//점주 입력 폼에서 매장 번호 선택
+	public List<BranchManager> selectBranchManagerShopCode(Model model) {
+		System.out.println("========[BranchManagerService.insertBranchManager 지역에 따른 매장번호 구하기 시작]==========");
+		List<BranchManager> list = BranchManagerDao.selectBranchManagerShopcode();
+		model.addAttribute("BranchManagerShopCode",list);
+		System.out.println("[BranchManagerService.selectBranchManagerShopCode] list :" + list);
+		return list;
+	}
+	
+	//점주 등록과정
 	public int insertBranchManager(BranchManager branchManager) {
 		System.out.println("[BranchManagerService.insertBranchManager] 실행");
 		System.out.println("[BranchManagerService.insertBranchManager] :" + branchManager);
@@ -20,7 +33,7 @@ public class BranchManagerService {
 		
 		//==========================branchEmployeeCode 설정하기==============================
 		System.out.println("========[BranchManagerService.insertBranchManager 코드 구하기 시작]==========");
-		int branchEmployeeCodeMax = branchManagerDao.branchEmployeeCodeMax();
+		int branchEmployeeCodeMax = branchManagerDao.selectBranchEmployeeCodeMax();
 		System.out.println("[BranchManagerService.insertBranchManager] 마지막코드branchImployeeCodeMax : " + branchEmployeeCodeMax);
 		String branchEmployeeCodeTemp = "bran_"; 
 		String branchEmployeeCode = "bran_00001";
@@ -40,32 +53,7 @@ public class BranchManagerService {
 		System.out.println("[BranchManagerService.insertBranchManager] branchEmployeeCode : " + branchEmployeeCode);
 		branchManager.setBranchEmployeeCode(branchEmployeeCode);
 		
-		
-		//==========================branchEmployeeshopCode 설정하기============================== 
-		System.out.println("========[BranchManagerService.insertBranchManager 지역에 따른 매장번호 구하기 시작]==========");
-		String branchEmployeeShopCodeMax = branchManagerDao.branchEmployeeShopCodeMax(branchManager.getLocalCategoryCode());
-		String branchEmployeeShopCode = null;
-		int branchEmployeeShopCodeInt = 0;
- 		String branchEmployeeShopCodeString = null;
-		   
-		if( branchEmployeeShopCodeMax != null) {
-			System.out.println("[BranchManagerService.insertBranchManager] branchEmployeeShopCodeMax(1) : " + branchEmployeeShopCodeMax);//005
-			branchEmployeeShopCode = branchEmployeeShopCodeMax;
-			System.out.println("[BranchManagerService.insertBranchManager] branchEmployeeShopCode(2) : " + branchEmployeeShopCode); //005
-			branchEmployeeShopCodeInt = Integer.parseInt(branchEmployeeShopCode); //문자 -> 숫자 (+1을 해야하기 때문)			
-			branchEmployeeShopCodeInt = branchEmployeeShopCodeInt + 1;
-			System.out.println("[BranchManagerService.insertBranchManager] branchEmployeeShopCodeMax(3) : " + branchEmployeeShopCodeInt); //6		
-		}
-		
-		System.out.println("[BranchManagerService.insertBranchManager] branchEmployeeShopCode : " + branchEmployeeShopCodeInt); //6
-		branchEmployeeShopCodeString = Integer.toString(branchEmployeeShopCodeInt); //숫자 -> 문자 (set할려면 다시 숫자로 바꿔줘야함)
-		branchEmployeeShopCodeString = 000 + branchEmployeeShopCodeString;
-		branchManager.setShopCode(branchEmployeeShopCodeString);
-		System.out.println("[BranchManagerService.insertBranchManager] branchManager : " + branchManager);
-		
-		
-		
-		return 0/*branchManagerDao.insertBranchManager(branchManager)*/;
+		return branchManagerDao.insertBranchEmployeeAndManager(branchManager);
 	};
 	
 

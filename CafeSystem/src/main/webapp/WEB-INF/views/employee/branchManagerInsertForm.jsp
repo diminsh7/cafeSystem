@@ -59,6 +59,18 @@
                       </div>
                       
                       <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">매장번호 <span class="required">*</span>
+                        </label>                
+                        	<div class="col-md-6 col-sm-6 col-xs-12">																													
+                       			<select name="shopCode" id="shopCode">
+                       				<c:forEach var="branchManagerShopCode" items="${branchManagerShopCode}">
+                       				<option>${branchmanagershopcode.shopCode}</option>
+                       				</c:forEach> 
+                       			</select>
+                        	</div>                        
+                      </div>
+                      
+                      <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">아이디 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">																										<!-- 입력이 꼭 필요 하다. -->						
