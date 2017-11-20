@@ -5,12 +5,26 @@
 	
 	$(document).ready(function(){
 		$('#loginButton').click(function(){
-			var len = $('input[name="division"]:checked').length;
-			if(len > 0){
-				$('#login').submit();
+			var lenDiv = $('input[name="division"]:checked').length;
+			var lenId = $('input[name="id"]').val().length;
+			var lenPw = $('input[name="pw"]').val().length;
+			if(lenDiv > 0){
+				if(lenId > 0) {
+					if(lenPw > 0) {
+						$('#login').submit();
+					}else{
+						alert('비밀번호를 입력하세요.');
+						$('input[name="pw"]').focus();
+						return false;
+					}
+				}else{
+					alert('아이디를 입력하세요.');
+					$('input[name="id"]').focus();
+					return false;
+				}
 			}else{
 				alert('본사 혹은 지점을 선택하세요.');
-				$('inpit[name="division"]').eq(0).focus();
+				$('input[name="division"]').eq(0).focus();
 				return false;
 			}
 		});

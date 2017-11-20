@@ -11,10 +11,10 @@ public class LoginDao {
 	
 	private final String NS = "com.caffeesys.cafesystem.login.service.LoginMapper.";
 	
-	public Login headLogin(Login login) {
+	public LoginVO headLogin(LoginVO login) {
 		return sqlSession.selectOne(NS+"headLogin", login);
 	}
-	public Login branchLogin(Login login) {
+	public LoginVO branchLogin(LoginVO login) {
 		return sqlSession.selectOne(NS+"branchLogin", login);
 	}
 }

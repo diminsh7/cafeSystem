@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.login.service;
 
-public class Login {
+public class LoginVO {
 	// 세션에 저장될 내용 : 이름, 직원코드, 본사/지점, 직급/부서, 아이디, 비밀번호(생년월일)
 	private String id;
 	private String pw;
