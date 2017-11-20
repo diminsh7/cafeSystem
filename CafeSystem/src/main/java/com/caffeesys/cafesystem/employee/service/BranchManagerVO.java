@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.employee.service;
   
-public class BranchManager {
+public class BranchManagerVO {
  
 	private String branchEmployeeCode; //직원코드
 	private String localCategoryCode; //지역코드  
@@ -102,6 +102,7 @@ public class BranchManager {
 	public void setBranchManagerBanknum(String branchManagerBanknum) {
 		this.branchManagerBanknum = branchManagerBanknum;
 	}
+	
 	@Override
 	public String toString() {
 		return "BranchManager [branchEmployeeCode=" + branchEmployeeCode + ", localCategoryCode=" + localCategoryCode
@@ -112,6 +113,33 @@ public class BranchManager {
 				+ ", branchManagerWorknum=" + branchManagerWorknum + ", branchManagerStart=" + branchManagerStart
 				+ ", branchManagerBank=" + branchManagerBank + ", branchManagerBanknum=" + branchManagerBanknum + "]";
 	}
+	
+	public BranchManagerVO(String branchEmployeeCode, String localCategoryCode, String shopCode,
+			String positionCategoryCode, String branchEmployeeId, String branchEmployeeName, int branchEmployeeBirth,
+			String branchEmployeePhone, String branchEmployeeAddress, String branchEmployeeCetificate,
+			String branchManagerWorknum, String branchManagerStart, String branchManagerBank,
+			String branchManagerBanknum) {
+		super();
+		this.branchEmployeeCode = branchEmployeeCode;
+		this.localCategoryCode = localCategoryCode;
+		this.shopCode = shopCode;
+		this.positionCategoryCode = positionCategoryCode;
+		this.branchEmployeeId = branchEmployeeId;
+		this.branchEmployeeName = branchEmployeeName;
+		this.branchEmployeeBirth = branchEmployeeBirth;
+		this.branchEmployeePhone = branchEmployeePhone;
+		this.branchEmployeeAddress = branchEmployeeAddress;
+		this.branchEmployeeCetificate = branchEmployeeCetificate;
+		this.branchManagerWorknum = branchManagerWorknum;
+		this.branchManagerStart = branchManagerStart;
+		this.branchManagerBank = branchManagerBank;
+		this.branchManagerBanknum = branchManagerBanknum;
+	}
+	
+	public BranchManagerVO() {
+		super();
+	}
+	
 	
 	
 	

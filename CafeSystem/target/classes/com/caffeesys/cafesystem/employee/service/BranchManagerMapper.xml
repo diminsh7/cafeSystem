@@ -3,28 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.employee.service.BranchManagerMapper">
-	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManager" id="resultBranchManager">
+
+	<!-- BranchManagerVO -->
+	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManagerVO" id="resultBranchManager">
 		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
-		<result property="localCategoryCode" column="local_category_code"/><!-- 지역코드 -->
-		<result property="shopCode" column="shop_code"/><!-- 매장코드 -->
-		<result property="positionCategoryCode" column="position_category_code"/><!-- 직급코드 -->
-		<result property="branchEmployeeId" column="branch_employee_id"/><!-- 아이디 -->
-		<result property="branchEmployeeName" column="branch_employee_name"/><!-- 이름 -->
-		<result property="branchEmployeeBirth" column="branch_employee_birth"/><!-- 생년월일 -->
-		<result property="branchEmployeePhone" column="branch_employee_phone"/><!-- 연락처 -->
-		<result property="branchEmployeeAddress" column="branch_employee_address"/><!-- 주소 -->
+		<result property="localCategoryCode" column="local_category_code"/>				 <!-- 지역코드 -->
+		<result property="shopCode" column="shop_code"/>								 <!-- 매장코드 -->
+		<result property="positionCategoryCode" column="position_category_code"/>		 <!-- 직급코드 -->
+		<result property="branchEmployeeId" column="branch_employee_id"/>				 <!-- 아이디 -->
+		<result property="branchEmployeeName" column="branch_employee_name"/>			 <!-- 이름 -->
+		<result property="branchEmployeeBirth" column="branch_employee_birth"/>			 <!-- 생년월일 -->
+		<result property="branchEmployeePhone" column="branch_employee_phone"/>			 <!-- 연락처 -->
+		<result property="branchEmployeeAddress" column="branch_employee_address"/>		 <!-- 주소 -->
 		<result property="branchEmployeeCetificate" column="branch_employee_cetificate"/><!-- 보건증 -->
-		<result property="branchManagerWorknum" column="branch_manager_worknum"/><!-- 사업자번호 -->
-		<result property="branchManagerStart" column="branch_manager_start"/><!-- 사업시작일 -->
-		<result property="branchManagerBank" column="branch_manager_bank"/><!-- 사업계좌은행명 -->
-		<result property="branchManagerBanknum" column="branch_manager_banknum"/><!-- 사업계좌번호 -->
+		<result property="branchManagerWorknum" column="branch_manager_worknum"/>		 <!-- 사업자번호 -->
+		<result property="branchManagerStart" column="branch_manager_start"/>			 <!-- 사업시작일 -->
+		<result property="branchManagerBank" column="branch_manager_bank"/>				 <!-- 사업계좌은행명 -->
+		<result property="branchManagerBanknum" column="branch_manager_banknum"/>		 <!-- 사업계좌번호 -->
 	</resultMap>
-  
-	<!-- DB branch_employee에서 지역에 따른 매장 코드 구하는 select -->
-	<select id="selectBranchEmployeeShopCode" resultType="Integer">
+<!-- 	
+	ShopVO 
+	<resultMap type="com.caffeesys.cafesystem.shop.service.ShopVO" id="resultShop">
+		<result property="localCategoryCode" column="local_category_code"/> 지역코드
+		<result property="shopCode" column="shop_code"/>                    매장코드
+		<result property="contractCode" column="contract_code"/>			계약코드
+		<result property="shopName" column="shop_name"/>					점포명
+		<result property="shopAddress" column="shop_address"/>				점포주소
+		<result property="shopCall" column="shop_call"/>					점포연락처
+		<result property="shopPostcode" column="shop_postcode"/>			우편번호
+		<result property="shopSize" column="shop_size"/>					점포규모
+	</resultMap> -->
+	
+  <!-- ============================================================================================================================ -->
+	
+ 	<!-- DB shop에서 매장 코드 가져오는 select 
+	<select id="selectBranchEmployeeShopCode" resultMap="resultShop">
 		SELECT DISTINCT shop_code
 		FROM shop
-	</select>
+	</select>  -->
 	
 	<!-- DB branch_employee에서 직원코드 숫자 최댓값 구하는 select -->
 	<select id="selectBranchImployeeCodeMax" resultType="Integer">
@@ -33,7 +49,7 @@
 	</select>
 	
 	 <!-- DB(지점인사관리)에 등록 -->
-	<insert id="insertBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
+	<insert id="insertBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
 		INSERT INTO branch_employee(
 			branch_employee_code, 
 			local_category_code, 
@@ -59,7 +75,7 @@
 	</insert>
 	
 	<!-- DB(지점점주관리)에 등록 -->
-	<insert id="insertBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManager">
+	<insert id="insertBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
 	INSERT INTO branch_manager(
 		branch_employee_code, 
 		branch_manager_worknum, 
