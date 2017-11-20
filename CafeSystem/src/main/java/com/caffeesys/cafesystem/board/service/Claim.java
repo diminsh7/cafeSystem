@@ -6,7 +6,7 @@ public class Claim {
 	private String employeeCode; //직원코드 (FK)
 	private String customerClaimTitle; //제목
 	private String customerClaimContents; //내용
-	private String customerClaimDate; //날짜
+	private String customerClaimDate; //날짜 
 	private String customerClaimFile; //첨부파일 저장경로
 	private String headEmployeeAdmin; //관리담당자
 

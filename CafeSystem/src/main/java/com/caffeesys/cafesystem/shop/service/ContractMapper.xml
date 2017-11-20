@@ -17,6 +17,11 @@
 		INSERT INTO contract (contract_code, contract_owner_name, contract_shop_name, contract_owner_phone, contract_start_date, contract_end_date, contract_photo)
 		VALUES (#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}, contract_start_date, contract_end_date, #{contractPhoto})
 	</insert>
+	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 select -->
+	<select id="selectContractMax" resultType="Integer">
+		select max(CAST(substring(contract_code,6) AS DECIMAL))  
+		from contract
+	</select>
 	<!-- 계약서수정 -->
 	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
 		UPDATE contract

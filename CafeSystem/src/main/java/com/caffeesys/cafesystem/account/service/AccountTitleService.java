@@ -1,13 +1,19 @@
 package com.caffeesys.cafesystem.account.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.account.controller.AccountTitleController;
 
 
 @Service
 public class AccountTitleService {
 	@Autowired
 	private AccountTitleDao accountTitleDao;
+	private AccountTitleController accountTitleController;
 	//계정과목 등록 과정 
 	public int insertAccountTitle(AccountTitle accountTitle) {
 			System.out.println("AccountTitleService.java/ insertAccountTitle method 확인");
@@ -33,4 +39,13 @@ public class AccountTitleService {
 			
 			return accountTitleDao.insertAccountTitle(accountTitle);
 		}
+	
+	public List<AccountTitle> listAccountTitle(Model model){
+		System.out.println("AccountTitleService.java/ listAccountTitle method 확인");
+		List<AccountTitle> list = accountTitleDao.selectAccountTitleList();
+		model.addAttribute("accountlist", list);
+		System.out.println("AccountTitleService.java/ listAccountTitle method의 리턴값list:"+list);
+		return list;
+		
+	}
 }

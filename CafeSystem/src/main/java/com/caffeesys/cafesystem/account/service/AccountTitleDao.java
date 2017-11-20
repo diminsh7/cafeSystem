@@ -1,5 +1,7 @@
 package com.caffeesys.cafesystem.account.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,5 +25,13 @@ public class AccountTitleDao {
 		System.out.println("AccountTitleDao.java / selectAccountMax method 확인");
 		
 		return sqlSessionTemplate.selectOne(NS+"selectAccountMax");
+	}
+	
+	//계정과목 list select
+	public List<AccountTitle> selectAccountTitleList(){
+		System.out.println("AccountTitleDao.java / selectAccountTitleList method 확인");
+		System.out.println("AccountTitleDao.java / selectAccountTitleList 잘받아왔나 확인"
+				+sqlSessionTemplate.selectList(NS+"selectAccountTitleList"));
+		return sqlSessionTemplate.selectList(NS+"selectAccountTitleList");
 	}
 }
