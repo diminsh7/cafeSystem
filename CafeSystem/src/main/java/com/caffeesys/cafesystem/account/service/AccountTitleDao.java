@@ -1,7 +1,10 @@
 package com.caffeesys.cafesystem.account.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +20,7 @@ public class AccountTitleDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	
 	//계정과목 수정한 값 update
 	public int updateAccountTitle(AccountTitleVO accountTitleVo) {
 		logger.debug("updateAccountTitle 메소드의 입력값 accountTitleVo :{}",accountTitleVo);
@@ -31,11 +35,22 @@ public class AccountTitleDao {
 	}
 	
 	//계정과목 list select
-	public List<AccountTitleVO> selectAccountTitleList(){
+	public List<AccountTitleVO> selectAccountTitleList(int currentPage, int pagePerRow){
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("beginRow", (currentPage-1)*pagePerRow); 
+		map.put("pagePerRow",pagePerRow);	//10	
 		logger.debug("selectAccountTitleList메소드의 리턴값 잘받아왔나 확인{}",
-				sqlSessionTemplate.selectList(NS+"selectAccountTitleList"));
-		return sqlSessionTemplate.selectList(NS+"selectAccountTitleList");
+				sqlSessionTemplate.selectList(NS+"selectAccountTitleList", map));
+		return sqlSessionTemplate.selectList(NS+"selectAccountTitleList",map);
+				
 	}
+	
+	//계정과목 리스트의 행의 수 
+	public int getAccountTitleCount() {
+		logger.debug("getAccountTitleCount메소드  리턴 확인: {}",sqlSessionTemplate.selectOne(NS+"getAccountTitleCount"));
+		return sqlSessionTemplate.selectOne(NS+"getAccountTitleCount");
+	}
+		
 	
 	//계정과목 등록
 	public int insertAccountTitle(AccountTitleVO accountTitleVo) {

@@ -20,8 +20,8 @@ public class AccountTitleController {
 	@Autowired
 	private AccountTitleService accountTitleService;
 	
-	//get방식으로 accountTitleUpdateForm 보여주기
-	@RequestMapping(value="/accountTitleUpdateForm", method = RequestMethod.GET)
+	//계정과목 updateForm 보여주기 get방식으로 accountTitleUpdateForm 보여주기
+	@RequestMapping(value="/updateAccountTitleForm", method = RequestMethod.GET)
 	public String updateAccountTitle(Model model, 
 									@RequestParam(value="accountTitleCode", required=true) String accountTitleCode) {
 		logger.debug("updateAccountTitle 메소드의 accountTitleCode 잘 넘어 왔나 확인:{}",accountTitleCode);
@@ -30,31 +30,32 @@ public class AccountTitleController {
 		return "/account/accountTitleUpdateForm"; 		
 	}
 	
-	@RequestMapping(value="/accountTitleUpdateForm", method = RequestMethod.POST)
+	//계정과목 update하기 post 방식으로 accountTitleUpdateForm의 입력값 넘겨주기  
+	@RequestMapping(value="/updateAccountTitleForm", method = RequestMethod.POST)
 	public String updateAccountTitle(AccountTitleVO accountTitleVo) {
 		logger.debug("updateAccountTitle 메소드의 입력값 : {}",accountTitleVo);
 		accountTitleService.updateAccountTitle(accountTitleVo);
 		return "redirect:/accountTitleList";
 	}
 	
-	//list 보여주기
-	@RequestMapping(value="accountTitleList")
-	public String listAccountTitle(Model model) {
-		logger.debug("listAccountTitle 메소드 확인");
-		List<AccountTitleVO> list = accountTitleService.listAccountTitle();
-		model.addAttribute("accountlist", list);
+	//계정과목 list 보여주기
+	@RequestMapping(value= {"accountTitleList"}, method = RequestMethod.GET)
+	public String listAccountTitle(Model model		
+									,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		logger.debug("listAccountTitle 메소드 currentPage 확인 :{}",currentPage);
+		List<AccountTitleVO> list = accountTitleService.listAccountTitle(model, currentPage);
+	
 		return "/account/accountTitleList";
 	}
 	
-	//get방식으로 accountTitleInsertForm 보여주기
+	//계정과목 insertform 보여주기 get방식으로 accountTitleInsertForm 보여주기
 	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.GET)
 	public String insertAccountTitle() {
 		logger.debug("insertAccountTitle 메소드 확인");
 		return "/account/accountTitleInsertForm";
 	}
 	
-	//폼에서 입력한것을 받아오면 accountTitleCode는 null값이고, 나머지는 입력한 값이 넘어온다. 
-	//계정과목 insert 작업
+	//계정과목 insert 작업 
 	@RequestMapping(value="/insertAccountTitle", method = RequestMethod.POST)
 	public String insertAccountTitle(AccountTitleVO accountTitleVo) {
 		logger.debug("insertAccountTitle메소드의 accountTitleVo 잘받아왔나확인 : {}",accountTitleVo);

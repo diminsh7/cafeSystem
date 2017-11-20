@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Service
 public class AccountTitleService {
@@ -28,10 +30,19 @@ public class AccountTitleService {
 	}
 	
 	//계정과목 리스트 select
-	public List<AccountTitleVO> listAccountTitle() {
-		logger.debug("listAccountTitle 메소드 확인");
-		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList();
-		logger.debug("listAccountTitle메소드의 리턴값list: {}",list);
+	public List<AccountTitleVO> listAccountTitle(Model model, int currentPage) {
+		logger.debug("listAccountTitle 메소드 확인 currentPage:{}",currentPage);
+		int pagePerRow = 10;
+		int accountTitleCount = accountTitleDao.getAccountTitleCount();	
+		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);
+		logger.debug("listAccountTitle메소드의 리턴값model: {}",list);
+		int lastPage = (int)(Math.ceil(accountTitleCount/pagePerRow));
+		model.addAttribute("totalRowCount",accountTitleCount);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("accountTitleCount",accountTitleCount);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("list",list);
+		model.addAttribute("accountlist", list);
 		return list;
 		
 	}
