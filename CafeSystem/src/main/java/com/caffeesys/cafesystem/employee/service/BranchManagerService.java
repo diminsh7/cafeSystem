@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.caffeesys.cafesystem.shop.service.ShopVO;
+
 @Service
 public class BranchManagerService {
 
@@ -13,16 +15,16 @@ public class BranchManagerService {
 	private BranchManagerDao branchManagerDao;
 	
 	//점주 입력 폼에서 매장 번호 선택
-	public List<BranchManager> selectBranchManagerShopCode(Model model) {
+	public List<ShopVO> selectBranchManagerShopCode(Model model) {
 		System.out.println("========[BranchManagerService.insertBranchManager 지역에 따른 매장번호 구하기 시작]==========");
-		List<BranchManager> list = BranchManagerDao.selectBranchManagerShopcode();
+		List<ShopVO> list = BranchManagerDao.selectBranchManagerShopcode();
 		model.addAttribute("BranchManagerShopCode",list);
 		System.out.println("[BranchManagerService.selectBranchManagerShopCode] list :" + list);
 		return list;
 	}
 	
 	//점주 등록과정
-	public int insertBranchManager(BranchManager branchManager) {
+	public int insertBranchManager(BranchManagerVO branchManager) {
 		System.out.println("[BranchManagerService.insertBranchManager] 실행");
 		System.out.println("[BranchManagerService.insertBranchManager] :" + branchManager);
 		
