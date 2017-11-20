@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.caffeesys.cafesystem.Category;
 import com.caffeesys.cafesystem.claim.service.Claim;
 import com.caffeesys.cafesystem.claim.service.ClaimDao;
 
@@ -24,8 +25,11 @@ public class ClaimController {
 
 	// 클레임 입력 폼 요청
 	@RequestMapping(value = "/claimInsert", method = RequestMethod.GET)
-	public String claimInsert() {
+	public String claimInsert(Model model) throws Exception {
 		logger.debug("[ClaimController.java/claimInsert Method] claimInsertForm.jsp Loading");
+		List<Category> categoryList = claimDao.selectCategoryForClaim();
+		//logger.debug("[ClaimController.java/claimInsert Method] categorylist param" + clist);
+		model.addAttribute("categoryList", categoryList);
 		return "/claim/claimInsertForm";
 	}
 	
@@ -40,9 +44,9 @@ public class ClaimController {
 	@RequestMapping(value ="/claimList", method = RequestMethod.GET)
 	public String claimList(Model model) throws Exception {
 		logger.debug("[ClaimController.java/claimList Method] claimList.jsp Loading");
-		List<Claim> clist = claimDao.selectAllClaim();
+		List<Claim> claimList = claimDao.selectAllClaim();
 		//System.out.println("[ClaimController.java/insertClaim Method param] " + clist);
-		model.addAttribute("clist", clist);
+		model.addAttribute("claimList", claimList);
 		return "/claim/claimList";
 	}
 	

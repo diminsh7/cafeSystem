@@ -62,13 +62,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="c" items="${clist}">
+								<c:forEach var="claimList" items="${claimList}">
 									<tr>
-										<td>${c.customerClaimCode}</td>
-										<td>${c.claimCategoryCode}</td>
-										<td>${c.employeeCode}</td>
-										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${c.customerClaimCode}">${c.customerClaimTitle}</a></td>
-										<td>${c.customerClaimDate}</td>
+										<td>${claimList.customerClaimCode}</td>
+										<td>${claimList.claimCategoryCode}</td>
+										<td>${claimList.employeeCode}</td>
+										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${claimList.customerClaimCode}">${claimList.customerClaimTitle}</a></td>
+										<td>${claimList.customerClaimDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

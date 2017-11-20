@@ -10,5 +10,5 @@ public interface ClaimDaoInter {
 	
 	public Claim selectOneForDetail(int customerClaimCode) throws Exception;
 	
-	public List<Category> Category() throws Exception;
+	public List<Category> selectCategoryForClaim() throws Exception;
 }

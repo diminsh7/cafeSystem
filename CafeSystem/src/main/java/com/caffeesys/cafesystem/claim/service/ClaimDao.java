@@ -40,8 +40,9 @@ public class ClaimDao implements ClaimDaoInter {
 	}
 
 	@Override
-	public List<Category> Category() throws Exception {
-		return null;
+	public List<Category> selectCategoryForClaim() throws Exception {
+		logger.debug("[ClaimDao.java/selectCategoryForClaim Method] Loading");
+		return sqlSessionTemplate.selectList(NS + "selectCategoryForClaim");
 	}
 
 }

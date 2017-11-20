@@ -8,7 +8,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "CategoryVo [categoryCode=" + categoryCode + ", categoryLarge=" + categoryLarge + ", categoryMiddle="
+		return "Category [categoryCode=" + categoryCode + ", categoryLarge=" + categoryLarge + ", categoryMiddle="
 				+ categoryMiddle + ", categorySmall=" + categorySmall + "]";
 	}
 

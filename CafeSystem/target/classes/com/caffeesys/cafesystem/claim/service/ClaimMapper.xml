@@ -3,22 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.claim.service.ClaimMapper">
+	<!-- ClaimVo resultmap -->
 	<resultMap type="com.caffeesys.cafesystem.claim.service.Claim" id="resultClaim">
 		<result property="customerClaimCode" column="customer_claim_code"/> <!-- 클레임 관리코드(PK) -->
-		<result property="claimCategoryCode" column="claim_category_code"/>
-		<result property="employeeCode" column="employee_code"/>
-		<result property="customerClaimTitle" column="customer_claim_title"/>
-		<result property="customerClaimContents" column="customer_claim_contents"/>
-		<result property="customerClaimDate" column="customer_claim_date"/>
-		<result property="customerClaimFile" column="customer_claim_file"/>
-		<result property="headEmployeeAdmin" column="head_employee_admin"/>
-	</resultMap> 
+		<result property="claimCategoryCode" column="claim_category_code"/> <!-- 카테고리(FK) -->
+		<result property="employeeCode" column="employee_code"/> <!-- 직원코드(FK) -->
+		<result property="customerClaimTitle" column="customer_claim_title"/> <!-- 제목 -->
+		<result property="customerClaimContents" column="customer_claim_contents"/> <!-- 내용 -->
+		<result property="customerClaimDate" column="customer_claim_date"/> <!-- 작성일 -->
+		<result property="customerClaimFile" column="customer_claim_file"/> <!-- 첨부파일 -->
+	</resultMap>
 	
+	<!-- CategoryVo resultMap --> 
+	<resultMap type="com.caffeesys.cafesystem.Category" id="resultCategory">
+		<result property="categoryCode" column="category_code"/> <!-- 코드(PK) -->
+		<result property="categoryLarge" column="category_large"/> <!-- 대분류 -->
+		<result property="categoryMiddle" column="category_middle"/> <!-- 중분류 -->
+		<result property="categorySmall" column="category_small"/> <!-- 소분류 -->
+	</resultMap>
+	
+	<!-- 클레임 카테고리 불러오기 -->
+	<select id="selectCategoryForClaim" resultMap="resultCategory">
+		SELECT category_code, category_large, category_middle, category_small FROM category WHERE category_middle = 'Claim'
+	</select>
+	
+	<!-- 클레임 게시글 삭제 -->
 	<delete id="deleteClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		DELETE FROM customer_claim
 		WHERE customer_claim_code = #{customerClaimCode}
 	</delete>
 	
+	<!-- 클레임 게시글 수정 -->
 	<update id="updateClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		UPDATE customer_claim 
 		SET claim_category_code = #{claimCategoryCode}
@@ -28,19 +43,22 @@
 		WHERE customer_claim_code = #{customerClaimCode}
 	</update>
 	
+	<!-- 클레임 상세보기 페이지 셀렉트 -->
 	<select id="selectOneForDetail" parameterType="Integer" resultMap="resultClaim">
-		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin
+		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file
 		FROM customer_claim
 		WHERE customer_claim_code = #{customerClaimCode}
 	</select>
 	
+	<!-- 클레임 리스트 셀렉트 -->
 	<select id="selectAllClaim" resultMap="resultClaim">
-		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin FROM customer_claim
+		SELECT customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file FROM customer_claim
 	</select>
-
+	
+	<!-- 클레임 게시글 입력처리 -->
 	<insert id="insertClaim" parameterType="com.caffeesys.cafesystem.claim.service.Claim">
 		INSERT INTO customer_claim 
-		(customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file, head_employee_admin)
-		VALUES (#{customerClaimCode}, #{claimCategoryCode}, #{employeeCode}, #{customerClaimTitle}, #{customerClaimContents}, now(), #{customerClaimFile}, #{headEmployeeAdmin})
+		(customer_claim_code, claim_category_code, employee_code, customer_claim_title, customer_claim_contents, customer_claim_date, customer_claim_file)
+		VALUES (#{customerClaimCode}, #{claimCategoryCode}, #{employeeCode}, #{customerClaimTitle}, #{customerClaimContents}, now(), #{customerClaimFile})
 	</insert>
 </mapper>

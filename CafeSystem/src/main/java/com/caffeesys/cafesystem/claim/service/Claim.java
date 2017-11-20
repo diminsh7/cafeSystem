@@ -1,26 +1,28 @@
 package com.caffeesys.cafesystem.claim.service;
 
 public class Claim {
-	private int customerClaimCode; //클레임 관리코드 (PK)
-	private String claimCategoryCode; //카테고리 (FK)
-	private String employeeCode; //직원코드 (FK)
-	private String customerClaimTitle; //제목
-	private String customerClaimContents; //내용
-	private String customerClaimDate; //날짜 
-	private String customerClaimFile; //첨부파일 저장경로
-	private String headEmployeeAdmin; //관리담당자
+	private int customerClaimCode; // 클레임 관리코드 (PK)
+	private String claimCategoryCode; // 카테고리 (FK)
+	private String employeeCode; // 직원코드 (FK)
+	private String customerClaimTitle; // 제목
+	private String customerClaimContents; // 내용
+	private String customerClaimDate; // 날짜
+	private String customerClaimFile; // 첨부파일 저장경로
 
 	@Override
 	public String toString() {
 		return "Claim [customerClaimCode=" + customerClaimCode + ", claimCategoryCode=" + claimCategoryCode
 				+ ", employeeCode=" + employeeCode + ", customerClaimTitle=" + customerClaimTitle
 				+ ", customerClaimContents=" + customerClaimContents + ", customerClaimDate=" + customerClaimDate
-				+ ", customerClaimFile=" + customerClaimFile + ", headEmployeeAdmin=" + headEmployeeAdmin + "]";
+				+ ", customerClaimFile=" + customerClaimFile + "]";
+	}
+
+	public Claim() {
+		super();
 	}
 
 	public Claim(int customerClaimCode, String claimCategoryCode, String employeeCode, String customerClaimTitle,
-			String customerClaimContents, String customerClaimDate, String customerClaimFile,
-			String headEmployeeAdmin) {
+			String customerClaimContents, String customerClaimDate, String customerClaimFile) {
 		super();
 		this.customerClaimCode = customerClaimCode;
 		this.claimCategoryCode = claimCategoryCode;
@@ -29,11 +31,6 @@ public class Claim {
 		this.customerClaimContents = customerClaimContents;
 		this.customerClaimDate = customerClaimDate;
 		this.customerClaimFile = customerClaimFile;
-		this.headEmployeeAdmin = headEmployeeAdmin;
-	}
-
-	public Claim() {
-		super();
 	}
 
 	public int getCustomerClaimCode() {
@@ -90,14 +87,6 @@ public class Claim {
 
 	public void setCustomerClaimFile(String customerClaimFile) {
 		this.customerClaimFile = customerClaimFile;
-	}
-
-	public String getHeadEmployeeAdmin() {
-		return headEmployeeAdmin;
-	}
-
-	public void setHeadEmployeeAdmin(String headEmployeeAdmin) {
-		this.headEmployeeAdmin = headEmployeeAdmin;
 	}
 
 }
