@@ -24,11 +24,11 @@ public class BranchManagerController {
 
 	// 점주등록폼으로 이동 /ShopCode가지고 감 
 	@RequestMapping(value = "/insertformbranchManager", method = RequestMethod.GET)
-	public String insertBranchManager(Model model) { 
+	public String insertBranchManager() { 
 		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 폼으로 이동 컨트롤러");
-		List<ShopVO> ShopCodeList = BranchManagerDao.selectBranchManagerShopcode();
+		/*List<ShopVO> ShopCodeList = BranchManagerDao.selectBranchManagerShopcode();
 		model.addAttribute("branchManagerShopCode",ShopCodeList);
-		System.out.println("[employee.controller.BranchManagerController.java] return ShopCodeList :" + ShopCodeList);
+		System.out.println("[employee.controller.BranchManagerController.java] return ShopCodeList :" + ShopCodeList);*/
 		return "/employee/branchManagerInsertForm";
 	}  
 	 
