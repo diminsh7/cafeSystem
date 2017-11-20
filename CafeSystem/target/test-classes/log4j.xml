@@ -10,28 +10,33 @@
 		</layout>
 	</appender>
 	
-	<!-- Application Loggers -->
-	<logger name="com.cafe24.dbwls799">
-		<level value="info" />
-	</logger>
-	
-	<!-- 3rdparty Loggers -->
-	<logger name="org.springframework.core">
-		<level value="info" />
-	</logger>	
-	
-	<logger name="org.springframework.beans">
-		<level value="info" />
-	</logger>
-	
-	<logger name="org.springframework.context">
-		<level value="info" />
-	</logger>
+   <!-- Application Loggers -->
+   <logger name="com.caffeesys.cafesystem">
+      <level value="debug" />
+   </logger>
+   <!-- springframework 중지 -->
+   <logger name="org.springframework">
+      <level value="off" />
+   </logger>
+   
+   <!-- 3rdparty Loggers -->
+   <!-- 
+   <logger name="org.springframework.core">
+      <level value="info" />
+   </logger>
+   
+   <logger name="org.springframework.beans">
+      <level value="info" />
+   </logger>
+   
+   <logger name="org.springframework.context">
+      <level value="info" />
+   </logger>
 
-	<logger name="org.springframework.web">
-		<level value="info" />
-	</logger>
-
+   <logger name="org.springframework.web">
+      <level value="info" />
+   </logger>
+ -->
 	<!-- Root Logger -->
 	<root>
 		<priority value="info" />
