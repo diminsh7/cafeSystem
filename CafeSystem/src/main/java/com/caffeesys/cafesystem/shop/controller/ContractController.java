@@ -15,6 +15,7 @@ import com.caffeesys.cafesystem.shop.service.ContractService;
 
 @Controller
 public class ContractController {
+	
 	@Autowired
 	private ContractService contractService;
 	@Autowired
@@ -88,12 +89,21 @@ public class ContractController {
 		contractDao.deleteContract(contractCode, contractOwnerName);
 		return "redirect:/contractList";
 	}
-	// 계약서검색조회
+/*	// 계약서검색조회
 	@RequestMapping(value = "/searchContract", method = RequestMethod.GET)
 	public String searchContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
 		System.out.println("ContractController.java / searchContract method get방식 ");
 		ContractVo contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/contractList";
-	}
+	}*/
+/*	// 계약서검색조회 임시테스트
+		@RequestMapping(value = "/searchContract")
+		public String cateSearch(Model model
+					, @RequestParam("con") String con
+					, @RequestParam("consearch") String consearch
+					, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+			cateService.cateSearch(model, con, consearch, currentPage);
+			return "cate/cateList";
+		}*/
 }

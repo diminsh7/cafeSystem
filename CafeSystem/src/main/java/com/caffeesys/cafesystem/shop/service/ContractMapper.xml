@@ -58,22 +58,42 @@
 		WHERE contract_code = #{contractCode}
 		AND contract_owner_name = #{contractOwnerName}
     </delete>
-    <!-- 계약서검색조회 소유자명 -->
+	<!-- 계약서검색조회 소유자명 -->
     <select id="searchContractOwnerName" resultMap="resultContract">
-		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract 
         WHERE contract_owner_name = #{contractOwnerName}
 	</select>
-    <!-- 계약서검색조회 점포명 -->
+	<!-- 계약서검색조회 점포명 -->
     <select id="searchContractShopName" resultMap="resultContract">
-		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract 
         WHERE contract_shop_name = #{contractShopName}
 	</select>
-    <!-- 계약서검색조회 계약만료일 -->
+	<!-- 계약서검색조회 계약만료일 -->
     <select id="searchContractEndDate" resultMap="resultContract">
-		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract 
         WHERE contract_end_date = #{contractEndDate}
 	</select>
+	<!-- 계약서검색조회 임시테스트 -->
+	<!-- 
+	<select id="searchContractCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM contract
+		<if test="con != null">
+			WHERE ${con} = #{consearch}		
+		</if>
+	</select>
+	<select id="searchContractList" parameterType="java.util.Map" resultMap="resultContract">
+		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+		FROM contract
+		<if test="consearch != null">
+			WHERE contract.${con} = #{consearch}
+		</if>
+		ORDER BY contract_code
+		<if test="start != null">
+			LIMIT ${start}, ${pagePerRow}
+		</if>
+	</select>
+	 -->
 </mapper>
