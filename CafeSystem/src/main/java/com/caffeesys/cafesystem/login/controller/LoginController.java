@@ -55,7 +55,6 @@ public class LoginController {
 		if(loginInfo != null) {	// 로그인 정보가 맞은 경우 -> 세션 등록
 			logger.debug("login method(POST) 로그인 성공");
 			loginInfo.setDivision(loginDiv);
-			//세션등록해야됌!
 			//session.setAttribute("loginInfo", loginInfo);
 			return "redirect:/";
 		}else {	// 로그인 정보가 틀린 경우
