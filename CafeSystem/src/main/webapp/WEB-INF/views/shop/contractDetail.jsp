@@ -8,6 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>계약서관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a>
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서 등록</a>
 			</div>
 			<div class="title_right">
@@ -28,7 +29,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>전체계약서조회</h2>
+						<h2>계약서상세조회</h2>
 						<ul class="nav navbar-right panel_toolbox">
 							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
 							</li>
@@ -44,40 +45,32 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">계약코드클릭(상세)</p>
-						<div align="right">전체행의 수 : ${contractCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th>계약코드</th>
 									<th>소유자명</th>
 									<th>점포명</th>
+									<th>소유자연락처</th>
 									<th>계약일</th>
 									<th>계약만료일</th>
+									<th>계약서사진 파일작업보류!</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="contract" items="${list}">
-									<tr>
-										<td><a href="${pageContext.request.contextPath}/contractDetail?contractCode=${contract.contractCode}">${contract.contractCode}</a></td>
-										<td>${contract.contractOwnerName}</td>
-										<td>${contract.contractShopName}</td>
-										<td>${contract.contractStartDate}</td>
-										<td>${contract.contractEndDate}</td>
-									</tr>
-								</c:forEach>
+								<tr>
+									<td>${contract.contractCode}</td>
+									<td>${contract.contractOwnerName}</td>
+									<td>${contract.contractShopName}</td>
+									<td>${contract.contractOwnerPhone}</td>
+									<td>${contract.contractStartDate}</td>
+									<td>${contract.contractEndDate}</td>
+									<td>${contract.contractPhoto}</td>
+								</tr>
 							</tbody>
 						</table>
-						<ul class="pager">
-							<c:if test="${currentPage > 1}">
-								<li class="previous"><a
-									href="${pageContext.request.contextPath}/contractList?currentPage=${currentPage-1}">이전</a></li>
-							</c:if>
-							<c:if test="${currentPage <= lastPage}">
-								<li class="next"><a
-									href="${pageContext.request.contextPath}/contractList?currentPage=${currentPage+1}">다음</a></li>
-							</c:if>
-						</ul>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateContract?contractCode=${contract.contractCode}">수정</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteContract?contractCode=${contract.contractCode}">삭제</a>
 					</div>
 				</div>
 			</div>
