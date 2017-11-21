@@ -30,17 +30,19 @@
                           <th>아이디</th>
                           <th>이름</th>
                           <th>생년월일</th>
-                          <th>점포명</th>
+                          <th>점포명</th> <!-- ???? -->
+                          <th>상세보기</th>
                         </tr>
                       </thead><!--branchManagerList  -->
                       <tbody>
-                      <c:forEach var="branchManager" items="${list}">
+                      <c:forEach var="BMList" items="${branchManagerList}">
                      	<tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>${BMList.branchEmployeeCode}</td> 
+                          <td>${BMList.branchEmployeeId}</td>
+                          <td>${BMList.branchEmployeeName}</td>
+                          <td>${BMList.branchEmployeeBirth}</td>
+                          <td>생각중...</td>
+                          <td><a href="${pageContext.request.contextPath}/branchManagerDetail?branchEmployeeCode=${BMList.branchEmployeeCode}">상세조회</a></td>
                         </tr>
                       </c:forEach>
                                                             

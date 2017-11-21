@@ -16,7 +16,7 @@ public class ContractDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	// 계약서등록
-	public int insertContract(Contract contract) {
+	public int insertContract(ContractVo contract) {
 		System.out.println("ContractDao.java / insertContract Param contract: "+contract);
 		return sqlSessionTemplate.insert(NS+"insertContract", contract);
 	}
@@ -26,7 +26,7 @@ public class ContractDao {
 		return sqlSessionTemplate.selectOne(NS+"selectContractMax");
 	}
 	// 전체계약서조회 상세전
-	public List<Contract> selectContractList(int currentPage, int pagePerRow) {
+	public List<ContractVo> selectContractList(int currentPage, int pagePerRow) {
 	     Map<String, Integer> map = new HashMap<String, Integer>();
 	     map.put("beginRow", (currentPage-1)*pagePerRow);
 	     map.put("pagePerRow", pagePerRow);
@@ -38,16 +38,16 @@ public class ContractDao {
 		return sqlSessionTemplate.selectOne(NS+"selectContractCount");
 	}
 	// 계약서수정 및 계약서상세조회
-	public Contract selectContract(String contractCode) {
+	public ContractVo selectContract(String contractCode) {
 		return sqlSessionTemplate.selectOne(NS+"selectContract", contractCode);
 	}
 	// 계약서수정
-	public int updateContract(Contract contract) {
+	public int updateContract(ContractVo contract) {
 		return sqlSessionTemplate.update(NS+"updateContract", contract);
 	}
 	// 계약서삭제 소유자명확인하고 삭제
 	public int deleteContract(String contractCode, String contractOwnerName) {
-		Contract contract = new Contract();
+		ContractVo contract = new ContractVo();
 		contract.setContractCode(contractCode);
 		contract.setContractOwnerName(contractOwnerName);
 		return sqlSessionTemplate.delete(NS+"deleteContract", contract);

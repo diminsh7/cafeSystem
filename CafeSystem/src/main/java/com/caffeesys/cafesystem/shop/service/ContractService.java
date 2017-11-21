@@ -1,20 +1,15 @@
 package com.caffeesys.cafesystem.shop.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
-
-import com.caffeesys.cafesystem.shop.controller.ContractController;
 
 @Service
 public class ContractService {
 	@Autowired
 	private ContractDao contractDao;
-	private ContractController contractController;
+
 	// 계약서등록 과정
-	public int insertContract(Contract contract) {
+	public int insertContract(ContractVo contract) {
 		System.out.println("ContractService.java/ insertContract method 확인");
 		System.out.println("ContractService.java / insertContract Param contract :" + contract);
 		int contractmaxnum = contractDao.selectContractMax();
