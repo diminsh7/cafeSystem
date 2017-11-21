@@ -1,9 +1,9 @@
 package com.caffeesys.cafesystem.employee.service;
-
+  
 public class BranchManager {
-
+ 
 	private String branchEmployeeCode; //직원코드
-	private String localCategoryCode; //지역코드
+	private String localCategoryCode; //지역코드  
 	private String shopCode; //매장코드
 	private String positionCategoryCode; //직급코드
 	private String branchEmployeeId; //아이디

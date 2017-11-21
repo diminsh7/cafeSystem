@@ -29,6 +29,14 @@
 <link href="<c:url value="/resources/vendors/jqvmap/dist/jqvmap.min.css" />" rel="stylesheet">
 <!-- bootstrap-daterangepicker -->
 <link href="<c:url value="/resources/vendors/bootstrap-daterangepicker/daterangepicker.css" />" rel="stylesheet">
+<!-- bootstrap-wysiwyg -->
+<link href="<c:url value="/resources/vendors/google-code-prettify/bin/prettify.min.css" />" rel="stylesheet">
+<!-- Select2 -->
+<link href="<c:url value="/resources/vendors/select2/dist/css/select2.min.css" />" rel="stylesheet">
+<!-- Switchery -->
+<link href="<c:url value="/resources/vendors/switchery/dist/switchery.min.css" />" rel="stylesheet">
+<!-- starrr -->
+<link href="<c:url value="/resources/vendors/starrr/dist/starrr.css" />" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="<c:url value="/resources/build/css/custom.min.css" />" rel="stylesheet">
 <!-- jQuery -->
@@ -95,6 +103,24 @@
 <!-- bootstrap-daterangepicker -->
 <script src="<c:url value="/resources/vendors/moment/min/moment.min.js" />"></script>
 <script src="<c:url value="/resources/vendors/bootstrap-daterangepicker/daterangepicker.js" />"></script>
+<!-- bootstrap-wysiwyg -->
+<script src="<c:url value="/resources/vendors/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js" />"></script>
+<script src="<c:url value="/resources/vendors/jquery.hotkeys/jquery.hotkeys.js" />"></script>
+<script src="<c:url value="/resources/vendors/google-code-prettify/src/prettify.js" />"></script>
+<!-- jQuery Tags Input -->
+<script src="<c:url value="/resources/vendors/jquery.tagsinput/src/jquery.tagsinput.js" />"></script>
+<!-- Switchery -->
+<script src="<c:url value="/resources/vendors/switchery/dist/switchery.min.js" />"></script>
+<!-- Select2 -->
+<script src="<c:url value="/resources/vendors/select2/dist/js/select2.full.min.js" />"></script>
+<!-- Parsley -->
+<script src="<c:url value="/resources/vendors/parsleyjs/dist/parsley.min.js" />"></script>
+<!-- Autosize -->
+<script src="<c:url value="/resources/vendors/autosize/dist/autosize.min.js" />"></script>
+<!-- jQuery autocomplete -->
+<script src="<c:url value="/resources/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js" />"></script>
+<!-- starrr -->
+<script src="<c:url value="/resources/vendors/starrr/dist/starrr.js" />"></script>
 <!-- Custom Theme Scripts -->
 <script src="<c:url value="/resources/build/js/custom.min.js" />"></script>
 
