@@ -21,6 +21,8 @@
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">계약코드클릭(상세)</p>
+						<%-- <%@ include file="./shop/contractSearchForm.jsp"%> --%>
+						<%-- <c:import url="/shop/contractSearchForm.jsp" /> --%>
 						<div align="right">전체행의 수 : ${contractCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
