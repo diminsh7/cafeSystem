@@ -8,5 +8,5 @@
 		<option value="contractEndDate">계약만료일</option>
 	</select>
 	<input id="searchContractText" name="searchContractText" type="text">
-	<input id="searchContractBtn" name="searchContractBtn" type="submit" value="검색">
+	<input type="submit" value="검색">
 </form>

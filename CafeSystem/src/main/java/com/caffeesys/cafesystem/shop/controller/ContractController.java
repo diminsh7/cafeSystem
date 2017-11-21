@@ -15,6 +15,7 @@ import com.caffeesys.cafesystem.shop.service.ContractService;
 
 @Controller
 public class ContractController {
+	
 	@Autowired
 	private ContractService contractService;
 	@Autowired
