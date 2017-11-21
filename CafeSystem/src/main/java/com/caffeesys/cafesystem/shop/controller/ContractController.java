@@ -38,7 +38,7 @@ public class ContractController {
 	@RequestMapping(value = { "/contractList" }, method = RequestMethod.GET)
 	public String listContract(Model model,
 			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		System.out.println("ContractController.java / contractList method 확인");
+		System.out.println("ContractController.java / contractList method get방식 ");
 		int contractCount = contractDao.selectContractCount();
 		int pagePerRow = 10;
 		int lastPage = (int) (Math.ceil(contractCount / pagePerRow));
@@ -52,6 +52,7 @@ public class ContractController {
 	// 계약서상세조회
 	@RequestMapping(value = "/contractDetail", method = RequestMethod.GET)
 	public String detailContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ContractController.java / detailContract method get방식 ");
 		ContractVo contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/contractDetail";
@@ -86,5 +87,13 @@ public class ContractController {
 		System.out.println("ContractController.java / Contract Param contract : " + contractCode);
 		contractDao.deleteContract(contractCode, contractOwnerName);
 		return "redirect:/contractList";
+	}
+	// 계약서검색조회
+	@RequestMapping(value = "/searchContract", method = RequestMethod.GET)
+	public String searchContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ContractController.java / searchContract method get방식 ");
+		ContractVo contract = contractDao.selectContract(contractCode);
+		model.addAttribute("contract", contract);
+		return "/shop/contractList";
 	}
 }
