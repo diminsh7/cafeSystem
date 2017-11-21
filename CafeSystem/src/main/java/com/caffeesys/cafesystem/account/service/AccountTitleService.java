@@ -15,6 +15,12 @@ public class AccountTitleService {
 	@Autowired
 	private AccountTitleDao accountTitleDao;
 	
+	//계정과목 삭제
+	public void deleteAccountTitle(String accountTitleCode) {
+		logger.debug("deleteAccountTitle메소드의 accountTitleCode :{}",accountTitleCode);
+		accountTitleDao.deleteAccountTitle(accountTitleCode);
+	}
+	
 	//계정과목 수정한값 update
 	public void updateAccountTitle(AccountTitleVO accountTitleVo) {
 		logger.debug("updateAccountTitle메소드의 입력값 accountTitleVo :{}",accountTitleVo);
@@ -32,10 +38,11 @@ public class AccountTitleService {
 	//계정과목 리스트 select
 	public List<AccountTitleVO> listAccountTitle(Model model, int currentPage) {
 		logger.debug("listAccountTitle 메소드 확인 currentPage:{}",currentPage);
-		int pagePerRow = 10;
-		int accountTitleCount = accountTitleDao.getAccountTitleCount();	
-		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);
-		logger.debug("listAccountTitle메소드의 리턴값model: {}",list);
+		logger.debug("listAccountTitle 메소드 확인 model:{}",model);
+		int pagePerRow = 10;	//한페이지당 10개
+		int accountTitleCount = accountTitleDao.getAccountTitleCount();	//accountTitleList의 행의 개수
+		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);//현재페이지의 행의수를 리스트
+		logger.debug("listAccountTitle메소드의 리턴값list: {}",list);
 		int lastPage = (int)(Math.ceil(accountTitleCount/pagePerRow));
 		model.addAttribute("totalRowCount",accountTitleCount);
 		model.addAttribute("currentPage",currentPage);

@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
+<script type="text/javascript" >
+	function button_event(){
+		if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+		    document.form.submit();
+		}else{   //취소
+		    return;
+		}
+}
+</script>
   <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -24,37 +33,35 @@
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
-                          <th>계정과목코드	</th>
+                          <th>계정과목코드</th>
                           <th>계정과목명</th>
                           <th>상세내용</th>
                           <th>수정</th>
                           <th>삭제</th>
                         </tr>
                       </thead><!--branchManagerList  -->
-                      <tbody>
+                      <tbody >
                       <c:forEach var="accountTitle" items="${accountlist}">
                      	<tr>
                           <td>${accountTitle.accountTitleCode}</td>
                           <td>${accountTitle.accountTitleName}</td>
                           <td>${accountTitle.accountTitleContent}</td>
-                          <td><a href ="${pageContext.request.contextPath}/updateAccountTitleForm?accountTitleCode=${accountTitle.accountTitleCode}">수정</a></td>
-                          <td><a href =""></a></td>
+                          <td><a id="accountTitleUpdateButton" href ="${pageContext.request.contextPath}/accountTitleUpdateForm?accountTitleCode=${accountTitle.accountTitleCode}">수정</a></td>
+                          <td><a onclick="button_event();" id="accountTitleDeleteButton" href ="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountTitle.accountTitleCode}">삭제</a></td>
                         </tr>
                       </c:forEach>                                                          
                       </tbody>
                     </table>
-                    <div>
 	                    <ul class="pager">
-	                    	<c:if test="${currentPage > 1 }">
-	                    		<li class="previous"><a href="${pageContext.request.contextPath}/accountTitleList?currentPag=${currentPage-1}">이전</a></li>
-	                    	</c:if>
-	                    	<c:if test="${currentPage > lastPage }">
-	                    		<li class="next"><a href="${pageContext.request.contextPath}/accountTitleList?currentPag=${currentPage+1}">다음</a></li>
-	                    	</c:if>
+	                    	<if test="${currentPage>1}">
+	                    		<li class="previous"><a href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage-1}">이전</a></li>
+	                    	</if>
+	                    	<if test="${currentPage>lastPage}">
+	                    		<li class="next"><a href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage+1}">다음</a></li>
+	                    	</if>          	
 	                    </ul>
-                    </div>
                     <div>
-                    	<a href="${pageContext.request.contextPath}/insertAccountTitle">계정과목 입력</a>
+                    	<a href="${pageContext.request.contextPath}/accountTitleInsert">계정과목 입력</a>
                     </div>
                   </div>
                 </div>
