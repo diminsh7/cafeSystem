@@ -7,53 +7,44 @@
 	<!-- BranchManagerVO -->
 	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManagerVO" id="resultBranchManager">
 		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
-		<result property="localCategoryCode" column="local_category_code"/>				 <!-- 지역코드 -->
-		<result property="shopCode" column="shop_code"/>								 <!-- 매장코드 -->
-		<result property="positionCategoryCode" column="position_category_code"/>		 <!-- 직급코드 -->
-		<result property="branchEmployeeId" column="branch_employee_id"/>				 <!-- 아이디 -->
-		<result property="branchEmployeeName" column="branch_employee_name"/>			 <!-- 이름 -->
-		<result property="branchEmployeeBirth" column="branch_employee_birth"/>			 <!-- 생년월일 -->
-		<result property="branchEmployeePhone" column="branch_employee_phone"/>			 <!-- 연락처 -->
-		<result property="branchEmployeeAddress" column="branch_employee_address"/>		 <!-- 주소 -->
+		<result property="localCategoryCode" column="local_category_code"/><!-- 지역코드 -->
+		<result property="shopCode" column="shop_code"/><!-- 매장코드 -->
+		<result property="positionCategoryCode" column="position_category_code"/><!-- 직급코드 -->
+		<result property="branchEmployeeId" column="branch_employee_id"/><!-- 아이디 -->
+		<result property="branchEmployeeName" column="branch_employee_name"/><!-- 이름 -->
+		<result property="branchEmployeeBirth" column="branch_employee_birth"/><!-- 생년월일 -->
+		<result property="branchEmployeePhone" column="branch_employee_phone"/><!-- 연락처 -->
+		<result property="branchEmployeeAddress" column="branch_employee_address"/><!-- 주소 -->
 		<result property="branchEmployeeCetificate" column="branch_employee_cetificate"/><!-- 보건증 -->
-		<result property="branchManagerWorknum" column="branch_manager_worknum"/>		 <!-- 사업자번호 -->
-		<result property="branchManagerStart" column="branch_manager_start"/>			 <!-- 사업시작일 -->
-		<result property="branchManagerBank" column="branch_manager_bank"/>				 <!-- 사업계좌은행명 -->
-		<result property="branchManagerBanknum" column="branch_manager_banknum"/>		 <!-- 사업계좌번호 -->
+		<result property="branchManagerWorknum" column="branch_manager_worknum"/><!-- 사업자번호 -->
+		<result property="branchManagerStart" column="branch_manager_start"/><!-- 사업시작일 -->
+		<result property="branchManagerBank" column="branch_manager_bank"/><!-- 사업계좌은행명 -->
+		<result property="branchManagerBanknum" column="branch_manager_banknum"/><!-- 사업계좌번호 -->
+		<result property="shopName" column="shop_name"/><!--  점포명 -->
 	</resultMap>
-<!-- 	
-	ShopVO 
-	<resultMap type="com.caffeesys.cafesystem.shop.service.ShopVO" id="resultShop">
-		<result property="localCategoryCode" column="local_category_code"/> 지역코드
-		<result property="shopCode" column="shop_code"/>                    매장코드
-		<result property="contractCode" column="contract_code"/>			계약코드
-		<result property="shopName" column="shop_name"/>					점포명
-		<result property="shopAddress" column="shop_address"/>				점포주소
-		<result property="shopCall" column="shop_call"/>					점포연락처
-		<result property="shopPostcode" column="shop_postcode"/>			우편번호
-		<result property="shopSize" column="shop_size"/>					점포규모
-	</resultMap> -->
-	
+ 
   <!-- ============================================================================================================================ -->
 	
- 	<!-- DB shop에서 매장 코드 가져오는 select 
-	<select id="selectBranchEmployeeShopCode" resultMap="resultShop">
+ 	<!-- DB shop에서 매장 코드 가져오는 select -->
+	<select id="selectBranchEmployeeShopCode" resultMap="resultBranchManager">
 		SELECT DISTINCT shop_code
 		FROM shop
-	</select>  -->
+	</select> 
 	
 	<!-- DB branch_employee에서 직원코드 숫자 최댓값 구하는 select -->
 	<select id="selectBranchImployeeCodeMax" resultType="Integer">
 		select max(CAST(substring(branch_employee_code,6) AS DECIMAL))  
 		from branch_employee		
 	</select>
+
 	
 	 <!-- DB(지점인사관리)에 등록 -->
 	<insert id="insertBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
 		INSERT INTO branch_employee(
 			branch_employee_code, 
 			local_category_code, 
-			shop_code, position_category_code, 
+			shop_code, 
+			position_category_code, 
 			branch_employee_id, 
 			branch_employee_name, 
 			branch_employee_birth, 
@@ -84,19 +75,62 @@
 		branch_manager_banknum
 	) VALUES (
 		#{branchEmployeeCode},  
-		#{branch_manager_worknum}, 
-		#{branch_manager_start}, 
-		#{branch_manager_bank}, 
-		#{branch_manager_banknum}
+		#{branchManagerWorknum}, 
+		#{branchManagerStart}, 
+		#{branchManagerBank}, 
+		#{branchManagerBanknum}
 		);
 	</insert>	
 	
-	<!-- 점주리스트 코드,아이디,이름,생년월일 -->
+	<!-- 점주리스트 코드,아이디,이름,생년월일 ,매장명 2중조인-->
 	<select id="selectBranchManagerList" resultMap="resultBranchManager">
-	SELECT branch_employee_code, branch_employee_id, branch_employee_name, branch_employee_birth
-	FROM branch_employee
+	SELECT 
+		branch_employee.branch_employee_code,
+		branch_employee.branch_employee_id,
+		branch_employee.branch_employee_name,
+		branch_employee.branch_employee_birth,
+		branch_employee.local_category_code,
+		branch_employee.shop_code,
+		shop.shop_name
+	
+	FROM branch_employee INNER JOIN shop
+	ON branch_employee.local_category_code = shop.local_category_code
+	AND branch_employee.shop_code = shop.shop_code
+	WHERE position_category_code = '201'
+	ORDER BY branch_employee_code asc
 	</select>
 	
-	
+	<!-- 점주 상세조회  3중조인-->
+	<select id="selectBranchManagerDetail" resultMap="resultBranchManager">
+	SELECT 
+		branch_employee.branch_employee_code, 	
+		branch_employee.branch_employee_id, 
+		branch_employee.branch_employee_name, 
+		branch_employee.branch_employee_birth,
+		branch_employee.branch_employee_phone,
+		branch_employee.branch_employee_address,
+		branch_employee.branch_employee_cetificate,
+		branch_manager.branch_manager_worknum,
+		branch_manager.branch_manager_start,
+		branch_manager.branch_manager_bank,
+		branch_manager.branch_manager_banknum,
+		shop.shop_name	
 
+	FROM branch_employee  INNER JOIN shop 
+	ON branch_employee.local_category_code = shop.local_category_code 
+	AND branch_employee.shop_code = shop.shop_code
+	INNER JOIN branch_manager 
+	ON branch_employee.branch_employee_code = branch_manager.branch_employee_code
+	WHERE branch_manager.branch_employee_code = #{branchEmployeeCode}
+	</select>
+	
+	 <!-- DB(지점인사관리)에 삭제 -->
+	<delete id="deleteBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
+		DELETE FROM branch_employee WHERE branch_employee_code=#{branchEmployeeCode}
+	</delete>
+	<!-- DB(지점점주관리)에 등록 -->
+	<delete id="deleteBranchManager" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
+		DELETE FROM branch_manager WHERE branch_employee_code=#{branchEmployeeCode}
+	</delete>
+	
 </mapper>

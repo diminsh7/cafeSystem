@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script>
+<!-- <script>
     $(document).ready(function(){
         $('#branchManagerInsertButton').click(function(){
                 $('#branchManagerInsert').submit();
         });
     });
-</script>
+</script> -->
 
 <div class="right_col" role="main">
           <div class="">
@@ -28,7 +28,7 @@
                   </div>
                   <div class="x_content">
 
-                    <form id="branchManagerInsert" name="branchManagerInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/insertBranchManager" method="post"novalidate >
+                    <form id="branchManagerInsert" name="branchManagerInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/insertBranchManager" method="post" novalidate >
 
                       <span class="section">지점장 인적사항 등록</span>
 						
@@ -62,9 +62,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">매장번호 <span class="required">*</span>
                         </label>                
                         	<div class="col-md-6 col-sm-6 col-xs-12">																													
-                       			<select name="shopCode" id="shopCode">
-                       				<c:forEach var="branchManagerShopCode" items="${branchManagerShopCode}">
-                       				<option>${branchmanagershopcode.shopCode}</option>
+                       			<select name="shopCode" id="shopCode" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                       				<c:forEach var="BMShopCode" items="${branchManagerShopCode}">
+                       				<option>${BMShopCode.shopCode}</option>
                        				</c:forEach> 
                        			</select>
                         	</div>                        
@@ -115,7 +115,7 @@
                       <div class="item form-group">
                         <label for="password" class="control-label col-md-3">사업자번호<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerWorknum" name="branchManagerWorknum" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
+                          <input type="text" id="branchManagerWorknum" name="branchManagerWorknum" placeholder="ex)000-00-00000" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
                         </div>
                       </div>
                       <div class="item form-group">
