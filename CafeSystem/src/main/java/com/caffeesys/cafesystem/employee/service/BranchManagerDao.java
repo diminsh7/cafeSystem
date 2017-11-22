@@ -8,8 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.caffeesys.cafesystem.shop.service.ShopVO;
-
 @Repository  
 public class BranchManagerDao { 
 	private static final Logger logger = LoggerFactory.getLogger(BranchManagerDao.class);
@@ -24,13 +22,11 @@ public class BranchManagerDao {
 	//지점 인사관리 테이블
 	public int insertBranchEmployee(BranchManagerVO branchManagerVo) {
 		System.out.println("[BranchManagerDao.insertBranchEmployeeAndManager] 점주등록 / 지점인사 테이블에 입력 ");
-		System.out.println("[BranchManagerDao.insertBranchEmployeeAndManager] branchManagerVo : " + branchManagerVo);
 		return sqlSessionTemplate.insert(NS + "insertBranchEmployee",branchManagerVo);
 	}
 	//지점 점주관리 테이블
 	public int insertBranchManager(BranchManagerVO branchManagerVo) {
 		System.out.println("[BranchManagerDao.insertBranchEmployeeAndManager] 점주등록 / 지점점주 테이블에 입력 ");
-		System.out.println("[BranchManagerDao.insertBranchEmployeeAndManager] branchManagerVo : " + branchManagerVo);
 		return sqlSessionTemplate.insert(NS + "insertBranchManager",branchManagerVo);
 	}
 	

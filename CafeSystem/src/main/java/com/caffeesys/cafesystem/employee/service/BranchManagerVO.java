@@ -17,7 +17,7 @@ public class BranchManagerVO {
 	private String branchManagerBank; //사업계좌은행명
 	private String branchManagerBanknum; //사업계좌
 	private String shopName; //점포명
-	
+	 
 	//겟셋
 	
 	public String getBranchEmployeeCode() {

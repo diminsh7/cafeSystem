@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.employee.service.BranchManagerMapper">
-
+ 
 	<!-- BranchManagerVO -->
 	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchManagerVO" id="resultBranchManager">
 		<result property="branchEmployeeCode" column="branch_employee_code"/> <!-- 직원코드 -->
