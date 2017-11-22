@@ -36,7 +36,7 @@
 				<div>
 					<input type="hidden" id="customerClaimCode" name="customerClaimCode" value="${claim.customerClaimCode}"><!-- 수정 후 바로 상세페이지로 가기 위한 변수  -->
 					<select id="claimCategoryCode" name="claimCategoryCode">
-					<c:forEach var="category" items="${categoryList}">
+					<c:forEach var="category" items="${claimCategory}">
 						<option value="${category.categoryCode}">${category.categorySmall}</option>
 					</c:forEach>
 				</select>

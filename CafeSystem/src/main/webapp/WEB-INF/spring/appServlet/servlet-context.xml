@@ -28,6 +28,8 @@
 			</list>
 		</property>
 	</bean>
+	<!-- 파일 업로드를 위한 설정 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
 	<!-- tiles를 사용함으로써 이 부분은 필요없어져서 주석처리함 -->
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
@@ -39,10 +41,9 @@
 	<!-- commons dbcp를 사용하여 커넥션 풀 생성 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url"
-			value="jdbc:mysql://192.168.123.174:3306/test_cafesystem" />
-		<property name="username" value="cafesystem" />
-		<property name="password" value="emdkdk25!" />
+		<property name="url" value="jdbc:mysql://localhost:3306/teamproject" />
+		<property name="username" value="synths" />
+		<property name="password" value="tifkffk" />
 	</bean>
 	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -52,7 +53,7 @@
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ContractMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/board/service/ClaimMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
 			</list>
 		</property>

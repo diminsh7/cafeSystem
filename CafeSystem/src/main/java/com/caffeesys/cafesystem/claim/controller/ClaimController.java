@@ -41,13 +41,24 @@ public class ClaimController {
 	}
 	// 클레임 리스트 요청
 	@RequestMapping(value ="/claimList", method = RequestMethod.GET)
-	public String claimList(Model model, HttpSession session) throws Exception {
+	public String claimList(Model model, HttpSession session, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) throws Exception {
 		logger.debug("[ClaimController.java/claimList Method] claimList.jsp Loading");
-		List<ClaimVO> claimList = claimDao.selectAllClaim();
-		List<Category> categoryList = claimDao.selectCategoryForClaim(); //수정을 위해 세션에 카테고리 값 넣기
+		int claimCount = claimDao.getClaimCount();
+		logger.debug("[ClaimController.java/claimList Method] claimCount Param : " + claimCount);
+		int pagePerRow = 10;
+		int lastPage = (int) (Math.ceil(claimCount / pagePerRow));
+		logger.debug("[ClaimController.java/claimList Method] lastPage Param : " + lastPage);
+		List<ClaimVO> claimList = claimDao.getClaimList(currentPage, pagePerRow);
+		
+		//수정을 위해 세션에 카테고리 값 넣기
+		List<Category> claimCategory = claimDao.selectCategoryForClaim(); 
+		
 		//logger.debug("[ClaimController.java/insertClaim Method] List<Claim> param : " + clist);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("claimCount", claimCount);
+		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("claimList", claimList);
-		session.setAttribute("categoryList", categoryList);
+		session.setAttribute("claimCategory", claimCategory);
 		return "/claim/claimList";
 	}
 	
@@ -71,7 +82,7 @@ public class ClaimController {
 		model.addAttribute("claim", claim);
 		return "/claim/claimUpdateForm";
 	}
-	
+	// 클레임 수정 처리
 	@RequestMapping(value="/claimUpdate", method = RequestMethod.POST)
 	public String claimUpdate(ClaimVO claim) throws Exception {
 		logger.debug("[ClaimController.java/claimUpdate Method] ClaimVO param : " + claim);
@@ -79,9 +90,11 @@ public class ClaimController {
 		claimDao.updateClaim(claim);
 		return "redirect:/claimList";
 	}
-	
-	@RequestMapping(value = "/claimDelete", method=RequestMethod.POST)
-	public String claimDelete(@RequestParam(value = "customerClaimCode", required = true) int customerClaimCode) {
-		return null;
+	// 클레임 삭제 처리
+	@RequestMapping(value = "/claimDelete", method=RequestMethod.GET)
+	public String claimDelete(@RequestParam(value = "customerClaimCode", required = true) int customerClaimCode) throws Exception {
+		logger.debug("[ClaimController.java/claimDelete Method] Claim Delete Action");
+		claimDao.deleteClaim(customerClaimCode);
+		return "redirect:/claimList";
 	}
 }

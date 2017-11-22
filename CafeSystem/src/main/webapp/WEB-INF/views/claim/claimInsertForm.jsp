@@ -34,7 +34,7 @@
 		</div>
 		<div>
 			<select id="claimCategoryCode" name="claimCategoryCode">
-				<c:forEach var="category" items="${categoryList}">
+				<c:forEach var="category" items="${claimCategory}">
 					<option value="${category.categoryCode}">${category.categorySmall}</option>
 				</c:forEach>
 			</select>

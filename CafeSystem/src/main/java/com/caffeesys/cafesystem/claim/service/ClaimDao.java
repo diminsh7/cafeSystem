@@ -1,6 +1,8 @@
 package com.caffeesys.cafesystem.claim.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -27,13 +29,16 @@ public class ClaimDao implements ClaimDaoInter {
 		return sqlSessionTemplate.insert(NS + "insertClaim", claim);
 	}
 
-	@Override //클레임 리스트용 
-	public List<ClaimVO> selectAllClaim() throws Exception {
-		logger.debug("[ClaimDao.java/selectAllClaim Method] Loading");
-		return sqlSessionTemplate.selectList(NS + "selectAllClaim");
+	@Override //클레임 리스트+페이징 불러오기
+	public List<ClaimVO> getClaimList(int currentPage, int pagePerRow) throws Exception {
+		Map<String, Integer> claimMap = new HashMap<String, Integer>();
+		claimMap.put("beginRow", (currentPage-1)*pagePerRow);
+		claimMap.put("pagePerRow", pagePerRow);
+		logger.debug("[ClaimDao.java/getClaimList Method] Loading");
+		return sqlSessionTemplate.selectList(NS + "getClaimList", claimMap);
 	}
 
-	@Override //클레임 상세보기, 업데이트폼
+	@Override //클레임 상세보기, 수정(업데이트)폼
 	public ClaimVO selectOneForDetail(int customerClaimCode) throws Exception {
 		logger.debug("[ClaimDao.java/selectOneForDetail Method] Loading");
 		return sqlSessionTemplate.selectOne(NS + "selectOneForDetail", customerClaimCode);
@@ -45,11 +50,23 @@ public class ClaimDao implements ClaimDaoInter {
 		return sqlSessionTemplate.selectList(NS + "selectCategoryForClaim");
 	}
 	
-	@Override
+	@Override //클레임 수정(업데이트) 처리
 	public int updateClaim(ClaimVO claim) throws Exception	{
 		logger.debug("[ClaimDao.java/updateClaim Method] Loading");
 		logger.debug("[ClaimDao.java/updateClaim Method] claim Param : " + claim);
 		return sqlSessionTemplate.update(NS + "updateClaim", claim);
+	}
+
+	@Override //클레임 리스트 페이징용 총 글 갯수 불러오기
+	public int getClaimCount() throws Exception {
+		logger.debug("[ClaimDao.java/getClaimCount Method] Loading");
+		return sqlSessionTemplate.selectOne(NS + "getClaimCount");
+	}
+
+	@Override // 클레임 삭제 처리
+	public int deleteClaim(int customerClaimCode) throws Exception {
+		logger.debug("[ClaimDao.java/deleteClaim Method] Loading");
+		return sqlSessionTemplate.delete(NS + "deleteClaim", customerClaimCode);
 	}
 
 }
