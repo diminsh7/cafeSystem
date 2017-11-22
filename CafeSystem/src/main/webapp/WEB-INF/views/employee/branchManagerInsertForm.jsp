@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<script>
+<!-- <script>
     $(document).ready(function(){
         $('#branchManagerInsertButton').click(function(){
                 $('#branchManagerInsert').submit();
         });
     });
-</script>
+</script> -->
 
 <div class="right_col" role="main">
           <div class="">
@@ -28,7 +28,7 @@
                   </div>
                   <div class="x_content">
 
-                    <form id="branchManagerInsert" name="branchManagerInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/selectBranchManager" method="post"novalidate >
+                    <form id="branchManagerInsert" name="branchManagerInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/insertBranchManager" method="post" novalidate >
 
                       <span class="section">지점장 인적사항 등록</span>
 						
@@ -36,7 +36,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">지역<span class="required">*</span>
                         </label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">																														
-                           <select name="brabchManagerLocal" id="brabchManagerLocal" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                           <select name="localCategoryCode" id="localCategoryCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 							<option value='001'>서울특별시</option>
 							<option value='002'>부산광역시</option>
 							<option value='003'>대구광역시</option>
@@ -62,9 +62,9 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">매장번호 <span class="required">*</span>
                         </label>                
                         	<div class="col-md-6 col-sm-6 col-xs-12">																													
-                       			<select name="shopCode" id="shopCode">
-                       				<c:forEach var="branchManagerShopCode" items="${branchManagerShopCode}">
-                       				<option>${branchmanagershopcode.shopCode}</option>
+                       			<select name="shopCode" id="shopCode" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
+                       				<c:forEach var="BMShopCode" items="${branchManagerShopCode}">
+                       				<option>${BMShopCode.shopCode}</option>
                        				</c:forEach> 
                        			</select>
                         	</div>                        
@@ -74,48 +74,48 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">아이디 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">																										<!-- 입력이 꼭 필요 하다. -->						
-                          <input type="text" id="branchManagerId" name="branchManagerId" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" required="required" >
+                          <input type="text" id="branchEmployeeId" name="branchEmployeeId" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" required="required" >
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">이름 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerName" name="branchManagerName" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="branchEmployeeName" name="branchEmployeeName" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">생년월일 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerBirth" name="branchManagerBirth" data-validate-linked="email" placeholder="ex)980101 비밀번호로 사용됩니다." required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="branchEmployeeBirth" name="branchEmployeeBirth" data-validate-linked="email" placeholder="ex)980101 비밀번호로 사용됩니다." required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">연락처 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerPhone" name="branchManagerPhone" required="required" placeholder="ex)010-1234-1234" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="branchEmployeePhone" name="branchEmployeePhone" required="required" placeholder="ex)010-1234-1234" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="website">주소  <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerAddress" name="branchManagerAddress" required="required"  class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="branchEmployeeAddress" name="branchEmployeeAddress" required="required"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="occupation">보건증 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input  type="file" id="branchManagerCetificate" name="branchManagerCetificate" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12">
+                          <input  type="file" id="branchEmployeeCetificate" name="branchEmployeeCetificate" data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label for="password" class="control-label col-md-3">사업자번호<span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="branchManagerWorknum" name="branchManagerWorknum" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
+                          <input type="text" id="branchManagerWorknum" name="branchManagerWorknum" placeholder="ex)000-00-00000" data-validate-length="6,8" class="form-control col-md-7 col-xs-12" required="required">
                         </div>
                       </div>
                       <div class="item form-group">
