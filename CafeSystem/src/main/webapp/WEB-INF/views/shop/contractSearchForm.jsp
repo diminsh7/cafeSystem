@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<form action="./listContract" method="post" name="form1">
+<form action="./contractList" method="post" name="form1">
 	<select name="searchOption">
 		<option value="all"
 			<c:out value="${map.searchOption == 'all'?'selected':''}"/>>전체</option>

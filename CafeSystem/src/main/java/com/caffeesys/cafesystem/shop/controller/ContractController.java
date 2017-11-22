@@ -105,7 +105,7 @@ public class ContractController {
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
-		mav.setViewName("/shop/contractList");
+		mav.setViewName("shop/contractList");
 		return mav;
 	}
 }
