@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <div class="right_col" role="main">
           <div class="">
@@ -34,13 +34,13 @@
                         </tr>
                       </thead><!--branchManagerList  -->
                       <tbody>
-                      <c:forEach var="branchManager" items="${list}">
-                     	<tr>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                        <c:forEach var="BMList" items="${branchManagerList}">
+                      	<tr>
+                          <td><a href="${pageContext.request.contextPath}/branchManagerDetail?branchEmployeeCode=${BMList.branchEmployeeCode}">${BMList.branchEmployeeCode}</a></td> 
+                          <td>${BMList.branchEmployeeId}</td>
+                          <td>${BMList.branchEmployeeName}</td>
+                          <td>${BMList.branchEmployeeBirth}</td>
+						  <td>${BMList.shopName}</td>
                         </tr>
                       </c:forEach>
                                                             

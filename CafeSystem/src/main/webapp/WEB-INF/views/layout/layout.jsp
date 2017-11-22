@@ -39,6 +39,9 @@
 <link href="<c:url value="/resources/vendors/starrr/dist/starrr.css" />" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="<c:url value="/resources/build/css/custom.min.css" />" rel="stylesheet">
+<!-- jQuery -->
+<script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js" />"></script>
+
 </head>
 
 <body class="nav-md">
@@ -47,7 +50,7 @@
 			<div class="col-md-3 left_col">
 				<div class="left_col scroll-view">
 					<div class="navbar nav_title" style="border: 0;">
-						<a href="index.html" class="site_title"><i class="fa fa-coffee"></i>
+						<a href="/" class="site_title"><i class="fa fa-coffee"></i>
 							<span>Bean Place</span></a>
 					</div>
 
@@ -64,9 +67,7 @@
 			<tiles:insertAttribute name="footer" />
 		</div>
 	</div>
-	
-<!-- jQuery -->
-<script src="<c:url value="/resources/vendors/jquery/dist/jquery.min.js" />"></script>
+
 <!-- Bootstrap -->
 <script src="<c:url value="/resources/vendors/bootstrap/dist/js/bootstrap.min.js" />"></script>
 <!-- FastClick -->

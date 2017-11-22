@@ -8,6 +8,7 @@
 			<div class="title_left">
 				<h3>계약서관리</h3>
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서 등록</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -15,12 +16,24 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>계약서 등록</h2>
+						<h2>계약서 수정</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form action="./insertContract" method="post"
+						<form action="./updateContract" method="post"
 							class="form-horizontal form-label-left" novalidate>
+							<div class="item form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12"
+									for="name">계약코드<span class="required">*</span>
+								</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input id="contractCode"
+										class="form-control col-md-7 col-xs-12"
+										data-validate-length-range="6" data-validate-words="2"
+										name="contractCode" required="required" type="text"
+										value="${contract.contractCode}" readonly="readonly">
+								</div>
+							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">소유자명<span class="required">*</span>
@@ -29,7 +42,8 @@
 									<input id="contractOwnerName"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerName" required="required" type="text">
+										name="contractOwnerName" required="required" type="text"
+										value="${contract.contractOwnerName}">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -40,7 +54,8 @@
 									<input id="contractShopName"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractShopName" required="required" type="text">
+										name="contractShopName" required="required" type="text"
+										value="${contract.contractShopName}">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -51,7 +66,8 @@
 									<input id="contractOwnerPhone"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerPhone" required="required" type="text">
+										name="contractOwnerPhone" required="required" type="text"
+										value="${contract.contractOwnerPhone}">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -62,7 +78,8 @@
 									<input id="contractStartDate"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractStartDate" required="required" type="text">
+										name="contractStartDate" required="required" type="text"
+										value="${contract.contractStartDate}">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -73,7 +90,8 @@
 									<input id="contractEndDate"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractEndDate" required="required" type="text">
+										name="contractEndDate" required="required" type="text"
+										value="${contract.contractEndDate}">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -84,14 +102,14 @@
 									<input id="contractPhoto"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="text"><!-- file인데 일단 text로 테스트작업 -->
+										name="contractPhoto" required="required" type="text"
+										value="${contract.contractPhoto }">
 								</div>
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/contractList">취소</a>
-									<button id="send" type="submit" class="btn btn-success">등록</button>
+									<button id="send" type="submit" class="btn btn-success">수정</button>
 								</div>
 							</div>
 						</form>
