@@ -58,18 +58,11 @@ public class ContractDao {
 		contract.setContractOwnerName(contractOwnerName);
 		return sqlSessionTemplate.delete(NS+"deleteContract", contract);
 	}
-	// 계약서검색조회목록
+	// 계약서검색조회 상세전
 	public List<ContractVo> searchContract(String searchOption, String keyword) {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		return sqlSessionTemplate.selectList(NS+"searchContract", map);
-	}
-	// 계약서검색조회갯수
-	public int searchContractCount(String searchOption, String keyword) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		return sqlSessionTemplate.selectOne(NS+"searchContractCount", map);
 	}
 }

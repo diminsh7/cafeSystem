@@ -26,7 +26,7 @@
 		select max(CAST(substring(contract_code,6) AS DECIMAL))  
 		from contract
 	</select>
-	<!-- 전체계약서조회 상세전-->
+	<!-- 전체계약서조회 상세전 -->
 	<select id="selectContractList" parameterType="java.util.Map" resultMap="resultContract">
         SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract 
@@ -52,55 +52,18 @@
 			, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
 		WHERE contract_code = #{contractCode}
 	</update>
-    <!-- 계약서삭제 소유자명확인하고 삭제-->
+    <!-- 계약서삭제 소유자명확인하고 삭제 -->
     <delete id="deleteContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo">
 		DELETE FROM contract 
 		WHERE contract_code = #{contractCode}
 		AND contract_owner_name = #{contractOwnerName}
     </delete>
-    <!-- 계약서검색조회목록갯수 / sql code 조각 / 반복되는 sql의 일부를 sql태그를 이용하여 빼둠-->
+    <!-- 계약서검색조회 상세전 -->
     <select id="searchContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo" resultMap="resultContract">
     	SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract
-        <include refid="search"></include>
-        ORDER BY contract_code DESC
+        <if test="keyword != null and keyword != ''">
+			WHERE ${searchOption} = #{keyword}
+		</if>
     </select>
-    
-    <select id="searchContractCount" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo" resultType="int">
-    	SELECT COUNT(*) FROM contract
-    	<include refid="search"></include>
-    </select>
-    
-    <sql id="search">
-    	<choose>
-    		<when test="searchOption == 'all'">
-    			WHERE contract_owner_name like '%'||#{keyword}||'%'
-    			OR contract_shop_name like '%'||#{keyword}||'%'
-    			OR contract_end_date like '%'||#{keyword}||'%'
-    		</when>
-    		<otherwise>
-    			WHERE ${searchOption} like '%'||#{keyword}||'%'
-    		</otherwise>
-    	</choose>
-    </sql>
-    
-    
-	<!-- 계약서검색조회 소유자명 -->
- <!--    <select id="searchContractOwnerName" resultMap="resultContract">
-		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
-        FROM contract 
-        WHERE contract_owner_name = #{contractOwnerName}
-	</select> -->
-	<!-- 계약서검색조회 점포명 -->
-<!--     <select id="searchContractShopName" resultMap="resultContract">
-		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
-        FROM contract 
-        WHERE contract_shop_name = #{contractShopName}
-	</select> -->
-	<!-- 계약서검색조회 계약만료일 -->
-<!--     <select id="searchContractEndDate" resultMap="resultContract">
-		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
-        FROM contract 
-        WHERE contract_end_date = #{contractEndDate}
-	</select> -->
 </mapper>
