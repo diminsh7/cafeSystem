@@ -58,10 +58,20 @@ public class ContractDao {
 		contract.setContractOwnerName(contractOwnerName);
 		return sqlSessionTemplate.delete(NS+"deleteContract", contract);
 	}
-	/*// 계약서검색조회 소유자명, 점포명, 계약만료일
-	public List<ContractVo> searchContract(Map<String, String> map) {
+	// 계약서검색조회목록
+	public List<ContractVo> searchContract(String searchOption, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
 		return sqlSessionTemplate.selectList(NS+"searchContract", map);
-	}*/
+	}
+	// 계약서검색조회갯수
+	public int searchContractCount(String searchOption, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSessionTemplate.selectOne(NS+"searchContractCount", map);
+	}
 	// 계약서검색조회 임시테스트
 	/*// 카테고리 검색
 		public List<Cate> cateSearch(Map<String, String> map){

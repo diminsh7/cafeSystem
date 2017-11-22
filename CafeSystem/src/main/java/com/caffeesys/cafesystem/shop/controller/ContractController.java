@@ -1,6 +1,8 @@
 package com.caffeesys.cafesystem.shop.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.caffeesys.cafesystem.shop.service.ContractVo;
 import com.caffeesys.cafesystem.shop.service.ContractDao;
@@ -89,6 +92,23 @@ public class ContractController {
 		contractDao.deleteContract(contractCode, contractOwnerName);
 		return "redirect:/contractList";
 	}
+	// 계약서검색조회목록갯수
+	@RequestMapping(value = "/contractList")
+	public ModelAndView searchContract(@RequestParam(defaultValue="searchContractOwnerName") String searchOption, 
+										@RequestParam(defaultValue="") String keyword) {
+		List<ContractVo> list = contractService.searchContract(searchOption, keyword);
+		int count = contractService.searchContractCount(searchOption, keyword);
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("count", count);
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		mav.addObject("map", map);
+		mav.setViewName("shop/contractSearchForm");
+		return mav;
+	}
+
 /*	// 계약서검색조회
 	@RequestMapping(value = "/searchContract", method = RequestMethod.GET)
 	public String searchContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {

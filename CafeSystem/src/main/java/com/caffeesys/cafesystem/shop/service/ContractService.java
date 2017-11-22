@@ -1,5 +1,7 @@
 package com.caffeesys.cafesystem.shop.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +34,20 @@ public class ContractService {
 		contract.setContractCode(contractcode);
 		System.out.println("ContractService.java/ contract:"+contract);
 		return contractDao.insertContract(contract);
+	}
+	// 계약서검색조회목록
+	public List<ContractVo> searchContract(String searchOption, String keyword) {
+		System.out.println("ContractService.java/ searchContract method 확인");
+		System.out.println("ContractService.java / searchContract Param searchOption :" + searchOption);
+		System.out.println("ContractService.java / searchContract Param keyword :" + keyword);
+		return contractDao.searchContract(searchOption, keyword);
+	}
+	// 계약서검색조회갯수
+	public int searchContractCount(String searchOption, String keyword) {
+		System.out.println("ContractService.java/ searchContractCount method 확인");
+		System.out.println("ContractService.java / searchContractCount Param searchOption :" + searchOption);
+		System.out.println("ContractService.java / searchContractCount Param keyword :" + keyword);
+		return contractDao.searchContractCount(searchOption, keyword);
 	}
 /*	// 계약서검색조회 임시테스트
 		public void searchContract(Model model, String con, String consearch, int currentPage){
