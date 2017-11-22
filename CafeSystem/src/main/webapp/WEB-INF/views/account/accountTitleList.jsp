@@ -2,13 +2,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <script type="text/javascript" >
-	function button_event(){
+/* 	$(document).ready( function(){
+	    $("#accountTitleDeleteButton").click( function() {
+	        if(confirm("종료 하시겠습니까?")) {
+	            $(this).parent().click();
+	        } else {
+	            return false;
+	        }
+	    });
+	}); */
+	$(document).ready(function button_event(){
 		if (confirm("정말 삭제하시겠습니까?") == true){    //확인
-		    document.form.submit();
+		    document.$('#accountTitleDeleteButton').submit();
 		}else{   //취소
-		    return;
+		    return false;
 		}
-}
+	});
 </script>
   <div class="right_col" role="main">
           <div class="">
@@ -28,8 +37,41 @@
                   </div>
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">
-                      	<div>전체 수: ${totalRowCount}</div>
-                    </p>
+                     <h2>게시글 목록</h2>
+                   	</p>
+		    <form name="form1" method="post" action="${pageContext.request.contextPath}/accountTitleList">
+		        <select name="searchOption">
+		            <!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+		            <option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >계정과목명+내용</option>
+		            <option value="account_title_name" <c:out value="${map.searchOption == 'account_title_name'?'selected':''}"/> >계정과목명</option>
+		            <option value="account_title_content" <c:out value="${map.searchOption == 'account_title_content'?'selected':''}"/> >내용</option>
+		        </select>
+		        <input name="keyword" value="${map.keyword}">
+		        <input type="submit" value="조회">
+		        <button type="button" id="btnWrite">글쓰기</button>
+		    </form>
+		    <!-- 레코드의 갯수를 출력 -->
+		    ${map.count}개의 게시물이 있습니다.
+		     <table id="datatable" class="table table-striped table-bordered">
+		        <tr>
+		            <th>계정과목코드</th>
+                          <th>계정과목명</th>
+                          <th>상세내용</th>
+                          <th>수정</th>
+                          <th>삭제</th>
+		        </tr>
+		        <c:forEach var="map" items="${map.list}">
+		        <tr>
+		            <td>${map.accountTitleCode}</td>
+		            <td>${map.accountTitleName}</td>
+		            <td>${map.accountTitleContent}</td>
+		            <td><a id="accountTitleUpdateButton" href ="${pageContext.request.contextPath}/accountTitleUpdateForm?accountTitleCode=${accountTitle.accountTitleCode}">수정</a></td>
+                    <td><a  onclick="button_event()" id="accountTitleDeleteButton" href ="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountTitle.accountTitleCode}">삭제</a></td>
+		       </tr>    
+		        </c:forEach>
+		        </table>
+                   	<div>전체 수: ${totalRowCount}</div>
+                   
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
@@ -49,7 +91,7 @@
                           <td><a id="accountTitleUpdateButton" href ="${pageContext.request.contextPath}/accountTitleUpdateForm?accountTitleCode=${accountTitle.accountTitleCode}">수정</a></td>
                           <td><a onclick="button_event();" id="accountTitleDeleteButton" href ="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountTitle.accountTitleCode}">삭제</a></td>
                         </tr>
-                      </c:forEach>                                                          
+                      </c:forEach>                                                        
                       </tbody>
                     </table>
 	                    <ul class="pager">
@@ -62,7 +104,7 @@
 	                    </ul>
                     <div>
                     	<a href="${pageContext.request.contextPath}/accountTitleInsert">계정과목 입력</a>
-                    </div>
+                    </div> 
                   </div>
                 </div>
               </div>

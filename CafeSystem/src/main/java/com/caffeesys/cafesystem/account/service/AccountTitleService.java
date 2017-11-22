@@ -14,7 +14,18 @@ public class AccountTitleService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleService.class);
 	@Autowired
 	private AccountTitleDao accountTitleDao;
+	//계정과목 전체 목록 
+	public List<AccountTitleVO> listAll(String searchOption, String keyword){
+		logger.debug("listAll메소드의 searchOption :{}",searchOption);	//all, account_title_code, account_title_name, account_title_content
+		logger.debug("listAll메소드의 keyword :{}",keyword);	//검색어
+		return accountTitleDao.listAll(searchOption,keyword);
+	}
 	
+	//계정과목 레코드 개수 
+	public int countArticle(String searchOption, String keyword) {
+		logger.debug("countArticle{}",accountTitleDao.countArticle(searchOption,keyword));
+		return accountTitleDao.countArticle(searchOption,keyword);
+	}
 	//계정과목 삭제
 	public void deleteAccountTitle(String accountTitleCode) {
 		logger.debug("deleteAccountTitle메소드의 accountTitleCode :{}",accountTitleCode);

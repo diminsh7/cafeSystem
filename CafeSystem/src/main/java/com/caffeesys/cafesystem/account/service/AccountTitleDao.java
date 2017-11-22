@@ -19,6 +19,28 @@ public class AccountTitleDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	//계정과목 검색 후 리스트
+	public List<AccountTitleVO> listAll(String searchOption, String keyword){
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		logger.debug("listAll메소드의 searchOption :{}",searchOption);
+		logger.debug("listAll메소드의 keyword :{}",keyword);
+		logger.debug("listAll메소드의 map:{}",map);
+		return sqlSessionTemplate.selectList(NS + "listAll",map);
+	}
+	
+	//검색된 레코드 개수
+	public int countArticle(String searchOption, String keyword) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		logger.debug("listAll메소드의 searchOption :{}",searchOption);
+		logger.debug("listAll메소드의 keyword :{}",keyword);
+		logger.debug("countArticle메소드의 map:{}",map);
+		return sqlSessionTemplate.selectOne(NS + "countArticle", map);
+	}
+	
 	//계정과목 삭제
 	public int deleteAccountTitle(String accountTitleCode) {
 		logger.debug("deleteAccountTitle메소드의 accountTitleCode :{}",accountTitleCode);
