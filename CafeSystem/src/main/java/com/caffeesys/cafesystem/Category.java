@@ -8,7 +8,7 @@ public class Category {
 
 	@Override
 	public String toString() {
-		return "Category [categoryCode=" + categoryCode + ", categoryLarge=" + categoryLarge + ", categoryMiddle="
+		return "CategoryVo [categoryCode=" + categoryCode + ", categoryLarge=" + categoryLarge + ", categoryMiddle="
 				+ categoryMiddle + ", categorySmall=" + categorySmall + "]";
 	}
 
@@ -55,5 +55,4 @@ public class Category {
 	public void setCategorySmall(String categorySmall) {
 		this.categorySmall = categorySmall;
 	}
-
 }

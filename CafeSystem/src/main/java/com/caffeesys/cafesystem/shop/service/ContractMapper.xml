@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.shop.service.ContractMapper">
-	<resultMap type="com.caffeesys.cafesystem.shop.service.Contract" id="resultContract">
+	<resultMap type="com.caffeesys.cafesystem.shop.service.ContractVo" id="resultContract">
 		<result property="contractCode" column="contract_code" />
 		<result property="contractOwnerName" column="contract_owner_name" />
 		<result property="contractShopName" column="contract_shop_name" />
@@ -13,25 +13,67 @@
 		<result property="contractPhoto" column="contract_photo" />
 	</resultMap>
 	<!-- 계약서등록 -->
-	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		INSERT INTO contract (contract_code, contract_owner_name, contract_shop_name, contract_owner_phone, contract_start_date, contract_end_date, contract_photo)
-		VALUES (#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}, contract_start_date, contract_end_date, #{contractPhoto})
+	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo">
+		INSERT INTO contract (
+			contract_code, contract_owner_name, contract_shop_name, contract_owner_phone
+			, contract_start_date, contract_end_date, contract_photo
+		) VALUES (
+			#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}
+			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto})
 	</insert>
-	<!-- 계약서수정 -->
-	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		UPDATE contract
-		SET contract_owner_name=#{contractOwnerName}, contract_shop_name=#{contractShopName}, contract_owner_phone=#{contractOwnerPhone}
-		, contract_start_date=#{contractStartDate}, contract_end_date=#{contractEndDate}, contract_photo=#{contractPhoto}
-		WHERE contract_code=#{contractCode}
-	</update>
-	<!-- 전체게약서조회 -->
-	<select id="listContract" resultMap="resultContract">
-		SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
-		FROM contract
+	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<select id="selectContractMax" resultType="Integer">
+		select max(CAST(substring(contract_code,6) AS DECIMAL))  
+		from contract
 	</select>
-	<!-- 선택지점계약서상세조회 -->
-	<select id="detailContract" resultMap="resultContract" parameterType="com.caffeesys.cafesystem.shop.service.Contract">
-		SELECT * FROM contract
-		WHERE contract_code=#{contractCode}
+	<!-- 전체계약서조회 상세전-->
+	<select id="selectContractList" parameterType="java.util.Map" resultMap="resultContract">
+        SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+        FROM contract 
+        ORDER BY contract_code DESC
+        LIMIT #{beginRow}, #{pagePerRow}
+    </select>
+    <!-- 전체계약서조회 상세전에서 전체행의 수 -->
+     <select id="selectContractCount" resultType="Integer">
+        SELECT COUNT(*) FROM contract
+    </select>
+     <!-- 계약서수정 및 계약서상세조회 -->
+	<select id="selectContract" parameterType="String" resultMap="resultContract">
+        SELECT contract_code, contract_owner_name, contract_shop_name, contract_owner_phone
+            	, contract_start_date, contract_end_date, contract_photo
+        FROM contract 
+        WHERE contract_code = #{contractCode}
+    </select>
+	<!-- 계약서수정 -->
+	<update id="updateContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo">
+		UPDATE contract
+		SET contract_owner_name = #{contractOwnerName}, contract_shop_name = #{contractShopName}
+			, contract_owner_phone = #{contractOwnerPhone}, contract_start_date = #{contractStartDate}
+			, contract_end_date = #{contractEndDate}, contract_photo = #{contractPhoto}
+		WHERE contract_code = #{contractCode}
+	</update>
+    <!-- 계약서삭제 소유자명확인하고 삭제-->
+    <delete id="deleteContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo">
+		DELETE FROM contract 
+		WHERE contract_code = #{contractCode}
+		AND contract_owner_name = #{contractOwnerName}
+    </delete>
+    <!-- 계약서검색조회 소유자명 -->
+    <select id="searchContractOwnerName" resultMap="resultContract">
+		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+        FROM contract 
+        WHERE contract_owner_name = #{contractOwnerName}
+	</select>
+    <!-- 계약서검색조회 점포명 -->
+    <select id="searchContractShopName" resultMap="resultContract">
+		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+        FROM contract 
+        WHERE contract_shop_name = #{contractShopName}
+	</select>
+    <!-- 계약서검색조회 계약만료일 -->
+    <select id="searchContractEndDate" resultMap="resultContract">
+		SELECT SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
+        FROM contract 
+        WHERE contract_end_date = #{contractEndDate}
 	</select>
 </mapper>

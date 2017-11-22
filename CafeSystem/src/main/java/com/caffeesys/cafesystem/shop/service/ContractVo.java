@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.shop.service;
 
-public class Contract {
+public class ContractVo {
 	private String contractCode; // 계약코드
 	private String contractOwnerName; // 소유자명
 	private String contractShopName; // 점포명
@@ -9,11 +9,11 @@ public class Contract {
 	private String contractEndDate; // 계약만료일
 	private String contractPhoto; // 계약서사진
 	
-	public Contract() {
+	public ContractVo() {
 		super();
 	}
 	
-	public Contract(String contractCode, String contractOwnerName, String contractShopName, String contractOwnerPhone,
+	public ContractVo(String contractCode, String contractOwnerName, String contractShopName, String contractOwnerPhone,
 			String contractStartDate, String contractEndDate, String contractPhoto) {
 		super();
 		this.contractCode = contractCode;
@@ -89,4 +89,3 @@ public class Contract {
 				+ ", contractPhoto=" + contractPhoto + "]";
 	}
 }
-
