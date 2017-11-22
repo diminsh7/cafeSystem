@@ -49,13 +49,4 @@ public class ContractService {
 		System.out.println("ContractService.java / searchContractCount Param keyword :" + keyword);
 		return contractDao.searchContractCount(searchOption, keyword);
 	}
-/*	// 계약서검색조회 임시테스트
-		public void searchContract(Model model, String con, String consearch, int currentPage){
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("con", con);
-			map.put("consearch", consearch);		
-			map = commonService.searchPaging(model, currentPage, 2, cateDao.cateSearchCount(map), map);
-	        model.addAttribute("cateList", cateDao.cateSearch(map));
-	        model.addAttribute("page", "cateSearch");
-		}*/
 }

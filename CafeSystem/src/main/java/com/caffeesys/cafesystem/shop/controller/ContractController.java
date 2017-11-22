@@ -93,8 +93,8 @@ public class ContractController {
 		return "redirect:/contractList";
 	}
 	// 계약서검색조회목록갯수
-	@RequestMapping(value = "/contractList")
-	public ModelAndView searchContract(@RequestParam(defaultValue="searchContractOwnerName") String searchOption, 
+	@RequestMapping(value = "/contractList", method = RequestMethod.POST)
+	public ModelAndView searchContract(@RequestParam(defaultValue="contractOwnerName") String searchOption, 
 										@RequestParam(defaultValue="") String keyword) {
 		List<ContractVo> list = contractService.searchContract(searchOption, keyword);
 		int count = contractService.searchContractCount(searchOption, keyword);
@@ -105,25 +105,7 @@ public class ContractController {
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
 		mav.addObject("map", map);
-		mav.setViewName("shop/contractSearchForm");
+		mav.setViewName("/shop/contractList");
 		return mav;
 	}
-
-/*	// 계약서검색조회
-	@RequestMapping(value = "/searchContract", method = RequestMethod.GET)
-	public String searchContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
-		System.out.println("ContractController.java / searchContract method get방식 ");
-		ContractVo contract = contractDao.selectContract(contractCode);
-		model.addAttribute("contract", contract);
-		return "/shop/contractList";
-	}*/
-/*	// 계약서검색조회 임시테스트
-		@RequestMapping(value = "/searchContract")
-		public String cateSearch(Model model
-					, @RequestParam("con") String con
-					, @RequestParam("consearch") String consearch
-					, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-			cateService.cateSearch(model, con, consearch, currentPage);
-			return "cate/cateList";
-		}*/
 }

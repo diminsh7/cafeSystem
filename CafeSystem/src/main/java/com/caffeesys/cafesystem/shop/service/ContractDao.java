@@ -72,29 +72,4 @@ public class ContractDao {
 		map.put("keyword", keyword);
 		return sqlSessionTemplate.selectOne(NS+"searchContractCount", map);
 	}
-	// 계약서검색조회 임시테스트
-	/*// 카테고리 검색
-		public List<Cate> cateSearch(Map<String, String> map){
-			return SST.selectList(NS+"cateList", map);
-		}
-		
-		// 카테고리 검색 결과 카운트
-		public int cateSearchCount(Map<String, String> map) {
-			return SST.selectOne(NS+"cateCount", map);
-		}
-		
-		// 전체 select(폼 옵션 용 페이징x)
-		public List<Cate> cateOption(){
-			return SST.selectList(NS+"cateList");
-		}
-		
-		// 전체 select(카테고리 목록용, 페이징o)
-		public List<Cate> cateList(Map<String, Integer> map){
-			return SST.selectList(NS+"cateList", map);
-		}
-		
-		// 페이징을 위한 전체 카운트
-		public int cateCount() {
-			return SST.selectOne(NS+"cateCount");
-		}*/
 }
