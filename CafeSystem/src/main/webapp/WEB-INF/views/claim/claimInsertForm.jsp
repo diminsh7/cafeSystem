@@ -25,30 +25,35 @@
 </script>
 <form id="claimInsertForm" action="${pageContext.request.contextPath}/claimInsert" method="post">
 	<div class="right_col" role="main">
-		<div class="">
-			<div class="page-title">
-				<div class="title_left">
-					<h3>Claim Insert Form</h3>
+		<div class="page-title">
+			<div class="title_left">
+				<h3>Claim Insert Form</h3>
+			</div>
+		</div>	
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">		
+					<div>
+						<input type="hidden" id="employeeCode" name="employeeCode" value="${loginInfo.empCode}" readonly>
+						<select id="claimCategoryCode" name="claimCategoryCode">
+							<c:forEach var="category" items="${claimCategory}">
+								<option value="${category.categoryCode}">${category.categorySmall}</option>
+							</c:forEach>
+						</select>
+						<input type="text" id="customerClaimTitle" name="customerClaimTitle">
+					</div>
+					<div>
+						<textarea id="customerClaimContents" name="customerClaimContents"></textarea>
+					</div>
+					<div>
+						<input type="file" id="customerClaimFile" name="customerClaimFile">
+					</div>
+					<div>
+						<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">
+						<input type="button" id="claimInsertBtn" value="등록" onclick="claimBtn('insert')">
+					</div>
 				</div>
 			</div>
-		</div>
-		<div>
-			<select id="claimCategoryCode" name="claimCategoryCode">
-				<c:forEach var="category" items="${claimCategory}">
-					<option value="${category.categoryCode}">${category.categorySmall}</option>
-				</c:forEach>
-			</select>
-			<input type="text" id="customerClaimTitle" name="customerClaimTitle">
-		</div>
-		<div>
-			<textarea id="customerClaimContents" name="customerClaimContents"></textarea>
-		</div>
-		<div>
-			<input type="file" id="customerClaimFile" name="customerClaimFile">
-		</div>
-		<div>
-			<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">
-			<input type="button" id="claimInsertBtn" value="등록" onclick="claimBtn('insert')">
 		</div>
 	</div>
 </form>
