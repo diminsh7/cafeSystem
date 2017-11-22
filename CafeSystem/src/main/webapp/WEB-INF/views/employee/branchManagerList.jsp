@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
   <div class="right_col" role="main">
           <div class="">
@@ -30,19 +30,17 @@
                           <th>아이디</th>
                           <th>이름</th>
                           <th>생년월일</th>
-                          <th>점포명</th> <!-- ???? -->
-                          <th>상세보기</th>
+                          <th>점포명</th>
                         </tr>
                       </thead><!--branchManagerList  -->
                       <tbody>
-                      <c:forEach var="BMList" items="${branchManagerList}">
-                     	<tr>
-                          <td>${BMList.branchEmployeeCode}</td> 
+                        <c:forEach var="BMList" items="${branchManagerList}">
+                      	<tr>
+                          <td><a href="${pageContext.request.contextPath}/branchManagerDetail?branchEmployeeCode=${BMList.branchEmployeeCode}">${BMList.branchEmployeeCode}</a></td> 
                           <td>${BMList.branchEmployeeId}</td>
                           <td>${BMList.branchEmployeeName}</td>
                           <td>${BMList.branchEmployeeBirth}</td>
-                          <td>생각중...</td>
-                          <td><a href="${pageContext.request.contextPath}/branchManagerDetail?branchEmployeeCode=${BMList.branchEmployeeCode}">상세조회</a></td>
+						  <td>${BMList.shopName}</td>
                         </tr>
                       </c:forEach>
                                                             
