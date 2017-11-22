@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.claim.service;
 
-public class ClaimReply {
+public class ClaimReplyVO {
 	private int claimReplyCode;
 	private int customerClaimCode;
 	private String claimReplyContents;
@@ -14,11 +14,11 @@ public class ClaimReply {
 				+ claimReplyDate + "]";
 	}
 
-	public ClaimReply() {
+	public ClaimReplyVO() {
 		super();
 	}
 
-	public ClaimReply(int claimReplyCode, int customerClaimCode, String claimReplyContents, String employeeCode,
+	public ClaimReplyVO(int claimReplyCode, int customerClaimCode, String claimReplyContents, String employeeCode,
 			String claimReplyDate) {
 		super();
 		this.claimReplyCode = claimReplyCode;

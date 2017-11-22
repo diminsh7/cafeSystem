@@ -20,21 +20,21 @@ public class ClaimReplyDao implements ClaimReplyDaoInter {
 	private final String NS = "com.caffeesys.cafesystem.claim.service.ClaimReplyMapper.";
 	
 	@Override
-	public List<ClaimReply> selectClaimReply(Integer customerClaimCode) throws Exception {
+	public List<ClaimReplyVO> selectClaimReply(Integer customerClaimCode) throws Exception {
 		logger.debug("[ClaimReplyDao.java/selectClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyDao.java/selectClaimReply.method] customerClaimCode param : " + customerClaimCode);
 		return sqlSession.selectList(NS + "selectClaimReply", customerClaimCode);
 	}
 
 	@Override
-	public void insertClaimReply(ClaimReply claimReply) throws Exception {
+	public void insertClaimReply(ClaimReplyVO claimReply) throws Exception {
 		logger.debug("[ClaimReplyDao.java/insertClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyDao.java/insertClaimReply.method] claimReply param : " + claimReply);
 		sqlSession.insert(NS + "insertClaimReply", claimReply);
 	}
 
 	@Override
-	public void updateClaimReply(ClaimReply claimReply) throws Exception {
+	public void updateClaimReply(ClaimReplyVO claimReply) throws Exception {
 		logger.debug("[ClaimReplyDao.java/updateClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyDao.java/updateClaimReply.method] claimReply param : " + claimReply);
 		sqlSession.update(NS + "updateClaimReply", claimReply);

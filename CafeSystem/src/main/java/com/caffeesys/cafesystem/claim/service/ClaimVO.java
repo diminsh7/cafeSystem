@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.claim.service;
 
-public class Claim {
+public class ClaimVO {
 	private int customerClaimCode; // 클레임 관리코드 (PK)
 	private String claimCategoryCode; // 카테고리 (FK)
 	private String employeeCode; // 직원코드 (FK)
@@ -8,21 +8,15 @@ public class Claim {
 	private String customerClaimContents; // 내용
 	private String customerClaimDate; // 날짜
 	private String customerClaimFile; // 첨부파일 저장경로
+	private String claimCategoryName; // 카테고리 이름 저장용
 
-	@Override
-	public String toString() {
-		return "Claim [customerClaimCode=" + customerClaimCode + ", claimCategoryCode=" + claimCategoryCode
-				+ ", employeeCode=" + employeeCode + ", customerClaimTitle=" + customerClaimTitle
-				+ ", customerClaimContents=" + customerClaimContents + ", customerClaimDate=" + customerClaimDate
-				+ ", customerClaimFile=" + customerClaimFile + "]";
-	}
-
-	public Claim() {
+	public ClaimVO() {
 		super();
 	}
 
-	public Claim(int customerClaimCode, String claimCategoryCode, String employeeCode, String customerClaimTitle,
-			String customerClaimContents, String customerClaimDate, String customerClaimFile) {
+	public ClaimVO(int customerClaimCode, String claimCategoryCode, String employeeCode, String customerClaimTitle,
+			String customerClaimContents, String customerClaimDate, String customerClaimFile,
+			String claimCategoryName) {
 		super();
 		this.customerClaimCode = customerClaimCode;
 		this.claimCategoryCode = claimCategoryCode;
@@ -31,6 +25,21 @@ public class Claim {
 		this.customerClaimContents = customerClaimContents;
 		this.customerClaimDate = customerClaimDate;
 		this.customerClaimFile = customerClaimFile;
+		this.claimCategoryName = claimCategoryName;
+	}
+
+	@Override
+	public String toString() {
+		return "ClaimVO [customerClaimCode=" + customerClaimCode + ", claimCategoryCode=" + claimCategoryCode
+				+ ", employeeCode=" + employeeCode + ", customerClaimTitle=" + customerClaimTitle
+				+ ", customerClaimContents=" + customerClaimContents + ", customerClaimDate=" + customerClaimDate
+				+ ", customerClaimFile=" + customerClaimFile + ", claimCategoryName=" + claimCategoryName
+				+ ", getCustomerClaimCode()=" + getCustomerClaimCode() + ", getClaimCategoryCode()="
+				+ getClaimCategoryCode() + ", getEmployeeCode()=" + getEmployeeCode() + ", getCustomerClaimTitle()="
+				+ getCustomerClaimTitle() + ", getCustomerClaimContents()=" + getCustomerClaimContents()
+				+ ", getCustomerClaimDate()=" + getCustomerClaimDate() + ", getCustomerClaimFile()="
+				+ getCustomerClaimFile() + ", getClaimCategoryName()=" + getClaimCategoryName() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
 
 	public int getCustomerClaimCode() {
@@ -87,6 +96,14 @@ public class Claim {
 
 	public void setCustomerClaimFile(String customerClaimFile) {
 		this.customerClaimFile = customerClaimFile;
+	}
+
+	public String getClaimCategoryName() {
+		return claimCategoryName;
+	}
+
+	public void setClaimCategoryName(String claimCategoryName) {
+		this.claimCategoryName = claimCategoryName;
 	}
 
 }

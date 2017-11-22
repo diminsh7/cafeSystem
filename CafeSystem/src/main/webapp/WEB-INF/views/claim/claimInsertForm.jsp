@@ -2,14 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script>
-	function claimBtn(num){
-		if(num == 1){
-			console.log("rollback Claim List");
-			$(location).attr('href', '${pageContext.request.contextPath}/claimList');
+	function claimBtn(btn){
+		if(btn == 'list'){
+			//console.log("rollback Claim List");
+			result = confirm('작성을 취소하시겠습니까?');
+			if(result){
+				$(location).attr('href', '${pageContext.request.contextPath}/claimList');
+			} else {
+				
+			}
 		} 
-		if(num == 2){
-			console.log("Claim Insert Action");
-			$('#claimInsertForm').submit();
+		if(btn == 'insert'){
+			//console.log("Claim Insert Action");
+			result = confirm('등록하시겠습니까?');
+			if(result){
+				$('#claimInsertForm').submit();
+			} else {
+				
+			}
 		}
 	}
 </script>
@@ -37,9 +47,8 @@
 			<input type="file" id="customerClaimFile" name="customerClaimFile">
 		</div>
 		<div>
-			<input type="button" id="claimListBtn" value="목록" onclick="claimBtn(1)">
-			<input type="button" id="claimInsertBtn" value="등록" onclick="claimBtn(2)">
-			<input type="button" id="claimReplyBtn" value="답글" onclick="claimBtn(3)">
+			<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">
+			<input type="button" id="claimInsertBtn" value="등록" onclick="claimBtn('insert')">
 		</div>
 	</div>
 </form>

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.caffeesys.cafesystem.claim.service.ClaimReply;
+import com.caffeesys.cafesystem.claim.service.ClaimReplyVO;
 import com.caffeesys.cafesystem.claim.service.ClaimReplyService;
 
 @Controller
@@ -26,7 +26,7 @@ public class ClaimReplyController {
 	private ClaimReplyService claimReplyService;
 
 	@RequestMapping(value = "/insertReply", method = RequestMethod.POST)
-	public ResponseEntity<String> insertClaimReply(@RequestBody ClaimReply claimReply) {
+	public ResponseEntity<String> insertClaimReply(@RequestBody ClaimReplyVO claimReply) {
 		logger.debug("[ClaimReplyController.java/insertClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyController.java/insertClaimReply.method] claimReply param : " + claimReply);
 		ResponseEntity<String> entity = null;
@@ -41,21 +41,21 @@ public class ClaimReplyController {
 	}
 
 	@RequestMapping(value = "/all/{customerClaimCode}", method = RequestMethod.GET)
-	public ResponseEntity<List<ClaimReply>> listClaimReply(@PathVariable("customerClaimCode") Integer customerClaimCode) {
+	public ResponseEntity<List<ClaimReplyVO>> listClaimReply(@PathVariable("customerClaimCode") Integer customerClaimCode) {
 		logger.debug("[ClaimReplyController.java/listClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyController.java/listClaimReply.method] customerClaimCode param : " + customerClaimCode);
-		ResponseEntity<List<ClaimReply>> entity = null;
+		ResponseEntity<List<ClaimReplyVO>> entity = null;
 		try {
-			entity = new ResponseEntity<List<ClaimReply>>(claimReplyService.selectClaimReply(customerClaimCode), HttpStatus.OK);
+			entity = new ResponseEntity<List<ClaimReplyVO>>(claimReplyService.selectClaimReply(customerClaimCode), HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<List<ClaimReply>>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<List<ClaimReplyVO>>(HttpStatus.BAD_REQUEST);
 		}
 		return entity;
 	}
 
 	@RequestMapping(value = "/{claimReplyCode}", method = { RequestMethod.PUT, RequestMethod.PATCH })
-	public ResponseEntity<String> updateClaimReply(@PathVariable("claimReplyCode") Integer claimReplyCode, @RequestBody ClaimReply claimReply) {
+	public ResponseEntity<String> updateClaimReply(@PathVariable("claimReplyCode") Integer claimReplyCode, @RequestBody ClaimReplyVO claimReply) {
 		logger.debug("[ClaimReplyController.java/updateClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyController.java/updateClaimReply.method] claimReplyCode param : " + claimReplyCode);
 		ResponseEntity<String> entity = null;

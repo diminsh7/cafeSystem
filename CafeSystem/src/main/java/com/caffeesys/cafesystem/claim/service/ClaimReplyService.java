@@ -16,21 +16,21 @@ public class ClaimReplyService implements ClaimReplyServiceInter {
 	private ClaimReplyDao claimReplyDao;
 
 	@Override
-	public void insertClaimReply(ClaimReply claimReply) throws Exception {
+	public void insertClaimReply(ClaimReplyVO claimReply) throws Exception {
 		logger.debug("[ClaimReplyService.java/insertClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyService.java/insertClaimReply.method] claimReply param : " + claimReply);
 		claimReplyDao.insertClaimReply(claimReply);
 	}
 
 	@Override
-	public List<ClaimReply> selectClaimReply(Integer customerClaimCode) throws Exception {
+	public List<ClaimReplyVO> selectClaimReply(Integer customerClaimCode) throws Exception {
 		logger.debug("[ClaimReplyService.java/selectClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyService.java/selectClaimReply.method] customerClaimCode param : " + customerClaimCode);
 		return claimReplyDao.selectClaimReply(customerClaimCode);
 	}
 
 	@Override
-	public void updateClaimReply(ClaimReply claimReply) throws Exception {
+	public void updateClaimReply(ClaimReplyVO claimReply) throws Exception {
 		logger.debug("[ClaimReplyService.java/updateClaimReply.method] Loading Complete");
 		logger.debug("[ClaimReplyService.java/updateClaimReply.method] claimReply param : " + claimReply);
 		claimReplyDao.updateClaimReply(claimReply);

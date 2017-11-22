@@ -65,7 +65,7 @@
 								<c:forEach var="claimList" items="${claimList}">
 									<tr>
 										<td>${claimList.customerClaimCode}</td>
-										<td>${claimList.claimCategoryCode}</td>
+										<td>${claimList.claimCategoryName}</td>
 										<td>${claimList.employeeCode}</td>
 										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${claimList.customerClaimCode}">${claimList.customerClaimTitle}</a></td>
 										<td>${claimList.customerClaimDate}</td>

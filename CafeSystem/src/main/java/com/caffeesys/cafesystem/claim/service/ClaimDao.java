@@ -20,29 +20,36 @@ public class ClaimDao implements ClaimDaoInter {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 
-	@Override
-	public int insertClaim(Claim claim) throws Exception {
+	@Override //클레임 게시글 입력처리
+	public int insertClaim(ClaimVO claim) throws Exception {
 		logger.debug("[ClaimDao.java/insertClaim Method] Loading");
 		logger.debug("[ClaimDao.java/insertClaim Method] claim Param : " + claim);
 		return sqlSessionTemplate.insert(NS + "insertClaim", claim);
 	}
 
-	@Override
-	public List<Claim> selectAllClaim() throws Exception {
+	@Override //클레임 리스트용 
+	public List<ClaimVO> selectAllClaim() throws Exception {
 		logger.debug("[ClaimDao.java/selectAllClaim Method] Loading");
 		return sqlSessionTemplate.selectList(NS + "selectAllClaim");
 	}
 
-	@Override
-	public Claim selectOneForDetail(int customerClaimCode) throws Exception {
+	@Override //클레임 상세보기, 업데이트폼
+	public ClaimVO selectOneForDetail(int customerClaimCode) throws Exception {
 		logger.debug("[ClaimDao.java/selectOneForDetail Method] Loading");
 		return sqlSessionTemplate.selectOne(NS + "selectOneForDetail", customerClaimCode);
 	}
 
-	@Override
+	@Override //CategoryVo 셀렉트
 	public List<Category> selectCategoryForClaim() throws Exception {
 		logger.debug("[ClaimDao.java/selectCategoryForClaim Method] Loading");
 		return sqlSessionTemplate.selectList(NS + "selectCategoryForClaim");
+	}
+	
+	@Override
+	public int updateClaim(ClaimVO claim) throws Exception	{
+		logger.debug("[ClaimDao.java/updateClaim Method] Loading");
+		logger.debug("[ClaimDao.java/updateClaim Method] claim Param : " + claim);
+		return sqlSessionTemplate.update(NS + "updateClaim", claim);
 	}
 
 }

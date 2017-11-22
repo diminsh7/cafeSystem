@@ -4,11 +4,13 @@ import java.util.List;
 import com.caffeesys.cafesystem.Category;
 
 public interface ClaimDaoInter {
-	public int insertClaim(Claim claim) throws Exception;
+	public int insertClaim(ClaimVO claim) throws Exception;
 	
-	public List<Claim> selectAllClaim() throws Exception;
+	public List<ClaimVO> selectAllClaim() throws Exception;
 	
-	public Claim selectOneForDetail(int customerClaimCode) throws Exception;
+	public ClaimVO selectOneForDetail(int customerClaimCode) throws Exception;
 	
 	public List<Category> selectCategoryForClaim() throws Exception;
+	
+	public int updateClaim(ClaimVO claim) throws Exception;
 }
