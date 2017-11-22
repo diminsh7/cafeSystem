@@ -1,6 +1,5 @@
 package com.caffeesys.cafesystem.employee.controller; 
  
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +21,17 @@ public class BranchManagerController {
 	@Autowired
 	private BranchManagerService branchManagerService;
 
-	// 점주등록폼으로 이동 /ShopCode가지고 감 
+	//  점주 입력 폼 페이지 실행 컨트롤러 /shop코드 먼저 select함
 	@RequestMapping(value = "/insertformbranchManager", method = RequestMethod.GET)
 	public String insertBranchManager(Model model) { 
-		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 폼으로 이동 컨트롤러");
+		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 폼 페이지 실행 컨트롤러");
 		List<BranchManagerVO> ShopCodeList = branchManagerDao.selectBranchManagerShopcode();
 		model.addAttribute("branchManagerShopCode",ShopCodeList);
 		return "/employee/branchManagerInsertForm";
 	}  
 	 
 	//직원코드 , 포지션코드는 null -> service에서 추가 작업
-	// 점주등록실행 
+	// 점주 입력 실행 컨트롤러
 	@RequestMapping(value = "/insertBranchManager", method = RequestMethod.POST)
 	public String insertBranchManager(BranchManagerVO branchManagerVo) { 
 		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 실행 컨트롤러");
@@ -42,39 +41,65 @@ public class BranchManagerController {
 		return "redirect:/branchManagerList";
 	}
 	
-	// 점주 리스트  branchManagerList
+	//점주 리스트 페이지 요청 컨트롤러
 	@RequestMapping(value = "/branchManagerList")
 	public String selectBranchManager(Model model) { 
-		System.out.println("[employee.controller.BranchManagerController.java] : 점주 리스트 출력 컨트롤러");
+		System.out.println("[employee.controller.BranchManagerController.java] : 점주 리스트 페이지 요청 컨트롤러");
 		List<BranchManagerVO> branchManagerList = branchManagerDao.selectBranchManagerList();
 		model.addAttribute("branchManagerList",branchManagerList);
+		/*int branchManagerCount = branchManagerDao.selectBranchMangerCount(); // 점주 총 수
+		int branchMaggerRow = 10; //한 페이지에 몇명의 점주를 보여줄 것인가
+		int lastPage = 0; //마지막
+*/		
+		
 		return "employee/branchManagerList";
 	}
 	
-	//점주 상세 조회 branchManagerDetail
+	//점주 상세조회 페이지 요청 컨트롤러
 	@RequestMapping(value = "/branchManagerDetail")
 	public String selectBranchManagerDetail(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode ) {
-		System.out.println("[employee.controller.selectBranchManagerDetail.java] : 점주 상세조회 출력 컨트롤러");
+		System.out.println("[employee.controller.selectBranchManagerDetail.java] : 점주 상세조회 페이지 요청 컨트롤러");
 		List<BranchManagerVO> branchManagerDetail = branchManagerDao.selectBranchManagerDetail(branchEmployeeCode);
 		model.addAttribute("branchManagerDetail",branchManagerDetail);
 		return "employee/branchManagerDetail";
 	}
 	
-	//점주 삭제 페이지 요청
+	// 점주 삭제페이지요청 컨트롤러
 	@RequestMapping(value = "/deleteBranchManager", method = RequestMethod.GET)
-	public String deleteBranchManagerFrom(@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode ) {
+	public String deleteBranchManagerFrom(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode ) {
 		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 삭제페이지요청 컨트롤러");
+		System.out.println("branchEmployeeCode : " + branchEmployeeCode);
+		model.addAttribute("branchEmployeeCode",branchEmployeeCode);
 		return "employee/branchManagerDelete";
 	}
 	
-	//점주 삭제  요청
+	//점주 삭제 처리 컨트롤러
 	@RequestMapping(value = "/deleteBranchManager", method = RequestMethod.POST)
 	public String deleteBranchManager(@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) {
-		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 삭제 컨트롤러");
+		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 삭제 처리 컨트롤러");
 		branchManagerDao.deleteBranchEmployee(branchEmployeeCode);
 		branchManagerDao.deleteBranchManager(branchEmployeeCode);
 		return "redirect:/branchManagerList";
 	}
+	
+	//점주 업데이트 폼 페이지 요청 컨트롤러
+	@RequestMapping(value = "/updateBranchManager", method = RequestMethod.GET)
+	public String updateBranchManager(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) {
+		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 업데이트 폼 페이지 요청 컨트롤러");
+		List<BranchManagerVO> branchManager = branchManagerDao.updateSelectBranchManager(branchEmployeeCode);
+		model.addAttribute("BranchManagerUpdate",branchManager);
+		return "employee/branchManagerUpdate";
+	}
+	
+	//점주 업데이트 처리 컨트롤러
+	@RequestMapping(value = "/updateBranchManager", method = RequestMethod.POST)
+	public String updateBranchManager(BranchManagerVO branchManagerVo) {
+		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 업데이트 처리 컨트롤러");
+		branchManagerDao.updateBranchEmployee(branchManagerVo);
+		branchManagerDao.updateBranchManager(branchManagerVo);
+		return "redirect:/branchManagerList";
+	}
+	
 	
 
 }

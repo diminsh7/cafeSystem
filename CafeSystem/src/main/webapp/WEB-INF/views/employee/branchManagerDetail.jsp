@@ -21,6 +21,7 @@
 						
 						<div class="clearfix"></div>
 					</div>
+					 <c:forEach var="Detail" items="${branchManagerDetail}">
 					<div class="x_content">
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -40,7 +41,6 @@
 								</tr>
 							</thead>
 							<tbody>
-							 <c:forEach var="Detail" items="${branchManagerDetail}">
 								<tr>
 									<td>${Detail.branchEmployeeCode}</td>
 									<td>${Detail.shopName}</td>
@@ -55,12 +55,14 @@
 									<td>${Detail.branchManagerBank}</td>
 									<td>${Detail.branchManagerBanknum}</td>
 								</tr>
-							</c:forEach>
+							
 							</tbody>
 						</table>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}">수정</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
+						
 					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
