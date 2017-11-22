@@ -42,16 +42,18 @@ public class BranchManagerController {
 	}
 	
 	//점주 리스트 페이지 요청 컨트롤러
-	@RequestMapping(value = "/branchManagerList")
-	public String selectBranchManager(Model model) { 
+	@RequestMapping(value = {"/branchManagerList"}, method = RequestMethod.GET)
+	public String selectBranchManager(Model model, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { 
 		System.out.println("[employee.controller.BranchManagerController.java] : 점주 리스트 페이지 요청 컨트롤러");
-		List<BranchManagerVO> branchManagerList = branchManagerDao.selectBranchManagerList();
-		model.addAttribute("branchManagerList",branchManagerList);
-		/*int branchManagerCount = branchManagerDao.selectBranchMangerCount(); // 점주 총 수
-		int branchMaggerRow = 10; //한 페이지에 몇명의 점주를 보여줄 것인가
-		int lastPage = 0; //마지막
-*/		
+		int branchManagerCount = branchManagerDao.selectBranchMangerCount(); // 점주 총 수
+		int pagePerRow = 10; //한 페이지에 몇명의 점주를 보여줄 것인가
+		int lastPage = (int) (Math.ceil(branchManagerCount / pagePerRow));; //마지막
+		List<BranchManagerVO> branchManagerList = branchManagerDao.selectBranchManagerList(currentPage,pagePerRow);
+		model.addAttribute("currentPage", currentPage); //첫번째 페이지
+		model.addAttribute("branchManagerCount", branchManagerCount);//몇개보여줄것인가
+		model.addAttribute("lastPage", lastPage);//마지막페이지
 		
+		model.addAttribute("branchManagerList",branchManagerList);
 		return "employee/branchManagerList";
 	}
 	

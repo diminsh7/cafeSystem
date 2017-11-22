@@ -1,6 +1,8 @@
 package com.caffeesys.cafesystem.employee.service;
   
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -31,9 +33,12 @@ public class BranchManagerDao {
 	}
 	
 	//점주 리스트
-	public List<BranchManagerVO> selectBranchManagerList() {
+	public List<BranchManagerVO> selectBranchManagerList(int branchManagerCount, int pagePerRow) {
 		System.out.println("[BranchManagerDao.selectBranchManager] 실행");
-		return sqlSessionTemplate.selectList(NS + "selectBranchManagerList");
+		 Map<String, Integer> map = new HashMap<String, Integer>();
+	     map.put("beginRow", (branchManagerCount-1)*pagePerRow);
+	     map.put("pagePerRow", pagePerRow);
+		return sqlSessionTemplate.selectList(NS + "selectBranchManagerList",map);
 	}
 	
 	//점주 상세조회
@@ -72,6 +77,11 @@ public class BranchManagerDao {
 		return  sqlSessionTemplate.selectList(NS + "updateBranchManger",branchManagerVo);
 	}
 	
+	//지점장 갯수구하기
+	public int selectBranchMangerCount() {
+		System.out.println("[BranchManagerDao.selectBranchMangerCount] 지점장 전체 숫자 구하기");
+		return sqlSessionTemplate.selectOne(NS + "selectBranchMangerCount");
+	}
 	
 	//입력폼에서 필요한 점주 매장코드 
 	public List<BranchManagerVO> selectBranchManagerShopcode(){
@@ -85,10 +95,7 @@ public class BranchManagerDao {
 		return sqlSessionTemplate.selectOne(NS + "selectBranchImployeeCodeMax");
 	}
 	
-	public int selectBranchMangerCount() {
-		System.out.println("[BranchManagerDao.selectBranchMangerCount] 지점장 전체 숫자 구하기");
-		return sqlSessionTemplate.selectOne(NS + "selectBranchMangerCount");
-	}
+
 	
 	
 
