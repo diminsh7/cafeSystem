@@ -36,7 +36,7 @@
 	<div class="login_wrapper">
 		<div class="animate form login_form">
 			<section class="login_content">
-				<form id="login" action="/login" method="post" >
+				<form id="login" action="${pageContext.request.contextPath}/login" method="post" >
 					<h1>Login</h1>
 					<div>
 						<div>

@@ -12,7 +12,7 @@
 			<div class="profile_info">
 				<div class="fa-hover">
 					<h3>
-						<a href="/login" style="color: white;"> LOGIN</a>
+						<a href="${pageContext.request.contextPath}/login" style="color: white;"> LOGIN</a>
 					</h3>
 				</div>
 			</div>
