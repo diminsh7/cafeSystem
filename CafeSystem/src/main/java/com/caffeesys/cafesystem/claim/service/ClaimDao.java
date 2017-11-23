@@ -26,6 +26,9 @@ public class ClaimDao implements ClaimDaoInter {
 	public int insertClaim(ClaimVO claim) throws Exception {
 		logger.debug("[ClaimDao.java/insertClaim Method] Loading");
 		logger.debug("[ClaimDao.java/insertClaim Method] claim Param : " + claim);
+		int claimCount = getClaimCount();
+		int claimCode = claimCount + 1;
+		claim.setClaimCode(claimCode);
 		return sqlSessionTemplate.insert(NS + "insertClaim", claim);
 	}
 

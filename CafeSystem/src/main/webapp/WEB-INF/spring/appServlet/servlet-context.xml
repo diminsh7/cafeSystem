@@ -12,14 +12,14 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
-
+	
+	<!-- tiles 설정 -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.tiles3.TilesView" />
 		<property name="order" value="0" />
 	</bean>
-
 	<bean id="tilesConfigurer"
 		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
 		<property name="definitions">
@@ -28,6 +28,19 @@
 			</list>
 		</property>
 	</bean>
+	
+	<!-- 인터셉터 객체 생성 -->
+    <bean id="authenticationInterceptor" class="com.caffeesys.cafesystem.AuthenticationInterceptor">
+    </bean>
+    
+    <!-- Interceptor 설정 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/contractList"/>
+            <ref bean="authenticationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    
 	<!-- 파일 업로드를 위한 설정 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"></bean>
 
@@ -45,6 +58,7 @@
 		<property name="username" value="synths" />
 		<property name="password" value="tifkffk" />
 	</bean>
+	
 	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -54,13 +68,18 @@
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimReplyMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchPersonnelMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
 			</list>
 		</property>
 	</bean>
+	
 	<!-- mybatis를 사용하여 db에접속하여 쿼리를 보내는 주체인 SqlSessionTemplate빈 생성 -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory" />
 	</bean>
+	
 	<context:component-scan base-package="com.caffeesys.cafesystem" />
 </beans>

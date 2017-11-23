@@ -15,47 +15,36 @@
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>점주 리스트 <small></small></h2>
+                    <h2>지점 직원 리스트 <small></small></h2>
                     
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">  </p>
-                     	전 매장별 점주 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-                     	<div align="right"> 총 점주 : ${branchManagerCount} 명</div>
-                   
+                     	전 매장 직원 리스트[직원 코드 클릭 시 상세자료 확인 가능]
+                   <!-- 직원코드, 직급명, 아이디, 이름, 생년월일,   -->
                     <table id="datatable" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>직원코드</th>
+                          <th>직급명</th>
                           <th>아이디</th>
                           <th>이름</th>
                           <th>생년월일</th>
-                          <th>점포명</th>
                         </tr>
                       </thead><!--branchManagerList  -->
                       <tbody>
-                        <c:forEach var="BMList" items="${branchManagerList}">
+                        <c:forEach var="BPList" items="${branchPersonnelList}">
                       	<tr>
-                          <td><a href="${pageContext.request.contextPath}/branchManagerDetail?branchEmployeeCode=${BMList.branchEmployeeCode}">${BMList.branchEmployeeCode}</a></td> 
-                          <td>${BMList.branchEmployeeId}</td>
-                          <td>${BMList.branchEmployeeName}</td>
-                          <td>${BMList.branchEmployeeBirth}</td>
-						  <td>${BMList.shopName}</td>
+                          <td><a href="${pageContext.request.contextPath}/branchPersonnelDetail?branchEmployeeCode=${BPList.branchEmployeeCode}">${BPList.branchEmployeeCode}</a></td> 
+                          <td>${BPList.categorySmall}</td>
+                          <td>${BPList.branchEmployeeId}</td>
+                          <td>${BPList.branchEmployeeName}</td>
+                          <td>${BPList.branchEmployeeBirth}</td>
                         </tr>
                       </c:forEach>                            
                       </tbody>
                     </table>
-                    <ul class="pager">
-							<c:if test="${currentPage > 1}">
-								<li class="previous"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage-1}">이전</a></li>
-							</c:if>
-							<c:if test="${currentPage <= lastPage}">
-								<li class="next"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage+1}">다음</a></li>
-							</c:if>
-						</ul>
                   </div>
                 </div>
               </div>
