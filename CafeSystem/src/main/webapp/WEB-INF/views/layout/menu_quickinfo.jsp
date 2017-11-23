@@ -23,8 +23,8 @@
 					class="img-circle profile_img">
 			</div>
 			<div class="profile_info">
-				<span>${sessionScope.loginInfo.empCode }</span>
-				<h2>${sessionScope.loginInfo.name } 님</h2>
+				<span>${sessionScope.loginInfo.empCode}</span>
+				<h2>${sessionScope.loginInfo.name} 님</h2>
 			</div>
 		</c:otherwise>
 	</c:choose>

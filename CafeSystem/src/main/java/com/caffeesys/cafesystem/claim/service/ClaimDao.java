@@ -39,9 +39,9 @@ public class ClaimDao implements ClaimDaoInter {
 	}
 
 	@Override //클레임 상세보기, 수정(업데이트)폼
-	public ClaimVO selectOneForDetail(int customerClaimCode) throws Exception {
+	public ClaimVO selectOneForDetail(int claimCode) throws Exception {
 		logger.debug("[ClaimDao.java/selectOneForDetail Method] Loading");
-		return sqlSessionTemplate.selectOne(NS + "selectOneForDetail", customerClaimCode);
+		return sqlSessionTemplate.selectOne(NS + "selectOneForDetail", claimCode);
 	}
 
 	@Override //CategoryVo 셀렉트
@@ -64,9 +64,9 @@ public class ClaimDao implements ClaimDaoInter {
 	}
 
 	@Override // 클레임 삭제 처리
-	public int deleteClaim(int customerClaimCode) throws Exception {
+	public int deleteClaim(int claimCode) throws Exception {
 		logger.debug("[ClaimDao.java/deleteClaim Method] Loading");
-		return sqlSessionTemplate.delete(NS + "deleteClaim", customerClaimCode);
+		return sqlSessionTemplate.delete(NS + "deleteClaim", claimCode);
 	}
 
 }

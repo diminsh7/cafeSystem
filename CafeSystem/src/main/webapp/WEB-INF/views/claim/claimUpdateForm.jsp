@@ -26,33 +26,36 @@
 </script>
 <form id="claimUpdateForm" action="${pageContext.request.contextPath}/claimUpdate" method="post">
 	<div class="right_col" role="main">
-		<div class="">
-			<div class="page-title">
-				<div class="title_left">
-					<h2>게시글 보기</h2>
+		<div class="page-title">
+			<div class="title_left">
+				<h2>게시글 보기</h2>
+			</div>
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="x_panel">
+				<div class="x_title">	
+					<div>
+						<input type="hidden" id="employeeCode" name="employeeCode" value="${claim.employeeCode}" readonly>
+						<input type="hidden" id="customerClaimCode" name="customerClaimCode" value="${claim.customerClaimCode}"><!-- 수정 후 바로 상세페이지로 가기 위한 변수  -->
+						<select id="claimCategoryCode" name="claimCategoryCode">
+						<c:forEach var="category" items="${claimCategory}">
+							<option value="${category.categoryCode}">${category.categorySmall}</option>
+						</c:forEach>
+					</select>
+						<input type="text" id="customerClaimTitle" name="customerClaimTitle" value="${claim.customerClaimTitle}">
+					</div>
+					<div>
+						<textarea id="customerClaimContents" name="customerClaimContents">${claim.customerClaimContents}</textarea>
+					</div>
+					<div>
+						<input type="file" id="customerClaimFile" name="customerClaimFile" value="${claim.customerClaimFile}">
+					</div>
+					<div>
+						<input type="button" id="claimListBtn" value="취소" onclick="claimBtn('cancel')">
+						<input type="button" id="claimInsertBtn" value="수정" onclick="claimBtn('update')"> 
+					</div>
 				</div>
 			</div>
-			<div>
-				<div>
-					<input type="hidden" id="customerClaimCode" name="customerClaimCode" value="${claim.customerClaimCode}"><!-- 수정 후 바로 상세페이지로 가기 위한 변수  -->
-					<select id="claimCategoryCode" name="claimCategoryCode">
-					<c:forEach var="category" items="${claimCategory}">
-						<option value="${category.categoryCode}">${category.categorySmall}</option>
-					</c:forEach>
-				</select>
-					<input type="text" id="customerClaimTitle" name="customerClaimTitle" value="${claim.customerClaimTitle}">
-				</div>
-				<div>
-					<textarea id="customerClaimContents" name="customerClaimContents">${claim.customerClaimContents}</textarea>
-				</div>
-				<div>
-					<input type="file" id="customerClaimFile" name="customerClaimFile" value="${claim.customerClaimFile}">
-				</div>
-				<div>
-					<input type="button" id="claimListBtn" value="취소" onclick="claimBtn('cancel')">
-					<input type="button" id="claimInsertBtn" value="수정" onclick="claimBtn('update')"> 
-				</div>
-			</div>
+		</div>
 		</div>
 	</div>
 </form>
