@@ -4,96 +4,115 @@
 	<div class="menu_section">
 		<h3>본사</h3>
 		<ul class="nav side-menu">
-			<li><a><i class="fa fa-home"></i> Home <span
+			<li><a><i class="fa fa-home"></i> 매장관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="index.html">Dashboard</a></li>
-					<li><a href="index2.html">Dashboard2</a></li>
-					<li><a href="index3.html">Dashboard3</a></li>
+					<li><a href="index2.html">매장정보</a></li>
+					<li><a href="index.html">가맹계약서</a></li>
+					<li><a href="index3.html">가맹수수료</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-edit"></i> Forms <span
+			<li><a><i class="fa fa-edit"></i> 직원관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="form.html">General Form</a></li>
-					<li><a href="form_advanced.html">Advanced Components</a></li>
-					<li><a href="form_validation.html">Form Validation</a></li>
-					<li><a href="form_wizards.html">Form Wizard</a></li>
-					<li><a href="form_upload.html">Form Upload</a></li>
-					<li><a href="form_buttons.html">Form Buttons</a></li>
+					<li><a href="form.html">본사직원정보</a></li>
+					<li><a href="form_advanced.html">점주정보</a></li>
+					<li><a href="form.html">지점직원정보</a></li>
+					<li><a href="form.html">본사직원근태정보</a></li>
+					<li><a href="form.html">본사직원급여명세서</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-desktop"></i> UI Elements <span
+			<li><a><i class="fa fa-desktop"></i> 메뉴관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="general_elements.html">General Elements</a></li>
-					<li><a href="media_gallery.html">Media Gallery</a></li>
-					<li><a href="typography.html">Typography</a></li>
-					<li><a href="icons.html">Icons</a></li>
-					<li><a href="glyphicons.html">Glyphicons</a></li>
-					<li><a href="widgets.html">Widgets</a></li>
-					<li><a href="invoice.html">Invoice</a></li>
-					<li><a href="inbox.html">Inbox</a></li>
-					<li><a href="calendar.html">Calendar</a></li>
+					<li><a href="form.html">카페메뉴</a></li>
+					<li><a href="form.html">메뉴재료원가</a></li>
+					<li><a href="form.html">메뉴총원가</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-table"></i> Tables <span
+			<li><a><i class="fa fa-table"></i> 발주관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="tables.html">Tables</a></li>
-					<li><a href="tables_dynamic.html">Table Dynamic</a></li>
+					<li><a href="form.html">발주품목</a></li>
+					<li><a href="form.html">발주신청내역</a></li>
+					<li><a href="form.html">발주취소내역</a></li>
+					<li><a href="form.html">불량품목신청내역</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span
+			<li><a><i class="fa fa-bar-chart-o"></i> 매출 및 회계관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="chartjs.html">Chart JS</a></li>
-					<li><a href="chartjs2.html">Chart JS2</a></li>
-					<li><a href="morisjs.html">Moris JS</a></li>
-					<li><a href="echarts.html">ECharts</a></li>
-					<li><a href="other_charts.html">Other Charts</a></li>
-				</ul></li>
-			<li><a><i class="fa fa-clone"></i>Layouts <span
-					class="fa fa-chevron-down"></span></a>
-				<ul class="nav child_menu">
-					<li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-					<li><a href="fixed_footer.html">Fixed Footer</a></li>
+					<li><a href="form.html">계정과목</a></li>
+					<li><a href="form.html">지점매출조회</a></li>
 				</ul></li>
 		</ul>
 	</div>
 	<div class="menu_section">
 		<h3>지점</h3>
 		<ul class="nav side-menu">
-			<li><a><i class="fa fa-bug"></i> Additional Pages <span
+			<li><a><i class="fa fa-home"></i> 매장관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="e_commerce.html">E-commerce</a></li>
-					<li><a href="projects.html">Projects</a></li>
-					<li><a href="project_detail.html">Project Detail</a></li>
-					<li><a href="contacts.html">Contacts</a></li>
-					<li><a href="profile.html">Profile</a></li>
+					<li><a href="index2.html">매장정보조회</a></li>
+					<li><a href="index.html">가맹계약서조회</a></li>
+					<li><a href="index3.html">가맹수수료조회</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-windows"></i> Extras <span
+			<li><a><i class="fa fa-edit"></i> 직원관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="page_403.html">403 Error</a></li>
-					<li><a href="page_404.html">404 Error</a></li>
-					<li><a href="page_500.html">500 Error</a></li>
-					<li><a href="plain_page.html">Plain Page</a></li>
-					<li><a href="login.html">Login Page</a></li>
-					<li><a href="pricing_tables.html">Pricing Tables</a></li>
+					<li><a href="form_advanced.html">점주정보</a></li>
+					<li><a href="form.html">지점직원정보</a></li>
+					<li><a href="form.html">지점직원근태정보</a></li>
+					<li><a href="form.html">지점직원급여명세서</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span
+			<li><a><i class="fa fa-desktop"></i> 메뉴관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="#level1_1">Level One</a>
-					<li><a>Level One<span class="fa fa-chevron-down"></span></a>
-						<ul class="nav child_menu">
-							<li class="sub_menu"><a href="level2.html">Level Two</a></li>
-							<li><a href="#level2_1">Level Two</a></li>
-							<li><a href="#level2_2">Level Two</a></li>
-						</ul></li>
-					<li><a href="#level1_2">Level One</a></li>
+					<li><a href="form.html">카페메뉴조회</a></li>
+					<li><a href="form.html">메뉴재료원가조회</a></li>
+					<li><a href="form.html">메뉴총원가조회</a></li>
 				</ul></li>
-			<li><a href="javascript:void(0)"><i class="fa fa-laptop"></i>
-					Landing Page <span class="label label-success pull-right">Coming
-						Soon</span></a></li>
+			<li><a><i class="fa fa-table"></i> 발주관리 <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="form.html">발주</a></li>
+					<li><a href="form.html">장바구니</a></li>
+					<li><a href="form.html">발주신청내역</a></li>
+					<li><a href="form.html">불량품목신청</a></li>
+				</ul></li>
+			<li><a><i class="fa fa-bar-chart-o"></i> 매출 및 회계관리 <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="form.html">지점매출</a></li>
+					<li><a href="form.html">지점기타지출</a></li>
+					<li><a href="form.html">지점회계</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	<div class="menu_section">
+		<h3>공통</h3>
+		<ul class="nav side-menu">
+			<li><a><i class="fa fa-home"></i> 고객클레임 <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="index2.html">매장정보</a></li>
+					<li><a href="index.html">가맹계약서</a></li>
+					<li><a href="index3.html">가맹수수료</a></li>
+				</ul></li>
+			<li><a><i class="fa fa-edit"></i> 통합게시판 <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="form.html">본사직원정보</a></li>
+					<li><a href="form_advanced.html">점주정보</a></li>
+					<li><a href="form.html">지점직원정보</a></li>
+					<li><a href="form.html">본사직원근태정보</a></li>
+					<li><a href="form.html">본사직원급여명세서</a></li>
+				</ul></li>
+			<li><a><i class="fa fa-edit"></i> 매장연락망 <span
+					class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="form.html">본사직원정보</a></li>
+					<li><a href="form_advanced.html">점주정보</a></li>
+					<li><a href="form.html">지점직원정보</a></li>
+					<li><a href="form.html">본사직원근태정보</a></li>
+					<li><a href="form.html">본사직원급여명세서</a></li>
+				</ul></li>
 		</ul>
 	</div>
 
