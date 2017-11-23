@@ -28,7 +28,6 @@ public class ClaimReplyDao implements ClaimReplyDaoInter {
 		int claimReSeq = claim.getClaimReSeq();
 		claimReSeq += 1;
 		claimReLev += 1;
-		claim.setClaimReRef(claimCode);
 		claim.setClaimReSeq(claimReSeq);
 		claim.setClaimReLev(claimReLev);	
 		return sqlSessionTemplate.insert(NS + "claimReplyInsert", claim);

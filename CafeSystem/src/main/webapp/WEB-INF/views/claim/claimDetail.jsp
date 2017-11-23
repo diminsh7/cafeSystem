@@ -37,7 +37,7 @@
 						<input type="text" id="claimTitle" name="claimTitle" value="${claim.claimTitle}" readonly>
 					</div>
 					<div>
-						<textarea id="claimContents" name="claimContents" readonly>${claim.claimContents}</textarea>
+						<textarea rows="6" id="claimContents" name="claimContents" readonly>${claim.claimContents}</textarea>
 					</div>
 					<div>
 						<input type="file" id="claimFile" name="claimFile" value="${claim.claimFile}">

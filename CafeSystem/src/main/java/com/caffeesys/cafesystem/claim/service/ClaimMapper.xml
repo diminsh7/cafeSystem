@@ -82,21 +82,17 @@
 	<!-- 클레임 리스트 셀렉트 -->
 	<select id="getClaimList" parameterType="java.util.Map" resultMap="resultClaim">
 		SELECT
-			claim_code
-			, claim_category_code
-			, employee_code
-			, claim_title
-			, claim_contents
-			, claim_date
-			, claim_file
-			, claim_re_ref
-			, claim_re_lev
-			, claim_re_seq
+			claim.claim_code
 			, category.category_small
-		FROM claim
+			, claim.employee_code
+			, claim.claim_title
+			, claim.claim_date
+		FROM
+			claim	
 			INNER JOIN category
-			ON claim.claim_category_code = category.category_code
-		ORDER BY claim_code DESC
+			ON 
+			claim.claim_category_code = category.category_code
+		ORDER BY claim.claim_re_ref DESC, claim.claim_code ASC
 		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 

@@ -35,8 +35,7 @@ public class ClaimController {
 	// 클레임 입력 처리
 	@RequestMapping(value = "/claimInsert", method = RequestMethod.POST)
 	public String claimInsert(ClaimVO claim) throws Exception {
-		logger.debug("[ClaimController.java/claimInsert Method] Claim Insert Action");
-		
+		logger.debug("[ClaimController.java/claimInsert Method] Claim Insert Action");	
 		claimDao.insertClaim(claim);
 		return "redirect:/claimList";
 	}
@@ -46,10 +45,17 @@ public class ClaimController {
 		logger.debug("[ClaimController.java/claimList Method] claimList.jsp Loading");
 		int claimCount = claimDao.getClaimCount();
 		logger.debug("[ClaimController.java/claimList Method] claimCount Param : " + claimCount);
+		int page = 1;
 		int pagePerRow = 10;
-		int lastPage = (int) (Math.ceil(claimCount / pagePerRow));
+		int lastPage = (int)(Math.ceil(claimCount / pagePerRow)) + 1;
 		logger.debug("[ClaimController.java/claimList Method] lastPage Param : " + lastPage);
 		List<ClaimVO> claimList = claimDao.getClaimList(currentPage, pagePerRow);
+		
+		//1,2,3.. 페이징을 위한 코드
+		int maxPage = (int)((double)claimCount/pagePerRow+0.95);
+		int startPage = (((int)((double)page / 10 + 0.9)) - 1 ) * 10 + 1;
+		int endPage = startPage+10-1;
+		if(endPage > maxPage) endPage = maxPage;
 		
 		//수정을 위해 세션에 카테고리 값 넣기
 		List<Category> claimCategory = claimDao.selectCategoryForClaim(); 
@@ -59,6 +65,9 @@ public class ClaimController {
 		model.addAttribute("claimCount", claimCount);
 		model.addAttribute("lastPage", lastPage);
 		model.addAttribute("claimList", claimList);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("maxPage", maxPage);
 		session.setAttribute("claimCategory", claimCategory);
 		return "/claim/claimList";
 	}

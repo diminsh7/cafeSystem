@@ -8,6 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>계약서관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a> 
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서 등록</a>
 			</div>
 		</div>
@@ -21,8 +22,9 @@
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">계약코드클릭(상세)</p>
-						<%-- <%@ include file="./shop/contractSearchForm.jsp"%> --%>
-						<%-- <c:import url="/shop/contractSearchForm.jsp" /> --%>
+
+						<%@ include file="../shop/contractSearchForm.jsp"%>
+
 						<div align="right">전체행의 수 : ${contractCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -37,7 +39,8 @@
 							<tbody>
 								<c:forEach var="contract" items="${list}">
 									<tr>
-										<td><a href="${pageContext.request.contextPath}/contractDetail?contractCode=${contract.contractCode}">${contract.contractCode}</a></td>
+										<td><a
+											href="${pageContext.request.contextPath}/contractDetail?contractCode=${contract.contractCode}">${contract.contractCode}</a></td>
 										<td>${contract.contractOwnerName}</td>
 										<td>${contract.contractShopName}</td>
 										<td>${contract.contractStartDate}</td>
