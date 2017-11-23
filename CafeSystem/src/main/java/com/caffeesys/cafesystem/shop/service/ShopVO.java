@@ -10,7 +10,8 @@ public class ShopVO {
 	private String shopCall; // 점포연락처
 	private char shopPostcode; // 우편번호
 	private int shopSize; // 점포규모
-	
+	private String contractOwnerName; // contract소유자이름
+
 	public String getLocalCategoryCode() {
 		return localCategoryCode;
 	}
@@ -59,16 +60,21 @@ public class ShopVO {
 	public void setShopSize(int shopSize) {
 		this.shopSize = shopSize;
 	}
-	
+	public String getContractOwnerName() {
+		return contractOwnerName;
+	}
+	public void setContractOwnerName(String contractOwnerName) {
+		this.contractOwnerName = contractOwnerName;
+	}
 	@Override
 	public String toString() {
 		return "ShopVO [localCategoryCode=" + localCategoryCode + ", shopCode=" + shopCode + ", contractCode="
 				+ contractCode + ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopCall=" + shopCall
-				+ ", shopPostcode=" + shopPostcode + ", shopSize=" + shopSize + "]";
+				+ ", shopPostcode=" + shopPostcode + ", shopSize=" + shopSize + ", contractOwnerName="
+				+ contractOwnerName + "]";
 	}
-	
 	public ShopVO(String localCategoryCode, String shopCode, String contractCode, String shopName, String shopAddress,
-			String shopCall, char shopPostcode, int shopSize) {
+			String shopCall, char shopPostcode, int shopSize, String contractOwnerName) {
 		super();
 		this.localCategoryCode = localCategoryCode;
 		this.shopCode = shopCode;
@@ -78,9 +84,11 @@ public class ShopVO {
 		this.shopCall = shopCall;
 		this.shopPostcode = shopPostcode;
 		this.shopSize = shopSize;
+		this.contractOwnerName = contractOwnerName;
 	}
-	
 	public ShopVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+	
 }

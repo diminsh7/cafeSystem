@@ -24,6 +24,21 @@ public class ContractController {
 	@Autowired
 	private ContractDao contractDao;
 	
+	// 전체계약서조회 상세전
+	@RequestMapping(value = { "/contractList" }, method = RequestMethod.GET)
+	public String listContract(Model model,
+			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
+		System.out.println("ContractController.java / listContract method GET방식 ");
+		int contractCount = contractDao.selectContractCount();
+		int pagePerRow = 10;
+		int lastPage = (int) (Math.ceil(contractCount / pagePerRow));
+		List<ContractVo> list = contractDao.selectContractList(currentPage, pagePerRow);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("contractCount", contractCount);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("list", list);
+		return "/shop/contractList";
+	}
 	// 계약서등록 페이지요청
 	@RequestMapping(value="/insertContract", method = RequestMethod.GET)
 	public String insertContract() {
@@ -36,21 +51,6 @@ public class ContractController {
 		System.out.println("ContractController.java / insertContract method POST방식 " + contract);
 		contractService.insertContract(contract);
 		return "redirect:/contractList";
-	}
-	// 전체계약서조회 상세전
-	@RequestMapping(value = { "/contractList" }, method = RequestMethod.GET)
-	public String listContract(Model model,
-			@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) {
-		System.out.println("ContractController.java / contractList method GET방식 ");
-		int contractCount = contractDao.selectContractCount();
-		int pagePerRow = 10;
-		int lastPage = (int) (Math.ceil(contractCount / pagePerRow));
-		List<ContractVo> list = contractDao.selectContractList(currentPage, pagePerRow);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("contractCount", contractCount);
-		model.addAttribute("lastPage", lastPage);
-		model.addAttribute("list", list);
-		return "/shop/contractList";
 	}
 	// 계약서상세조회
 	@RequestMapping(value = "/contractDetail", method = RequestMethod.GET)

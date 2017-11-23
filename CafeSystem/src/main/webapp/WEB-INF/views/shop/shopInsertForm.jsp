@@ -24,6 +24,7 @@
 		}
 	}
 </script>
+<!-- page content -->
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -41,7 +42,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form id="shopInsertForm" action="${pageContext.request.contextPath}/shopInsert" method="post"
+						<form id="shopInsertForm" action="${pageContext.request.contextPath}/insertShop" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -55,7 +56,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="item form-group">
+						<!-- 	<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">매장코드<span class="required">*</span>
 								</label>
@@ -65,7 +66,7 @@
 										data-validate-length-range="6" data-validate-words="2"
 										name="shopCode" required="required" type="text" placeholder="ex)001~999">
 								</div>
-							</div>
+							</div> -->
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
 									for="name">계약코드<span class="required">*</span>
