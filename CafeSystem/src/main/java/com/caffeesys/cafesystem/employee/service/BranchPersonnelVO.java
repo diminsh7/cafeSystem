@@ -18,7 +18,7 @@ public class BranchPersonnelVO {
 	private String branchPersonnelBanknum; //월급계좌번호
 	private String branchPersonnelContract; //근로계약서
 	private String shopName; //점포명
-	private String categorySmall; //직급명
+	
 	
 	
 	public String getBranchEmployeeCode() {
@@ -69,9 +69,9 @@ public class BranchPersonnelVO {
 	public String getShopName() {
 		return shopName;
 	}
-	public String getCategorySmall() {
+	/*public String getCategorySmall() {
 		return categorySmall;
-	}
+	}*/
 	public void setBranchEmployeeCode(String branchEmployeeCode) {
 		this.branchEmployeeCode = branchEmployeeCode;
 	}
@@ -120,9 +120,12 @@ public class BranchPersonnelVO {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-	public void setCategorySmall(String categorySmall) {
+	/*public void setCategorySmall(String categorySmall) {
 		this.categorySmall = categorySmall;
-	}
+	}*/
+	
+	
+	
 	@Override
 	public String toString() {
 		return "BranchPersonnelVO [branchEmployeeCode=" + branchEmployeeCode + ", localCategoryCode="
@@ -133,13 +136,13 @@ public class BranchPersonnelVO {
 				+ branchEmployeeCetificate + ", branchPersonnelJoin=" + branchPersonnelJoin + ", branchPersonnelSalary="
 				+ branchPersonnelSalary + ", branchPersonnelBank=" + branchPersonnelBank + ", branchPersonnelBanknum="
 				+ branchPersonnelBanknum + ", branchPersonnelContract=" + branchPersonnelContract + ", shopName="
-				+ shopName + ", categorySmall=" + categorySmall + "]";
+				+ shopName + "]";
 	}
 	public BranchPersonnelVO(String branchEmployeeCode, String localCategoryCode, String shopCode,
 			String positionCategoryCode, String branchEmployeeId, String branchEmployeeName, int branchEmployeeBirth,
 			String branchEmployeePhone, String branchEmployeeAddress, String branchEmployeeCetificate,
 			String branchPersonnelJoin, int branchPersonnelSalary, String branchPersonnelBank,
-			String branchPersonnelBanknum, String branchPersonnelContract, String shopName, String categorySmall) {
+			String branchPersonnelBanknum, String branchPersonnelContract, String shopName) {
 		super();
 		this.branchEmployeeCode = branchEmployeeCode;
 		this.localCategoryCode = localCategoryCode;
@@ -157,9 +160,7 @@ public class BranchPersonnelVO {
 		this.branchPersonnelBanknum = branchPersonnelBanknum;
 		this.branchPersonnelContract = branchPersonnelContract;
 		this.shopName = shopName;
-		this.categorySmall = categorySmall;
 	}
-	
 	public BranchPersonnelVO() {
 		super();
 	}

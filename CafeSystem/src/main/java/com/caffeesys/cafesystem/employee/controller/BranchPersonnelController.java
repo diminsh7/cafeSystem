@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.caffeesys.cafesystem.employee.service.BranchManagerVO;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelDao;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelService;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelVO;
@@ -42,11 +40,12 @@ public class BranchPersonnelController {
 	}  
 	
 	//직원리스트컨트롤러
-	@RequestMapping(value = {"/branchPersonnelList"}, method = RequestMethod.GET)
+	/*@RequestMapping(value = {"/branchPersonnelList"}, method = RequestMethod.GET)
 	public String selectBranchManager(Model model) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점 직원,매니져 리스트 페이지 요청 컨트롤러");
 		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList();
+		System.out.println("컨트롤러 변수 값 확인 branchPersonnelList : " + branchPersonnelList);
 		model.addAttribute("branchPersonnelList",branchPersonnelList);
 		return "employee/branchManagerList";
-	}
+	}*/
 }
