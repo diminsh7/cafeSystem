@@ -13,13 +13,15 @@
 		<result property="shopPostcode" column="shop_postcode" /> <!-- 점포우편번호 -->
 		<result property="shopSize" column="shop_size" /> <!-- 점포규모 -->
 	</resultMap>
+	
 	<!-- CategoryVO resultMap -->
+	<!-- 
 	<resultMap type="com.caffeesys.cafesystem.Category" id="resultCategory">
-		<result property="categoryCode" column="category_code" /> <!-- 코드(PK) -->
-		<result property="categoryLarge" column="category_large" /> <!-- 대분류 Shop-->
-		<result property="categoryMiddle" column="category_middle" /> <!-- 중분류 Local-->
-		<result property="categorySmall" column="category_small" /> <!-- 소분류 지역-->
-	</resultMap>
+		<result property="categoryCode" column="category_code" /> 코드(PK)
+		<result property="categoryLarge" column="category_large" /> 대분류 Shop
+		<result property="categoryMiddle" column="category_middle" /> 중분류 Local
+		<result property="categorySmall" column="category_small" /> 소분류 지역
+	</resultMap> -->
 	<!-- 매장등록 -->
 	<insert id="insertShop" parameterType="com.caffeesys.cafesystem.shop.service.ShopVO">
 		INSERT INTO shop (

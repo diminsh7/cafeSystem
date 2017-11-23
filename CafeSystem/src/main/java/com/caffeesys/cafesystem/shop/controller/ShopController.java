@@ -20,14 +20,15 @@ public class ShopController {
 	// 매장등록 페이지요청
 	@RequestMapping(value = "/shopInsert", method = RequestMethod.GET)
 	public String shopInsert(Model model) throws Exception {
-		logger.debug("ContractController.java / insertContract method GET방식 ");
+		logger.debug("ContractController.java / shopInsert method GET방식 ");
 		return "/shop/shopInsertForm";
 	}
 	// 매장등록(액션)요청
 	@RequestMapping(value = "/shopInsert", method = RequestMethod.POST)
 	public String shopInsert(ShopVO shop) throws Exception {
-		logger.debug("[ContractController.java / insertContract method POST방식 " + shop);
+		logger.debug("[ContractController.java / shopInsert method POST방식 " + shop);
 		shopDao.insertShop(shop);
-		return "redirect:/shopList";
+		/*return "redirect:/shopList";*/
+		return "redirect:/shopInsertForm";
 	}
 }
