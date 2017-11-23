@@ -179,6 +179,7 @@
 		branch_employee_code = #{branchEmployeeCode}
 	</update>
 	
+	<!-- 점주 총 명수 -->
 	<select id="selectBranchMangerCount" resultType="Integer">
 		SELECT count(*) FROM branch_manager
 	</select>

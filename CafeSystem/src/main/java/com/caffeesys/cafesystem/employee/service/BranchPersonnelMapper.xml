@@ -21,7 +21,7 @@
 		<result property="branchPersonnelBanknum" column="branch_personnel_banknum" /><!-- 월급계좌번화 -->
 		<result property="branchPersonnelContract" column="branch_personnel_contract" /><!-- 근로계약서 -->
 		<result property="shopName" column="shop_name" /><!-- 점포명 -->
-
+		<result property="categorySmall" column="category_small" /><!-- 직급명 -->
 	</resultMap>
 	
 	<!-- DB shop에서 매장 코드 가져오는 select -->
@@ -83,5 +83,48 @@
 		from branch_employee		
 	</select>
 
+	
+	<!-- 지점 직원 리스트   직원코드, 아이디, 이름, 생년월일, 직급-->
+	<select id="selectBranchPersonnelList" resultMap="resultBranchPersonnel">
+		SELECT
+			branch_employee.branch_employee_code,
+			branch_employee.branch_employee_id,
+			branch_employee.branch_employee_name,
+			branch_employee.branch_employee_birth,
+			category.category_small
+		FROM branch_employee INNER JOIN category
+		ON branch_employee.position_category_code = category.category_code
+		WHERE branch_employee.position_category_code = '202'
+		OR branch_employee.position_category_code = '203'
+		ORDER BY branch_employee.branch_employee_code asc
+	</select>
+	
+	<!-- 지점 직원 상세조회  -->
+	<select id="selectBranchPersonnelDetail" resultMap="resultBranchPersonnel">
+	SELECT
+		branch_employee.branch_employee_code,
+		category.category_small,
+		branch_employee.branch_employee_id,
+		branch_employee.branch_employee_birth,
+		branch_employee.branch_employee_phone,
+		branch_employee.branch_employee_address,
+		branch_employee.branch_employee_cetificate,
+		branch_personnel.branch_personnel_join,
+		branch_personnel.branch_personnel_salary,
+		branch_personnel.branch_personnel_bank,
+		branch_personnel.branch_personnel_banknum,
+		branch_personnel.branch_personnel_contract
+		
+	FROM branch_employee INNER JOIN branch_personnel
+	ON branch_employee.branch_employee_code = branch_personnel.branch_employee_code
+	INNER JOIN category
+	ON branch_employee.position_category_code = category.category_code
+	WHERE branch_employee.branch_employee_code = #{branchEmployeeCode};
+	</select>
+	
+	<!-- 지점 직원 총 count -->
+	<select id="selectBranchPersonnelCount" resultType="Integer">
+		SELECT count(*) FROM branch_personnel
+	</select>
 	
 </mapper>
