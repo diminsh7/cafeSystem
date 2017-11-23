@@ -36,6 +36,7 @@ public class ClaimController {
 	@RequestMapping(value = "/claimInsert", method = RequestMethod.POST)
 	public String claimInsert(ClaimVO claim) throws Exception {
 		logger.debug("[ClaimController.java/claimInsert Method] Claim Insert Action");
+		
 		claimDao.insertClaim(claim);
 		return "redirect:/claimList";
 	}

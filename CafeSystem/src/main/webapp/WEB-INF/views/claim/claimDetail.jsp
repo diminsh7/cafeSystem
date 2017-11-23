@@ -17,7 +17,7 @@
 			}		
 		}
 		if(btn == "reply"){
-			
+			$(location).attr('href', '${pageContext.request.contextPath}/claimReply?claimCode=${claim.claimCode}');
 		}
 	}
 </script>

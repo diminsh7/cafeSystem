@@ -7,19 +7,14 @@
 			//console.log("rollback Claim List");
 			result = confirm('수정을 취소하시겠습니까?');
 			if(result){
-				//$(location).attr('href', '${pageContext.request.contextPath}/claimList');
 				history.go(-1);
-			} else {
-				
-			}		
+			}
 		} 
 		if(btn == 'update'){
 			//console.log("Claim Insert Action");
 			result = confirm('수정하시겠습니까?');
 			if(result){
 				$('#claimUpdateForm').submit();
-			} else {
-				
 			}
 		}
 	}
