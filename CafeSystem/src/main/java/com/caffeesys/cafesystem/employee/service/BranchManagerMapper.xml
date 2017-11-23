@@ -79,7 +79,7 @@
 		#{branchManagerStart}, 
 		#{branchManagerBank}, 
 		#{branchManagerBanknum}
-		);
+	)
 	</insert>	
 	
 	<!-- 점주리스트 코드,아이디,이름,생년월일 ,매장명 2중조인-->

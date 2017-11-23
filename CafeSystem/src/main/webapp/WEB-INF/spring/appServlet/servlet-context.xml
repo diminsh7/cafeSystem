@@ -41,8 +41,8 @@
 	<!-- commons dbcp를 사용하여 커넥션 풀 생성 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://192.168.123.174:3306/test_cafesystem" />
-		<property name="username" value="cafesystem" />
+		<property name="url" value="jdbc:mysql://localhost:3306/cafesystem_local" />
+		<property name="username" value="cafesystem_local" />
 		<property name="password" value="emdkdk25!" />
 	</bean>
 	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
@@ -55,6 +55,8 @@
 				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchPersonnelMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
 			</list>
 		</property>
 	</bean>

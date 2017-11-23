@@ -35,7 +35,6 @@ public class BranchManagerController {
 	@RequestMapping(value = "/insertBranchManager", method = RequestMethod.POST)
 	public String insertBranchManager(BranchManagerVO branchManagerVo) { 
 		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 실행 컨트롤러");
-		System.out.println("[employee.controller.BranchManagerController.java] : " + branchManagerVo);
 		branchManagerService.insertBranchEmployee(branchManagerVo); //지점인사관리테이블 insert
 		branchManagerService.insertBranchManager(branchManagerVo); //지점점주관리테이블 insert
 		return "redirect:/branchManagerList";
@@ -52,7 +51,6 @@ public class BranchManagerController {
 		model.addAttribute("currentPage", currentPage); //첫번째 페이지
 		model.addAttribute("branchManagerCount", branchManagerCount);//몇개보여줄것인가
 		model.addAttribute("lastPage", lastPage);//마지막페이지
-		
 		model.addAttribute("branchManagerList",branchManagerList);
 		return "employee/branchManagerList";
 	}
@@ -66,17 +64,8 @@ public class BranchManagerController {
 		return "employee/branchManagerDetail";
 	}
 	
-	// 점주 삭제페이지요청 컨트롤러
+	//점주 삭제 컨트롤러
 	@RequestMapping(value = "/deleteBranchManager", method = RequestMethod.GET)
-	public String deleteBranchManagerFrom(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode ) {
-		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 삭제페이지요청 컨트롤러");
-		System.out.println("branchEmployeeCode : " + branchEmployeeCode);
-		model.addAttribute("branchEmployeeCode",branchEmployeeCode);
-		return "employee/branchManagerDelete";
-	}
-	
-	//점주 삭제 처리 컨트롤러
-	@RequestMapping(value = "/deleteBranchManager", method = RequestMethod.POST)
 	public String deleteBranchManager(@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) {
 		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 삭제 처리 컨트롤러");
 		branchManagerDao.deleteBranchEmployee(branchEmployeeCode);
@@ -90,7 +79,7 @@ public class BranchManagerController {
 		System.out.println("[employee.controller.selectBranchManagerDelete.java] : 점주 업데이트 폼 페이지 요청 컨트롤러");
 		List<BranchManagerVO> branchManager = branchManagerDao.updateSelectBranchManager(branchEmployeeCode);
 		model.addAttribute("BranchManagerUpdate",branchManager);
-		return "employee/branchManagerUpdate";
+		return "employee/branchManagerUpdateForm";
 	}
 	
 	//점주 업데이트 처리 컨트롤러

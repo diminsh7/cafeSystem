@@ -43,24 +43,26 @@ public class BranchManagerDao {
 	
 	//점주 상세조회
 	public List<BranchManagerVO> selectBranchManagerDetail(String branchEmployeeCode){
+		System.out.println("[BranchManagerDao.selectBranchManagerDetail] 실행");
 		return sqlSessionTemplate.selectList(NS + "selectBranchManagerDetail",branchEmployeeCode);
 	}
 	
 	//점주 삭제 (지점인사/지점점주 두개의 테이블에서 삭제)
 	//지점인사테이블에서 삭제
 	public int deleteBranchEmployee(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.branchEmployeeCode] 실행");
 		return sqlSessionTemplate.delete(NS + "deleteBranchEmployee",branchEmployeeCode);
 	}
 	
 	//지점점주관리테이블에서 삭제
 	public int deleteBranchManager(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.deleteBranchManager] 실행");
 		return sqlSessionTemplate.delete(NS + "deleteBranchManager",branchEmployeeCode);
 	}
 	
 	//점주 수정폼에 들어갈 내용 조회
 	public List<BranchManagerVO> updateSelectBranchManager(String branchEmployeeCode) {
 		System.out.println("[BranchManagerDao.updateSelectBranchManager] 실행");
-		System.out.println("branchEmployeeCode : " + branchEmployeeCode);
 		return sqlSessionTemplate.selectList(NS + "selectUpdateBranchManger",branchEmployeeCode);
 	}
 	
