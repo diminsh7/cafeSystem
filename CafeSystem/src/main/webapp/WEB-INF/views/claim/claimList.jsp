@@ -11,12 +11,10 @@
 			</div>
 
 			<div class="title_right">
-				<div
-					class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
 							<button class="btn btn-default" type="button">Go!</button>
 						</span>
 					</div>
@@ -31,17 +29,8 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>
-							Claim LIST <small>Users</small>
+							Claim LIST <small>Claim</small>
 						</h2>
-						<ul class="nav navbar-right panel_toolbox">
-							<li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Settings 1</a></li>
-									<li><a href="#">Settings 2</a></li>
-								</ul></li>
-							<li><a class="close-link"><i class="fa fa-close"></i></a></li>
-						</ul>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -62,17 +51,28 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="c" items="${clist}">
+								<c:forEach var="claimList" items="${claimList}">
 									<tr>
-										<td>${c.customerClaimCode}</td>
-										<td>${c.claimCategoryCode}</td>
-										<td>${c.employeeCode}</td>
-										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${c.customerClaimCode}">${c.customerClaimTitle}</a></td>
-										<td>${c.customerClaimDate}</td>
+										<td>${claimList.customerClaimCode}</td>
+										<td>${claimList.claimCategoryName}</td>
+										<td>${claimList.employeeCode}</td>
+										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${claimList.customerClaimCode}">${claimList.customerClaimTitle}</a></td>
+										<td>${claimList.customerClaimDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
+						<ul class="pager">
+							<c:if test="${currentPage > 1}">
+								<li class="previous"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage-1}">Prev</a></li>
+							</c:if>
+							<c:if test="${currentPage < lastPage}">
+								<li class="next"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage+1}">Next</a></li>
+							</c:if>
+						</ul>
+					</div>
+					<div>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/claimInsert">클레임 등록</a>
 					</div>
 				</div>
 			</div>

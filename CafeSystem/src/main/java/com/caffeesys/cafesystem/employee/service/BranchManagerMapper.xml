@@ -79,11 +79,11 @@
 		#{branchManagerStart}, 
 		#{branchManagerBank}, 
 		#{branchManagerBanknum}
-		);
+	)
 	</insert>	
 	
 	<!-- 점주리스트 코드,아이디,이름,생년월일 ,매장명 2중조인-->
-	<select id="selectBranchManagerList" resultMap="resultBranchManager">
+	<select id="selectBranchManagerList" resultMap="resultBranchManager" parameterType="java.util.Map">
 	SELECT 
 		branch_employee.branch_employee_code,
 		branch_employee.branch_employee_id,
@@ -98,6 +98,7 @@
 	AND branch_employee.shop_code = shop.shop_code
 	WHERE position_category_code = '201'
 	ORDER BY branch_employee_code asc
+	LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 	
 	<!-- 점주 상세조회  3중조인-->
@@ -133,4 +134,52 @@
 		DELETE FROM branch_manager WHERE branch_employee_code=#{branchEmployeeCode}
 	</delete>
 	
+	<!-- 점주 수정 폼에 들어갈 내용 조회  -->
+	<select id="selectUpdateBranchManger" resultMap="resultBranchManager">
+	SELECT 
+		branch_employee.branch_employee_code, 	
+		branch_employee.branch_employee_id, 
+		branch_employee.branch_employee_name, 
+		branch_employee.branch_employee_birth,
+		branch_employee.branch_employee_phone,
+		branch_employee.branch_employee_address,
+		branch_manager.branch_manager_bank,
+		branch_manager.branch_manager_banknum,
+		shop.shop_name
+		
+	FROM branch_employee INNER JOIN branch_manager
+	ON branch_employee.branch_employee_code = branch_manager.branch_employee_code
+	INNER JOIN shop
+	ON branch_employee.local_category_code = shop.local_category_code
+	AND branch_employee.shop_code = shop.shop_code
+	WHERE branch_employee.branch_employee_code = #{branchEmployeeCode}
+	
+	</select>
+	
+	<!-- 업데이트(1) 지점 인사관리 -->
+	<update id="updateBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
+	UPDATE branch_employee
+	SET
+		branch_employee_id= #{branchEmployeeId},
+		branch_employee_name= #{branchEmployeeName},
+		branch_employee_birth= #{branchEmployeeBirth},
+		branch_employee_phone= #{branchEmployeePhone},
+		branch_employee_address= #{branchEmployeeAddress}
+	WHERE 
+		branch_employee_code = #{branchEmployeeCode}
+	</update>
+	
+	<!-- 업데이트(2) 지점 점주 관리 -->
+	<update id="updateBranchManger" parameterType="com.caffeesys.cafesystem.employee.service.BranchManagerVO">
+	UPDATE branch_manager
+	SET
+		branch_manager_bank=#{branchManagerBank},
+		branch_manager_banknum=#{branchManagerBanknum}
+	WHERE 
+		branch_employee_code = #{branchEmployeeCode}
+	</update>
+	
+	<select id="selectBranchMangerCount" resultType="Integer">
+		SELECT count(*) FROM branch_manager
+	</select>
 </mapper>
