@@ -7,9 +7,9 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>계약서관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서 등록</a>
+				<h3>가맹계약서관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">계약서(전체리스트)</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서(등록)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>

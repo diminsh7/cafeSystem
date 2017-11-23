@@ -2,7 +2,7 @@ package com.caffeesys.cafesystem.shop.service;
 
 public class ShopVO {
 
-	private String localCategoryCode;//지역코드
+	private String localCategoryCode; // 지역코드
 	private String shopCode; // 매장코드
 	private String contractCode; // 계약코드
 	private String shopName; // 점포명
@@ -10,6 +10,7 @@ public class ShopVO {
 	private String shopCall; // 점포연락처
 	private char shopPostcode; // 우편번호
 	private int shopSize; // 점포규모
+	
 	public String getLocalCategoryCode() {
 		return localCategoryCode;
 	}
@@ -81,11 +82,5 @@ public class ShopVO {
 	
 	public ShopVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
 }

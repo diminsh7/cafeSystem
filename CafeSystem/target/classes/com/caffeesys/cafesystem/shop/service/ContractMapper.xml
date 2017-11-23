@@ -4,13 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.shop.service.ContractMapper">
 	<resultMap type="com.caffeesys.cafesystem.shop.service.ContractVo" id="resultContract">
-		<result property="contractCode" column="contract_code" />
-		<result property="contractOwnerName" column="contract_owner_name" />
-		<result property="contractShopName" column="contract_shop_name" />
-		<result property="contractOwnerPhone" column="contract_owner_phone" />
-		<result property="contractStartDate" column="contract_start_date" />
-		<result property="contractEndDate" column="contract_end_date" />
-		<result property="contractPhoto" column="contract_photo" />
+		<result property="contractCode" column="contract_code" /> <!-- 계약코드(PK) -->
+		<result property="contractOwnerName" column="contract_owner_name" /> <!-- 소유자명 -->
+		<result property="contractShopName" column="contract_shop_name" /> <!-- 점포명 -->
+		<result property="contractOwnerPhone" column="contract_owner_phone" /> <!-- 소유자연락처 -->
+		<result property="contractStartDate" column="contract_start_date" /> <!-- 계약일 -->
+		<result property="contractEndDate" column="contract_end_date" /> <!-- 계약만료일 -->
+		<result property="contractPhoto" column="contract_photo" /> <!-- 계약서사진 -->
 	</resultMap>
 	<!-- 계약서등록 -->
 	<insert id="insertContract" parameterType="com.caffeesys.cafesystem.shop.service.ContractVo">
@@ -19,11 +19,13 @@
 			, contract_start_date, contract_end_date, contract_photo
 		) VALUES (
 			#{contractCode}, #{contractOwnerName}, #{contractShopName}, #{contractOwnerPhone}
-			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto})
+			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto}
+		)
 	</insert>
 	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
 	<select id="selectContractMax" resultType="Integer">
-		select max(CAST(substring(contract_code,6) AS DECIMAL))  
+		select max(CAST(substring(contract_code,6) AS DECIMAL)
+		)  
 		from contract
 	</select>
 	<!-- 전체계약서조회 상세전 -->
@@ -63,7 +65,8 @@
     	SELECT contract_code, contract_owner_name, contract_shop_name, contract_start_date, contract_end_date
         FROM contract
         <if test="keyword != null and keyword != ''">
-			WHERE ${searchOption} = #{keyword}
+        	 WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			<!-- WHERE ${searchOption} = #{keyword} -->
 		</if>
     </select>
 </mapper>

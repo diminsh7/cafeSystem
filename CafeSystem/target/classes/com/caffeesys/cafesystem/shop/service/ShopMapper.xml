@@ -3,13 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.shop.service.ShopMapper">
-	<resultMap type="com.caffeesys.cafesystem.shop.service.ContractVo" id="resultShop">
-		<result property="contractCode" column="contract_code" />
-		<result property="contractOwnerName" column="contract_owner_name" />
-		<result property="contractShopName" column="contract_shop_name" />
-		<result property="contractOwnerPhone" column="contract_owner_phone" />
-		<result property="contractStartDate" column="contract_start_date" />
-		<result property="contractEndDate" column="contract_end_date" />
-		<result property="contractPhoto" column="contract_photo" />
+	<resultMap type="com.caffeesys.cafesystem.shop.service.ShopVO" id="resultShop">
+		<result property="localCategoryCode" column="local_category_code" /> <!-- 지역코드(PK) -->
+		<result property="shopCode" column="shop_code" /> <!-- 매장코드(PK) -->
+		<result property="contractCode" column="contract_code" /> <!-- 계약코드(FK) -->
+		<result property="shopName" column="shop_name" /> <!-- 점포명 -->
+		<result property="shopAddress" column="shop_address" /> <!-- 점포주소 -->
+		<result property="shopCall" column="shop_call" /> <!-- 점포연락처 -->
+		<result property="shopPostcode" column="shop_postcode" /> <!-- 점포우편번호 -->
+		<result property="shopSize" column="shop_size" /> <!-- 점포규모 -->
 	</resultMap>
+	<!-- CategoryVO resultMap -->
+	<resultMap type="com.caffeesys.cafesystem.Category" id="resultCategory">
+		<result property="categoryCode" column="category_code" /> <!-- 코드(PK) -->
+		<result property="categoryLarge" column="category_large" /> <!-- 대분류 Shop-->
+		<result property="categoryMiddle" column="category_middle" /> <!-- 중분류 Local-->
+		<result property="categorySmall" column="category_small" /> <!-- 소분류 지역-->
+	</resultMap>
+	<!-- 매장등록 -->
+	<insert id="insertShop" parameterType="com.caffeesys.cafesystem.shop.service.ShopVO">
+		INSERT INTO shop (
+			local_category_code, shop_code, contract_code, shop_name
+			, shop_address, shop_call, shop_postcode, shop_size
+		) VALUES (
+			#{localCategoryCode}, #{shopCode}, #{contractCode}, #{shopName}
+			, #{shopAddress}, #{shopCall}, #{shopPostcode}, #{shopSize}
+		)
+	</insert>
 </mapper>
