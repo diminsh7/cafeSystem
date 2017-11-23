@@ -64,20 +64,20 @@ public class ClaimController {
 	
 	// 클레임 게시글 상세보기 페이지 요청
 	@RequestMapping(value = "/claimDetail", method = RequestMethod.GET)
-	public String claimDetail(Model model, @RequestParam(value = "customerClaimCode", required = true) int customerClaimCode) throws Exception {
+	public String claimDetail(Model model, @RequestParam(value = "claimCode", required = true) int claimCode) throws Exception {
 		logger.debug("[ClaimController.java/claimDetail Method] claimDetail.jsp Loading");
-		logger.debug("[ClaimController.java/claimDetail.Method] customerClaimCode param: " + customerClaimCode);
-		ClaimVO claim = claimDao.selectOneForDetail(customerClaimCode);
+		logger.debug("[ClaimController.java/claimDetail.Method] claimCode param: " + claimCode);
+		ClaimVO claim = claimDao.selectOneForDetail(claimCode);
 		logger.debug("[ClaimController.java/claimDetail.Method] claim param: " + claim);
 		model.addAttribute("claim", claim);
 		return "/claim/claimDetail";
 	}
 	// 클레임 수정 폼 요청
 	@RequestMapping(value="/claimUpdate", method = RequestMethod.GET)
-	public String claimUpdate(Model model ,@RequestParam(value = "customerClaimCode", required = true) int customerClaimCode) throws Exception {
+	public String claimUpdate(Model model ,@RequestParam(value = "claimCode", required = true) int claimCode) throws Exception {
 		logger.debug("[ClaimController.java/claimUpdate Method] claimUpdate.jsp Loading");
-		logger.debug("[ClaimController.java/claimUpdate.Method] customerClaimCode param: " + customerClaimCode);
-		ClaimVO claim = claimDao.selectOneForDetail(customerClaimCode);
+		logger.debug("[ClaimController.java/claimUpdate.Method] claimCode param: " + claimCode);
+		ClaimVO claim = claimDao.selectOneForDetail(claimCode);
 		logger.debug("[ClaimController.java/claimUpdate.Method] claim param: " + claim);
 		model.addAttribute("claim", claim);
 		return "/claim/claimUpdateForm";
@@ -92,9 +92,9 @@ public class ClaimController {
 	}
 	// 클레임 삭제 처리
 	@RequestMapping(value = "/claimDelete", method=RequestMethod.GET)
-	public String claimDelete(@RequestParam(value = "customerClaimCode", required = true) int customerClaimCode) throws Exception {
+	public String claimDelete(@RequestParam(value = "claimCode", required = true) int claimCode) throws Exception {
 		logger.debug("[ClaimController.java/claimDelete Method] Claim Delete Action");
-		claimDao.deleteClaim(customerClaimCode);
+		claimDao.deleteClaim(claimCode);
 		return "redirect:/claimList";
 	}
 }
