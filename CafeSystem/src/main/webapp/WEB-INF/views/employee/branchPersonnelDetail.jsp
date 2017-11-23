@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script>
+<!-- <script>
 $(document).click(function button_click(){
 	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){    //삭제처리
 		document.$('#DeleteButton').submit();
@@ -10,7 +10,7 @@ $(document).click(function button_click(){
  		return false; //삭제 취소
 	}
 });
-</script>
+</script> -->
 
 <div class="right_col" role="main">
 	<div class="">
@@ -67,7 +67,7 @@ $(document).click(function button_click(){
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchPersonnelForm?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
 						<a class="btn btn-default" onclick="button_click()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
 					</div>
 					</c:forEach>

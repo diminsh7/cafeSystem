@@ -144,7 +144,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <a href="${pageContext.request.contextPath}/insertformbranchManager" class="btn btn-primary"> 취소</a>
+                          <a href="${pageContext.request.contextPath}/branchManagerList" class="btn btn-primary">취소</a>
+                          <a href="${pageContext.request.contextPath}/insertformbranchManager" class="btn btn-primary">지우기</a>
                           <input type="submit" id="branchManagerInsertButton" name="branchManagerInsertButton" class="btn btn-success" value="등록">
                           
                         </div>

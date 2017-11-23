@@ -45,10 +45,10 @@ public class BranchPersonnelDao {
 	}
 	
 	// 직원리스트
-	public List<BranchPersonnelVO> selectBranchPersonnelList(int branchManagerCount, int pagePerRow){
+	public List<BranchPersonnelVO> selectBranchPersonnelList(int branchPersonnelCount, int pagePerRow){
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelList] 직원 리스트 출력 실행");
 		 Map<String, Integer> map = new HashMap<String, Integer>();
-	     map.put("beginRow", (branchManagerCount-1)*pagePerRow);
+	     map.put("beginRow", (branchPersonnelCount-1)*pagePerRow);
 	     map.put("pagePerRow", pagePerRow);
 		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList",map);
 	}
@@ -57,7 +57,6 @@ public class BranchPersonnelDao {
 	public int selectBranchPersonnelCount() {
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelCount] 직원 전체 숫자 구하기");
 		return sqlSessionTemplate.selectOne(NS + "selectBranchPersonnelCount");
-		
 	}
 	
 	//직원상세조회 
@@ -66,5 +65,24 @@ public class BranchPersonnelDao {
 		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelDetail",branchEmployeeCode);
 	}
 	
+	//직원 수정 폼
+	public List<BranchPersonnelVO> selectUpdateBranchPersonnel(String branchEmployeeCode){
+		System.out.println("[BranchPersonnelDao.selectUpdateBranchPersonnel] 실행");
+		return sqlSessionTemplate.selectList(NS + "selectUpdateBranchPersonnel",branchEmployeeCode);
+	}
+	
+	//직원 수정 처리
+	//지점인사테이블에서 수정(1) DB-branch_employee
+	public List<BranchPersonnelVO> updateBranchEmployee(BranchPersonnelVO branchPersonnelVo) {
+		System.out.println("[BranchManagerDao.updateBranchEmployee] 실행");
+		return  sqlSessionTemplate.selectList(NS + "updateBranchEmployee",branchPersonnelVo);
+		
+	}
+	//지점인사테이블에서 수정(2) DB-branch_personnel
+	public List<BranchPersonnelVO> updateBranchPersonnel(BranchPersonnelVO branchPersonnelVo) {
+		System.out.println("[BranchManagerDao.updateBranchPersonnel] 실행");
+		return  sqlSessionTemplate.selectList(NS + "updateBranchPersonnel",branchPersonnelVo);
+		
+	}
 
 }
