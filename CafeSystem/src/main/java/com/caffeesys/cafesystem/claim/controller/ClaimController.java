@@ -95,6 +95,6 @@ public class ClaimController {
 	public String claimDelete(@RequestParam(value = "claimCode", required = true) int claimCode) throws Exception {
 		logger.debug("[ClaimController.java/claimDelete Method] Claim Delete Action");
 		claimDao.deleteClaim(claimCode);
-		return "redirect:/claimList";
+		return "redirect:/claimList"; 
 	}
 }
