@@ -12,7 +12,6 @@ import com.caffeesys.cafesystem.shop.service.ShopDao;
 
 public class ShopDao {
 	
-	private static final Logger logger = LoggerFactory.getLogger(ShopDao.class);
 	private final String NS = "com.caffeesys.cafesystem.shop.service.ShopMapper.";
 	
 	@Autowired
@@ -20,14 +19,8 @@ public class ShopDao {
 	
 	@Override
 	// 매장등록처리
-	public int insertShop(ShopVO shop) throws Exception {
-		logger.debug("ShopDao.java / insertShop Param shop: "+shop);
+	public int insertShop(ShopVO shop) {
+		
 		return sqlSessionTemplate.insert(NS+"insertShop", shop);
-	}
-	// 카테고리VO
-	@Override
-	public List<Category> selectCategoryForShop() throws Exception {
-		logger.debug("ShopDao.java / selectCategoryForShop Method");
-		return sqlSessionTemplate.selectList(NS + "selectCategoryForShop");
 	}
 }
