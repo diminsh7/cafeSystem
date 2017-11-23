@@ -40,13 +40,13 @@
 								<option value="${category.categoryCode}">${category.categorySmall}</option>
 							</c:forEach>
 						</select>
-						<input type="text" id="customerClaimTitle" name="customerClaimTitle">
+						<input type="text" id="claimTitle" name="claimTitle">
 					</div>
 					<div>
-						<textarea id="customerClaimContents" name="customerClaimContents"></textarea>
+						<textarea id="claimContents" name="claimContents"></textarea>
 					</div>
 					<div>
-						<input type="file" id="customerClaimFile" name="customerClaimFile">
+						<input type="file" id="claimFile" name="claimFile">
 					</div>
 					<div>
 						<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">
