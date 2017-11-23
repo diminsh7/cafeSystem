@@ -14,17 +14,33 @@ public class AccountTitleService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleService.class);
 	@Autowired
 	private AccountTitleDao accountTitleDao;
-	//계정과목 전체 목록 
+	//검색한 계정과목 전체 목록 
 	public List<AccountTitleVO> listAll(String searchOption, String keyword){
 		logger.debug("listAll메소드의 searchOption :{}",searchOption);	//all, account_title_code, account_title_name, account_title_content
 		logger.debug("listAll메소드의 keyword :{}",keyword);	//검색어
 		return accountTitleDao.listAll(searchOption,keyword);
 	}
 	
-	//계정과목 레코드 개수 
+	//검섹힌 계정과목 레코드 개수 
 	public int countArticle(String searchOption, String keyword) {
-		logger.debug("countArticle{}",accountTitleDao.countArticle(searchOption,keyword));
+		logger.debug("countArticle메소드의 리턴값 :{}",accountTitleDao.countArticle(searchOption,keyword));
 		return accountTitleDao.countArticle(searchOption,keyword);
+	}
+	
+	//accountTitleList의 행의 개수
+	public int getAccountTitleCount() {
+		int accountTitleCount = 0;
+		logger.debug("getAccountTitleCount메소드 확인");
+		accountTitleCount = accountTitleDao.getAccountTitleCount();
+		logger.debug("getAccountTitleCount메솓의 accountTitleCount :{}",accountTitleCount);
+		return accountTitleCount;		
+	}
+	
+	//현재페이지의 행의수를 리스트
+	public List<AccountTitleVO> selectAccountTitleList(int currentPage,int pagePerRow) {
+		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);
+		logger.debug("selectAccountTitleList메솓의 list :{}",list);
+		return list;
 	}
 	//계정과목 삭제
 	public void deleteAccountTitle(String accountTitleCode) {
@@ -45,25 +61,7 @@ public class AccountTitleService {
 		logger.debug("selectAccountTitle의 리턴값 : {}",accountTitleVo);
 		return accountTitleVo;
 	}
-	
-	//계정과목 리스트 select
-	public List<AccountTitleVO> listAccountTitle(Model model, int currentPage) {
-		logger.debug("listAccountTitle 메소드 확인 currentPage:{}",currentPage);
-		logger.debug("listAccountTitle 메소드 확인 model:{}",model);
-		int pagePerRow = 10;	//한페이지당 10개
-		int accountTitleCount = accountTitleDao.getAccountTitleCount();	//accountTitleList의 행의 개수
-		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);//현재페이지의 행의수를 리스트
-		logger.debug("listAccountTitle메소드의 리턴값list: {}",list);
-		int lastPage = (int)(Math.ceil(accountTitleCount/pagePerRow));
-		model.addAttribute("totalRowCount",accountTitleCount);
-		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("accountTitleCount",accountTitleCount);
-		model.addAttribute("lastPage",lastPage);
-		model.addAttribute("list",list);
-		model.addAttribute("accountlist", list);
-		return list;
-		
-	}
+
 		
 	//계정과목 등록 과정 
 	public void insertAccountTitle(AccountTitleVO accountTitle) {

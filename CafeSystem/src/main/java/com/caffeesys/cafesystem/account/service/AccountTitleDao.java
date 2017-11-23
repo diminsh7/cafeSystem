@@ -35,9 +35,9 @@ public class AccountTitleDao {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);
-		logger.debug("listAll메소드의 searchOption :{}",searchOption);
-		logger.debug("listAll메소드의 keyword :{}",keyword);
-		logger.debug("countArticle메소드의 map:{}",map);
+		logger.debug("countArticle메소드의 searchOption :{}",searchOption);
+		logger.debug("countArticle메소드의 keyword :{}",keyword);
+		//logger.debug("countArticle메소드의 countArticle:{}",sqlSessionTemplate.selectOne(NS + "countArticle", map));
 		return sqlSessionTemplate.selectOne(NS + "countArticle", map);
 	}
 	
@@ -55,7 +55,7 @@ public class AccountTitleDao {
 	//계정과목 하나의 code넘겨서  계정과목코드에 대한 정보 select
 	public AccountTitleVO selectAccountTitle(String accountTitleCode) {
 		logger.debug("selectAccountTitle메소드의 입력값 accountTitleCode 잘받아왔나 확인 : {}",accountTitleCode);
-		logger.debug("selectAccountTitle메소드의 mapper리턴:{}",sqlSessionTemplate.selectOne(NS + "selectAccountTitle", accountTitleCode));
+		//logger.debug("selectAccountTitle메소드의 mapper리턴:{}",sqlSessionTemplate.selectOne(NS + "selectAccountTitle", accountTitleCode));
 		return sqlSessionTemplate.selectOne(NS + "selectAccountTitle", accountTitleCode);
 	}
 	
@@ -64,8 +64,8 @@ public class AccountTitleDao {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("beginRow", (currentPage-1)*pagePerRow); //이숫자부터 시작하겠다:beginRow    현재페이지:currentPage, 한페이지의 행의 수:pagePerRow
 		map.put("pagePerRow",pagePerRow);	//10	
-		logger.debug("selectAccountTitleList메소드의 리턴값 잘받아왔나 확인{}",
-				sqlSessionTemplate.selectList(NS + "selectAccountTitleList", map));
+		//logger.debug("selectAccountTitleList메소드의 리턴값 잘받아왔나 확인{}",
+				//sqlSessionTemplate.selectList(NS + "selectAccountTitleList", map));
 		return sqlSessionTemplate.selectList(NS + "selectAccountTitleList",map);
 				
 	}
@@ -73,7 +73,7 @@ public class AccountTitleDao {
 	//계정과목 리스트의 행의 수 
 	public int getAccountTitleCount() {
 		logger.debug("getAccountTitleCount메소드 확인");
-		logger.debug("getAccountTitleCount메소드  리턴 확인: {}",sqlSessionTemplate.selectOne(NS+"getAccountTitleCount"));
+		//logger.debug("getAccountTitleCount메소드  리턴 확인: {}",sqlSessionTemplate.selectOne(NS+"getAccountTitleCount"));
 		return sqlSessionTemplate.selectOne(NS + "getAccountTitleCount");
 	}
 		
