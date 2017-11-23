@@ -8,12 +8,12 @@
 			$(location).attr('href', '${pageContext.request.contextPath}/claimList');
 		} 
 		if(btn == "update"){
-			$(location).attr('href', '${pageContext.request.contextPath}/claimUpdate?customerClaimCode=${claim.customerClaimCode}');
+			$(location).attr('href', '${pageContext.request.contextPath}/claimUpdate?claimCode=${claim.claimCode}');
 		}
 		if(btn == "delete"){
 			result = confirm('정말 삭제하시겠습니까?');
 			if(result){
-				$(location).attr('href', '${pageContext.request.contextPath}/claimDelete?customerClaimCode=${claim.customerClaimCode}');
+				$(location).attr('href', '${pageContext.request.contextPath}/claimDelete?claimCode=${claim.claimCode}');
 			}		
 		}
 		if(btn == "reply"){
@@ -34,13 +34,13 @@
 					<div>
 						<input type="hidden" id="employeeCode" name="employeeCode" value="${claim.employeeCode}" readonly>
 						<input type="text" id="claimCategoryCode" name="claimCategoryCode" value="${claim.claimCategoryName}" readonly>
-						<input type="text" id="customerClaimTitle" name="customerClaimTitle" value="${claim.customerClaimTitle}" readonly>
+						<input type="text" id="claimTitle" name="claimTitle" value="${claim.claimTitle}" readonly>
 					</div>
 					<div>
-						<textarea id="customerClaimContents" name="customerClaimContents" readonly>${claim.customerClaimContents}</textarea>
+						<textarea id="claimContents" name="claimContents" readonly>${claim.claimContents}</textarea>
 					</div>
 					<div>
-						<input type="file" id="customerClaimFile" name="customerClaimFile" value="${claim.customerClaimFile}">
+						<input type="file" id="claimFile" name="claimFile" value="${claim.claimFile}">
 					</div>
 					<div>
 						<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">

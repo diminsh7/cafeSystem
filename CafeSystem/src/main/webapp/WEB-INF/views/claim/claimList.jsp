@@ -53,11 +53,11 @@
 							<tbody>
 								<c:forEach var="claimList" items="${claimList}">
 									<tr>
-										<td>${claimList.customerClaimCode}</td>
+										<td>${claimList.claimCode}</td>
 										<td>${claimList.claimCategoryName}</td>
 										<td>${claimList.employeeCode}</td>
-										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${claimList.customerClaimCode}">${claimList.customerClaimTitle}</a></td>
-										<td>${claimList.customerClaimDate}</td>
+										<td><a href="${pageContext.request.contextPath}/claimDetail?claimCode=${claimList.claimCode}">${claimList.claimTitle}</a></td>
+										<td>${claimList.claimDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -35,19 +35,19 @@
 				<div class="x_title">	
 					<div>
 						<input type="hidden" id="employeeCode" name="employeeCode" value="${claim.employeeCode}" readonly>
-						<input type="hidden" id="customerClaimCode" name="customerClaimCode" value="${claim.customerClaimCode}"><!-- 수정 후 바로 상세페이지로 가기 위한 변수  -->
+						<input type="hidden" id="claimCode" name="claimCode" value="${claim.claimCode}"><!-- 수정 후 바로 상세페이지로 가기 위한 변수  -->
 						<select id="claimCategoryCode" name="claimCategoryCode">
 						<c:forEach var="category" items="${claimCategory}">
 							<option value="${category.categoryCode}">${category.categorySmall}</option>
 						</c:forEach>
 					</select>
-						<input type="text" id="customerClaimTitle" name="customerClaimTitle" value="${claim.customerClaimTitle}">
+						<input type="text" id="claimTitle" name="claimTitle" value="${claim.claimTitle}">
 					</div>
 					<div>
-						<textarea id="customerClaimContents" name="customerClaimContents">${claim.customerClaimContents}</textarea>
+						<textarea id="claimContents" name="claimContents">${claim.claimContents}</textarea>
 					</div>
 					<div>
-						<input type="file" id="customerClaimFile" name="customerClaimFile" value="${claim.customerClaimFile}">
+						<input type="file" id="claimFile" name="claimFile" value="${claim.claimFile}">
 					</div>
 					<div>
 						<input type="button" id="claimListBtn" value="취소" onclick="claimBtn('cancel')">
