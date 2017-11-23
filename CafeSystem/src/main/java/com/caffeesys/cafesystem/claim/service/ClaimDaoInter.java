@@ -8,7 +8,7 @@ public interface ClaimDaoInter {
 	
 	public List<ClaimVO> getClaimList(int currentPage, int pagePerRow) throws Exception;
 	
-	public ClaimVO selectOneForDetail(int customerClaimCode) throws Exception;
+	public ClaimVO selectOneForDetail(int claimCode) throws Exception;
 	
 	public List<Category> selectCategoryForClaim() throws Exception;
 	
@@ -16,5 +16,5 @@ public interface ClaimDaoInter {
 	
 	public int getClaimCount() throws Exception;
 	
-	public int deleteClaim(int customerClaimCode) throws Exception;
+	public int deleteClaim(int claimCode) throws Exception;
 }
