@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.caffeesys.cafesystem.board.service.BoardMapper">
+	<resultMap type="com.caffeesys.cafesystem.board.service.BoardVO" id="resultBoard">
+		<result column="board_code" property="boardCode"/>	<!-- 게시글코드(PK) -->
+		<result column="category_code" property="categoryCode"/>	<!-- 카테고리(FK) -->
+		<result column="employee_code" property="employeeCode"/>	<!-- 직원코드(FK) -->
+		<result column="board_title" property="boardTitle"/>	<!-- 제목 -->
+		<result column="board_content" property="boardContent"/>	<!-- 내용 -->
+		<result column="board_date" property="boardDate"/>	<!-- 날짜 -->
+		<result column="board_file" property="boardFile"/>	<!-- 첨부파일 -->
+	</resultMap>
+	</mapper>

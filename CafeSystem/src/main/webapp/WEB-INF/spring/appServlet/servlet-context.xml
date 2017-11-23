@@ -68,9 +68,11 @@
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimReplyMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchPersonnelMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/board/service/BoardMapper.xml</value>
 			</list>
 		</property>
 	</bean>

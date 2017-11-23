@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.claim.service.ClaimReplyMapper">
+	<!-- ClaimVo resultmap -->
+	<resultMap type="com.caffeesys.cafesystem.claim.service.ClaimVO" id="resultClaimReply">
+		<result property="claimCode" column="claim_code" /> <!-- 클레임 관리코드(PK) -->
+		<result property="claimCategoryCode" column="claim_category_code" /> <!-- 카테고리(FK) -->
+		<result property="employeeCode" column="employee_code" /> <!-- 직원코드(FK) -->
+		<result property="claimTitle" column="claim_title" /> <!-- 제목 -->
+		<result property="claimContents" column="claim_contents" /> <!-- 내용 -->
+		<result property="claimDate" column="claim_date" /> <!-- 작성일 -->
+		<result property="claimFile" column="claim_file" /> <!-- 첨부파일 -->
+		<result property="claimReRef" column="claim_re_ref" /> <!-- 답글의 원글 번호 -->
+		<result property="claimReLev" column="claim_re_lev" /> <!-- 해당 원글의 몇번째 답글인가 -->
+		<result property="claimReSeq" column="claim_re_seq" /> <!-- 답글 정렬을 위한 시퀀스 -->
+		<result property="claimCategoryName" column="category_small" /> <!-- 카테고리 이름 저장용 -->
+	</resultMap>
+	
+	<!-- CategoryVo resultMap -->
+	<resultMap type="com.caffeesys.cafesystem.Category" id="resultCategory">
+		<result property="categoryCode" column="category_code" /> <!-- 코드(PK) -->
+		<result property="categoryLarge" column="category_large" /> <!-- 대분류 -->
+		<result property="categoryMiddle" column="category_middle" /> <!-- 중분류 -->
+		<result property="categorySmall" column="category_small" /> <!-- 소분류 -->
+	</resultMap>
+	
+	<insert id="claimReplyInsert" parameterType="com.caffeesys.cafesystem.claim.service.ClaimVO">
+		INSERT INTO claim (
+			claim_code
+			, claim_category_code
+			, employee_code
+			, claim_title
+			, claim_contents
+			, claim_file
+			, claim_re_ref
+			, claim_re_lev
+			, claim_re_seq
+			, claim_date
+		) VALUES (
+			#{claimCode}
+			, #{claimCategoryCode}
+			, #{employeeCode}
+			, #{claimTitle}
+			, #{claimContents}
+			, #{claimFile}
+			, #{claimReRef}
+			, #{claimReLev}
+			, #{claimReSeq}
+			, now()
+		)
+	</insert>
+</mapper>
