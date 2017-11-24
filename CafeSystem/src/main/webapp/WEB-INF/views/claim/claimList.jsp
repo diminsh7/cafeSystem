@@ -53,23 +53,35 @@
 							<tbody>
 								<c:forEach var="claimList" items="${claimList}">
 									<tr>
-										<td>${claimList.customerClaimCode}</td>
+										<td>${claimList.claimCode}</td>
 										<td>${claimList.claimCategoryName}</td>
 										<td>${claimList.employeeCode}</td>
-										<td><a href="${pageContext.request.contextPath}/claimDetail?customerClaimCode=${claimList.customerClaimCode}">${claimList.customerClaimTitle}</a></td>
-										<td>${claimList.customerClaimDate}</td>
+										<td><a href="${pageContext.request.contextPath}/claimDetail?claimCode=${claimList.claimCode}">${claimList.claimTitle}</a></td>
+										<td>${claimList.claimDate}</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-						<ul class="pager">
-							<c:if test="${currentPage > 1}">
-								<li class="previous"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage-1}">Prev</a></li>
-							</c:if>
-							<c:if test="${currentPage < lastPage}">
-								<li class="next"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage+1}">Next</a></li>
-							</c:if>
-						</ul>
+						<div class = "text-center"> 
+							<ul class="pagination">
+								<c:if test="${currentPage > 1}">
+									<li class="previous"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage-1}">prev</a></li>
+								</c:if>
+								<c:forEach var="page" begin="${startPage}" end="${endPage}" step="1">
+									<c:choose>
+										<c:when test="${page == currentPage}">
+											<li class="active"><a>${page}</a></li>
+										</c:when>
+										<c:otherwise>
+											<li><a href="${pageContext.request.contextPath}/claimList?currentPage=${page}">${page}</a></li>
+										</c:otherwise>	
+									</c:choose>	
+								</c:forEach>
+								<c:if test="${currentPage < lastPage}">
+									<li class="next"><a href="${pageContext.request.contextPath}/claimList?currentPage=${currentPage+1}">next</a></li>
+								</c:if>
+							</ul>
+						</div>
 					</div>
 					<div>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/claimInsert">클레임 등록</a>
