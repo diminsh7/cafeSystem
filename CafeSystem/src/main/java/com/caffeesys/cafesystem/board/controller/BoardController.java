@@ -1,31 +1,70 @@
 package com.caffeesys.cafesystem.board.controller;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+import com.caffeesys.cafesystem.Category;
+import com.caffeesys.cafesystem.board.service.BoardService;
 import com.caffeesys.cafesystem.board.service.BoardVO;
 @Controller
 public class BoardController {
-
 	@Autowired
-	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+	private BoardService boardService;
 	
-	// 클레임 입력 폼 요청
+	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
+
+	//통합게시판 리스트 
+	@RequestMapping(value="/boardList", method=RequestMethod.GET)
+	public String boardList(Model model, HttpSession session, 
+							@RequestParam(value = "currentPage", 
+							required = false, defaultValue = "1")int currentPage) throws Exception {
+		
+		logger.debug("boardList 메소드 get방식 확인");
+		//페이징작업
+		int pagePerRow = 10;	//한페이지당 10개
+		int boardCount = boardService.getBoardCount(); //boardList의 레코드 수
+		List<BoardVO> list = boardService.selectBoardList(currentPage, pagePerRow); //현재페이지의 리스트
+		int lastPage = (int)(Math.ceil(boardCount/pagePerRow));
+		logger.debug("boardList 메소드 currentPage :{}",currentPage);
+		logger.debug("boardList 메소드 accountTitleCount :{}",boardCount);
+		logger.debug("boardList 메소드 list :{}",list);
+		
+		//카테고리 갖고오기 
+		List<Category> boardCategory = boardService.selectBoardCategory();
+		logger.debug("boardList 메소드 boardCategory :{}",boardCategory);
+		model.addAttribute("totalRowCount",boardCount);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("lastPage",lastPage);
+		model.addAttribute("boardList",list);
+		//카테고리 세션넣기 시작
+		session.setAttribute("boardCategory", boardCategory);
+		return "/board/boardList";
+	}
+	// 통합게시판 입력 폼 요청
 	@RequestMapping(value="/boardInsert", method = RequestMethod.GET)
-	public String boardInsert() {
+	public String boardInsert(Model model) {
 		logger.debug("boardInsert 메소드 확인 get방식");
 		return "/board/boardInsertForm";
 	}
 	
-	// 클레임 입력 처리
+	// 통합게시판 입력 처리
 	@RequestMapping(value ="/boardInsert", method = RequestMethod.POST)
 	public String boardInsert(BoardVO board) throws Exception {
 		logger.debug("boardInsert 메소드확인 post방식");
+		logger.debug("boardInsert 메소드확인 board:{}",board);
+		boardService.insertBoard(board);
 		return "redirect:/boardList";
 	}
 	// 클레임 리스트 요청

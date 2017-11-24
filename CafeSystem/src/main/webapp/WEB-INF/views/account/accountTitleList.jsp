@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -16,8 +15,12 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>계정과목 리스트</h2>
+						<div class="col-md-0 col-sm-0 col-xs-0 form-group pull-right top_search">
+							<a class="btn btn-primary" href="${pageContext.request.contextPath}/accountTitleInsert">계정과목 등록</a>
+						</div>
 						<div class="clearfix"></div>
 					</div>
+					
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">
 						<h2>게시글 목록</h2>
@@ -58,8 +61,7 @@
 							</c:if>
 						</ul>
 						<div>
-							<a href="${pageContext.request.contextPath}/accountTitleInsert">계정과목
-								입력</a>
+							
 						</div>
 					</div>
 				</div>

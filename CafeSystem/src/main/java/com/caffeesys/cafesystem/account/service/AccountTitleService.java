@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Service
 public class AccountTitleService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleService.class);
+	
 	@Autowired
 	private AccountTitleDao accountTitleDao;
 	//검색한 계정과목 전체 목록 
