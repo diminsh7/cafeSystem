@@ -55,7 +55,7 @@ public class ContractController {
 	// 계약서상세조회
 	@RequestMapping(value = "/contractDetail", method = RequestMethod.GET)
 	public String detailContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
-		System.out.println("ContractController.java / detailContract method GET방식 ");
+		System.out.println("ContractController.java / detailContract method GET방식 " + contractCode);
 		ContractVo contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/contractDetail";
@@ -63,7 +63,7 @@ public class ContractController {
 	// 계약서수정 페이지요청
 	@RequestMapping(value = "/updateContract", method = RequestMethod.GET)
 	public String updateContract(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
-		System.out.println("ContractController.java / updateContract method GET방식 ");
+		System.out.println("ContractController.java / updateContract method GET방식 " + contractCode);
 		ContractVo contract = contractDao.selectContract(contractCode);
 		model.addAttribute("contract", contract);
 		return "/shop/contractUpdateForm";
@@ -78,7 +78,7 @@ public class ContractController {
 	// 계약서삭제 페이지요청(소유자명 입력)
 	@RequestMapping(value = "/deleteContract", method = RequestMethod.GET)
 	public String deleteContract(@RequestParam(value = "contractCode", required = true) String contractCode) {
-		System.out.println("ContractController.java / deleteContract method GET방식 ");
+		System.out.println("ContractController.java / deleteContract method GET방식 " + contractCode);
 		return "/shop/contractDeleteForm";
 	}
 	// 계약서삭제(액션)요청

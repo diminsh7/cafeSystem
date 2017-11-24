@@ -28,26 +28,9 @@
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select id="localCategoryCode" name="localCategoryCode">
-									<%-- 	<c:forEach var="ShopCategoryLocal" items="${CategoryLocalList}">
+										<c:forEach var="ShopCategoryLocal" items="${CategoryLocalList}">
 											<option value='${ShopCategoryLocal.categoryCode}'>${ShopCategoryLocal.categorySmall}</option>
-										</c:forEach> --%>
-										<option value='001'>서울특별시</option>
-										<option value='002'>부산광역시</option>
-										<option value='003'>대구광역시</option>
-										<option value='004'>인천광역시</option>
-										<option value='005'>대전광역시</option>
-										<option value='006'>광주광역시</option>
-										<option value='007'>울산광역시</option>
-										<option value='008'>세종특별자치시</option>
-										<option value='009'>경기도</option>
-										<option value='010'>강원도</option>
-										<option value='011'>충청북도</option>
-										<option value='012'>충청남도</option>
-										<option value='013'>전라북도</option>
-										<option value='014'>전라남도</option>
-										<option value='015'>경상북도</option>
-										<option value='016'>경상남도</option>
-										<option value='017'>제주도</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>

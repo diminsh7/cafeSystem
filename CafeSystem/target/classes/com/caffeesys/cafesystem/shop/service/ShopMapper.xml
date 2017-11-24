@@ -13,7 +13,8 @@
 		<result property="shopPostcode" column="shop_postcode" /> <!-- 점포우편번호 -->
 		<result property="shopSize" column="shop_size" /> <!-- 점포규모 -->
 		<result property="contractOwnerName" column="contract_owner_name" /> <!-- contract소유자이름 -->
-		<!-- <result property="categorySmall" column="category_small" /> --> <!-- category소분류001~017 -->
+		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
+		<result property="categorySmall" column="category_small" /> <!-- category소분류001~017 -->
 	</resultMap>
 	<!-- 전체매장조회 상세전 -->
 	<select id="selectShopList" parameterType="java.util.Map" resultMap="resultShop">
@@ -50,9 +51,15 @@
 		FROM contract
 	</select>
 	<!-- 매장등록 category에서 소분류 가져오는 select -->
-<!-- 	<select id="selectShopCategorySmall" resultMap="resultShop">
+	<select id="selectShopCategorySmall" resultMap="resultShop">
 		SELECT category_code, category_small
 		FROM category
 		WHERE category_code LIKE '0%'
-	</select> -->
+	</select>
+	<!-- 매장수정 및 매장상세조회 -->
+	<select id="selectShop" parameterType="String" resultMap="resultShop">
+        SELECT contract_code, shop_name, shop_address, shop_call, shop_postcode, shop_size
+        FROM shop 
+        WHERE shop_name = #{shopName}
+    </select>
 </mapper>

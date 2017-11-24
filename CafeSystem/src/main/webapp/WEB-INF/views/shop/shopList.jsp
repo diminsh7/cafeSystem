@@ -37,8 +37,8 @@
 							<tbody>
 								<c:forEach var="shop" items="${list}">
 									<tr>
-										<td><%-- <a
-											href="${pageContext.request.contextPath}/shopDetail?contractCode=${shop.contractCode}"> --%>${shop.shopName}<!-- </a> --></td>
+										<td><a
+											href="${pageContext.request.contextPath}/shopDetail?shopName=${shop.shopName}">${shop.shopName}</a></td>
 										<td>${shop.contractOwnerName}</td>
 										<td>${shop.shopAddress}</td>
 									</tr>

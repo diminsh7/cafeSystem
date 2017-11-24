@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.caffeesys.cafesystem.employee.service.BranchManagerVO;
 import com.caffeesys.cafesystem.shop.service.ShopDao;
 import com.caffeesys.cafesystem.shop.service.ShopService;
 import com.caffeesys.cafesystem.shop.service.ShopVO;
@@ -42,17 +41,24 @@ public class ShopController {
 	public String insertShop(Model model) {
 		System.out.println("ShopController.java / insertShop method GET방식 ");
 		List<ShopVO> ContractCodeList = shopDao.selectShopContractCode();
-		/*List<ShopVO> CategoryLocalList = shopDao.selectShopCategorySmall();*/
+		List<ShopVO> CategoryLocalList = shopDao.selectShopCategorySmall();
 		model.addAttribute("ContractCodeList",ContractCodeList);
-		/*model.addAttribute("CategoryLocalList",CategoryLocalList);*/
+		model.addAttribute("CategoryLocalList",CategoryLocalList);
 		return "/shop/shopInsertForm";
 	}
 	// 매장등록(액션)요청
 	@RequestMapping(value="/insertShop", method = RequestMethod.POST)
 	public String insertShop(ShopVO shop) {
-		System.out.println("ShopController.java / insertShop method POST방식 ");
 		System.out.println("ShopController.java / insertShop method POST방식 " + shop);
 		shopService.insertShop(shop);
 		return "redirect:/shopList";
+	}
+	// 매장상세조회
+	@RequestMapping(value = "/shopDetail", method = RequestMethod.GET)
+	public String detailShop(Model model, @RequestParam(value = "shopName", required = true) String shopName) {
+		System.out.println("ShopController.java / detailShop method GET방식 " + shopName);
+		ShopVO shop = shopDao.selectShop(shopName);
+		model.addAttribute("shop", shop);
+		return "/shop/shopDetail";
 	}
 }

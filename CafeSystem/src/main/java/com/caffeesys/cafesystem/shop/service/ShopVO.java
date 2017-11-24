@@ -11,7 +11,8 @@ public class ShopVO {
 	private char shopPostcode; // 우편번호
 	private int shopSize; // 점포규모
 	private String contractOwnerName; // contract소유자이름
-	private String categorySmall; // 소분류 001~017 지역
+	private String categoryCode; // category코드
+	private String categorySmall; // category소분류001~017
 	
 	public String getLocalCategoryCode() {
 		return localCategoryCode;
@@ -67,6 +68,12 @@ public class ShopVO {
 	public void setContractOwnerName(String contractOwnerName) {
 		this.contractOwnerName = contractOwnerName;
 	}
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
 	public String getCategorySmall() {
 		return categorySmall;
 	}
@@ -78,10 +85,11 @@ public class ShopVO {
 		return "ShopVO [localCategoryCode=" + localCategoryCode + ", shopCode=" + shopCode + ", contractCode="
 				+ contractCode + ", shopName=" + shopName + ", shopAddress=" + shopAddress + ", shopCall=" + shopCall
 				+ ", shopPostcode=" + shopPostcode + ", shopSize=" + shopSize + ", contractOwnerName="
-				+ contractOwnerName + ", categorySmall=" + categorySmall + "]";
+				+ contractOwnerName + ", categoryCode=" + categoryCode + ", categorySmall=" + categorySmall + "]";
 	}
 	public ShopVO(String localCategoryCode, String shopCode, String contractCode, String shopName, String shopAddress,
-			String shopCall, char shopPostcode, int shopSize, String contractOwnerName, String categorySmall) {
+			String shopCall, char shopPostcode, int shopSize, String contractOwnerName, String categoryCode,
+			String categorySmall) {
 		super();
 		this.localCategoryCode = localCategoryCode;
 		this.shopCode = shopCode;
@@ -92,11 +100,13 @@ public class ShopVO {
 		this.shopPostcode = shopPostcode;
 		this.shopSize = shopSize;
 		this.contractOwnerName = contractOwnerName;
+		this.categoryCode = categoryCode;
 		this.categorySmall = categorySmall;
 	}
 	public ShopVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

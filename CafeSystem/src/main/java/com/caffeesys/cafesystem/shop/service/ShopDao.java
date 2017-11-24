@@ -8,8 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.caffeesys.cafesystem.employee.service.BranchManagerVO;
-
 @Repository
 public class ShopDao {
 	
@@ -47,8 +45,13 @@ public class ShopDao {
 		return sqlSessionTemplate.selectList(NS + "selectShopContractCode");
 	}
 	// 매장등록 category에서 소분류 가져오는 select 
-/*	public List<ShopVO> selectShopCategorySmall(){
+	public List<ShopVO> selectShopCategorySmall(){
 		System.out.println("ShopDao.java / selectShopCategorySmall method 확인");
 		return sqlSessionTemplate.selectList(NS + "selectShopCategorySmall");
-	}*/
+	}
+	// 매장수정 및 매장상세조회
+	public ShopVO selectShop(String shopName) {
+		System.out.println("ShopDao.java / selectShop Param shopName: "+shopName);
+		return sqlSessionTemplate.selectOne(NS+"selectShop", shopName);
+	}
 }
