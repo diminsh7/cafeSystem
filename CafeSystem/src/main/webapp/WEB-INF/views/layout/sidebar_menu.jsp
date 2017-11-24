@@ -15,7 +15,8 @@
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/#">본사직원정보</a></li>
-					<li><a href="${pageContext.request.contextPath}/branchManagerList">점주정보</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/branchManagerList">점주정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">지점직원정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">본사직원근태정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">본사직원급여명세서</a></li>
@@ -38,7 +39,8 @@
 			<li><a><i class="fa fa-krw"></i> 매출 및 회계관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
+					<li><a
+						href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">지점매출조회</a></li>
 				</ul></li>
 		</ul>
@@ -88,9 +90,12 @@
 	<div class="menu_section">
 		<h3>공통</h3>
 		<ul class="nav side-menu">
-			<li><a href="${pageContext.request.contextPath}/claimList"><i class="fa fa-exclamation-triangle"></i> 고객클레임 </a></li>
-			<li><a href="${pageContext.request.contextPath}/#"><i class="fa fa-edit"></i> 통합게시판 </a></li>
-			<li><a href="${pageContext.request.contextPath}/#"><i class="fa fa-phone-square"></i> 매장연락망</a></li>
+			<li><a href="${pageContext.request.contextPath}/claimList"><i
+					class="fa fa-exclamation-triangle"></i> 고객클레임 </a></li>
+			<li><a href="${pageContext.request.contextPath}/#"><i
+					class="fa fa-edit"></i> 통합게시판 </a></li>
+			<li><a href="${pageContext.request.contextPath}/#"><i
+					class="fa fa-phone-square"></i> 매장연락망</a></li>
 		</ul>
 	</div>
 </div>
