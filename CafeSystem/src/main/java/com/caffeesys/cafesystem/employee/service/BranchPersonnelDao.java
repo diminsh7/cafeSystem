@@ -24,6 +24,11 @@ public class BranchPersonnelDao {
 		logger.debug("[selectBranchPersonnelShopcode] 지점 매장번호 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeShopCode");
 	}
+	//입력폼에서 필요하 지역
+	public List<BranchPersonnelVO> selectBranchPersonnelLocal() {
+		logger.debug("[selectBranchPersonnelShopcode] 지점 지역 구하기 실행");
+		return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeLocal");
+	}
 
 	// 점주 등록
 	// 지점 인사관리 테이블등록
@@ -76,13 +81,22 @@ public class BranchPersonnelDao {
 	public List<BranchPersonnelVO> updateBranchEmployee(BranchPersonnelVO branchPersonnelVo) {
 		System.out.println("[BranchManagerDao.updateBranchEmployee] 실행");
 		return  sqlSessionTemplate.selectList(NS + "updateBranchEmployee",branchPersonnelVo);
-		
 	}
 	//지점인사테이블에서 수정(2) DB-branch_personnel
 	public List<BranchPersonnelVO> updateBranchPersonnel(BranchPersonnelVO branchPersonnelVo) {
 		System.out.println("[BranchManagerDao.updateBranchPersonnel] 실행");
 		return  sqlSessionTemplate.selectList(NS + "updateBranchPersonnel",branchPersonnelVo);
-		
 	}
-
+	
+	//직원 삭제 처리
+	//지점인사테이블에서 삭제(1) DB-branch_employee
+	public int deleteBranchEmployee(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.deleteBranchEmployee] 실행");
+		return  sqlSessionTemplate.delete(NS + "deleteBranchEmployee",branchEmployeeCode);	
+	}
+	//지짐직원테이블에서의 삭제(2) DB-branch_personnel
+	public int deleteBranchPersonnel(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.deleteBranchPersonnel] 실행");
+		return  sqlSessionTemplate.delete(NS + "deleteBranchPersonnel",branchEmployeeCode);	
+	}
 }

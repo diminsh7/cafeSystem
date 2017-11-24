@@ -21,7 +21,8 @@
 		<result property="branchPersonnelBanknum" column="branch_personnel_banknum" /><!-- 월급계좌번화 -->
 		<result property="branchPersonnelContract" column="branch_personnel_contract" /><!-- 근로계약서 -->
 		<result property="shopName" column="shop_name" /><!-- 점포명 -->
-		<result property="categorySmall" column="category_small" /><!-- 직급명 -->
+		<result property="categorySmall" column="category_small" /><!-- 지역명 -->
+		<result property="categoryCode" column="category_code" /><!-- 카테고리코드 -->
 	</resultMap>
 	
 	<!-- DB shop에서 매장 코드 가져오는 select -->
@@ -29,7 +30,12 @@
 		SELECT DISTINCT shop_code
 		FROM shop
 	</select> 
-	
+	<!-- DB 카테고리에서 매장 코드 가져오는 select -->
+	<select id="selectBranchEmployeeLocal" resultMap="resultBranchPersonnel">
+	SELECT category_code, category_small
+	FROM category
+	WHERE category_code LIKE '0%'
+	</select>
 	<!-- 직원,매니져 등록 -->
 	<!-- DB(지점인사관리)에 등록 -->
 	<insert id="insertBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchPersonnelVO">
@@ -142,6 +148,7 @@
 			branch_employee.branch_employee_phone,
 			branch_employee.branch_employee_address,
 			branch_employee.branch_employee_cetificate,
+			branch_personnel.branch_personnel_salary,
 			branch_personnel.branch_personnel_bank,
 			branch_personnel.branch_personnel_banknum,
 			branch_personnel.branch_personnel_contract
@@ -175,4 +182,16 @@
 	WHERE 
 		branch_employee_code = #{branchEmployeeCode}
 	</update>
+	
+	<!-- 지점직원 삭제 처리/ 지점인사관리, 지점직원관리 -->
+	 <!-- DB(지점인사관리)에 삭제 -->
+	<delete id="deleteBranchEmployee" parameterType="com.caffeesys.cafesystem.employee.service.BranchPersonnelVO">
+		DELETE FROM branch_employee WHERE branch_employee_code = #{branchEmployeeCode}
+	</delete>
+	<!-- DB(지점직원관리)에 삭제-->
+	<delete id="deleteBranchPersonnel" parameterType="com.caffeesys.cafesystem.employee.service.BranchPersonnelVO">
+		 DELETE FROM branch_personnel WHERE branch_employee_code = #{branchEmployeeCode}
+	</delete>
+	
+	
 </mapper>

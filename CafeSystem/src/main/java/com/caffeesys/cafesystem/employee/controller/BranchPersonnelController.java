@@ -26,7 +26,9 @@ public class BranchPersonnelController {
 	public String insertBranchManager(Model model) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점직원 입력 폼 페이지 실행 컨트롤러");
 		List<BranchPersonnelVO> ShopCodeList = branchPersonnelDao.selectBranchPersonnelShopcode();
+		List<BranchPersonnelVO> localList = branchPersonnelDao.selectBranchPersonnelLocal();
 		model.addAttribute("branchShopCode",ShopCodeList);
+		model.addAttribute("localList",localList);
 		return "/employee/branchPersonnelInsertForm";
 	}  
 	
@@ -78,7 +80,16 @@ public class BranchPersonnelController {
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 수정 실행 컨트롤러");
 		branchPersonnelDao.updateBranchEmployee(branchPersonnelVo);
 		branchPersonnelDao.updateBranchPersonnel(branchPersonnelVo);
-		System.out.println("[employee.controller.BranchPersonnelController.java] : 성공");
+		return "redirect:/branchPersonnelList";
+	}
+	
+	//삭제 실행 컨트롤러 deleteBranchPersonnel
+	@RequestMapping(value = {"/deleteBranchPersonnel"}, method = RequestMethod.GET)
+	public String deleteBranchPersonnel(@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) { 
+		System.out.println("[employee.controller.BranchPersonnelController.java] : 삭제 실행 컨트롤러");
+		branchPersonnelDao.deleteBranchEmployee(branchEmployeeCode);
+		branchPersonnelDao.deleteBranchPersonnel(branchEmployeeCode);
+		
 		return "redirect:/branchPersonnelList";
 	}
 	

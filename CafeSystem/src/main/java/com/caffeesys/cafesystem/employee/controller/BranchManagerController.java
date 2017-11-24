@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.caffeesys.cafesystem.employee.service.BranchManagerVO;
+import com.caffeesys.cafesystem.employee.service.BranchPersonnelVO;
 import com.caffeesys.cafesystem.employee.service.BranchManagerDao;
 import com.caffeesys.cafesystem.employee.service.BranchManagerService;
  
@@ -26,7 +27,9 @@ public class BranchManagerController {
 	public String insertBranchManager(Model model) { 
 		System.out.println("[employee.controller.BranchManagerController.java] : 점주 입력 폼 페이지 실행 컨트롤러");
 		List<BranchManagerVO> ShopCodeList = branchManagerDao.selectBranchManagerShopcode();
+		List<BranchManagerVO> localList = branchManagerDao.selectBranchPersonnelLocal();
 		model.addAttribute("branchManagerShopCode",ShopCodeList);
+		model.addAttribute("localList",localList);
 		return "/employee/branchManagerInsertForm";
 	}  
 	 

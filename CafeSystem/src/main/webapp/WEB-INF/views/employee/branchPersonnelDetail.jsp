@@ -2,15 +2,16 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- <script>
-$(document).click(function button_click(){
-	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){    //삭제처리
+<script>
+
+function deleteb(){
+	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){  //삭제처리
 		document.$('#DeleteButton').submit();
 	}else{   
- 		return false; //삭제 취소
+			return false; //삭제 취소
 	}
-});
-</script> -->
+}
+</script>
 
 <div class="right_col" role="main">
 	<div class="">
@@ -18,7 +19,7 @@ $(document).click(function button_click(){
 			<div class="title_left">
 				<h3>지점인사관리</h3>
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchPersonnelList">목록</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertformbranchPersonneel">점주등록</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertformbranchPersonneel">직원등록</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -68,7 +69,7 @@ $(document).click(function button_click(){
 							</tbody>
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchPersonnelForm?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
-						<a class="btn btn-default" onclick="button_click()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
+						<a class="btn btn-default" onclick="deleteb" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
 					</div>
 					</c:forEach>
 				</div>
