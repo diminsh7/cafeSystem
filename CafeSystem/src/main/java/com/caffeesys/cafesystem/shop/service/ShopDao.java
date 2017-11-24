@@ -59,4 +59,13 @@ public class ShopDao {
 		System.out.println("ShopDao.java / updateShop Param shop: "+shop);
 		return sqlSessionTemplate.update(NS+"updateShop", shop);
 	}
+	// 매장삭제 점포명확인하고 삭제
+	public int deleteShop(String contractCode, String shopName) {
+		System.out.println("ShopDao.java / deleteShop Param contractCode: "+contractCode);
+		System.out.println("ShopDao.java / deleteShop Param shopName: "+shopName);
+		ShopVO shop = new ShopVO();
+		shop.setContractCode(contractCode);
+		shop.setShopName(shopName);
+		return sqlSessionTemplate.delete(NS+"deleteShop", shop);
+	}
 }

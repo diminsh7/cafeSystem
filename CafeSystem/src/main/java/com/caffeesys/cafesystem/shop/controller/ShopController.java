@@ -76,4 +76,19 @@ public class ShopController {
 		shopDao.updateShop(shop);
 		return "redirect:/shopDetail?contractCode=" + shop.getContractCode();
 	}
+	// 매장삭제 페이지요청(점포명 입력)
+	@RequestMapping(value = "/deleteShop", method = RequestMethod.GET)
+	public String deleteShop(@RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ShopController.java / deleteShop method GET방식 " + contractCode);
+		return "/shop/shopDeleteForm";
+	}
+	// 매장삭제(액션)요청
+	@RequestMapping(value = "/deleteShop", method = RequestMethod.POST)
+	public String deleteShop(@RequestParam(value = "contractCode", required = true) String contractCode,
+			@RequestParam(value = "shopName", required = true) String shopName) {
+		System.out.println("ShopController.java / deleteShop method POST방식 " + contractCode);
+		System.out.println("ShopController.java / deleteShop method POST방식 " + shopName);
+		shopDao.deleteShop(contractCode, shopName);
+		return "redirect:/shopList";
+	}
 }

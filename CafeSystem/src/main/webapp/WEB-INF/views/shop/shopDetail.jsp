@@ -46,7 +46,7 @@
 							</tbody>
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateShop?contractCode=${shop.contractCode}">수정</a>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteShop?shopName=${shop.shopName}">삭제</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteShop?contractCode=${shop.contractCode}">삭제</a>
 					</div>
 				</div>
 			</div>
