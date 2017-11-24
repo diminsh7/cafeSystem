@@ -3,16 +3,18 @@ package com.caffeesys.cafesystem.shop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.caffeesys.cafesystem.shop.service.ContractVo;
+import com.caffeesys.cafesystem.employee.service.BranchManagerVO;
 import com.caffeesys.cafesystem.shop.service.ShopDao;
 import com.caffeesys.cafesystem.shop.service.ShopService;
 import com.caffeesys.cafesystem.shop.service.ShopVO;
 
+@Controller
 public class ShopController {
 	
 	@Autowired
@@ -37,15 +39,20 @@ public class ShopController {
 	}
 	// 매장등록 페이지요청
 	@RequestMapping(value="/insertShop", method = RequestMethod.GET)
-	public String insertShop() {
+	public String insertShop(Model model) {
 		System.out.println("ShopController.java / insertShop method GET방식 ");
+		List<ShopVO> ContractCodeList = shopDao.selectShopContractCode();
+		/*List<ShopVO> CategoryLocalList = shopDao.selectShopCategorySmall();*/
+		model.addAttribute("ContractCodeList",ContractCodeList);
+		/*model.addAttribute("CategoryLocalList",CategoryLocalList);*/
 		return "/shop/shopInsertForm";
 	}
 	// 매장등록(액션)요청
 	@RequestMapping(value="/insertShop", method = RequestMethod.POST)
 	public String insertShop(ShopVO shop) {
+		System.out.println("ShopController.java / insertShop method POST방식 ");
 		System.out.println("ShopController.java / insertShop method POST방식 " + shop);
 		shopService.insertShop(shop);
-		return "redirect:/contractList";
+		return "redirect:/shopList";
 	}
 }

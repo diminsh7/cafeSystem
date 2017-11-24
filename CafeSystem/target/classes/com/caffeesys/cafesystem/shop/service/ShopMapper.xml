@@ -13,15 +13,9 @@
 		<result property="shopPostcode" column="shop_postcode" /> <!-- 점포우편번호 -->
 		<result property="shopSize" column="shop_size" /> <!-- 점포규모 -->
 		<result property="contractOwnerName" column="contract_owner_name" /> <!-- contract소유자이름 -->
+		<!-- <result property="categorySmall" column="category_small" /> --> <!-- category소분류001~017 -->
 	</resultMap>
-	<!-- Category resultMap -->
-	<resultMap type="com.caffeesys.cafesystem.Category" id="resultCategory">
-		<result property="categoryCode" column="category_code" /> <!-- 코드(PK) -->
-		<result property="categoryLarge" column="category_large" /> <!-- 대분류 -->
-		<result property="categoryMiddle" column="category_middle" /> <!-- 중분류 -->
-		<result property="categorySmall" column="category_small" /> <!-- 소분류 -->
-	</resultMap>
-	<!-- 매장조회 상세전 -->
+	<!-- 전체매장조회 상세전 -->
 	<select id="selectShopList" parameterType="java.util.Map" resultMap="resultShop">
         SELECT s.shop_name, c.contract_owner_name, s.shop_address
 		FROM shop s
@@ -30,7 +24,7 @@
         ORDER BY s.contract_code DESC
         LIMIT #{beginRow}, #{pagePerRow}
     </select>
-    <!-- 전체계약서조회 상세전에서 전체행의 수 -->
+    <!-- 전체매장조회 상세전에서 전체행의 수 -->
     <select id="selectShopCount" resultType="Integer">
         SELECT COUNT(*) FROM shop
     </select>
@@ -44,10 +38,21 @@
 			, #{shopAddress}, #{shopCall}, #{shopPostcode}, #{shopSize}
 		)
 	</insert>
-	<!-- 매장의 shop_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<!-- 매장등록의 shop_code컬럼에서 숫자의 최대값 증가 select -->
 	<select id="selectShopMax" resultType="Integer">
-		select max(CAST(substring(shop_code,1) AS DECIMAL)
-		)  
-		from shop
+		SELECT max(CAST(shop_code AS DECIMAL))  
+		FROM shop
+		WHERE local_category_code = #{localCategoryCode}
 	</select>
+	<!-- 매장등록 contract에서 계약코드 가져오는 select -->
+	<select id="selectShopContractCode" resultMap="resultShop">
+		SELECT DISTINCT contract_code
+		FROM contract
+	</select>
+	<!-- 매장등록 category에서 소분류 가져오는 select -->
+<!-- 	<select id="selectShopCategorySmall" resultMap="resultShop">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE '0%'
+	</select> -->
 </mapper>

@@ -33,7 +33,7 @@
 			, #{contractStartDate}, #{contractEndDate}, #{contractPhoto}
 		)
 	</insert>
-	<!-- 계약서의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<!-- 계약서등록의 contract_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
 	<select id="selectContractMax" resultType="Integer">
 		select max(CAST(substring(contract_code,6) AS DECIMAL)
 		)  

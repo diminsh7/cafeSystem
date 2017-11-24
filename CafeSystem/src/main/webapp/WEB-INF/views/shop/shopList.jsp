@@ -8,8 +8,8 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>매장기초정보관리</h3>
-				<%-- <a class="btn btn-default" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a> --%> 
-				<%-- <a class="btn btn-default" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a> --%>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a> 
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
