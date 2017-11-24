@@ -71,4 +71,10 @@
 			, shop_call = #{shopCall}, shop_postcode = #{shopPostcode}, shop_size = #{shopSize}
 		WHERE contract_code = #{contractCode}
 	</update>
+	<!-- 매장삭제 점포명확인하고 삭제 -->
+    <delete id="deleteShop" parameterType="com.caffeesys.cafesystem.shop.service.ShopVO">
+		DELETE FROM shop 
+		WHERE contract_code = #{contractCode}
+		AND shop_name = #{shopName}
+    </delete>
 </mapper>
