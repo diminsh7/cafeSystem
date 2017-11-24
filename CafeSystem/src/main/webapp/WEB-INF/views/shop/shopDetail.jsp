@@ -25,16 +25,18 @@
 							<thead>
 								<tr>
 									<th>계약코드</th>
+									<th>소유자명</th>
 									<th>점포명</th>
 									<th>점포주소</th>
 									<th>점포연락처</th>
-									<th>우편번호</th>
+									<th>점포우편번호</th>
 									<th>점포규모</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>${shop.contractCode}</td>
+									<td>${shop.contractOwnerName}</td>
 									<td>${shop.shopName}</td>
 									<td>${shop.shopAddress}</td>
 									<td>${shop.shopCall}</td>
@@ -43,7 +45,7 @@
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateShop?shopName=${shop.shopName}">수정</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateShop?contractCode=${shop.contractCode}">수정</a>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteShop?shopName=${shop.shopName}">삭제</a>
 					</div>
 				</div>

@@ -21,7 +21,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">점포명클릭-상세조회</p>
+						<p class="text-muted font-13 m-b-30">계약코드클릭-상세조회</p>
 
 						<%-- <%@ include file="../shop/shopSearchForm.jsp"%> --%>
 
@@ -29,8 +29,9 @@
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
+									<th>계약코드</th>
 									<th>점포명</th>
-									<th>소유자이름</th>
+									<th>소유자명</th>
 									<th>점포주소</th>
 								</tr>
 							</thead>
@@ -38,7 +39,8 @@
 								<c:forEach var="shop" items="${list}">
 									<tr>
 										<td><a
-											href="${pageContext.request.contextPath}/shopDetail?shopName=${shop.shopName}">${shop.shopName}</a></td>
+											href="${pageContext.request.contextPath}/shopDetail?contractCode=${shop.contractCode}">${shop.contractCode}</a></td>
+										<td>${shop.shopName}</td>
 										<td>${shop.contractOwnerName}</td>
 										<td>${shop.shopAddress}</td>
 									</tr>

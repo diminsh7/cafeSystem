@@ -50,8 +50,13 @@ public class ShopDao {
 		return sqlSessionTemplate.selectList(NS + "selectShopCategorySmall");
 	}
 	// 매장수정 및 매장상세조회
-	public ShopVO selectShop(String shopName) {
-		System.out.println("ShopDao.java / selectShop Param shopName: "+shopName);
-		return sqlSessionTemplate.selectOne(NS+"selectShop", shopName);
+	public ShopVO selectShop(String contractCode) {
+		System.out.println("ShopDao.java / selectShop Param contractCode: "+contractCode);
+		return sqlSessionTemplate.selectOne(NS+"selectShop", contractCode);
+	}
+	// 매장수정
+	public int updateShop(ShopVO shop) {
+		System.out.println("ShopDao.java / updateShop Param shop: "+shop);
+		return sqlSessionTemplate.update(NS+"updateShop", shop);
 	}
 }

@@ -18,7 +18,7 @@
 	</resultMap>
 	<!-- 전체매장조회 상세전 -->
 	<select id="selectShopList" parameterType="java.util.Map" resultMap="resultShop">
-        SELECT s.shop_name, c.contract_owner_name, s.shop_address
+        SELECT s.contract_code, s.shop_name, c.contract_owner_name, s.shop_address
 		FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
@@ -56,10 +56,19 @@
 		FROM category
 		WHERE category_code LIKE '0%'
 	</select>
-	<!-- 매장수정 및 매장상세조회 -->
-	<select id="selectShop" parameterType="String" resultMap="resultShop">
-        SELECT contract_code, shop_name, shop_address, shop_call, shop_postcode, shop_size
-        FROM shop 
-        WHERE shop_name = #{shopName}
+    <!-- 매장수정 및 매장상세조회 -->
+    <select id="selectShop" parameterType="String" resultMap="resultShop">
+        SELECT s.contract_code, c.contract_owner_name, s.shop_name, s.shop_address, s.shop_call, s.shop_postcode, s.shop_size
+        FROM shop s
+		INNER JOIN contract c
+		ON s.contract_code = c.contract_code
+        WHERE s.contract_code = #{contractCode}
     </select>
+    <!-- 매장수정 -->
+	<update id="updateShop" parameterType="com.caffeesys.cafesystem.shop.service.ShopVO">
+		UPDATE shop
+		SET shop_name = #{shopName}, shop_address = #{shopAddress}
+			, shop_call = #{shopCall}, shop_postcode = #{shopPostcode}, shop_size = #{shopSize}
+		WHERE contract_code = #{contractCode}
+	</update>
 </mapper>

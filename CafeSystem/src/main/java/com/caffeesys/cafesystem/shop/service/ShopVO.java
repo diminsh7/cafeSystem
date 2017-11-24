@@ -8,7 +8,7 @@ public class ShopVO {
 	private String shopName; // 점포명
 	private String shopAddress; // 점포주소
 	private String shopCall; // 점포연락처
-	private char shopPostcode; // 우편번호
+	private char shopPostcode; // 점포우편번호
 	private int shopSize; // 점포규모
 	private String contractOwnerName; // contract소유자이름
 	private String categoryCode; // category코드

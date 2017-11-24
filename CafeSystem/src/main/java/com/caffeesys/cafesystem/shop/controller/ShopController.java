@@ -55,10 +55,25 @@ public class ShopController {
 	}
 	// 매장상세조회
 	@RequestMapping(value = "/shopDetail", method = RequestMethod.GET)
-	public String detailShop(Model model, @RequestParam(value = "shopName", required = true) String shopName) {
-		System.out.println("ShopController.java / detailShop method GET방식 " + shopName);
-		ShopVO shop = shopDao.selectShop(shopName);
+	public String detailShop(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ShopController.java / detailShop method GET방식 " + contractCode);
+		ShopVO shop = shopDao.selectShop(contractCode);
 		model.addAttribute("shop", shop);
 		return "/shop/shopDetail";
+	}
+	// 계약서수정 페이지요청
+	@RequestMapping(value = "/updateShop", method = RequestMethod.GET)
+	public String updateShop(Model model, @RequestParam(value = "contractCode", required = true) String contractCode) {
+		System.out.println("ShopController.java / updateShop method GET방식 " + contractCode);
+		ShopVO shop = shopDao.selectShop(contractCode);
+		model.addAttribute("shop", shop);
+		return "/shop/shopUpdateForm";
+	}
+	// 계약서수정(액션)요청
+	@RequestMapping(value = "/updateShop", method = RequestMethod.POST)
+	public String updateShop(ShopVO shop) {
+		System.out.println("ShopController.java / updateShop method POST방식 " + shop);
+		shopDao.updateShop(shop);
+		return "redirect:/shopDetail?contractCode=" + shop.getContractCode();
 	}
 }

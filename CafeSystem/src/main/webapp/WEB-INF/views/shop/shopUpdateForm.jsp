@@ -6,9 +6,9 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>가맹계약서관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">계약서(전체리스트)</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertContract">계약서(등록)</a>
+				<h3>매장기초정보관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -16,11 +16,11 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>계약서수정</h2>
+						<h2>매장수정</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form action="./updateContract" method="post"
+						<form action="./updateShop" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -31,19 +31,7 @@
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
 										name="contractCode" required="required" type="text"
-										value="${contract.contractCode}" readonly="readonly">
-								</div>
-							</div>
-							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">소유자명<span class="required">*</span>
-								</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractOwnerName"
-										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerName" required="required" type="text"
-										value="${contract.contractOwnerName}">
+										value="${shop.contractCode}" readonly="readonly">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -51,59 +39,59 @@
 									for="name">점포명<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractShopName"
+									<input id="shopName"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractShopName" required="required" type="text"
-										value="${contract.contractShopName}">
+										name="shopName" required="required" type="text"
+										value="${shop.shopName}">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">소유자연락처<span class="required">*</span>
+									for="name">점포주소<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractOwnerPhone"
+									<input id="shopAddress"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerPhone" required="required" type="text"
-										value="${contract.contractOwnerPhone}">
+										name="shopAddress" required="required" type="text"
+										value="${shop.shopAddress}">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약일<span class="required">*</span>
+									for="name">점포연락처<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractStartDate"
+									<input id="shopCall"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractStartDate" required="required" type="text"
-										value="${contract.contractStartDate}">
+										name="shopCall" required="required" type="text"
+										value="${shop.shopCall}">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약만료일<span class="required">*</span>
+									for="name">점포우편번호<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractEndDate"
+									<input id="shopPostcode"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractEndDate" required="required" type="text"
-										value="${contract.contractEndDate}">
+										name="shopPostcode" required="required" type="text"
+										value="${shop.shopPostcode}">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약서사진<span class="required">*</span>
+									for="name">점포규모<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractPhoto"
+									<input id="shopSize"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="text"
-										value="${contract.contractPhoto}">
+										name="shopSize" required="required" type="text"
+										value="${shop.shopSize}">
 								</div>
 							</div>
 							<div class="ln_solid"></div>
