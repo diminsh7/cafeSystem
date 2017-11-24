@@ -33,7 +33,7 @@
                           <th>생년월일</th>
                           <th>점포명</th>
                         </tr>
-                      </thead><!--branchManagerList  -->
+                      </thead>
                       <tbody>
                         <c:forEach var="BMList" items="${branchManagerList}">
                       	<tr>

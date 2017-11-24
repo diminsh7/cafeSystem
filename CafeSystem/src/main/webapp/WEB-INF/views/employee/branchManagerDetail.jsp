@@ -79,4 +79,4 @@ $(document).click(function button_click(){
 		</div>
 	</div>
 </div>
-<!-- /page content -->
+

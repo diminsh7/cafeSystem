@@ -1,6 +1,8 @@
 package com.caffeesys.cafesystem.employee.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -43,9 +45,44 @@ public class BranchPersonnelDao {
 	}
 	
 	// 직원리스트
-	public List<BranchPersonnelVO> selectBranchPersonnelList(){
+	public List<BranchPersonnelVO> selectBranchPersonnelList(int branchPersonnelCount, int pagePerRow){
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelList] 직원 리스트 출력 실행");
-		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList");
+		 Map<String, Integer> map = new HashMap<String, Integer>();
+	     map.put("beginRow", (branchPersonnelCount-1)*pagePerRow);
+	     map.put("pagePerRow", pagePerRow);
+		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList",map);
+	}
+	
+	// 직원 명수 구하기
+	public int selectBranchPersonnelCount() {
+		System.out.println("[BranchPersonnelDao.selectBranchPersonnelCount] 직원 전체 숫자 구하기");
+		return sqlSessionTemplate.selectOne(NS + "selectBranchPersonnelCount");
+	}
+	
+	//직원상세조회 
+	public List<BranchPersonnelVO> selectBranchPersonnelDetail(String branchEmployeeCode){
+		System.out.println("[BranchPersonnelDao.selectBranchPersonnelDetail] 직원 리스트 출력 실행");
+		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelDetail",branchEmployeeCode);
+	}
+	
+	//직원 수정 폼
+	public List<BranchPersonnelVO> selectUpdateBranchPersonnel(String branchEmployeeCode){
+		System.out.println("[BranchPersonnelDao.selectUpdateBranchPersonnel] 실행");
+		return sqlSessionTemplate.selectList(NS + "selectUpdateBranchPersonnel",branchEmployeeCode);
+	}
+	
+	//직원 수정 처리
+	//지점인사테이블에서 수정(1) DB-branch_employee
+	public List<BranchPersonnelVO> updateBranchEmployee(BranchPersonnelVO branchPersonnelVo) {
+		System.out.println("[BranchManagerDao.updateBranchEmployee] 실행");
+		return  sqlSessionTemplate.selectList(NS + "updateBranchEmployee",branchPersonnelVo);
+		
+	}
+	//지점인사테이블에서 수정(2) DB-branch_personnel
+	public List<BranchPersonnelVO> updateBranchPersonnel(BranchPersonnelVO branchPersonnelVo) {
+		System.out.println("[BranchManagerDao.updateBranchPersonnel] 실행");
+		return  sqlSessionTemplate.selectList(NS + "updateBranchPersonnel",branchPersonnelVo);
+		
 	}
 
 }
