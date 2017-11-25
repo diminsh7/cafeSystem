@@ -1,5 +1,7 @@
 package com.caffeesys.cafesystem.shop.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,19 @@ public class ShopService {
 		shop.setShopCode(result_shopCode);
 		System.out.println("ShopService.java/ shop:"+shop);
 		return shopDao.insertShop(shop);
+	}
+	// 매장검색조회 상세전
+	public List<ShopVO> searchShop(String searchOption, String keyword) {
+		System.out.println("ShopService.java/ searchShop method 확인");
+		System.out.println("ShopService.java / searchShop Param searchOption :" + searchOption);
+		System.out.println("ShopService.java / searchShop Param keyword :" + keyword);
+		return shopDao.searchShop(searchOption, keyword);
+	}
+	// 매장연락망검색조회
+	public List<ShopVO> searchBranchCall(String searchOption, String keyword) {
+		System.out.println("ShopService.java/ searchBranchCall method 확인");
+		System.out.println("ShopService.java / searchBranchCall Param searchOption :" + searchOption);
+		System.out.println("ShopService.java / searchBranchCall Param keyword :" + keyword);
+		return shopDao.searchBranchCall(searchOption, keyword);
 	}
 }

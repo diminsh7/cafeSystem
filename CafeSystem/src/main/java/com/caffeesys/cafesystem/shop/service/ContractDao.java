@@ -60,6 +60,8 @@ public class ContractDao {
 	}
 	// 계약서검색조회 상세전
 	public List<ContractVo> searchContract(String searchOption, String keyword) {
+		System.out.println("ShopDao.java / searchContract Param searchOption: "+searchOption);
+		System.out.println("ShopDao.java / searchContract Param keyword: "+keyword);
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
 		map.put("keyword", keyword);

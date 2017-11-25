@@ -68,4 +68,35 @@ public class ShopDao {
 		shop.setShopName(shopName);
 		return sqlSessionTemplate.delete(NS+"deleteShop", shop);
 	}
+	// 매장검색조회 상세전
+	public List<ShopVO> searchShop(String searchOption, String keyword) {
+		System.out.println("ShopDao.java / searchShop Param searchOption: "+searchOption);
+		System.out.println("ShopDao.java / searchShop Param keyword: "+keyword);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSessionTemplate.selectList(NS+"searchShop", map);
+	}
+	// 매장연락망조회
+	public List<ShopVO> selectBranchCallList(int currentPage, int pagePerRow) {
+		System.out.println("ShopDao.java / selectBranchCallList method 확인");
+	     Map<String, Integer> map = new HashMap<String, Integer>();
+	     map.put("beginRow", (currentPage-1)*pagePerRow);
+	     map.put("pagePerRow", pagePerRow);
+	     return sqlSessionTemplate.selectList(NS+"selectBranchCallList", map);
+	}
+	// 매장연락망조회에서 전체행의 수
+	public int selectBranchCallCount() {
+		System.out.println("ShopDao.java / selectBranchCallCount method 확인");
+		return sqlSessionTemplate.selectOne(NS+"selectBranchCallCount");
+	}
+	// 매장연락망검색조회
+	public List<ShopVO> searchBranchCall(String searchOption, String keyword) {
+		System.out.println("ShopDao.java / searchBranchCall Param searchOption: "+searchOption);
+		System.out.println("ShopDao.java / searchBranchCall Param keyword: "+keyword);
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("searchOption", searchOption);
+		map.put("keyword", keyword);
+		return sqlSessionTemplate.selectList(NS+"searchBranchCall", map);
+	}
 }

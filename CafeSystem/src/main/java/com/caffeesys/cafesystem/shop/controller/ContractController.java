@@ -94,8 +94,8 @@ public class ContractController {
 	@RequestMapping(value = "/contractSearch", method = RequestMethod.POST)
 	public ModelAndView searchContract(@RequestParam(defaultValue="") String searchOption, 
 										@RequestParam(defaultValue="") String keyword) {
-		System.out.println("ContractController.java / deleteContract method POST방식 " + searchOption);
-		System.out.println("ContractController.java / deleteContract method POST방식 " + keyword);
+		System.out.println("ContractController.java / searchContract method POST방식 " + searchOption);
+		System.out.println("ContractController.java / searchContract method POST방식 " + keyword);
 		List<ContractVo> list = contractService.searchContract(searchOption, keyword);
 		ModelAndView mav = new ModelAndView();
 		Map<String, Object> map = new HashMap<String, Object>();
