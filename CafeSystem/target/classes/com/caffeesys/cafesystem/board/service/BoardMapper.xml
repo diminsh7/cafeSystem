@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="board_content" property="boardContent"/>	<!-- 내용 -->
 		<result column="board_date" property="boardDate"/>	<!-- 날짜 -->
 		<result column="board_file" property="boardFile"/>	<!-- 첨부파일 -->
+		<result column="category_small" property="categorySmall"  /> <!-- 카테고리 이름 저장용 -->
 	</resultMap>
 	
 	<!-- CategoryVo resultMap -->
@@ -21,22 +22,58 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="category_small" property="categorySmall"  /> <!-- 소분류 -->
 	</resultMap>
 	
+		<!--board 삭제   -->
+		<delete id="deleteBoard" parameterType="Integer">
+			DELETE
+			FROM board
+			WHERE board_code = #{boardCode};
+		</delete>
+		<!-- board 수정 update -->
+		<update id="updateBoard" parameterType="com.caffeesys.cafesystem.board.service.BoardVO">
+			UPDATE board
+			SET category_code = #{categoryCode}
+				,	board_title = #{boardTitle}
+				, board_content = #{boardContent}
+				, board_file = #{boardFile}
+			WHERE board_code = #{boardCode}
+		</update>
+		
+		
+		<!-- board 디테일 select -->
+		<select id="selectBoardDetail" parameterType="Integer" resultMap="resultBoard">
+			SELECT 
+				board_code
+				,board.category_code
+				,category.category_small
+				,employee_code
+				,board_title
+				,board_content
+				,board_date
+				,board_file				
+			FROM board
+				INNER JOIN category
+				ON board.category_code = category.category_code
+			WHERE board_code = #{boardCode} ;
+		</select>
+		
 		<!-- 페이징 작업을 위한 board 레코드 개수 -->
-		<select id="getBoardCount" resultType="int">
+		<select id="getBoardCount" resultType="Integer">
 			select count(*) from board 
 		</select>
 		
 		<!-- board리스트 select -->
 		<select id="selectBoardList"  parameterType="java.util.Map" resultMap="resultBoard">
-			SELECT 
-			 	board_code
-				 ,category_code
-				 ,employee_code
-				 ,board_title
-				 ,board_content
-				 ,board_date
-				 ,board_file 		 	
-			FROM board  
+			SELECT board_code
+				,board.category_code
+				,employee_code
+				,board_title
+				,board_content
+				,board_date
+				,board_file	
+				,category.category_small			
+			FROM board
+				INNER JOIN category
+				ON board.category_code = category.category_code
 			ORDER BY board_code ASC 
 			LIMIT #{beginRow}, #{pagePerRow};
 		</select>

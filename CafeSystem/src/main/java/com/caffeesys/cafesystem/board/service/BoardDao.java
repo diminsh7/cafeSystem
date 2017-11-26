@@ -14,14 +14,14 @@ import com.caffeesys.cafesystem.Category;
 
 
 @Repository
-public class BoardDao implements BoardDaoInter {
+public class BoardDao implements  BoardDaoInter {
 	private static final Logger logger = LoggerFactory.getLogger(BoardDao.class);
 
 	private final String NS ="com.caffeesys.cafesystem.board.service.BoardMapper.";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
+
 	//검색한  board 리스트
 	@Override
 	public List<BoardVO> searchBoardList(String searchOption, String keyword) throws Exception {
@@ -53,14 +53,16 @@ public class BoardDao implements BoardDaoInter {
 	//board의 삭제
 	@Override
 	public int deleteBoard(int boardCode) throws Exception {
+		logger.debug("deleteBoard 메소드의 boardCode :{}",boardCode);
 		
-		return 0;
+		return sqlSessionTemplate.delete(NS+"deleteBoard",boardCode);
 	}
 	//board 수정한 값 update
 	@Override
 	public int updateBoard(BoardVO board) throws Exception {
+		logger.debug("updateBoard 메소드의 board :{}",board);
 		
-		return 0;
+		return sqlSessionTemplate.update(NS+"updateBoard",board);
 	}
 	//board 수정하기위해 select
 	@Override
@@ -75,16 +77,16 @@ public class BoardDao implements BoardDaoInter {
 		logger.debug("insertBoard 메소드의 board :{}",board);
 		return sqlSessionTemplate.insert(NS+"insertBoard",board);
 	}
-	//board 디테일
+	//board 디테일 select
 	@Override
 	public BoardVO selectBoardDetail(int boardCode) throws Exception {
+		logger.debug("selectBoardDetail 메소드의 boardCode :{}",boardCode);
 		
-		return null;
+		return sqlSessionTemplate.selectOne(NS +"selectBoardDetail", boardCode);
 	}
 	@Override
 	public List<Category> selectBoardCategory() throws Exception {
 		logger.debug("selectBoardCategory 메소드 확인");
 		return sqlSessionTemplate.selectList(NS+"selectBoardCategory");
 	}
-
 }

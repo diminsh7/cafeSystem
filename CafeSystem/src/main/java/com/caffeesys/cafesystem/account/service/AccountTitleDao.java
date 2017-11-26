@@ -19,7 +19,7 @@ public class AccountTitleDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	//계정과목 검색 후 리스트
+	/*//계정과목 검색 후 리스트
 	public List<AccountTitleVO> listAll(String searchOption, String keyword){
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("searchOption", searchOption);
@@ -89,5 +89,5 @@ public class AccountTitleDao {
 		logger.debug("selectAccountMax 메도스 확인");
 		
 		return sqlSessionTemplate.selectOne(NS + "selectAccountMax");
-	}
+	}*/
 }

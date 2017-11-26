@@ -32,11 +32,14 @@
 						<h2>
 							Board LIST <small>Board</small>
 						</h2>
+						<div class="col-md-0 col-sm-0 col-xs-0 form-group pull-right top_search">
+							<a class="btn btn-primary" href="${pageContext.request.contextPath}/boardInsert	">게시글 등록</a>
+						</div>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">
-							카테고리, 직원코드는 나중에 join
+							카테고리 나중에 join
 						</p>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -52,7 +55,7 @@
 								<c:forEach var="boardList" items="${boardList}">
 									<tr>
 										<td>${boardList.boardCode}</td>
-										<td>${boardList.categoryCode}</td>
+										<td>${boardList.categorySmall}</td> 
 										<td>${boardList.employeeCode}</td>
 										<td><a href="${pageContext.request.contextPath}/boardDetail?boardCode=${boardList.boardCode}">${boardList.boardTitle}</a></td>
 										<td>${boardList.boardDate}</td>					
@@ -90,9 +93,6 @@
 								</c:if>
 							</ul>
 						</div>--%>
-					</div>
-					<div>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/boardInsert">등록</a>
 					</div>
 				</div>
 			</div>

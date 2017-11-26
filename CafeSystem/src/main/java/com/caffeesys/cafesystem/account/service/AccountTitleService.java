@@ -15,7 +15,11 @@ public class AccountTitleService {
 	
 	@Autowired
 	private AccountTitleDao accountTitleDao;
-	//검색한 계정과목 전체 목록 
+	
+	public void accountTitleInsert(Model model) {
+		
+	}
+	/*//검색한 계정과목 전체 목록 
 	public List<AccountTitleVO> listAll(String searchOption, String keyword){
 		logger.debug("listAll메소드의 searchOption :{}",searchOption);	//all, account_title_code, account_title_name, account_title_content
 		logger.debug("listAll메소드의 keyword :{}",keyword);	//검색어
@@ -87,5 +91,5 @@ public class AccountTitleService {
 		accountTitle.setAccountTitleCode(accountcode);			
 		logger.debug("insertAccountTitle 메소드 accountTitle 확인 :{}"+accountTitle);
 		count = accountTitleDao.insertAccountTitle(accountTitle);
-	}
+	}*/
 }

@@ -49,14 +49,15 @@ public class BoardService implements BoardServiceInter {
 	//board의 삭제
 	@Override
 	public void deleteBoard(int boardCode) throws Exception {
-		
+		logger.debug("deleteBoard 메소드의 boardCode: {}",boardCode);
+		boardDao.deleteBoard(boardCode);
 
 	}
 	//board 수정한 값 update
 	@Override
 	public void updateBoard(BoardVO board) throws Exception {
-		
-
+		logger.debug("updateBoard 메소드의 board: {}",board);
+		boardDao.updateBoard(board);
 	}
 	//board 수정하기위해 select
 	@Override
@@ -64,7 +65,7 @@ public class BoardService implements BoardServiceInter {
 		
 		return null;
 	}
-	//board 등록
+	//board Insert
 	@Override
 	public void insertBoard(BoardVO board) throws Exception {
 		logger.debug("insertBoard 메소드의 board :{}",board);
@@ -77,8 +78,10 @@ public class BoardService implements BoardServiceInter {
 	//board 디테일
 	@Override
 	public BoardVO selectBoardDetail(int boardCode) throws Exception {
-		
-		return null;
+		logger.debug("selectBoardDetail 메소드의 boardCode :{}",boardCode);
+		BoardVO board = boardDao.selectBoardDetail(boardCode);
+		logger.debug("selectBoardDetail 메소드의  리턴값 board :{}",board);
+		return board;
 	}
 	@Override
 	public List<Category> selectBoardCategory() throws Exception {

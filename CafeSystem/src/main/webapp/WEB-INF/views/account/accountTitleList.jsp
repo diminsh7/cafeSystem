@@ -60,9 +60,6 @@
 									href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
 						</ul>
-						<div>
-							
-						</div>
 					</div>
 				</div>
 			</div>
