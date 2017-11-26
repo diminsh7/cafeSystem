@@ -84,8 +84,7 @@
 									<input id="contractPhoto"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="text">
-									<!-- file인데 일단 text로 테스트작업 -->
+										name="contractPhoto" required="required" type="file">
 								</div>
 							</div>
 							<div class="ln_solid"></div>

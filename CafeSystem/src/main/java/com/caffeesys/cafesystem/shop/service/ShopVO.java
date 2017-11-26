@@ -2,9 +2,9 @@ package com.caffeesys.cafesystem.shop.service;
 
 public class ShopVO {
 
-	private String localCategoryCode; // 지역코드
-	private String shopCode; // 매장코드
-	private String contractCode; // 계약코드
+	private String localCategoryCode; // 지역코드(PK)
+	private String shopCode; // 매장코드(PK)
+	private String contractCode; // 계약코드(FK)
 	private String shopName; // 점포명
 	private String shopAddress; // 점포주소
 	private String shopCall; // 점포연락처

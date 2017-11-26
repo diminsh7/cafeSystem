@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuVO" id="resultMenu">
+		<result property="menuCode" column="menu_code" /> <!-- 메뉴코드(PK) -->
+		<result property="menuCategoryCode" column="menu_category_code" /> <!-- 메뉴카테고리 -->
+		<result property="menuName" column="menu_name" /> <!-- 메뉴명 -->
+		<result property="menuStart" column="menu_start" /> <!-- 출시일 -->
+		<result property="menuImage" column="menu_image" /> <!-- 메뉴 이미지 -->
+		<result property="menuRecipe" column="menu_recipe" /> <!-- 레시피 이미지 -->
+		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
+		<result property="categorySmall" column="category_small" /> <!-- category소분류M101~M109 -->
+	</resultMap>
+	
+</mapper>
+ 
