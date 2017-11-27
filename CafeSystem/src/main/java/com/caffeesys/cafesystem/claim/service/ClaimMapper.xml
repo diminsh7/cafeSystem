@@ -78,6 +78,23 @@
 			ON claim.claim_category_code = category.category_code
 		WHERE claim_code = #{claimCode}
 	</select>
+	
+	<!-- 클레임 검색 처리 -->
+	<select id="claimSearch" parameterType="java.util.Map" resultMap="resultClaim">
+		SELECT
+			claim.claim_code
+			, category.category_small
+			, claim.employee_code
+			, claim.claim_title
+			, claim.claim_date
+		FROM
+			claim
+			INNER JOIN category
+			ON 
+			claim.claim_category_code = category.category_code
+		WHERE
+			#{claimSearchOption} like CONCAT('%',#{claimSearchWord},'%')
+	</select>
 
 	<!-- 클레임 리스트 셀렉트 -->
 	<select id="getClaimList" parameterType="java.util.Map" resultMap="resultClaim">
