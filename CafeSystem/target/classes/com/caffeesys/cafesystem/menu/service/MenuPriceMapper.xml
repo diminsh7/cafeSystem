@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuPriceMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuPriceVO" id="resultMenuPrice">
+		<result property="menuPriceCode" column="menu_price_code" />
+		<result property="menuCode" column="menu_code" />
+		<result property="tempCategory" column="temp_category" />
+		<result property="sizeCategory" column="size_category" />
+		<result property="menuTotalCost" column="menu_totalcost" />
+		<result property="menuSellCost" column="menu_sellcost" />
+	</resultMap>
+</mapper>
