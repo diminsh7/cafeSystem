@@ -20,10 +20,10 @@
 				<div class="title_right">
 					<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 						<select class="" id="claimSearchOption" name="claimSearchOption">
-								<option value="claimCategoryCode" <c:out value="${map.claimSearchOption == 'claimCategoryCode'?'selected':''}"/>>카테고리</option>
-								<option value="claimTitle" <c:out value="${map.claimSearchOption == 'claimTitle'?'selected':''}"/>>제목</option>
-								<option value="claimContents" <c:out value="${map.claimSearchOption == 'claimContents'?'selected':''}"/>>내용</option>
-								<option value="claimDate" <c:out value="${map.claimSearchOption == 'claimDate'?'selected':''}"/>>날짜</option>
+								<option value="claimCategoryCode">>카테고리</option>
+								<option value="claimTitle">제목</option>
+								<option value="claimContents">내용</option>
+								<option value="claimDate">날짜</option>
 						</select>	
 						<div class="input-group">
 							<input type="text" class="form-control" name="claimSearchWord">

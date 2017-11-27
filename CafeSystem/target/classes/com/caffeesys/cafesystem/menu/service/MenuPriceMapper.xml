@@ -12,14 +12,19 @@
 		<result property="menuSellCost" column="menu_sellcost" /><!--메뉴 판매가  -->
 		<result property="menuName" column="menu_name" /><!-- 메뉴 이름 -->
 		<result property="tempCateName" column="tempCateName" /><!-- 냉온 카테고리 이름 -->
-		<result property="sizeCateName" column="size" /><!-- 사이즈 카테고리 이름 -->
+		<result property="sizeCateName" column="sizeCateName" /><!-- 사이즈 카테고리 이름 -->
 		
 	</resultMap>
 	
 	<select id="menuPriceCount" parameterType="java.util.Map" resultType="int">
 		SELECT COUNT(*) FROM menu_price
-		<if test="cate != null">
-			WHERE ${cate} = #{input}		
+		<if test="cate = menu_code">
+			WHERE ${cate} = #{input}	
+		</if>
+		<if test="cate = menu_name">
+			INNER JOIN menu
+				ON menu_price.menu_code = menu.menu_code
+			WHERE menu.${cate} = #{input}
 		</if>
 	</select>
 	
@@ -28,9 +33,7 @@
 			menu_price_code
 			, mp.menu_code
 			, m.menu_name
-			, temp_category
 			, tempCate.category_small AS tempCateName
-			, size_category
 			, sizeCate.category_small AS sizeCateName
 			, menu_totalcost
 			, menu_sellcost
@@ -38,12 +41,13 @@
 			menu_price AS mp
 			INNER JOIN menu AS m
 				ON mp.menu_code = m.menu_code
-			INNER JOIN category AS tempCate
-				ON mp.temp_category = tempCate.category_code
 			INNER JOIN category AS sizeCate
 				ON mp.size_category = sizeCate.category_code
+			INNER JOIN category AS tempCate
+				ON mp.temp_category = tempCate.category_code
+			
 		<if test="input != null">
-			WHERE mp.${cate} = #{input}
+			WHERE m.${cate} = #{input}
 		</if>
 			ORDER BY mp.menu_code DESC
 		<if test="start != null">

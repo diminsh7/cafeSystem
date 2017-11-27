@@ -15,6 +15,16 @@
 	    <c:if test="${currentPage > 1}">
 	        <li class="previous"><a class="paging btn-default btn-sm" href="?currentPage=${currentPage-1}">이전</a></li>
 	    </c:if>
+    	<c:forEach var="page" begin="${startPage}" end="${endPage}" step="1">
+			<c:choose>
+				<c:when test="${page == currentPage}">
+					<li class="active"><a>${page}</a></li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="?currentPage=${page}">${page}</a></li>
+				</c:otherwise>	
+			</c:choose>	
+		</c:forEach>
 	    <c:if test="${currentPage < lastPage}">
 	        <li class="next"><a class="paging btn-default btn-sm" href="?currentPage=${currentPage+1}">다음</a></li>
 	    </c:if>

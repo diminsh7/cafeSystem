@@ -1,46 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<script>
-	$(document).ready(function(){
-		$('#menuPriceSearchBtn').click(function(){
-			$('#menuPriceSearchForm').submit();
-		})
-	})
-</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>
-					CLAIM <small>고객 클레임</small> 
-				</h3>
+				<h3>MenuPrice List<small>MenuPrice List</small></h3>
 			</div>
-			<c:choose>			
+			<%-- <c:choose>			
 				<c:when test="${cate != null}">
 						<input type="hidden" id="cate" value="${cate}">
 						<input type="hidden" id="input" value="${input}">
 				</c:when>
-				<c:otherwise>
-				<form id="menuPriceSearchForm "action="${pageContext.request.contextPath}/menuPriceList" method="post">
-					<div class="title_right">
-						<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-							<select name="cate" id="cate" required class="input-sm">
-								<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>							
-								<option value="menu_name" class="input-sm">메뉴명</option>
-								<option value="menu_code" class="input-sm">메뉴코드</option>
-							</select>
-							<div class="input-group">
-								<input type="text" name="input" id="input" value="${input}">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button" id="menuPriceSearchBtn">Go!</button>
-								</span>
+				<c:otherwise> --%>
+					<form id="menuPriceSearchForm "action="${pageContext.request.contextPath}/menuPriceList" method="post">
+						<div class="title_right">
+							<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+								<select name="cate" id="cate" required class="input-sm">
+									<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>							
+									<option value="menu_name" class="input-sm">메뉴명</option>
+									<option value="menu_code" class="input-sm">메뉴코드</option>
+								</select>
+								<div class="input-group">
+									<input type="text" name="input" id="input" value="${input}" required class="input-sm">
+									<span class="input-group-btn">
+										<input type="submit" class="btn btn-default" id="menuPriceSearchBtn" value="검색">
+									</span>
+								</div>
 							</div>
 						</div>
-					</div>
-				</form>
-				</c:otherwise>
-			</c:choose>
+					</form>
+				<%-- </c:otherwise>
+			</c:choose> --%>
 		</div>
 
 		<div class="clearfix"></div>

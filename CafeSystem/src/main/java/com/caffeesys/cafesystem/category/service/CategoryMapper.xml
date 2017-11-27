@@ -21,7 +21,8 @@
 			category	
 		<choose>
 			<when test="input2 != null">
-				WHERE category_middle = #{input} OR category_middle = #{input2}
+				WHERE 
+					category_middle = #{input} OR category_middle = #{input2}
 			</when>
 			<otherwise>
 				WHERE

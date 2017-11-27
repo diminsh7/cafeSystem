@@ -45,6 +45,7 @@ public class MenuPriceService {
 		} else {
 			map = null;
 		}
+		
 		map = commonService.paging(model, currentPage, 2, menuPriceDao.menuPriceCount(map), map);
 		System.out.println("[MenuPriceService.java / menuPriceList.method] Paging 완료");
 		List<MenuPriceVO> list = menuPriceDao.menuPriceList(map);
