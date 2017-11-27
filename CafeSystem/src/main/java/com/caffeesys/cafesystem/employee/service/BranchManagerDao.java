@@ -19,7 +19,12 @@ public class BranchManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-
+	//입력폼에서 필요한 지역
+		public List<BranchManagerVO> selectBranchPersonnelLocal() {
+			logger.debug("[selectBranchPersonnelShopcode] 지점 지역 구하기 실행");
+			return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeLocal");
+	}
+	
 	// 점주 등록 (지점인사/지점점주 두개의 테이블에 들어감)
 	//지점 인사관리 테이블
 	public int insertBranchEmployee(BranchManagerVO branchManagerVo) {

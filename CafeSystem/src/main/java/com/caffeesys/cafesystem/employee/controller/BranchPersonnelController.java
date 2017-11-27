@@ -26,7 +26,9 @@ public class BranchPersonnelController {
 	public String insertBranchManager(Model model) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점직원 입력 폼 페이지 실행 컨트롤러");
 		List<BranchPersonnelVO> ShopCodeList = branchPersonnelDao.selectBranchPersonnelShopcode();
+		List<BranchPersonnelVO> localList = branchPersonnelDao.selectBranchPersonnelLocal();
 		model.addAttribute("branchShopCode",ShopCodeList);
+		model.addAttribute("localList",localList);
 		return "/employee/branchPersonnelInsertForm";
 	}  
 	
@@ -40,7 +42,8 @@ public class BranchPersonnelController {
 	}  
 	
 	//직원 리스트 페이지 요청 컨트롤러
-	@RequestMapping(value = {"/branchPersonnelList"}, method = RequestMethod.GET)
+	//검색 하다가마 말았어요! 
+	@RequestMapping(value = {"/branchPersonnelList"})
 	public String selectBranchManager(Model model, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점 직원,매니져 리스트 페이지 요청 컨트롤러");
 		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount(); // 직원 총 수
@@ -52,6 +55,16 @@ public class BranchPersonnelController {
 		model.addAttribute("lastPage", lastPage);//마지막페이지
 		model.addAttribute("branchPersonnelList",branchPersonnelList);
 		return "employee/branchPersonnelList";
+		
+		/*,@RequestParam(value="searchOption", required=false, defaultValue="all")String searchOption
+		,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
+		,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) throws Exception {
+	System.out.println("[employee.controller.selectBranchManager.java] : 직원 리스트페이지 요청 컨트롤러\"");
+	System.out.println("model : " + model);
+	System.out.println("searchOption : " + searchOption);
+	System.out.println("keyword : " + keyword);
+	System.out.println("currentPage : " + currentPage);
+	branchPersonnelService.selectBranchPersonSearch(model, searchOption, keyword, currentPage);*/
 	}
 	
 	//선택 직원 상세페이지 요청 컨트롤러 
@@ -78,8 +91,19 @@ public class BranchPersonnelController {
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 수정 실행 컨트롤러");
 		branchPersonnelDao.updateBranchEmployee(branchPersonnelVo);
 		branchPersonnelDao.updateBranchPersonnel(branchPersonnelVo);
-		System.out.println("[employee.controller.BranchPersonnelController.java] : 성공");
 		return "redirect:/branchPersonnelList";
 	}
+	
+	//삭제 실행 컨트롤러 deleteBranchPersonnel
+	@RequestMapping(value = {"/deleteBranchPersonnel"}, method = RequestMethod.GET)
+	public String deleteBranchPersonnel(@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) { 
+		System.out.println("[employee.controller.BranchPersonnelController.java] : 삭제 실행 컨트롤러");
+		branchPersonnelDao.deleteBranchEmployee(branchEmployeeCode);
+		branchPersonnelDao.deleteBranchPersonnel(branchEmployeeCode);
+		
+		return "redirect:/branchPersonnelList";
+	}
+	
+	//조회 실행 컨트
 	
 }

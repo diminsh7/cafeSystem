@@ -1,13 +1,23 @@
 package com.caffeesys.cafesystem.employee.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.employee.controller.BranchPasingService;
 
 @Service
 public class BranchPersonnelService {
 
 	@Autowired
 	private BranchPersonnelDao branchPersonnelDao;
+	
+	@Autowired
+	private BranchPasingService pasingServiec;
 	
 	//테이블 두개에 들어가서 입력되야하기 때문에 서비스를 나눔, 1->employee테이블에 등록 2->manager테이블에 등록
 	//점주 등록과정 1->employee테이블
@@ -52,4 +62,23 @@ public class BranchPersonnelService {
 		return branchPersonnelDao.insertBranchPersonnel(branchPersonnelVo); 
 	}
 	
+	//검색한 내용 목록
+	public void selectBranchPersonSearch(Model model, String searchOption, String keyword, int currentPage) {
+		System.out.println("========[BranchManagerService.selectBranchPersonSearch 코드 구하기 시작]==========");
+		System.out.println(" BranchManagerService searchOption : " + searchOption ); //셀렉트박스
+		System.out.println(" BranchManagerService keyword : " + keyword ); //입력 내용
+		
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		System.out.println("BranchManagerService map : " + map);
+		map = pasingServiec.paging(model, currentPage, 10, branchPersonnelDao.selectBranchPessonnelrow(map), map);
+		model.addAttribute("accountTitleList",branchPersonnelDao.selectBranchPersonnelSearch(map));
+		
+	}
 }

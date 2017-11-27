@@ -1,32 +1,43 @@
 package com.caffeesys.cafesystem.account.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.caffeesys.cafesystem.account.controller.PasingService;
 
 @Service
 public class AccountTitleService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleService.class);
+	
 	@Autowired
 	private AccountTitleDao accountTitleDao;
+	
+	@Autowired
+	PasingService pasingService;
+	
 	//검색한 계정과목 전체 목록 
-	public List<AccountTitleVO> listAll(String searchOption, String keyword){
+	public void listAll(Model model, String searchOption, String keyword, int currentPage){
 		logger.debug("listAll메소드의 searchOption :{}",searchOption);	//all, account_title_code, account_title_name, account_title_content
 		logger.debug("listAll메소드의 keyword :{}",keyword);	//검색어
-		return accountTitleDao.listAll(searchOption,keyword);
-	}
-	
-	//검섹힌 계정과목 레코드 개수 
-	public int countArticle(String searchOption, String keyword) {
-		logger.debug("countArticle메소드의 리턴값 :{}",accountTitleDao.countArticle(searchOption,keyword));
-		return accountTitleDao.countArticle(searchOption,keyword);
-	}
-	
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		logger.debug("listAll 메소드의  map :{}",map);
+		map = pasingService.paging(model, currentPage, 10, accountTitleDao.accountTitleCount(map), map);
+		model.addAttribute("accountTitleList",accountTitleDao.listAll(map));
+	}	
 	//accountTitleList의 행의 개수
 	public int getAccountTitleCount() {
 		int accountTitleCount = 0;

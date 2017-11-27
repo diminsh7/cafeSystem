@@ -10,6 +10,8 @@ public interface ClaimDaoInter {
 	
 	public ClaimVO selectOneForDetail(int claimCode) throws Exception;
 	
+	public List<ClaimVO> claimSearch(String claimSearchOption, String claimSearchWord) throws Exception;
+	
 	public List<Category> selectCategoryForClaim() throws Exception;
 	
 	public int updateClaim(ClaimVO claim) throws Exception;

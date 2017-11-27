@@ -2,11 +2,26 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
-	$(document).ready(function(){
-		$('#accountTitleUpdateButton').click(function(){
+function accountTitleBtn(btn){
+	if(btn == 'list'){
+		//console.log("rollback accountTitle List");
+		result = confirm('수정을 취소하시겠습니까?');
+		if(result){
+			$(location).attr('href', '${pageContext.request.contextPath}/accountTitleList');
+		} else {
+			
+		}
+	} 
+	if(btn == 'update'){
+		//console.log("accountTitle Update");
+		result = confirm('수정하시겠습니까?');
+		if(result){
 			$('#accountTitleUpdateForm').submit();
-		})
-	})
+		} else {
+			
+		}
+	}
+}
 </script>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -54,7 +69,7 @@
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form id="accountTitleUpdateForm" action="${pageContext.request.contextPath}/accountTitleUpdateForm" method="post" class="form-horizontal form-label-left" novalidate>
+						<form id="accountTitleUpdateForm" action="${pageContext.request.contextPath}/accountTitleUpdate" method="post" class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">계정과목코드<span class="required">*</span>
 								</label>
@@ -80,7 +95,8 @@
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
 									<!-- <button type="button" class="btn btn-primary">Cancel</button> -->
-									<button id="accountTitleUpdateButton" type="submit" class="btn btn-success">계정과목 수정</button>
+									<input type="button" class="btn btn-primary" value="목록" onclick="accountTitleBtn('list')" name="list">
+									<input type="button" class="btn btn-success" value="수정" onclick="accountTitleBtn('update')" name="update">
 								</div>
 							</div>
 						</form>
