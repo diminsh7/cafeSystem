@@ -128,7 +128,7 @@
 	ON branch_employee.branch_employee_code = branch_personnel.branch_employee_code
 	INNER JOIN category
 	ON branch_employee.position_category_code = category.category_code
-	WHERE branch_employee.branch_employee_code = #{branchEmployeeCode}
+	WHERE branch_employee.branch_employee_code = #{branchEmployeeCode};
 	</select>
 	
 	<!-- 지점 직원 총 count -->
