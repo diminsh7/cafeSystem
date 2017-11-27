@@ -23,8 +23,22 @@
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
 						전 매장 직원 리스트[직원 코드 클릭 시 상세자료 확인 가능]
+						<form name="search" method="post" action="${pageContext.request.contextPath}/branchPersonnelList">
+						<select name="searchOption">
+							<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+							<option value="all"
+								<c:out value="${searchOption == 'all'?'selected':''}"/>>관련검색어</option>
+							<option value="account_title_name"
+								<c:out value="${searchOption == 'branch_employee_code'?'selected':''}"/>>직원코드</option>
+							<option value="account_title_content"
+								<c:out value="${searchOption == 'branch_employee_name'?'selected':''}"/>>이름</option>
+							<option value="account_title_content"
+								<c:out value="${searchOption == 'position_category_code'?'selected':''}"/>>직급</option>
+						</select> 
+						<input name="keyword" value="${keyword}"> <input type="submit" value="조회">
+					</form>
+											
 						<div align="right">총 직원 : ${branchPersonnelCount} 명</div>
-
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>

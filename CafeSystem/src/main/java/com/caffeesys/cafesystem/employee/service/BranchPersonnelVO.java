@@ -18,7 +18,7 @@ public class BranchPersonnelVO {
 	private String branchPersonnelBanknum; //월급계좌번호
 	private String branchPersonnelContract; //근로계약서
 	private String shopName; //점포명
-	private String categorySmall; //직급명
+	private String categorySmall; //카테고리내용
 	private String categoryCode; //카테고리코드
 	@Override
 	public String toString() {
