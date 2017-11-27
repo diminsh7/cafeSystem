@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.menu.service;
 
-public class MenuVO {
+public class MenuInfoVO {
 	private String menuCode; // 메뉴코드(PK)
 	private String menuCategoryCode; // 메뉴카테고리
 	private String menuName; // 메뉴명
@@ -64,7 +64,7 @@ public class MenuVO {
 				+ ", menuStart=" + menuStart + ", menuImage=" + menuImage + ", menuRecipe=" + menuRecipe
 				+ ", categoryCode=" + categoryCode + ", categorySmall=" + categorySmall + "]";
 	}
-	public MenuVO(String menuCode, String menuCategoryCode, String menuName, String menuStart, String menuImage,
+	public MenuInfoVO(String menuCode, String menuCategoryCode, String menuName, String menuStart, String menuImage,
 			String menuRecipe, String categoryCode, String categorySmall) {
 		super();
 		this.menuCode = menuCode;
@@ -76,7 +76,7 @@ public class MenuVO {
 		this.categoryCode = categoryCode;
 		this.categorySmall = categorySmall;
 	}
-	public MenuVO() {
+	public MenuInfoVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

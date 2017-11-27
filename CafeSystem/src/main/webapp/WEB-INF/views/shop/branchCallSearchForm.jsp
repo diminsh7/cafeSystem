@@ -5,7 +5,6 @@
 <!-- page content -->
 <form action="./branchCallSearch" method="post" name="form1">
 	<select name="searchOption">
-		<option value="all" <c:out value="${searchOption == 'all'?'selected':''}"/> >점포명+점포주소</option>
 		<option value="shop_name"
 			<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
 		<option value="contract_owner_name"
@@ -31,8 +30,8 @@
 			<tr>
 				<td>${shop.contractOwnerName}</td>
 				<td>${shop.shopName}</td>
-				<td>${contract.shopAddress}</td>
-				<td>${contract.shopCall}</td>
+				<td>${shop.shopAddress}</td>
+				<td>${shop.shopCall}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

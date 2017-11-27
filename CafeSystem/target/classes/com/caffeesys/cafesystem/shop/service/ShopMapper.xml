@@ -83,23 +83,10 @@
 		FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
-	   <!-- WHERE절 include 태그로 삽입 -->
-	    <include refid="search"></include>    
-	    ORDER BY contract_code DESC
-	    </select>
-	<sql id="search">
-		<choose>
-			<!-- 검색 옵션이 전체 검색일 경우 -->
-			<when test = "searchOption.equals('all')">
-				WHERE shop_name like CONCAT('%',#{keyword},'%')
-	      		OR shop_address like CONCAT('%',#{keyword},'%') 
-			</when>
-			<!-- 전체검색이 아닐경우  -->
-			<otherwise>
-				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
-			</otherwise>
-		</choose>
-	</sql>
+		<if test="keyword != null and keyword != ''">
+        	WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+		</if>
+	</select>
 	<!-- 매장연락망조회 -->
 	<select id="selectBranchCallList" parameterType="java.util.Map" resultMap="resultShop">
         SELECT c.contract_owner_name, s.shop_name, s.shop_address, s.shop_call
@@ -119,21 +106,8 @@
 		FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
-	   <!-- WHERE절 include 태그로 삽입 -->
-	    <include refid="searchCall"></include>    
-	    ORDER BY contract_owner_name DESC
-	    </select>
-	<sql id="searchCall">
-		<choose>
-			<!-- 검색 옵션이 전체 검색일 경우 -->
-			<when test = "searchOption.equals('all')">
-				WHERE shop_name like CONCAT('%',#{keyword},'%')
-	      		OR shop_address like CONCAT('%',#{keyword},'%')    
-			</when>
-			<!-- 전체검색이 아닐경우  -->
-			<otherwise>
-				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
-			</otherwise>
-		</choose>
-	</sql>
+  		<if test="keyword != null and keyword != ''">
+        	WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+		</if>
+	</select>
 </mapper>

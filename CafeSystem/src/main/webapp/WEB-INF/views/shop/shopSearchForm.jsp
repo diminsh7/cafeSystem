@@ -5,7 +5,6 @@
 <!-- page content -->
 <form action="./shopSearch" method="post" name="form1">
 	<select name="searchOption">
-		<option value="all" <c:out value="${searchOption == 'all'?'selected':''}"/> >점포명+점포주소</option>
 		<option value="shop_name"
 			<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
 		<option value="contract_owner_name"
@@ -31,8 +30,8 @@
 			<tr>
 				<td><a href="${pageContext.request.contextPath}/shopDetail?contractCode=${shop.contractCode}">${shop.contractCode}</a></td>
 				<td>${shop.shopName}</td>
-				<td>${contract.contractOwnerName}</td>
-				<td>${contract.shopAddress}</td>
+				<td>${shop.contractOwnerName}</td>
+				<td>${shop.shopAddress}</td>
 			</tr>
 		</c:forEach>
 	</tbody>

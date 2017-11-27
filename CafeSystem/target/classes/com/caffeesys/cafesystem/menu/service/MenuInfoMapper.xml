@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuMapper">
-	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuVO" id="resultMenu">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuInfoMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuInfoVO" id="resultMenuInfo">
 		<result property="menuCode" column="menu_code" /> <!-- 메뉴코드(PK) -->
 		<result property="menuCategoryCode" column="menu_category_code" /> <!-- 메뉴카테고리 -->
 		<result property="menuName" column="menu_name" /> <!-- 메뉴명 -->
