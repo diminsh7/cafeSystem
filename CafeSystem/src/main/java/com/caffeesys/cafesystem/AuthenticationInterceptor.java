@@ -17,6 +17,8 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
 			response.sendRedirect("/login");
 			return false; //컨트롤러 요청으로 가지 않도록 false를 반환
 		}
+		//다른 메뉴로 넘어가면 저장되어 있던 세션을 없애는 과정이 필요!
+		//세션에 담긴 로그인정보를 제외한 모든 세션을 없애야함
 		return true;	//return이 true이면 컨트롤러 요청 uri로 감
 	}
 }
