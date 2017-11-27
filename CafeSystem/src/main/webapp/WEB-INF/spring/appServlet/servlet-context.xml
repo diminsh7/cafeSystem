@@ -74,7 +74,8 @@
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/board/service/BoardMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/menu/service/MenuPriceMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/category/service/CategoryMapper.xml</value>		
+				<value>classpath:com/caffeesys/cafesystem/category/service/CategoryMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/menu/service/MaterialMapper.xml</value>
 			</list>
 		</property>
 	</bean>
