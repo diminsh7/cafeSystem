@@ -16,19 +16,34 @@
 		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
 		<result property="categorySmall" column="category_small" /> <!-- category소분류001~017 -->
 	</resultMap>
-	<!-- 전체매장조회 상세전 -->
+	<!-- 매장리스트 및 조회 상세전 -->
 	<select id="selectShopList" parameterType="java.util.Map" resultMap="resultShop">
         SELECT s.contract_code, s.shop_name, c.contract_owner_name, s.shop_address
 		FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
+		<include refid="search"></include>
         ORDER BY s.contract_code DESC
-        LIMIT #{beginRow}, #{pagePerRow}
+        LIMIT ${beginRow}, ${pagePerRow}
     </select>
-    <!-- 전체매장조회 상세전에서 전체행의 수 -->
-    <select id="selectShopCount" resultType="Integer">
+    <!-- 매장리스트 및 조회 상세전 행의수 -->
+    <select id="selectShopCount" parameterType="java.util.Map" resultType="Integer">
         SELECT COUNT(*) FROM shop
+        <include refid="search"></include>
     </select>
+    <sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<when test = "searchOption.equals('all')">
+				WHERE shop_name like CONCAT('%',#{keyword},'%')
+	      		OR shop_address like CONCAT('%',#{keyword},'%')    
+			</when>
+			<!-- 전체검색이 아닐경우  -->
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
 	<!-- 매장등록 -->
 	<insert id="insertShop" parameterType="com.caffeesys.cafesystem.shop.service.ShopVO">
 		INSERT INTO shop (
@@ -77,37 +92,33 @@
 		WHERE contract_code = #{contractCode}
 		AND shop_name = #{shopName}
     </delete>
-   	<!-- 매장검색조회 상세전 -->
-	<select id="searchShop" resultMap="resultShop">
-		SELECT s.contract_code, s.shop_name, c.contract_owner_name, s.shop_address
-		FROM shop s
-		INNER JOIN contract c
-		ON s.contract_code = c.contract_code
-		<if test="keyword != null and keyword != ''">
-        	WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
-		</if>
-	</select>
-	<!-- 매장연락망조회 -->
+	
+	<!-- 매장연락망리스트 및 조회-->
 	<select id="selectBranchCallList" parameterType="java.util.Map" resultMap="resultShop">
         SELECT c.contract_owner_name, s.shop_name, s.shop_address, s.shop_call
 		FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
+		<include refid="searchBranchCall"></include>
         ORDER BY c.contract_owner_name DESC
-        LIMIT #{beginRow}, #{pagePerRow}
+        LIMIT ${beginRow}, ${pagePerRow}
     </select>
-    <!-- 매장연락망조회에서 전체행의 수 -->
-    <select id="selectBranchCallCount" resultType="Integer">
+    <!-- 매장연락망리스트 및 조회 행의수 -->
+    <select id="selectBranchCallCount" parameterType="java.util.Map" resultType="Integer">
         SELECT COUNT(*) FROM shop
+        <include refid="searchBranchCall"></include>
     </select>
-    <!-- 매장연락망검색조회 -->
-	<select id="searchBranchCall" resultMap="resultShop">
-		SELECT c.contract_owner_name, s.shop_name, s.shop_address, s.shop_call
-		FROM shop s
-		INNER JOIN contract c
-		ON s.contract_code = c.contract_code
-  		<if test="keyword != null and keyword != ''">
-        	WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
-		</if>
-	</select>
+   	<sql id="searchBranchCall">
+		<choose>
+			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<when test = "searchOption.equals('all')">
+				WHERE shop_name like CONCAT('%',#{keyword},'%')
+	      		OR shop_address like CONCAT('%',#{keyword},'%')    
+			</when>
+			<!-- 전체검색이 아닐경우  -->
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>

@@ -8,7 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>매장연락망관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchCallList">매장연락망(전체리스트)</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchCallList">매장연락망(전체리스트)</a> 
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -17,13 +17,21 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>매장연락망전체조회</h2>
+						<form action="./branchCallList" method="post" name="search">
+							<select name="searchOption">
+								<option value="all"
+									<c:out value="${searchOption == 'all'?'selected':''}"/>>점포명+점포주소</option>
+								<option value="shop_name"
+									<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
+								<option value="shop_address"
+									<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>점포주소</option>
+							</select> <input name="keyword" value="${keyword}"> <input
+								type="submit" value="조회">
+						</form>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">.</p>
-
-						<%@ include file="../shop/branchCallSearchForm.jsp"%>
-
 						<div align="right">전체행의 수 : ${branchCallCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -35,7 +43,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="shop" items="${list}">
+								<c:forEach var="shop" items="${branchCallList}">
 									<tr>
 										<td>${shop.contractOwnerName}</td>
 										<td>${shop.shopName}</td>

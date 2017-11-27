@@ -1,15 +1,44 @@
 package com.caffeesys.cafesystem.shop.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.account.controller.PasingService;
 
 @Service
 public class ShopService {
 	
 	@Autowired
+	PasingService pasingService;
+	
+	@Autowired
 	private ShopDao shopDao;
+	
+	// 매장연락망리스트 및 조회
+	public void selectShopList(Model model, String searchOption, String keyword, int currentPage) {
+		System.out.println("ShopService.java / selectShopList method 확인");
+		System.out.println("ShopService.java / selectShopList Param searchOption :" + model);
+		System.out.println("ShopService.java / selectShopList Param keyword :" + searchOption);
+		System.out.println("ShopService.java / selectShopList Param searchOption :" + keyword);
+		System.out.println("ShopService.java / selectShopList Param keyword :" + currentPage);
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		System.out.println("ShopService.java"+map);
+		map = pasingService.paging(model, currentPage, 10, shopDao.selectShopCount(map), map);
+		model.addAttribute("shopList", shopDao.selectShopList(map));
+		model.addAttribute("shopCount", shopDao.selectShopCount(map));
+	}
 	
 	// 계약서등록 과정
 	public int insertShop(ShopVO shop) {
@@ -34,18 +63,25 @@ public class ShopService {
 		System.out.println("ShopService.java/ shop:"+shop);
 		return shopDao.insertShop(shop);
 	}
-	// 매장검색조회 상세전
-	public List<ShopVO> searchShop(String searchOption, String keyword) {
-		System.out.println("ShopService.java/ searchShop method 확인");
-		System.out.println("ShopService.java / searchShop Param searchOption :" + searchOption);
-		System.out.println("ShopService.java / searchShop Param keyword :" + keyword);
-		return shopDao.searchShop(searchOption, keyword);
-	}
-	// 매장연락망검색조회
-	public List<ShopVO> searchBranchCall(String searchOption, String keyword) {
-		System.out.println("ShopService.java/ searchBranchCall method 확인");
-		System.out.println("ShopService.java / searchBranchCall Param searchOption :" + searchOption);
-		System.out.println("ShopService.java / searchBranchCall Param keyword :" + keyword);
-		return shopDao.searchBranchCall(searchOption, keyword);
+
+	// 매장연락망리스트 및 조회
+	public void selectBranchCallList(Model model, String searchOption, String keyword, int currentPage) {
+		System.out.println("ShopService.java / selectBranchCallList method 확인");
+		System.out.println("ShopService.java / selectBranchCallList Param searchOption :" + model);
+		System.out.println("ShopService.java / selectBranchCallList Param keyword :" + searchOption);
+		System.out.println("ShopService.java / selectBranchCallList Param searchOption :" + keyword);
+		System.out.println("ShopService.java / selectBranchCallList Param keyword :" + currentPage);
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		System.out.println("ShopService.java"+map);
+		map = pasingService.paging(model, currentPage, 10, shopDao.selectBranchCallCount(map), map);
+		model.addAttribute("branchCallList", shopDao.selectBranchCallList(map));
+		model.addAttribute("branchCallCount", shopDao.selectBranchCallCount(map));
 	}
 }

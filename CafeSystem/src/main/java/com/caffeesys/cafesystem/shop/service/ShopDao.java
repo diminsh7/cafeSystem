@@ -16,18 +16,15 @@ public class ShopDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	// 매장조회 상세전
-	public List<ShopVO> selectShopList(int currentPage, int pagePerRow) {
+	// 매장리스트 및 조회 상세전
+	public List<ShopVO> selectShopList(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectShopList method 확인");
-	     Map<String, Integer> map = new HashMap<String, Integer>();
-	     map.put("beginRow", (currentPage-1)*pagePerRow);
-	     map.put("pagePerRow", pagePerRow);
 	     return sqlSessionTemplate.selectList(NS+"selectShopList", map);
 	}
-	// 매장조회 상세전에서 전체행의 수
-	public int selectShopCount() {
+	// 매장리스트 및 조회 상세전 행의수
+	public int selectShopCount(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectShopCount method 확인");
-		return sqlSessionTemplate.selectOne(NS+"selectShopCount");
+		return sqlSessionTemplate.selectOne(NS+"selectShopCount", map);
 	}
 	// 매장등록
 	public int insertShop(ShopVO shop) {
@@ -68,35 +65,15 @@ public class ShopDao {
 		shop.setShopName(shopName);
 		return sqlSessionTemplate.delete(NS+"deleteShop", shop);
 	}
-	// 매장검색조회 상세전
-	public List<ShopVO> searchShop(String searchOption, String keyword) {
-		System.out.println("ShopDao.java / searchShop Param searchOption: "+searchOption);
-		System.out.println("ShopDao.java / searchShop Param keyword: "+keyword);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		return sqlSessionTemplate.selectList(NS+"searchShop", map);
-	}
-	// 매장연락망조회
-	public List<ShopVO> selectBranchCallList(int currentPage, int pagePerRow) {
+
+	// 매장연락망리스트 및 조회
+	public List<ShopVO> selectBranchCallList(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectBranchCallList method 확인");
-	     Map<String, Integer> map = new HashMap<String, Integer>();
-	     map.put("beginRow", (currentPage-1)*pagePerRow);
-	     map.put("pagePerRow", pagePerRow);
 	     return sqlSessionTemplate.selectList(NS+"selectBranchCallList", map);
 	}
-	// 매장연락망조회에서 전체행의 수
-	public int selectBranchCallCount() {
+	// 매장연락망리스트 및 조회 행의수
+	public int selectBranchCallCount(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectBranchCallCount method 확인");
-		return sqlSessionTemplate.selectOne(NS+"selectBranchCallCount");
-	}
-	// 매장연락망검색조회
-	public List<ShopVO> searchBranchCall(String searchOption, String keyword) {
-		System.out.println("ShopDao.java / searchBranchCall Param searchOption: "+searchOption);
-		System.out.println("ShopDao.java / searchBranchCall Param keyword: "+keyword);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		return sqlSessionTemplate.selectList(NS+"searchBranchCall", map);
+		return sqlSessionTemplate.selectOne(NS+"selectBranchCallCount", map);
 	}
 }
