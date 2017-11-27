@@ -22,12 +22,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="category_small" property="categorySmall"  /> <!-- 소분류 -->
 	</resultMap>
 	
+		<!-- 순번 최대 select -->
+		<select id="selectBoardMax" resultType="Integer">
+			select max(board_code)  
+			from board;
+		</select>
+		
 		<!--board 삭제   -->
 		<delete id="deleteBoard" parameterType="Integer">
 			DELETE
 			FROM board
 			WHERE board_code = #{boardCode};
 		</delete>
+		
 		<!-- board 수정 update -->
 		<update id="updateBoard" parameterType="com.caffeesys.cafesystem.board.service.BoardVO">
 			UPDATE board
@@ -37,7 +44,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				, board_file = #{boardFile}
 			WHERE board_code = #{boardCode}
 		</update>
-		
 		
 		<!-- board 디테일 select -->
 		<select id="selectBoardDetail" parameterType="Integer" resultMap="resultBoard">
@@ -56,27 +62,49 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			WHERE board_code = #{boardCode} ;
 		</select>
 		
-		<!-- 페이징 작업을 위한 board 레코드 개수 -->
-		<select id="getBoardCount" resultType="Integer">
+		<!-- 검색한 board 레코드 개수 -->
+		<select id="getBoardCount"  parameterType="java.util.Map"  resultType="Integer">
 			select count(*) from board 
+			INNER JOIN category
+					ON board.category_code = category.category_code
+			 <!-- WHERE절 include 태그로 삽입 -->
+	     	<include refid="search"></include>  
+	     	ORDER BY board_code ASC 
 		</select>
 		
 		<!-- board리스트 select -->
-		<select id="selectBoardList"  parameterType="java.util.Map" resultMap="resultBoard">
-			SELECT board_code
-				,board.category_code
-				,employee_code
-				,board_title
-				,board_content
-				,board_date
-				,board_file	
-				,category.category_small			
-			FROM board
-				INNER JOIN category
-				ON board.category_code = category.category_code
-			ORDER BY board_code ASC 
-			LIMIT #{beginRow}, #{pagePerRow};
+		<select id="searchBoardList"  parameterType="java.util.Map" resultMap="resultBoard">
+				SELECT board_code
+					,board.category_code
+					,employee_code
+					,board_title
+					,board_content
+					,board_date
+					,board_file	
+					,category.category_small			
+				FROM board
+					INNER JOIN category
+					ON board.category_code = category.category_code	
+				<!-- WHERE절 include 태그로 삽입 -->
+	     		<include refid="search"></include>  	
+				ORDER BY board_code ASC 
+				LIMIT ${beginRow}, ${pagePerRow};
 		</select>
+		
+		<sql id="search">
+			<choose>
+				<!--검색 옵션이 전체 검색일 경우 카테고리명, 제목, 내용  -->
+				<when test = "searchOption.equals('all')">
+					WHERE category.category_small like CONCAT('%',#{keyword},'%')
+	      			OR board_content like CONCAT('%',#{keyword},'%')  
+					OR board_content like CONCAT('%',#{keyword},'%') 
+				</when>
+				<!-- 전체 검색이 아닐경우 -->
+				<otherwise>
+					WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+				</otherwise>
+			</choose>
+		</sql>
 		
 		<!-- board 카테고리 불러오기 -->
 		<select id="selectBoardCategory" resultMap="resultCategory">

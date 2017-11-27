@@ -22,34 +22,47 @@
 					</div>
 					
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">
+					<p class="text-muted font-13 m-b-30">
 						<h2>게시글 목록</h2>
-						</p>
-						<%@include file="../account/accountTitleSerchForm.jsp"%>
-						<div>전체 수: ${totalRowCount}</div>
+					</p>
+					<form name="search" method="post" action="${pageContext.request.contextPath}/accountTitleList">
+						<select name="searchOption">
+							<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+							<option value="all"
+								<c:out value="${searchOption == 'all'?'selected':''}"/>>계정과목명+내용</option>
+							<option value="account_title_name"
+								<c:out value="${searchOption == 'account_title_name'?'selected':''}"/>>계정과목명</option>
+							<option value="account_title_content"
+								<c:out value="${searchOption == 'account_title_content'?'selected':''}"/>>내용</option>
+						</select> 
+						<input name="keyword" value="${keyword}"> <input type="submit" value="조회">
+					</form>
 
-						<table id="datatable" class="table table-striped table-bordered">
-							<thead>
-								<tr>
-									<th>계정과목코드</th>
-									<th>계정과목명</th>
-									<th>상세내용</th>
-									<th>수정</th>
-									<th>삭제</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach var="accountlist" items="${accountlist}"> 
-									<tr>
-										<td>${accountlist.accountTitleCode}</td>
-										<td>${accountlist.accountTitleName}</td>
-										<td>${accountlist.accountTitleContent}</td>
-										<td><a href="${pageContext.request.contextPath}/accountTitleUpdateForm?accountTitleCode=${accountlist.accountTitleCode}">수정</a></td> 
-                             			<td><a href="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountlist.accountTitleCode}">삭제</a></td>						
-									</tr>
-								</c:forEach> 
-							</tbody>
-						</table>
+
+					<!-- 레코드의 갯수를 출력 -->
+					${count}개의 게시물이 있습니다.
+					<table id="datatable" class="table table-striped table-bordered">
+						<tr>
+							<th>계정과목코드</th>
+							<th>계정과목명</th>
+							<th>상세내용</th>
+							<th>수정</th>
+							<th>삭제</th>
+						</tr>
+						<c:forEach var="accountTitleList" items="${accountTitleList}">
+							<tr>
+								<td>${accountTitleList.accountTitleCode}</td>
+								<td>${accountTitleList.accountTitleName}</td>
+								<td>${accountTitleList.accountTitleContent}</td>
+								<td><a id="accountTitleUpdateButton"
+									href="${pageContext.request.contextPath}/accountTitleUpdate?accountTitleCode=${accountTitleList.accountTitleCode}">
+										수정</a></td>
+								<td><a onclick="button_event()" id="accountTitleDeleteButton"
+									href="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountTitleList.accountTitleCode}">
+										삭제</a></td>
+							</tr>
+						</c:forEach>
+					</table>
 						<ul class="pager">
 							<c:if test="${currentPage>1}">
 								<li class="previous"><a

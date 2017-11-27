@@ -1,13 +1,18 @@
 package com.caffeesys.cafesystem.board.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.Category;
+import com.caffeesys.cafesystem.account.controller.PasingService;
+import com.caffeesys.cafesystem.account.service.AccountTitleDao;
 
 @Service
 public class BoardService implements BoardServiceInter {
@@ -15,29 +20,28 @@ public class BoardService implements BoardServiceInter {
 	
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Autowired
+	private PasingService pasingService;
 	//검색한  board 리스트
 	@Override
-	public List<BoardVO> searchBoardList(String searchOption, String keyword) throws Exception {
-	
-		return null;
+	public void searchBoardList(Model model, String searchOption, String keyword, int currentPage) throws Exception {
+		logger.debug("searchBoardList메소드의 searchOption :{}",searchOption);	//all, account_title_code, account_title_name, account_title_content
+		logger.debug("searchBoardList메소드의 keyword :{}",keyword);	//검색어
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		logger.debug("searchBoardList 메소드의  map :{}",map);
+		map = pasingService.paging(model, currentPage, 10, boardDao.getBoardCount(map), map);
+		model.addAttribute("boardList",boardDao.searchBoardList(map));
+		logger.debug("searchBoardList 메소드의  map :{}",map);
 	}
-	//검색한 board 레코드 개수
-	@Override
-	public int searchBoardCount(String searchOption, String keyword) throws Exception {
-		
-		return 0;
-	}
-	
-	//리스트의 레코드 개수 get
-	@Override
-	public int getBoardCount() throws Exception {
-		logger.debug("getBoardCount 메소드 확인");
-		int boardCount=0;
-		boardCount = boardDao.getBoardCount();
-		logger.debug("getBoardCount메소드의 boardCount{}",boardCount);
-		
-		return boardCount;
-	}
+
 	//board의 리스트 select
 	@Override
 	public List<BoardVO> selectBoardList(int currentPage, int pagePerRow) throws Exception {
@@ -69,7 +73,7 @@ public class BoardService implements BoardServiceInter {
 	@Override
 	public void insertBoard(BoardVO board) throws Exception {
 		logger.debug("insertBoard 메소드의 board :{}",board);
-		int boardCount = boardDao.getBoardCount();
+		int boardCount = boardDao.selectBoardMax();
 		int boardCode = boardCount + 1;
 		board.setBoardCode(boardCode);
 		logger.debug("insertBoard 메소드의 board :{}",board);
@@ -90,5 +94,6 @@ public class BoardService implements BoardServiceInter {
 		logger.debug("selectBoardCategory 메소드의 list{}",boardCategory);
 		return boardCategory;
 	}
+
 
 }

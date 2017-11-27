@@ -9,6 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.account.controller.PasingService;
 
 @Repository
 public class AccountTitleDao {
@@ -17,28 +20,20 @@ public class AccountTitleDao {
 	private final String NS = "com.caffeesys.cafesystem.account.service.AccountTitleMapper.";
 	
 	@Autowired
+	PasingService pasingService;
+	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	/*//계정과목 검색 후 리스트
-	public List<AccountTitleVO> listAll(String searchOption, String keyword){
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		logger.debug("listAll메소드의 searchOption :{}",searchOption);
-		logger.debug("listAll메소드의 keyword :{}",keyword);
-		logger.debug("listAll메소드의 map:{}",map);
+	//계정과목 검색 후 리스트
+	public List<AccountTitleVO> listAll(Map<String, String> map){
+		logger.debug("listAll 메소드의 리턴값 :{}",sqlSessionTemplate.selectList(NS + "listAll",map));
 		return sqlSessionTemplate.selectList(NS + "listAll",map);
 	}
 	
 	//검색된 레코드 개수
-	public int countArticle(String searchOption, String keyword) {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		logger.debug("countArticle메소드의 searchOption :{}",searchOption);
-		logger.debug("countArticle메소드의 keyword :{}",keyword);
-		//logger.debug("countArticle메소드의 countArticle:{}",sqlSessionTemplate.selectOne(NS + "countArticle", map));
-		return sqlSessionTemplate.selectOne(NS + "countArticle", map);
+	public int accountTitleCount(Map<String, String> map) {
+		logger.debug("accountTitleCount메소드의 리턴값 :{}",sqlSessionTemplate.selectOne(NS + "accountTitleCount", map));
+		return sqlSessionTemplate.selectOne(NS + "accountTitleCount", map);
 	}
 	
 	//계정과목 삭제
@@ -89,5 +84,5 @@ public class AccountTitleDao {
 		logger.debug("selectAccountMax 메도스 확인");
 		
 		return sqlSessionTemplate.selectOne(NS + "selectAccountMax");
-	}*/
+	}
 }

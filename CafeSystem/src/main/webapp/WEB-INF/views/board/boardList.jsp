@@ -13,10 +13,22 @@
 			<div class="title_right">
 				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
+					<form name="search" method="post" action="${pageContext.request.contextPath}/boardList">
+						<select name="searchOption">
+							<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
+							<option value="all"
+								<c:out value="${searchOption == 'all'?'selected':''}"/>>title+내용+카테고리</option>
+							<option value="board_content"
+								<c:out value="${searchOption == 'board_content'?'selected':''}"/>>title명</option>
+							<option value="board_content"
+								<c:out value="${searchOption == 'board_content'?'selected':''}"/>>내용</option>
+							<option value="category.category_small"
+								<c:out value="${searchOption == 'category.category_small'?'selected':''}"/>>카테고리</option>
+						</select> 
 						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
+							<input name="keyword" value="${keyword}" class="form-control"> <input type="submit" class="btn btn-default" value="조회">
 						</span>
+					</form>
 					</div>
 				</div>
 			</div>

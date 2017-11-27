@@ -2,17 +2,18 @@
 package com.caffeesys.cafesystem.board.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.caffeesys.cafesystem.Category;
 
 public interface BoardDaoInter {
 		public List<Category> selectBoardCategory() throws Exception;
 		
-		public List<BoardVO> searchBoardList(String searchOption, String keyword) throws Exception;
+		public List<BoardVO> searchBoardList(Map<String, String> map) throws Exception;
 		
 		public int searchBoardCount(String searchOption, String keyword) throws Exception;
 		
-		public int getBoardCount() throws Exception;
+		public int getBoardCount(Map<String, String> map) throws Exception;
 		
 		public List<BoardVO> selectBoardList(int currentPage,int pagePerRow) throws Exception;
 		

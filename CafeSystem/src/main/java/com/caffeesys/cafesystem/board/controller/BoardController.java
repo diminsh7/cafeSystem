@@ -26,7 +26,7 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	//통합게시판 리스트 
-	@RequestMapping(value="/boardList", method=RequestMethod.GET)
+	/*@RequestMapping(value="/boardList", method=RequestMethod.GET)
 	public String boardList(Model model, HttpSession session, 
 							@RequestParam(value = "currentPage", 
 							required = false, defaultValue = "1")int currentPage) throws Exception {
@@ -49,16 +49,36 @@ public class BoardController {
 		model.addAttribute("lastPage",lastPage);
 		model.addAttribute("boardList",boardlist);
 		
-		
 		//카테고리 세션넣기 시작
 		session.setAttribute("boardCategory", boardCategory);
 		System.out.println("-------------------------------------------------------------");
 		logger.debug("boardList 메소드 boardlist :{}",boardlist);
 		return "board/boardList";
+	}*/
+	
+	//통합게시판 리스트
+	@RequestMapping(value="boardList")
+	public String boardList(Model model, HttpSession session
+			,@RequestParam(value="searchOption", required=false, defaultValue="all")String searchOption
+			,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
+			,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) throws Exception {
+		logger.debug("boardList메소드 확인");
+		logger.debug("boardList메소드의 model :{}",model);
+		logger.debug("boardList메소드의 searchOption :{}",searchOption);	//all
+		logger.debug("boardList메소드의 keyword :{}",keyword);	//""
+		logger.debug("boardList메소드의 currentPage :{}",currentPage);	//1
+		boardService.searchBoardList(model, searchOption, keyword, currentPage);
+		//카테고리 갖고오기 
+		List<Category> boardCategory = boardService.selectBoardCategory();
+		logger.debug("boardList 메소드 boardCategory :{}",boardCategory);
+		//카테고리 세션넣기 시작
+		session.setAttribute("boardCategory", boardCategory);
+		System.out.println("-------------------------------------------------------------");
+		return "board/boardList";
 	}
 	// 통합게시판 입력 폼 요청
 	@RequestMapping(value="/boardInsert", method = RequestMethod.GET)
-	public String boardInsert(Model model) {
+	public String boardInsert() {
 		logger.debug("boardInsert 메소드 확인 get방식");
 		return "/board/boardInsertForm";
 	}

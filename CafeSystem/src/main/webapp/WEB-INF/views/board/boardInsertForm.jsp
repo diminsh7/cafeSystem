@@ -5,7 +5,7 @@
 <script>
 	function boardBtn(btn){
 		if(btn == 'list'){
-			//console.log("rollback Claim List");
+			//console.log("rollback Board List");
 			result = confirm('작성을 취소하시겠습니까?');
 			if(result){
 				$(location).attr('href', '${pageContext.request.contextPath}/boardList');
@@ -14,7 +14,7 @@
 			}
 		} 
 		if(btn == 'insert'){
-			//console.log("Claim Insert Action");
+			//console.log("Board Insert Action");
 			result = confirm('등록하시겠습니까?');
 			if(result){
 				$('#boardInsertForm').submit();

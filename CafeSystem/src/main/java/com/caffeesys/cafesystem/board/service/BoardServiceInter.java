@@ -2,17 +2,19 @@ package com.caffeesys.cafesystem.board.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.caffeesys.cafesystem.Category;
 
 
 public interface BoardServiceInter {
 	public List<Category> selectBoardCategory() throws Exception;
 	
-	public List<BoardVO> searchBoardList(String searchOption, String keyword) throws Exception;
+	public void searchBoardList(Model model, String searchOption, String keyword, int currentPage) throws Exception;
 
-	public int searchBoardCount(String searchOption, String keyword) throws Exception;
+	//public int searchBoardCount(String searchOption, String keyword) throws Exception;
 	
-	public int getBoardCount() throws Exception;
+	//public int getBoardCount() throws Exception;
 	
 	public List<BoardVO> selectBoardList(int currentPage,int pagePerRow) throws Exception;
 	

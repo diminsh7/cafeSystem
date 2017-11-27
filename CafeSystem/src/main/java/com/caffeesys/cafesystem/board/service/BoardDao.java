@@ -22,11 +22,16 @@ public class BoardDao implements  BoardDaoInter {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 
+	//board의 최대값 갖고오기
+	public int selectBoardMax() {
+		logger.debug("selectBoardMax 메소드 확인");
+		return sqlSessionTemplate.selectOne(NS+"selectBoardMax");
+	}
 	//검색한  board 리스트
 	@Override
-	public List<BoardVO> searchBoardList(String searchOption, String keyword) throws Exception {
-		
-		return null;
+	public List<BoardVO> searchBoardList(Map<String, String> map) throws Exception {
+		logger.debug("searchBoardList 메소드의 리턴값 :{}",sqlSessionTemplate.selectList(NS + "searchBoardList", map));
+		return sqlSessionTemplate.selectList(NS + "searchBoardList", map);
 	}
 	//검색한 board 레코드 개수
 	@Override
@@ -36,10 +41,10 @@ public class BoardDao implements  BoardDaoInter {
 	}
 	//리스트의 레코드 개수 get
 	@Override
-	public int getBoardCount() throws Exception {
-		logger.debug("getBoardCount 메소드 확인");
+	public int getBoardCount(Map<String, String> map) throws Exception {
+		logger.debug("getBoardCount메소드의 리턴값 :{}",sqlSessionTemplate.selectOne(NS + "getBoardCount", map));
 			
-		return sqlSessionTemplate.selectOne(NS+"getBoardCount");
+		return sqlSessionTemplate.selectOne(NS+"getBoardCount", map);
 	}
 	//board의 리스트 select
 	@Override
