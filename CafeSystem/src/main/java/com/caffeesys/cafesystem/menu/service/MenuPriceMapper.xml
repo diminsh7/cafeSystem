@@ -4,11 +4,50 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.menu.service.MenuPriceMapper">
 	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuPriceVO" id="resultMenuPrice">
-		<result property="menuPriceCode" column="menu_price_code" />
-		<result property="menuCode" column="menu_code" />
-		<result property="tempCategory" column="temp_category" />
-		<result property="sizeCategory" column="size_category" />
-		<result property="menuTotalCost" column="menu_totalcost" />
-		<result property="menuSellCost" column="menu_sellcost" />
+		<result property="menuPriceCode" column="menu_price_code" /><!-- 메뉴 가격 관리 코드 -->
+		<result property="menuCode" column="menu_code" /><!-- 메뉴 코드 -->
+		<result property="tempCategory" column="temp_category" /><!-- 냉온 카테고리 -->
+		<result property="sizeCategory" column="size_category" /><!-- 사이즈 카테고리 -->
+		<result property="menuTotalCost" column="menu_totalcost" /><!-- 메뉴 원가 -->
+		<result property="menuSellCost" column="menu_sellcost" /><!--메뉴 판매가  -->
+		<result property="menuName" column="menu_name" /><!-- 메뉴 이름 -->
+		<result property="tempCateName" column="tempCateName" /><!-- 냉온 카테고리 이름 -->
+		<result property="sizeCateName" column="size" /><!-- 사이즈 카테고리 이름 -->
+		
 	</resultMap>
+	
+	<select id="menuPriceCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM menu_price
+		<if test="cate != null">
+			WHERE ${cate} = #{input}		
+		</if>
+	</select>
+	
+	<select id="menuPriceList" parameterType="java.util.Map" resultMap="resultMenuPrice">
+		SELECT
+			menu_price_code
+			, mp.menu_code
+			, m.menu_name
+			, temp_category
+			, tempCate.category_small AS tempCateName
+			, size_category
+			, sizeCate.category_small AS sizeCateName
+			, menu_totalcost
+			, menu_sellcost
+		FROM
+			menu_price AS mp
+			INNER JOIN menu AS m
+				ON mp.menu_code = m.menu_code
+			INNER JOIN category AS tempCate
+				ON mp.temp_category = tempCate.category_code
+			INNER JOIN category AS sizeCate
+				ON mp.size_category = sizeCate.category_code
+		<if test="input != null">
+			WHERE mp.${cate} = #{input}
+		</if>
+			ORDER BY mp.menu_code DESC
+		<if test="start != null">
+			LIMIT ${start}, ${pagePerRow}
+		</if>		
+	</select>
 </mapper>
