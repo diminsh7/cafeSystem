@@ -23,10 +23,6 @@
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
 						전 매장 직원 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-<<<<<<< HEAD
-						<div align="right">총 직원 : ${branchPersonnelCount} 명</div>
-
-=======
 						<form name="search" method="post" action="${pageContext.request.contextPath}/branchPersonnelList">
 						<select name="searchOption">
 							<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
@@ -43,7 +39,6 @@
 					</form>
 											
 						<div align="right">총 직원 : ${branchPersonnelCount} 명</div>
->>>>>>> upstream/JK
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>

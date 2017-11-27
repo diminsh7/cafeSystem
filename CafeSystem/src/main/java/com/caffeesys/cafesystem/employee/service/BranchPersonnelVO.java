@@ -18,61 +18,6 @@ public class BranchPersonnelVO {
 	private String branchPersonnelBanknum; //월급계좌번호
 	private String branchPersonnelContract; //근로계약서
 	private String shopName; //점포명
-<<<<<<< HEAD
-	private String categorySmall; //직급명
-	
-	public String getBranchEmployeeCode() {
-		return branchEmployeeCode;
-	}
-	public String getLocalCategoryCode() {
-		return localCategoryCode;
-	}
-	public String getShopCode() {
-		return shopCode;
-	}
-	public String getPositionCategoryCode() {
-		return positionCategoryCode;
-	}
-	public String getBranchEmployeeId() {
-		return branchEmployeeId;
-	}
-	public String getBranchEmployeeName() {
-		return branchEmployeeName;
-	}
-	public int getBranchEmployeeBirth() {
-		return branchEmployeeBirth;
-	}
-	public String getBranchEmployeePhone() {
-		return branchEmployeePhone;
-	}
-	public String getBranchEmployeeAddress() {
-		return branchEmployeeAddress;
-	}
-	public String getBranchEmployeeCetificate() {
-		return branchEmployeeCetificate;
-	}
-	public String getBranchPersonnelJoin() {
-		return branchPersonnelJoin;
-	}
-	public int getBranchPersonnelSalary() {
-		return branchPersonnelSalary;
-	}
-	public String getBranchPersonnelBank() {
-		return branchPersonnelBank;
-	}
-	public String getBranchPersonnelBanknum() {
-		return branchPersonnelBanknum;
-	}
-	public String getBranchPersonnelContract() {
-		return branchPersonnelContract;
-	}
-	public String getShopName() {
-		return shopName;
-	}
-	public String getCategorySmall() {
-		return categorySmall;
-	}
-=======
 	private String categorySmall; //카테고리내용
 	private String categoryCode; //카테고리코드
 	@Override
@@ -90,7 +35,6 @@ public class BranchPersonnelVO {
 	public String getBranchEmployeeCode() {
 		return branchEmployeeCode;
 	}
->>>>>>> upstream/JK
 	public void setBranchEmployeeCode(String branchEmployeeCode) {
 		this.branchEmployeeCode = branchEmployeeCode;
 	}
@@ -184,23 +128,6 @@ public class BranchPersonnelVO {
 	public void setShopName(String shopName) {
 		this.shopName = shopName;
 	}
-<<<<<<< HEAD
-	public void setCategorySmall(String categorySmall) {
-		this.categorySmall = categorySmall;
-	}
-	
-	@Override
-	public String toString() {
-		return "BranchPersonnelVO [branchEmployeeCode=" + branchEmployeeCode + ", localCategoryCode="
-				+ localCategoryCode + ", shopCode=" + shopCode + ", positionCategoryCode=" + positionCategoryCode
-				+ ", branchEmployeeId=" + branchEmployeeId + ", branchEmployeeName=" + branchEmployeeName
-				+ ", branchEmployeeBirth=" + branchEmployeeBirth + ", branchEmployeePhone=" + branchEmployeePhone
-				+ ", branchEmployeeAddress=" + branchEmployeeAddress + ", branchEmployeeCetificate="
-				+ branchEmployeeCetificate + ", branchPersonnelJoin=" + branchPersonnelJoin + ", branchPersonnelSalary="
-				+ branchPersonnelSalary + ", branchPersonnelBank=" + branchPersonnelBank + ", branchPersonnelBanknum="
-				+ branchPersonnelBanknum + ", branchPersonnelContract=" + branchPersonnelContract + ", shopName="
-				+ shopName + ", categorySmall=" + categorySmall + "]";
-=======
 	public String getCategorySmall() {
 		return categorySmall;
 	}
@@ -212,18 +139,13 @@ public class BranchPersonnelVO {
 	}
 	public void setCategoryCode(String categoryCode) {
 		this.categoryCode = categoryCode;
->>>>>>> upstream/JK
 	}
 	public BranchPersonnelVO(String branchEmployeeCode, String localCategoryCode, String shopCode,
 			String positionCategoryCode, String branchEmployeeId, String branchEmployeeName, int branchEmployeeBirth,
 			String branchEmployeePhone, String branchEmployeeAddress, String branchEmployeeCetificate,
 			String branchPersonnelJoin, int branchPersonnelSalary, String branchPersonnelBank,
-<<<<<<< HEAD
-			String branchPersonnelBanknum, String branchPersonnelContract, String shopName, String categorySmall) {
-=======
 			String branchPersonnelBanknum, String branchPersonnelContract, String shopName, String categorySmall,
 			String categoryCode) {
->>>>>>> upstream/JK
 		super();
 		this.branchEmployeeCode = branchEmployeeCode;
 		this.localCategoryCode = localCategoryCode;
@@ -242,23 +164,11 @@ public class BranchPersonnelVO {
 		this.branchPersonnelContract = branchPersonnelContract;
 		this.shopName = shopName;
 		this.categorySmall = categorySmall;
-<<<<<<< HEAD
-=======
 		this.categoryCode = categoryCode;
->>>>>>> upstream/JK
 	}
-	
 	public BranchPersonnelVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-<<<<<<< HEAD
-	
-
-}
-=======
-	
-	
 	
 }	
->>>>>>> upstream/JK
