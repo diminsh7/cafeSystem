@@ -5,19 +5,19 @@
 <script>
 	function boardBtn(btn){
 		if(btn == 'list'){
-			//console.log("rollback Board List");
-			result = confirm('작성을 취소하시겠습니까?');
+			//console.log("rollback Claim List");
+			result = confirm('수정을 취소하시겠습니까?');
 			if(result){
 				$(location).attr('href', '${pageContext.request.contextPath}/boardList');
 			} else {
 				
 			}
 		} 
-		if(btn == 'insert'){
-			//console.log("Board Insert Action");
-			result = confirm('등록하시겠습니까?');
+		if(btn == 'update'){
+			//console.log("Claim Insert Action");
+			result = confirm('수정하시겠습니까?');
 			if(result){
-				$('#boardInsertForm').submit();
+				$('#boardUpdateForm').submit();
 			} else {
 				
 			}
@@ -34,7 +34,7 @@
 					</h2>
 					<div class="clearfix"></div>
 				</div>
-				<form id="boardInsertForm" action="${pageContext.request.contextPath}/boardInsert" method="post">
+				<form id="boardUpdateForm" action="${pageContext.request.contextPath}/boardUpdate" method="post">
 					<div class="x_content">
 						<div class="col-md-8 col-xs-8">
 							<select id="categoryCode" name="categoryCode" class="btn btn-default dropdown-toggle">
@@ -42,8 +42,10 @@
 									<option  value="${boardCategory.categoryCode}" >${boardCategory.categorySmall}</option>								
 								</c:forEach>
 							</select>
+							<input type="hidden" id="boardCode" name="boardCode" value="${board.boardCode}">
 							<input type="hidden" id="employeeCode" name="employeeCode" value="${loginInfo.empCode}">
-							<input type="text" id="fullname" class="form-control" name="boardTitle" >
+							<input type="hidden" id="boardDate" name="boardDate" value="${board.boardDate}">
+							<input type="text" id="boardTitle" class="form-control" name="boardTitle" value="${board.boardTitle}">
 						</div>
 					</div>
 					
@@ -128,7 +130,7 @@
 								<a class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn">
 									<i class="fa fa-picture-o"></i>
 								</a> 
-								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" name="boardFile"/>
+								<input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" name="boardFile" value="${board.boardFile}"/>
 							</div>
 	
 							<div class="btn-group">
@@ -140,11 +142,11 @@
 								</a>
 							</div>
 						</div>
-						<textarea name="boardContent" rows="8" class="resizable_textarea form-control"></textarea>
+						<textarea name="boardContent" rows="8" class="resizable_textarea form-control" >${board.boardContent}</textarea>
 						<br />
 						<div class="col-md-6 col-md-offset-5">
 							<input type="button" class="btn btn-primary" value="목록" onclick="boardBtn('list')" name="list">
-							<input type="button" class="btn btn-success" value="등록" onclick="boardBtn('insert')" name="insert">
+							<input type="button" class="btn btn-success" value="수정" onclick="boardBtn('update')" name="update">
 							<!-- <button type="submit" class="btn btn-primary">Cancel</button>
 							<button id="send" type="submit" class="btn btn-success">Submit</button> -->
 						</div>
@@ -155,35 +157,6 @@
 	</div>
 </div>
 
-
-
-<%-- 	<div class="right_col" role="main">
-		<div class="">
-			<div class="page-title">
-				<div class="title_left">
-					<h3>boardInsertForm</h3>
-				</div>
-			</div>
-		</div> 
- 		<div>
-			<select id="claimCategoryCode" name="claimCategoryCode">
-				<c:forEach var="category" items="${categoryList}">
-					<option value="${category.categoryCode}">${category.categorySmall}</option>
-				</c:forEach>
-			</select>
-			<input type="text" id="customerClaimTitle" name="customerClaimTitle">
-		</div>
-		<div>
-			<textarea id="customerClaimContents" name="customerClaimContents"></textarea>
-		</div>
-		<div>
-			<input type="file" id="customerClaimFile" name="customerClaimFile">
-		</div>
-		<div>
-			<input type="button" id="claimListBtn" value="목록" onclick="claimBtn('list')">
-			<input type="button" id="claimInsertBtn" value="등록" onclick="claimBtn('insert')">
-		</div> 
- --%>
 
 
 
