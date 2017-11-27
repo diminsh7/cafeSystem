@@ -17,13 +17,13 @@ public class ShopService {
 	@Autowired
 	private ShopDao shopDao;
 	
-	// 매장연락망리스트 및 조회
+	// 매장리스트 및 조회 상세전
 	public void selectShopList(Model model, String searchOption, String keyword, int currentPage) {
 		System.out.println("ShopService.java / selectShopList method 확인");
-		System.out.println("ShopService.java / selectShopList Param searchOption :" + model);
-		System.out.println("ShopService.java / selectShopList Param keyword :" + searchOption);
-		System.out.println("ShopService.java / selectShopList Param searchOption :" + keyword);
-		System.out.println("ShopService.java / selectShopList Param keyword :" + currentPage);
+		System.out.println("ShopService.java / selectShopList Param model :" + model);
+		System.out.println("ShopService.java / selectShopList Param searchOption :" + searchOption);
+		System.out.println("ShopService.java / selectShopList Param keyword :" + keyword);
+		System.out.println("ShopService.java / selectShopList Param currentPage :" + currentPage);
 		Map<String, String> map;
 		if(searchOption != "") {
 			map = new HashMap<String, String>();
@@ -37,22 +37,22 @@ public class ShopService {
 		model.addAttribute("shopList", shopDao.selectShopList(map));
 		model.addAttribute("shopCount", shopDao.selectShopCount(map));
 	}
-	// 계약서등록 과정
+	// 매장등록 과정
 	public int insertShop(ShopVO shop) {
-		System.out.println("ShopService.java/ insertShop method 확인");
+		System.out.println("ShopService.java / insertShop method 확인");
 		System.out.println("ShopService.java / insertShop Param shop :" + shop);
 		int shopmaxnum = shopDao.selectShopMax(shop);
-		System.out.println("ShopService.java/ insertShop의 리턴값 shopmaxnum :" + shopmaxnum);
+		System.out.println("ShopService.java / insertShop의 리턴값 shopmaxnum :" + shopmaxnum);
 		
 		String result_shopCode = null;
 		int result = 0;
 		if(shopmaxnum != 0) {
 			result = shopmaxnum;
-			System.out.println("ShopService.java/ insertShop result1 :"+result);
+			System.out.println("ShopService.java / insertShop result1 :"+result);
 			result = result + 1;
-			System.out.println("ShopService.java/ insertShop result2 :"+result);
+			System.out.println("ShopService.java / insertShop result2 :"+result);
 			result_shopCode = String.format("%03d", result); // 자리수 맞추기
-			System.out.println("ShopService.java/ insertShop result3 :"+result_shopCode);
+			System.out.println("ShopService.java / insertShop result3 :"+result_shopCode);
 		} else {
 			result_shopCode = "001";
 		}
@@ -64,10 +64,10 @@ public class ShopService {
 	// 매장연락망리스트 및 조회
 	public void selectBranchCallList(Model model, String searchOption, String keyword, int currentPage) {
 		System.out.println("ShopService.java / selectBranchCallList method 확인");
-		System.out.println("ShopService.java / selectBranchCallList Param searchOption :" + model);
-		System.out.println("ShopService.java / selectBranchCallList Param keyword :" + searchOption);
-		System.out.println("ShopService.java / selectBranchCallList Param searchOption :" + keyword);
-		System.out.println("ShopService.java / selectBranchCallList Param keyword :" + currentPage);
+		System.out.println("ShopService.java / selectBranchCallList Param model :" + model);
+		System.out.println("ShopService.java / selectBranchCallList Param searchOption :" + searchOption);
+		System.out.println("ShopService.java / selectBranchCallList Param keyword :" + keyword);
+		System.out.println("ShopService.java / selectBranchCallList Param currentPage :" + currentPage);
 		Map<String, String> map;
 		if(searchOption != "") {
 			map = new HashMap<String, String>();

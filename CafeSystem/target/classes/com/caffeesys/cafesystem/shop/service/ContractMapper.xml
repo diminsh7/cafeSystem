@@ -28,7 +28,7 @@
     <!-- 계약서리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
-			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('all')">
 				WHERE contract_owner_name like CONCAT('%',#{keyword},'%')
 	      		OR contract_shop_name like CONCAT('%',#{keyword},'%')    

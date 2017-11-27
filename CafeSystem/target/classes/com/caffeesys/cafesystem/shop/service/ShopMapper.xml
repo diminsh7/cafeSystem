@@ -28,16 +28,23 @@
     </select>
     <!-- 매장리스트 및 조회 상세전 행의수 -->
     <select id="selectShopCount" parameterType="java.util.Map" resultType="Integer">
-        SELECT COUNT(*) FROM shop
+        SELECT COUNT(*) 
+        FROM shop s
+        INNER JOIN contract c
+		ON s.contract_code = c.contract_code
         <include refid="search"></include>
     </select>
     <!-- 매장리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
-			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('all')">
 				WHERE shop_name like CONCAT('%',#{keyword},'%')
-	      		OR shop_address like CONCAT('%',#{keyword},'%')    
+	      		OR shop_address like CONCAT('%',#{keyword},'%')   
+			</when>
+			<!-- 검색 옵션이 다른하나일 경우  -->
+			<when test = "searchOption.equals('contract_owner_name')">
+				WHERE c.contract_owner_name like CONCAT('%',#{keyword},'%')
 			</when>
 			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
@@ -112,7 +119,7 @@
     <!-- 매장연락망리스트 및 조회 상세전 sql조각 -->
    	<sql id="searchBranchCall">
 		<choose>
-			<!-- 검색 옵션이 전체 검색일 경우 -->
+			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('all')">
 				WHERE shop_name like CONCAT('%',#{keyword},'%')
 	      		OR shop_address like CONCAT('%',#{keyword},'%')    

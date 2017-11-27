@@ -26,8 +26,8 @@
 								<c:out value="${searchOption == 'all'?'selected':''}"/>>점포명+점포주소</option>
 							<option value="shop_name"
 								<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
-							<%-- <option value="contract_owner_name"
-									<c:out value="${map.searchOption == 'contractOwnerName'?'selected':''}"/>>소유자명</option> --%>
+							<option value="contract_owner_name"
+									<c:out value="${map.searchOption == 'contractOwnerName'?'selected':''}"/>>소유자명</option>
 							<option value="shop_address"
 								<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>점포주소</option>
 						</select>

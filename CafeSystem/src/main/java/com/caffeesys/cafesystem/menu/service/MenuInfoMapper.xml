@@ -13,6 +13,40 @@
 		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
 		<result property="categorySmall" column="category_small" /> <!-- category소분류M101~M109 -->
 	</resultMap>
-	
+	<!-- 메뉴리스트 및 조회 상세전 -->
+	<select id="selectMenuInfoList" parameterType="java.util.Map" resultMap="resultMenuInfo">
+		SELECT c.category_small, m.menu_name, m.menu_start, m.menu_image
+		FROM menu m
+		INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+		<include refid="search"></include>
+        ORDER BY m.menu_name DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 메뉴리스트 및 조회 상세전 행의수 -->
+    <select id="selectMenuInfoCount" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM menu m
+        INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+        <include refid="search"></include>
+    </select>
+    <!-- 메뉴리스트 및 조회 상세전 sql조각 -->
+    <sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체검색일 경우 -->
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
+			</when>
+			<!-- 검색 옵션이 다른하나일 경우  -->
+			<when test = "searchOption.equals('menu_name')">
+				WHERE menu_name like CONCAT('%',#{keyword},'%')
+			</when>
+			<!-- 전체검색이 아닐경우  -->
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
 </mapper>
  
