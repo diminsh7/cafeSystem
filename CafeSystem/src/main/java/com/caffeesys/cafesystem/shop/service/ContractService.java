@@ -1,16 +1,42 @@
 package com.caffeesys.cafesystem.shop.service;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.account.controller.PasingService;
 
 @Service
 public class ContractService {
 	
 	@Autowired
+	PasingService pasingService;
+	@Autowired
 	private ContractDao contractDao;
-
+	
+	// 계약서연락망리스트 및 조회
+	public void selectContractList(Model model, String searchOption, String keyword, int currentPage) {
+		System.out.println("ContractService.java / selectContractList method 확인");
+		System.out.println("ContractService.java / selectContractList Param searchOption :" + model);
+		System.out.println("ContractService.java / selectContractList Param keyword :" + searchOption);
+		System.out.println("ContractService.java / selectContractList Param searchOption :" + keyword);
+		System.out.println("ContractService.java / selectContractList Param keyword :" + currentPage);
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		System.out.println("ContractService.java"+map);
+		map = pasingService.paging(model, currentPage, 10, contractDao.selectContractCount(map), map);
+		model.addAttribute("contractList", contractDao.selectContractList(map));
+		model.addAttribute("contractCount", contractDao.selectContractCount(map));
+	}
 	// 계약서등록 과정
 	public int insertContract(ContractVo contract) {
 		System.out.println("ContractService.java/ insertContract method 확인");
@@ -34,12 +60,5 @@ public class ContractService {
 		contract.setContractCode(contractcode);
 		System.out.println("ContractService.java/ contract:"+contract);
 		return contractDao.insertContract(contract);
-	}
-	// 계약서검색조회 상세전
-	public List<ContractVo> searchContract(String searchOption, String keyword) {
-		System.out.println("ContractService.java/ searchContract method 확인");
-		System.out.println("ContractService.java / searchContract Param searchOption :" + searchOption);
-		System.out.println("ContractService.java / searchContract Param keyword :" + keyword);
-		return contractDao.searchContract(searchOption, keyword);
 	}
 }

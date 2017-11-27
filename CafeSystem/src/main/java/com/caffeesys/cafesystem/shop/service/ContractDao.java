@@ -1,6 +1,5 @@
 package com.caffeesys.cafesystem.shop.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,18 +15,15 @@ public class ContractDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	// 전체계약서조회 상세전
-	public List<ContractVo> selectContractList(int currentPage, int pagePerRow) {
+	// 계약서리스트 및 조회 상세전
+	public List<ContractVo> selectContractList(Map<String, String> map) {
 		System.out.println("ContractDao.java / selectContractList method 확인");
-	    Map<String, Integer> map = new HashMap<String, Integer>();
-	    map.put("beginRow", (currentPage-1)*pagePerRow);
-	    map.put("pagePerRow", pagePerRow);
-	    return sqlSessionTemplate.selectList(NS+"selectContractList", map);
+	     return sqlSessionTemplate.selectList(NS+"selectContractList", map);
 	}
-	// 전체계약서조회 상세전에서 전체행의 수
-	public int selectContractCount() {
+	// 계약서리스트 및 조회 상세전 행의수
+	public int selectContractCount(Map<String, String> map) {
 		System.out.println("ContractDao.java / selectContractCount method 확인");
-		return sqlSessionTemplate.selectOne(NS+"selectContractCount");
+		return sqlSessionTemplate.selectOne(NS+"selectContractCount", map);
 	}
 	// 계약서등록
 	public int insertContract(ContractVo contract) {
@@ -57,14 +53,5 @@ public class ContractDao {
 		contract.setContractCode(contractCode);
 		contract.setContractOwnerName(contractOwnerName);
 		return sqlSessionTemplate.delete(NS+"deleteContract", contract);
-	}
-	// 계약서검색조회 상세전
-	public List<ContractVo> searchContract(String searchOption, String keyword) {
-		System.out.println("ShopDao.java / searchContract Param searchOption: "+searchOption);
-		System.out.println("ShopDao.java / searchContract Param keyword: "+keyword);
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
-		return sqlSessionTemplate.selectList(NS+"searchContract", map);
 	}
 }

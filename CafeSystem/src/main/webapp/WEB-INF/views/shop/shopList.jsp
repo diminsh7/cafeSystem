@@ -18,19 +18,22 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>매장전체조회</h2>
-							<form action="./shopList" method="post" name="search">
-							<select name="searchOption">
-								<option value="all"
-									<c:out value="${searchOption == 'all'?'selected':''}"/>>점포명+점포주소</option>
-								<option value="shop_name"
-									<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
-								<option value="shop_address"
-									<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>점포주소</option>
-							</select> <input name="keyword" value="${keyword}"> <input
-								type="submit" value="조회">
-						</form>
 						<div class="clearfix"></div>
 					</div>
+					<form action="./shopList" method="post" name="search">
+						<select name="searchOption">
+							<option value="all"
+								<c:out value="${searchOption == 'all'?'selected':''}"/>>점포명+점포주소</option>
+							<option value="shop_name"
+								<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
+							<%-- <option value="contract_owner_name"
+									<c:out value="${map.searchOption == 'contractOwnerName'?'selected':''}"/>>소유자명</option> --%>
+							<option value="shop_address"
+								<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>점포주소</option>
+						</select>
+						<input name="keyword" value="${keyword}"> 
+						<input type="submit" value="조회">
+					</form>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">계약코드클릭-상세조회</p>
 						<div align="right">전체행의 수 : ${shopCount}</div>

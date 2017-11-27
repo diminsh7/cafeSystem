@@ -31,6 +31,7 @@
         SELECT COUNT(*) FROM shop
         <include refid="search"></include>
     </select>
+    <!-- 매장리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
 			<!-- 검색 옵션이 전체 검색일 경우 -->
@@ -108,6 +109,7 @@
         SELECT COUNT(*) FROM shop
         <include refid="searchBranchCall"></include>
     </select>
+    <!-- 매장연락망리스트 및 조회 상세전 sql조각 -->
    	<sql id="searchBranchCall">
 		<choose>
 			<!-- 검색 옵션이 전체 검색일 경우 -->

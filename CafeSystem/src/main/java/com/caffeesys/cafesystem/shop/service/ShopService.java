@@ -1,7 +1,6 @@
 package com.caffeesys.cafesystem.shop.service;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ public class ShopService {
 	
 	@Autowired
 	PasingService pasingService;
-	
 	@Autowired
 	private ShopDao shopDao;
 	
@@ -39,7 +37,6 @@ public class ShopService {
 		model.addAttribute("shopList", shopDao.selectShopList(map));
 		model.addAttribute("shopCount", shopDao.selectShopCount(map));
 	}
-	
 	// 계약서등록 과정
 	public int insertShop(ShopVO shop) {
 		System.out.println("ShopService.java/ insertShop method 확인");
