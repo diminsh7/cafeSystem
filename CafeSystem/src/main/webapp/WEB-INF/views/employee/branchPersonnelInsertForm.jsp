@@ -16,7 +16,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>지점 직원 등록 <small>모든 항목을 다 채워 주십시오.</small></h2>
-                    
+                  
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -30,23 +30,9 @@
                         </label> 
                         <div class="col-md-6 col-sm-6 col-xs-12">																														
                            <select name="localCategoryCode" id="localCategoryCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-							<option value='001'>서울특별시</option>
-							<option value='002'>부산광역시</option>
-							<option value='003'>대구광역시</option>
-							<option value='004'>인천광역시</option>
-							<option value='005'>대전광역시</option>
-							<option value='006'>광주광역시</option>
-							<option value='007'>울산광역시</option>
-							<option value='008'>세종특별자치시</option>
-							<option value='009'>경기도</option>
-							<option value='010'>강원도</option>
-							<option value='011'>충청북도</option>
-							<option value='012'>충청남도</option>
-							<option value='013'>전라북도</option>
-							<option value='014'>전라남도</option>
-							<option value='015'>경상북도</option>
-							<option value='016'>경상남도</option>
-							<option value='017'>제주도</option>
+							<c:forEach var="BPlocal" items="${localList}">
+                       			<option value='${BPlocal.categoryCode}'>${BPlocal.categorySmall}</option>
+                       		</c:forEach>
 						</select>
                         </div>
                       </div>
@@ -162,7 +148,8 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                          <a href="${pageContext.request.contextPath}/insertformbranchPersonneel" class="btn btn-primary"> 취소</a>
+                          <a class="btn btn-default" href="${pageContext.request.contextPath}/branchPersonnelList">목록</a>
+                          <a href="${pageContext.request.contextPath}/insertformbranchPersonneel" class="btn btn-primary">지우기</a>
                           <input type="submit" id="branchPersonnelInsertButton" name="branchPersonnelInsertButton" class="btn btn-success" value="등록">
                         </div>
                       </div>
@@ -172,4 +159,4 @@
               </div>
             </div>
           </div>
-        </div>
+		</div>

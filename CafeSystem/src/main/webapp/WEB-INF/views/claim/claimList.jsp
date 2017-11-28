@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<script>
+	$(document).ready(function(){
+		$('#claimSearchBtn').click(function(){
+			$('#claimSearchForm').submit();
+		})
+	});
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -9,17 +16,24 @@
 					CLAIM <small>고객 클레임</small> 
 				</h3>
 			</div>
-
-			<div class="title_right">
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
+			<form id="claimSearchForm" action="${pageContext.request.contextPath}/claimList" method="post">
+				<div class="title_right">
+					<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+						<select class="" id="claimSearchOption" name="claimSearchOption">
+								<option value="claimCategoryCode">>카테고리</option>
+								<option value="claimTitle">제목</option>
+								<option value="claimContents">내용</option>
+								<option value="claimDate">날짜</option>
+						</select>	
+						<div class="input-group">
+							<input type="text" class="form-control" name="claimSearchWord">
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="button" id="claimSearchBtn">Go!</button>
+							</span>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
 
 		<div class="clearfix"></div>
@@ -44,9 +58,9 @@
 							<thead>
 								<tr>
 									<th>번호</th>
-									<th>카테고리</th>
-									<th>글쓴이</th>
+									<th>카테고리</th>									
 									<th>제목</th>
+									<th>글쓴이</th>
 									<th>작성일</th>
 								</tr>
 							</thead>
@@ -54,9 +68,9 @@
 								<c:forEach var="claimList" items="${claimList}">
 									<tr>
 										<td>${claimList.claimCode}</td>
-										<td>${claimList.claimCategoryName}</td>
-										<td>${claimList.employeeCode}</td>
+										<td>${claimList.claimCategoryName}</td>									
 										<td><a href="${pageContext.request.contextPath}/claimDetail?claimCode=${claimList.claimCode}">${claimList.claimTitle}</a></td>
+										<td>${claimList.employeeCode}</td>
 										<td>${claimList.claimDate}</td>
 									</tr>
 								</c:forEach>

@@ -73,7 +73,10 @@
 				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchPersonnelMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
 				<value>classpath:com/caffeesys/cafesystem/board/service/BoardMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/account/service/SalesMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/menu/service/MenuPriceMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/category/service/CategoryMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/menu/service/MaterialMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/menu/service/MenuInfoMapper.xml</value>
 			</list>
 		</property>
 	</bean>

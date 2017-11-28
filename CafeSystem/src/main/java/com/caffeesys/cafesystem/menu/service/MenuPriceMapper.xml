@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuPriceMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuPriceVO" id="resultMenuPrice">
+		<result property="menuPriceCode" column="menu_price_code" /><!-- 메뉴 가격 관리 코드 -->
+		<result property="menuCode" column="menu_code" /><!-- 메뉴 코드 -->
+		<result property="tempCategory" column="temp_category" /><!-- 냉온 카테고리 -->
+		<result property="sizeCategory" column="size_category" /><!-- 사이즈 카테고리 -->
+		<result property="menuTotalCost" column="menu_totalcost" /><!-- 메뉴 원가 -->
+		<result property="menuSellCost" column="menu_sellcost" /><!--메뉴 판매가  -->
+		<result property="menuName" column="menu_name" /><!-- 메뉴 이름 -->
+		<result property="tempCateName" column="tempCateName" /><!-- 냉온 카테고리 이름 -->
+		<result property="sizeCateName" column="sizeCateName" /><!-- 사이즈 카테고리 이름 -->
+	</resultMap>
+	
+	<!-- 메뉴가격관리 총 숫자 -->
+	<select id="menuPriceCount" parameterType="java.util.Map" resultType="int">
+		SELECT COUNT(*) FROM menu_price
+		<if test="cate = menu_code">
+			WHERE ${cate} = #{input}	
+		</if>
+		<if test="cate = menu_name">
+			INNER JOIN menu
+				ON menu_price.menu_code = menu.menu_code
+			WHERE menu.${cate} = #{input}
+		</if>
+	</select>
+	
+	<!-- 메뉴 가격관리 리스트 및 검색, 페이징  -->
+	<select id="menuPriceList" parameterType="java.util.Map" resultMap="resultMenuPrice">
+		SELECT
+			menu_price_code
+			, mp.menu_code
+			, m.menu_name
+			, tempCate.category_small AS tempCateName
+			, sizeCate.category_small AS sizeCateName
+			, menu_totalcost
+			, menu_sellcost
+		FROM
+			menu_price AS mp
+			INNER JOIN menu AS m
+				ON mp.menu_code = m.menu_code
+			INNER JOIN category AS sizeCate
+				ON mp.size_category = sizeCate.category_code
+			INNER JOIN category AS tempCate
+				ON mp.temp_category = tempCate.category_code
+			
+		<if test="input != null">
+			WHERE m.${cate} = #{input}
+		</if>
+			ORDER BY mp.menu_code DESC
+		<if test="start != null">
+			LIMIT ${start}, ${pagePerRow}
+		</if>		
+	</select>
+	
+	<!-- 메뉴가격관리 입력 -->
+	<insert id="menuPriceInsert" parameterType="com.caffeesys.cafesystem.menu.service.MenuPriceVO">
+		INSERT INTO
+			menu_price (
+				menu_price_code
+				, menu_code
+				, temp_category
+				, size_category
+				, menu_totalcost
+				, menu_sellcost
+			) VALUSE (
+				#{menuCode}
+				, #{tempCategory}
+				, #{sizeCategory}
+				, #{menuTotalCost}
+				, #{menuCode}
+				, #{menuSellCost}
+			)
+	</insert>
+	
+	<!-- 메뉴 코드 자동 등록 -->
+	<select id="menuCodeInsert" parameterType="String" resultType="String">
+		SELECT 
+			menu_code
+		FROM
+			menu
+		WHERE
+			menu_name = #{menuName}
+	</select>
+	
+	<!-- 메뉴 원가 자동 등록 -->
+	<select id="materialInsert" parameterType="java.util.Map" resultType="Integer">
+		
+	</select>
+</mapper>
