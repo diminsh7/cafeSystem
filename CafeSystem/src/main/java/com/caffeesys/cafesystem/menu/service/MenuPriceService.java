@@ -55,11 +55,21 @@ public class MenuPriceService {
 		//session.setAttribute("top", "menuPrice");
 	}
 	
-	// 메뉴 코드 자동 입력
+	//메뉴 코드 자동 등록
 	public String menuCodeInsert(String menuName) {
 		System.out.println("[MenuPriceService.java / menuCodeInsert.method] Access");
 		//System.out.println("[MenuPriceService.java / menuCodeInsert.method] menuName param : " + menuName);
 		Gson gson = new Gson();
 		return gson.toJson(menuPriceDao.menuCodeInsert(menuName));
+	}
+	
+	//메뉴 원가 자동 등록
+	public String materialInsert(String tempCate, String sizeCate) {
+		System.out.println("[MenuPriceService.java / materialInsert.method] Access");
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("tempCate", tempCate);
+		map.put("sizeCate", sizeCate);
+		
+		return "";
 	}
 }

@@ -76,6 +76,7 @@
 			)
 	</insert>
 	
+	<!-- 메뉴 코드 자동 등록 -->
 	<select id="menuCodeInsert" parameterType="String" resultType="String">
 		SELECT 
 			menu_code
@@ -83,5 +84,10 @@
 			menu
 		WHERE
 			menu_name = #{menuName}
+	</select>
+	
+	<!-- 메뉴 원가 자동 등록 -->
+	<select id="materialInsert" parameterType="java.util.Map" resultType="Integer">
+		
 	</select>
 </mapper>

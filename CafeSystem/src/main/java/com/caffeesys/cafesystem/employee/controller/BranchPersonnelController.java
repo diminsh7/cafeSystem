@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelDao;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelService;
 import com.caffeesys.cafesystem.employee.service.BranchPersonnelVO;
-
+ 
 @Controller
 public class BranchPersonnelController {
 
@@ -36,6 +36,7 @@ public class BranchPersonnelController {
 	@RequestMapping(value = "/insertBranchPersonnel", method = RequestMethod.POST)
 	public String insertBranchManager(BranchPersonnelVO branchPersonnelVo) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점직원 입력 실행 컨트롤러");
+		System.out.println("branchPersonnelVo : " + branchPersonnelVo);
 		branchPersonnelService.insertBranchEmployee(branchPersonnelVo); //지점인사관리테이블 insert
 		branchPersonnelService.insertBranchPersonnel(branchPersonnelVo); //지점점주관리테이블 insert
 		return "redirect:/branchPersonnelList";

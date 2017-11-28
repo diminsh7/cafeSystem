@@ -40,12 +40,23 @@ public class MenuPriceController {
 		return "redirect:/menuPriceList";
 	}
 	
-	// 메뉴 코드 자동 입력
+	//메뉴 코드 자동 등록
 	@ResponseBody
 	@RequestMapping(value = "menuCodeInsert")
-	public String menuCodeInsert(@RequestParam(value = "menuName") String menuName) {
+	public String menuCodeInsert(@RequestParam(value = "menuName") String menuName) { //여기서 메뉴명 미입력을 막을 수는 없을까
 		System.out.println("[MenuPriceController.java / menuCodeInsert.method] Ajax success");
 		//System.out.println("[MenuPriceController.java / menuCodeInsert.method] menuName param : " + menuName);
 		return menuPriceService.menuCodeInsert(menuName);
+	}
+	
+	//메뉴 원가 자동 등록
+	@ResponseBody
+	@RequestMapping(value = "materialInsert")
+	public String materialInsert(@RequestParam(value = "tempCate") String tempCate
+								,@RequestParam(value = "sizeCate") String sizeCate) {
+		System.out.println("[MenuPriceController.java / materialInsert.method] Ajax success");
+		//System.out.println("[MenuPriceController.java / materialInsert.method] tempCate param : " + tempCate);
+		//System.out.println("[MenuPriceController.java / materialInsert.method] sizeCate param : " + sizeCate);
+		return menuPriceService.materialInsert(tempCate, sizeCate);
 	}
 }

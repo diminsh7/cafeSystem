@@ -8,8 +8,8 @@ function deleteb(){
 		document.$('#DeleteButton').submit();
 	}else{   
 			return false; //삭제 취소
-	}
-}
+	};
+};
 </script>
 
 <div class="right_col" role="main">
@@ -68,7 +68,7 @@ function deleteb(){
 							</tbody>
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchPersonnelForm?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
-						<a class="btn btn-default" onclick="deleteb" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
+						<a class="btn btn-default" onclick="deleteb()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
 					</div>
 					</c:forEach>
 				</div>
