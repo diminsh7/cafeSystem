@@ -39,9 +39,8 @@
 			<li><a><i class="fa fa-krw"></i> 매출 및 회계관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a
-						href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">지점매출조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
+					<li><a href="${pageContext.request.contextPath}/dailySalesList">지점매출조회</a></li>
 				</ul></li>
 		</ul>
 	</div>

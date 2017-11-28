@@ -128,7 +128,7 @@
 <!-- starrr -->
 <script src="<c:url value="/resources/vendors/starrr/dist/starrr.js" />"></script>
 <!-- Datatables -->
-<script src="<c:url value="/resources/vendors/datatables.net/js/jquery.dataTables.min.js" />"></script>
+<script src="<c:url value="/resources/vendors/datatables.net/js/jquery.dataTables.js" />"></script>
 <script src="<c:url value="/resources/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js" />"></script>
 <script src="<c:url value="/resources/vendors/datatables.net-buttons/js/dataTables.buttons.min.js" />"></script>
 <script src="<c:url value="/resources/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js" />"></script>

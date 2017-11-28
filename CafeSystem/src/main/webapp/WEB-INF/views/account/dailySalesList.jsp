@@ -11,21 +11,7 @@
 					매출 <small>Sales</small>
 				</h3>
 			</div>
-
-			<div class="title_right">
-				<div
-					class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control"
-							placeholder="Search for..."> <span
-							class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
-			</div>
 		</div>
-
 		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
@@ -37,6 +23,17 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
+						<div class="form-group" style="float: right;">
+							<form action="${pageContext.request.contextPath}/dailySalesSearch" method="get">
+								<select class="input-sm" style="float: left;">
+									<option value="">dd</option>
+									<option value="">ff</option>
+								</select>
+								<input type="search" name="search" class="input-sm" style="text-align: center; float: left;" placeholder="검색어 입력" aria-controls="datatable">
+								&nbsp; &nbsp;
+								<button type="submit" class="btn btn-primary btn-sm" id="loginButton" style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;"> 검색 </button>
+							</form>
+						</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -48,7 +45,6 @@
 									<th>일매출액</th>
 								</tr>
 							</thead>
-
 							<tbody>
 								<c:choose>
 									<c:when test="${fn:length(dailySalesList) > 0}">
@@ -69,7 +65,6 @@
 										</tr>
 									</c:otherwise>
 								</c:choose>
-
 							</tbody>
 						</table>
 					</div>
