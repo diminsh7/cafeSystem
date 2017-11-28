@@ -47,7 +47,7 @@
 									<tr>
 										<td>${menuInfo.categorySmall}</td>
 										<td><%-- <a
-											href="${pageContext.request.contextPath}/menuInfoDetail?menuCode=${menuInfo.menuCode}"> --%>${menuInfo.menuName}><!-- </a> --></td>
+											href="${pageContext.request.contextPath}/menuInfoDetail?menuCode=${menuInfo.menuCode}"> --%>${menuInfo.menuName}<!-- </a> --></td>
 										<td>${menuInfo.menuStart}</td>
 										<td>${menuInfo.menuImage}</td>
 									</tr>

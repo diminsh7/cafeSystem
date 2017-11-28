@@ -48,5 +48,25 @@
 			</otherwise>
 		</choose>
 	</sql>
+	<!-- 메뉴등록 -->
+	<insert id="insertMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		INSERT INTO menu (
+			menu_code, menu_category_code, menu_name, menu_start, menu_image, menu_recipe
+		) VALUES (
+			#{menuCode}, #{menuCategoryCode}, #{menuName}, #{menuStart}, #{menuImage}, #{menuRecipe}
+		)
+	</insert>
+	<!-- 메뉴등록의 menu_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<select id="selectMenuInfoMax" resultType="Integer">
+		select max(CAST(substring(menu_code,6) AS DECIMAL)
+		)  
+		from menu
+	</select>
+	<!-- 메뉴등록 category에서 소분류 가져오는 select -->
+	<select id="selectMenuInfoCategorySmall" resultMap="resultMenuInfo">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE '0%'
+	</select>
 </mapper>
  
