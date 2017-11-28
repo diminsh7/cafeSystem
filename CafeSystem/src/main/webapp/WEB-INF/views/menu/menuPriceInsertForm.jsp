@@ -1,21 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<script>
+	$(document).ready(function(){
+		$('#menuNameSearch').click(function(){
+			var menuName = $('#menuName').val();
+			//console.log(menuName);
+			$.ajax({
+				url:"menuCodeInsert"
+				, type:'GET'
+				, data:{"menuName":menuName}
+				, success:function(data){
+					var result = JSON.parse(data)
+					//console.log(result);
+					$('#menuCode').val(result);
+				}
+				, error:function(request, status, error){
+					alert('일치하는 메뉴명이 없습니다');
+				}
+			})
+		});
+	});
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>Form Elements</h3>
-			</div>
-			<div class="title_right">
-				<div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="button">Go!</button>
-						</span>
-					</div>
-				</div>
+				<h3>Menu Price Manager</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -23,65 +34,63 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>Form Design<small>different form elements</small></h2>
-						<ul class="nav navbar-right panel_toolbox">
-							<li>
-								<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-							</li>
-							<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Settings 1</a></li>
-									<li><a href="#">Settings 2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a class="close-link"><i class="fa fa-close"></i></a>
-							</li>
-						</ul>
+						<h2>Menu Price Manager<small>Menu Price Insert</small></h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<br />
-						<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+						<form id="menuPriceInsertForm" data-parsley-validate class="form-horizontal form-label-left">
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">First Name <span class="required">*</span></label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuName">Menu Name</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+									<input type="text" id="menuName" name="menuName" required="required" class="form-control col-md-7 col-xs-12">
+								</div>
+								<button type="button" id="menuNameSearch">입력</button>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Code</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="text" id="menuCode" name="menuCode" required="required" class="form-control col-md-7 col-xs-12" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Last Name<span class="required">*</span></label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Hot/Ice</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12">
+									<select class="form-control" id="tempCate">
+										<option value="">선택하세요</option>
+										<c:forEach var="cateList" items="${cateList}">
+											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
+												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
+											</c:if>
+										</c:forEach>
+									 </select>
+								</div>
+	                      	</div>
+	                      	<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate">Size</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<select class="form-control" id="sizeCate">
+										<option value="">선택하세요</option>
+										<c:forEach var="cateList" items="${cateList}">
+											<c:if test="${cateList.categoryMiddle eq 'Size'}">
+												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
+											</c:if>
+										</c:forEach>
+									 </select>
+								</div>
+	                      	</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuTotalCost">Menu Total Cost</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="text" id="menuTotalCost" name="menuTotalCost" required="required" class="form-control col-md-7 col-xs-12" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Middle Name / Initial</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">Menu Sell Cost</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name">
+									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
 								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<div id="gender" class="btn-group" data-toggle="buttons">
-										<label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-											<input type="radio" name="gender" value="male"> &nbsp; Male &nbsp;
-										</label>
-										<label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-											<input type="radio" name="gender" value="female"> Female
-										</label>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth
-									<span class="required">*</span>
-								</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text">
-								</div>
-							</div>
+							</div>							
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

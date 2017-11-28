@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.CommonService;
 import com.caffeesys.cafesystem.category.service.CategoryService;
+import com.google.gson.Gson;
 
 @Service
 public class MenuPriceService {
@@ -28,9 +29,9 @@ public class MenuPriceService {
 	@Autowired
 	HttpSession session;
 	
-	// 메뉴 가격 등록 폼
-	public void menuPriceInsert(Model model) {
-		
+	//메뉴 가격 등록 처리 (로그인 처리?)
+	public void menuPriceInsert(MenuPriceVO menuPrice) {
+		menuPriceDao.menuPriceInsert(menuPrice);
 	}
 	
 	// 메뉴 가격 리스트
@@ -49,9 +50,16 @@ public class MenuPriceService {
 		map = commonService.paging(model, currentPage, 2, menuPriceDao.menuPriceCount(map), map);
 		System.out.println("[MenuPriceService.java / menuPriceList.method] Paging 완료");
 		List<MenuPriceVO> list = menuPriceDao.menuPriceList(map);
-		System.out.println("-----------------------------------------" +list);
 		model.addAttribute("menuPriceList", list);
 		System.out.println("[MenuPriceService.java / menuPriceList.method] Complete");
 		//session.setAttribute("top", "menuPrice");
+	}
+	
+	// 메뉴 코드 자동 입력
+	public String menuCodeInsert(String menuName) {
+		System.out.println("[MenuPriceService.java / menuCodeInsert.method] Access");
+		//System.out.println("[MenuPriceService.java / menuCodeInsert.method] menuName param : " + menuName);
+		Gson gson = new Gson();
+		return gson.toJson(menuPriceDao.menuCodeInsert(menuName));
 	}
 }

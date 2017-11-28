@@ -19,8 +19,18 @@ public class MenuPriceDao {
 		return sqlSessionTemplate.selectOne(NS + "menuPriceCount", map);
 	}
 	
+	//메뉴 가격 리스트 및 검색 처리
 	public List<MenuPriceVO> menuPriceList(Map<String, String> map){
 		System.out.println("[MenuPriceDao.java / menuPriceList.method] Loading");
 		return sqlSessionTemplate.selectList(NS + "menuPriceList", map);
+	}
+	//메뉴 가격 입력 처리
+	public int menuPriceInsert(MenuPriceVO menuPrice) {
+		System.out.println("[MenuPriceDao.java / menuPriceInsert.method] Loading");
+		return sqlSessionTemplate.insert(NS + "menuPriceInsert", menuPrice);
+	}
+	//메뉴코드 자동입력
+	public String menuCodeInsert(String menuName) {
+		return sqlSessionTemplate.selectOne(NS + "menuCodeInsert", menuName);
 	}
 }

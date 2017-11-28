@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <script>
 		$('document').ready(function(){
-			//이전 다음 버튼 눌렀을시 검색조건 전송되도록
+			//이전 다음 버튼 눌렀을시 검색조건 그대로 유지하며 리스트 
 			$('.paging').click(function(){
 				var url = $(location).attr('pathname')+$(this).attr('href')
 				var str = '&cate='+$('#cate').val()+'&input='+$('#input').val()
