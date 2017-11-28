@@ -50,4 +50,12 @@ public class MenuInfoController {
 		menuInfoService.insertMenuInfo(menuInfo);
 		return "redirect:/menuInfoList";
 	}
+	// 메뉴상세조회
+	@RequestMapping(value = "/menuInfoDetail", method = RequestMethod.GET)
+	public String detailMenuInfo(Model model, @RequestParam(value = "menuName", required = true) String menuName) {
+		System.out.println("MenuInfoController.java / detailMenuInfo method GET방식 " + menuName);
+		MenuInfoVO menuInfo = menuInfoDao.selectMenuInfo(menuName);
+		model.addAttribute("menuInfo", menuInfo);
+		return "/menu/menuInfoDetail";
+	}
 }

@@ -40,4 +40,9 @@ public class MenuInfoDao {
 		System.out.println("MenuInfoDao.java / selectMenuInfoCategorySmall method 확인");
 		return sqlSessionTemplate.selectList(NS + "selectMenuInfoCategorySmall");
 	}
+	// 메뉴수정 및 메뉴상세조회
+	public MenuInfoVO selectMenuInfo(String menuName) {
+		System.out.println("MenuInfoDao.java / selectMenuInfo Param menuName: "+menuName);
+		return sqlSessionTemplate.selectOne(NS+"selectMenuInfo", menuName);
+	}
 }

@@ -68,5 +68,13 @@
 		FROM category
 		WHERE category_code LIKE 'M%'
 	</select>
+	 <!-- 메뉴수정 및 메뉴상세조회 -->
+    <select id="selectMenuInfo" parameterType="String" resultMap="resultMenuInfo">
+        SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image, m.menu_recipe
+		FROM menu m
+		INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+        WHERE m.menu_name = #{menuName}
+    </select>
 </mapper>
  
