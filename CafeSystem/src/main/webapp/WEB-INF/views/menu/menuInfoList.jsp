@@ -31,7 +31,7 @@
 						<input type="submit" value="조회">
 					</form>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">메뉴명클릭-상세조회</p>
+						<p class="text-muted font-13 m-b-30">메뉴코드클릭-상세조회</p>
 						<div align="right">전체행의 수 : ${menuInfoCount}</div>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -46,10 +46,10 @@
 							<tbody>
 								<c:forEach var="menuInfo" items="${menuInfoList}">
 									<tr>
-										<td>${menuInfo.menuCode}</td>
-										<td>${menuInfo.categorySmall}</td>
 										<td><a
-											href="${pageContext.request.contextPath}/menuInfoDetail?menuCode=${menuInfo.menuCode}">${menuInfo.menuName}</a></td>
+											href="${pageContext.request.contextPath}/menuInfoDetail?menuCode=${menuInfo.menuCode}">${menuInfo.menuCode}</a></td>
+										<td>${menuInfo.categorySmall}</td>
+										<td>${menuInfo.menuName}</td>
 										<td>${menuInfo.menuStart}</td>
 										<td>${menuInfo.menuImage}</td>
 									</tr>

@@ -73,4 +73,19 @@ public class MenuInfoController {
 		menuInfoDao.updateMenuInfo(menuInfo);
 		return "redirect:/menuInfoDetail?menuCode=" + menuInfo.getMenuCode();
 	}
+	// 메뉴삭제 페이지요청(메뉴명 입력)
+	@RequestMapping(value = "/deleteMenuInfo", method = RequestMethod.GET)
+	public String deleteMenuInfo(@RequestParam(value = "menuCode", required = true) String menuCode) {
+		System.out.println("MenuInfoController.java / deleteMenuInfo method GET방식 " + menuCode);
+		return "/menu/menuInfoDeleteForm";
+	}
+	// 메뉴삭제(액션)요청
+	@RequestMapping(value = "/deleteMenuInfo", method = RequestMethod.POST)
+	public String deleteMenuInfo(@RequestParam(value = "menuCode", required = true) String menuCode,
+			@RequestParam(value = "menuName", required = true) String menuName) {
+		System.out.println("MenuInfoController.java / deleteMenuInfo method POST방식 " + menuCode);
+		System.out.println("MenuInfoController.java / deleteMenuInfo method POST방식 " + menuName);
+		menuInfoDao.deleteMenuInfo(menuCode, menuName);
+		return "redirect:/menuInfoList";
+	}
 }

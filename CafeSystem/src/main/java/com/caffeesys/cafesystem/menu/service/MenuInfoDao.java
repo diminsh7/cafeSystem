@@ -50,4 +50,13 @@ public class MenuInfoDao {
 		System.out.println("MenuInfoDao.java / updateMenuInfo Param menuInfo: "+menuInfo);
 		return sqlSessionTemplate.update(NS+"updateMenuInfo", menuInfo);
 	}
+	// 메뉴삭제 메뉴명확인하고 삭제
+	public int deleteMenuInfo(String menuCode, String menuName) {
+		System.out.println("MenuInfoDao.java / deleteMenuInfo Param menuCode: "+menuCode);
+		System.out.println("MenuInfoDao.java / deleteMenuInfo Param menuName: "+menuName);
+		MenuInfoVO menuInfo = new MenuInfoVO();
+		menuInfo.setMenuCode(menuCode);
+		menuInfo.setMenuName(menuName);
+		return sqlSessionTemplate.delete(NS+"deleteMenuInfo", menuInfo);
+	}
 }

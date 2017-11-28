@@ -44,7 +44,7 @@
 							</tbody>
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateMenuInfo?menuCode=${menuInfo.menuCode}">수정</a>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteMenuInfo?menuName=${menuInfo.menuName}">삭제</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteMenuInfo?menuCode=${menuInfo.menuCode}">삭제</a>
 					</div>
 				</div>
 			</div>

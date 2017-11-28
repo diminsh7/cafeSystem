@@ -68,7 +68,7 @@
 		FROM category
 		WHERE category_code LIKE 'M%'
 	</select>
-	 <!-- 메뉴수정 및 메뉴상세조회 -->
+	<!-- 메뉴수정 및 메뉴상세조회 -->
     <select id="selectMenuInfo" parameterType="String" resultMap="resultMenuInfo">
         SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image, m.menu_recipe
 		FROM menu m
@@ -83,5 +83,11 @@
 			, menu_image = #{menuImage}, menu_recipe = #{menuRecipe}
 		WHERE menu_code = #{menuCode}
 	</update>
+	<!-- 메뉴삭제 메뉴명확인하고 삭제 -->
+    <delete id="deleteMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		DELETE FROM menu 
+		WHERE menu_code = #{menuCode}
+		AND menu_name = #{menuName}
+    </delete>
 </mapper>
  
