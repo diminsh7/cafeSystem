@@ -39,6 +39,37 @@ public class ClaimController {
 		claimDao.insertClaim(claim);
 		return "redirect:/claimList";
 	}
+	// 클레임 검색 처리
+	@RequestMapping(value="/claimList", method = RequestMethod.POST)
+	public String claimSearch(Model model, String claimSearchOption, String claimSearchWord, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) throws Exception {
+		logger.debug("[ClaimController.java/claimSearch Method] Loading");
+		claimDao.claimSearch(claimSearchOption, claimSearchWord);
+		
+		int claimCount = claimDao.getClaimCount();
+		int page = 1;
+		int pagePerRow = 10;
+		int lastPage = (int)(Math.ceil(claimCount / pagePerRow)) + 1;
+		List<ClaimVO> claimList = claimDao.getClaimList(currentPage, pagePerRow);
+		
+		//1,2,3.. 페이징을 위한 코드
+		int maxPage = (int)((double)claimCount/pagePerRow+0.95);
+		int startPage = (((int)((double)page / 10 + 0.9)) - 1 ) * 10 + 1;
+		int endPage = startPage+10-1;
+		if(endPage > maxPage) endPage = maxPage;
+		
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("claimCount", claimCount);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("claimList", claimList);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("maxPage", maxPage);
+				
+		return "/claim/claimList";
+	}
+	
+	
+	
 	// 클레임 리스트 요청
 	@RequestMapping(value ="/claimList", method = RequestMethod.GET)
 	public String claimList(Model model, HttpSession session, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) throws Exception {

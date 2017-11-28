@@ -3,13 +3,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
-$(document).click(function button_click(){
-	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){    //삭제처리
+function deleteb(){
+	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){  //삭제처리
 		document.$('#DeleteButton').submit();
 	}else{   
- 		return false; //삭제 취소
-	}
-});
+			return false; //삭제 취소
+	};
+};
 </script>
 
 <div class="right_col" role="main">
@@ -70,7 +70,7 @@ $(document).click(function button_click(){
 						</table>
 						
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
-						<a class="btn btn-default" onclick="button_click()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
+						<a class="btn btn-default" onclick="deleteb()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>
 						
 					</div>
 					</c:forEach>
@@ -79,4 +79,3 @@ $(document).click(function button_click(){
 		</div>
 	</div>
 </div>
-<!-- /page content -->

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MaterialMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MaterialVO" id="resultMarerial">
+		<result property="materialCode" column="menu_price_code" /> <!-- 재료원가관리코드 -->
+		<result property="menuCode" column="menu_code" /><!-- 메뉴코드 -->
+		<result property="tempCategoryCode" column="temp_category_code" /><!-- 온도 -->
+		<result property="sizeCategoryCode" column="size_category_code" /><!-- 사이즈 -->
+		<result property="itemCode" column="item_code" /><!--품목코드  -->
+		<result property="materialMeasure" column="material_measure" /><!-- 단위 -->
+		<result property="materialCost" column="material_cost" /><!-- 단가  -->
+	</resultMap>
+</mapper>
