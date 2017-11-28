@@ -4,12 +4,146 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.menu.service.MaterialMapper">
 	<resultMap type="com.caffeesys.cafesystem.menu.service.MaterialVO" id="resultMarerial">
-		<result property="materialCode" column="menu_price_code" /> <!-- 재료원가관리코드 -->
+		<result property="materialCode" column="material_code" /> <!-- 재료원가관리코드 -->
 		<result property="menuCode" column="menu_code" /><!-- 메뉴코드 -->
-		<result property="tempCategoryCode" column="temp_category_code" /><!-- 온도 -->
-		<result property="sizeCategoryCode" column="size_category_code" /><!-- 사이즈 -->
+		<result property="tempCategoryCode" column="temp_category_code" /><!-- 온도코드 -->
+		<result property="sizeCategoryCode" column="size_category_code" /><!-- 사이즈코드 -->
 		<result property="itemCode" column="item_code" /><!--품목코드  -->
 		<result property="materialMeasure" column="material_measure" /><!-- 단위 -->
 		<result property="materialCost" column="material_cost" /><!-- 단가  -->
+		<result property="menuName" column="menu_name" /><!-- 메뉴이름  -->
+		<result property="itemName" column="item_name" /><!-- 품목이름 -->
+		<result property="tempcate" column="tempcate" /><!-- 온도 명 -->
+		<result property="sizecate" column="sizecate" /><!-- 사이즈 명 -->
+		<result property="categorySmall" column="category_small" /><!-- 그 외 카테고리 -->
 	</resultMap>
+	
+	<!-- DB menu에서 메뉴명,코드 select -->
+	<select id="selectMenuName" resultMap="resultMarerial">
+		SELECT menu_code, menu_name
+		FROM menu
+	</select>
+	
+	<!-- DB category에서 size select -->
+	<select id="selectSize" resultMap="resultMarerial">
+		SELECT sizecategory.category_code as size_category_code,
+				sizecategory.category_small as sizecate
+		FROM category as sizecategory
+		WHERE sizecategory.category_middle = 'size'
+	</select>
+	
+	<!-- DB category에서 tmpe select -->
+	<select id="selectTemp" resultMap="resultMarerial">
+		SELECT tempcategory.category_code as temp_category_code, 
+				tempcategory.category_small as tempcate
+		FROM category as tempcategory
+		WHERE tempcategory.category_middle = 'Temp'
+		
+
+	</select>
+	
+	<!-- DB item에서 품목명,코드 select -->
+	<select id="selectitem" resultMap="resultMarerial">
+		SELECT item_code, item_name
+		FROM item
+		WHERE item_category_code != '606' 
+		AND item_category_code != '607'
+	</select>
+	
+	<!-- 마지막 코드 번호 구하기 -->
+	<select id="selectMaterialCodeMax" resultType="Integer">
+		select max(material_code)  
+		from material;
+	</select>
+	
+	
+	<!-- DB material insert-->
+	<insert id="insertMaterial" parameterType="com.caffeesys.cafesystem.menu.service.MaterialVO">
+		INSERT INTO material(
+			material_code, menu_code, temp_category_code, size_category_code, item_code, material_measure, material_cost
+		) VALUES (
+			#{materialCode}, 
+			#{menuCode}, 
+			#{tempCategoryCode}, 
+			#{sizeCategoryCode},
+			#{itemCode}, 
+			#{materialMeasure}, 
+			#{materialCost}
+		)
+	</insert>
+	
+	<!-- 리스트  -->
+	<select id="selectMaterialList" resultMap="resultMarerial">
+		SELECT 
+			material.material_code,
+			menu.menu_name,
+			tempcategory.category_small AS tempcate,
+			sizecategory.category_small AS sizecate,
+			item.item_name,
+			material.material_measure,
+			material.material_cost
+		FROM material INNER JOIN menu
+			ON material.menu_code = menu.menu_code
+		INNER JOIN item
+			ON material.item_code = item.item_code
+		INNER JOIN category AS tempcategory
+			ON material.temp_category_code = tempcategory.category_code
+		INNER JOIN category AS sizecategory
+			ON material.size_category_code = sizecategory.category_code		
+	</select>
+	
+	<!-- 삭제 -->
+	<delete id="deleteMaterial" parameterType="com.caffeesys.cafesystem.menu.service.MaterialVO">
+		DELETE FROM material WHERE material_code = #{materialCode}
+	</delete>
+	
+	<!-- 수정 폼 -->
+	<select id="selectUpdateMaterial" resultMap="resultMarerial">
+		SELECT 
+			material.material_code,
+			menu.menu_name,
+			material.menu_code,
+			tempcategory.category_small AS tempcate,
+			material.temp_category_code,
+			sizecategory.category_small AS sizecate,
+			material.size_category_code,
+			item.item_name,
+			material.item_code,
+			material.material_measure,
+			material.material_cost
+		
+		FROM material INNER JOIN menu
+			ON material.menu_code = menu.menu_code
+		INNER JOIN item
+			ON material.item_code = item.item_code
+		INNER JOIN category AS tempcategory
+			ON material.temp_category_code = tempcategory.category_code
+		INNER JOIN category AS sizecategory
+			ON material.size_category_code = sizecategory.category_code
+		
+		WHERE material.material_code = #{materialCode}
+	</select>
+			
+	<!-- 업데이트 -->
+	<update id="updateMaterial" parameterType="com.caffeesys.cafesystem.menu.service.MaterialVO">
+		UPDATE material
+		SET 
+			menu_code=#{menuCode},
+			temp_category_code=#{tempCategoryCode},
+			size_category_code=#{sizeCategoryCode},
+			item_code=#{itemName},
+			material_measure=#{materialMeasure},
+			material_cost=#{materialCost}
+		WHERE material_code=#{materialCode}
+	</update>
+	
+	
+
+
+
+
+
 </mapper>
+
+
+
