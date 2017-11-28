@@ -27,7 +27,7 @@
 							<option value="menu_name"
 								<c:out value="${map.searchOption == 'menuName'?'selected':''}"/>>메뉴명</option>
 						</select>
-						<input name="keyword" value="${keyword}"> 
+						<input name="keyword" value="${keyword}">
 						<input type="submit" value="조회">
 					</form>
 					<div class="x_content">
