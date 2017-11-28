@@ -25,4 +25,19 @@ public class MenuInfoDao {
 		System.out.println("MenuInfoDao.java / selectMenuInfoCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectMenuInfoCount", map);
 	}
+	// 메뉴등록
+	public int insertMenuInfo(MenuInfoVO MenuInfo) {
+		System.out.println("MenuInfoDao.java / insertMenuInfo Param shop: "+MenuInfo);
+		return sqlSessionTemplate.insert(NS+"insertMenuInfo", MenuInfo);
+	}
+	// 메뉴등록의 menu_code컬럼에서 글자말고, 숫자의 최대값 증가 select
+	public int selectMenuInfoMax() {
+		System.out.println("MenuInfoDao.java / selectMenuInfoMax method 확인");
+		return sqlSessionTemplate.selectOne(NS+"selectMenuInfoMax");
+	}
+	// 메뉴등록 category에서 소분류 가져오는 select 
+	public List<MenuInfoVO> selectMenuInfoCategorySmall(){
+		System.out.println("MenuInfoDao.java / selectMenuInfoCategorySmall method 확인");
+		return sqlSessionTemplate.selectList(NS + "selectMenuInfoCategorySmall");
+	}
 }

@@ -37,7 +37,7 @@ public class ShopService {
 		model.addAttribute("shopList", shopDao.selectShopList(map));
 		model.addAttribute("shopCount", shopDao.selectShopCount(map));
 	}
-	// 매장등록 과정
+	// 매장등록 과정 기존코드자동증가 말고 다른값비교후 코드자동증가
 	public int insertShop(ShopVO shop) {
 		System.out.println("ShopService.java / insertShop method 확인");
 		System.out.println("ShopService.java / insertShop Param shop :" + shop);

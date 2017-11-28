@@ -30,7 +30,7 @@ public class ShopDao {
 		System.out.println("ShopDao.java / insertShop Param shop: "+shop);
 		return sqlSessionTemplate.insert(NS+"insertShop", shop);
 	}
-	// 매장의 shop_code컬럼에서 글자말고, 숫자의 최대값 증가 select
+	// 매장등록 과정 기존코드자동증가 말고 다른값비교후 코드자동증가
 	public int selectShopMax(ShopVO shop) {
 		System.out.println("ShopDao.java / selectShopMax method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectShopMax", shop);

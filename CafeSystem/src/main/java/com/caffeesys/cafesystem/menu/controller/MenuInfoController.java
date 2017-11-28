@@ -1,13 +1,17 @@
 package com.caffeesys.cafesystem.menu.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.caffeesys.cafesystem.menu.service.MenuInfoDao;
 import com.caffeesys.cafesystem.menu.service.MenuInfoService;
+import com.caffeesys.cafesystem.menu.service.MenuInfoVO;
 
 @Controller
 public class MenuInfoController {
@@ -30,5 +34,20 @@ public class MenuInfoController {
 		System.out.println("MenuInfoController.java"+currentPage);
 		menuInfoService.selectMenuInfoList(model, searchOption, keyword, currentPage);
 		return "/menu/menuInfoList";
+	}
+	// 메뉴등록 페이지요청
+	@RequestMapping(value="/insertMenuInfo", method = RequestMethod.GET)
+	public String insertMenuInfo(Model model) {
+		System.out.println("MenuInfoController.java / insertMenuInfo method GET방식 ");
+		List<MenuInfoVO> CategoryMenuList = menuInfoDao.selectMenuInfoCategorySmall();
+		model.addAttribute("CategoryMenuList",CategoryMenuList);
+		return "/menu/menuInfoInsertForm";
+	}
+	// 메뉴등록(액션)요청
+	@RequestMapping(value="/insertMenuInfo", method = RequestMethod.POST)
+	public String insertMenuInfo(MenuInfoVO menuInfo) {
+		System.out.println("MenuInfoController.java / insertMenuInfo method POST방식 " + menuInfo);
+		menuInfoService.insertMenuInfo(menuInfo);
+		return "redirect:/menuInfoList";
 	}
 }

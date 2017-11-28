@@ -62,7 +62,7 @@
 			, #{shopAddress}, #{shopCall}, #{shopPostcode}, #{shopSize}
 		)
 	</insert>
-	<!-- 매장등록의 shop_code컬럼에서 숫자의 최대값 증가 select -->
+	<!-- 매장등록 과정 기존코드자동증가 말고 다른값비교후 코드자동증가 -->
 	<select id="selectShopMax" resultType="Integer">
 		SELECT max(CAST(shop_code AS DECIMAL))  
 		FROM shop

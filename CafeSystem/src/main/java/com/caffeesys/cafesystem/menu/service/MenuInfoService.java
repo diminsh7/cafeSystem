@@ -37,4 +37,28 @@ public class MenuInfoService {
 		model.addAttribute("menuInfoList", menuInfoDao.selectMenuInfoList(map));
 		model.addAttribute("menuInfoCount", menuInfoDao.selectMenuInfoCount(map));
 	}
+	// 메뉴등록 과정
+	public int insertMenuInfo(MenuInfoVO menuInfo) {
+		System.out.println("MenuInfoService.java / insertMenuInfo method 확인");
+		System.out.println("MenuInfoService.java / insertMenuInfo Param menuInfo :" + menuInfo);
+		int menuInfomaxnum = menuInfoDao.selectMenuInfoMax();
+		System.out.println("MenuInfoService.java / insertMenuInfo의 리턴값 menuInfomaxnum :" + menuInfomaxnum);		
+		String menu_code_temp = "menu_";
+		String menucode = "menu_001";
+		String result_no = null;
+		int result = 0;
+		if(menuInfomaxnum != 0) {
+			result = menuInfomaxnum;
+			System.out.println("MenuInfoService.java / insertMenuInfo result1 :"+result);
+			result = result + 1;
+			System.out.println("MenuInfoService.java / insertMenuInfo result2 :"+result);
+			result_no = String.format("%03d", result); // 자리수 맞추기
+			System.out.println("MenuInfoService.java / insertMenuInfo result3 :"+result_no);
+		}
+		menucode = menu_code_temp+ result_no;
+		System.out.println("menucode : "+ menucode);
+		menuInfo.setMenuCode(menucode);
+		System.out.println("MenuInfoService.java / menuInfo:"+menuInfo);
+		return menuInfoDao.insertMenuInfo(menuInfo);
+	}
 }
