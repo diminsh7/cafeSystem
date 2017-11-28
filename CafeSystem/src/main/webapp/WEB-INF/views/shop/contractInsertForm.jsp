@@ -6,8 +6,8 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>계약서관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">전체계약서 리스트</a>
+				<h3>가맹계약서관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/contractList">계약서(전체리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -15,7 +15,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>계약서 등록</h2>
+						<h2>계약서등록</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -51,7 +51,7 @@
 									<input id="contractOwnerPhone"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerPhone" required="required" type="text">
+										name="contractOwnerPhone" required="required" type="text" placeholder="ex)010-0000-0000">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -78,14 +78,13 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약서사진 파일작업보류!<span class="required">*</span>
+									for="name">계약서사진<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractPhoto"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="text">
-									<!-- file인데 일단 text로 테스트작업 -->
+										name="contractPhoto" required="required" type="file">
 								</div>
 							</div>
 							<div class="ln_solid"></div>

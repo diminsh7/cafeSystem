@@ -1,7 +1,7 @@
 package com.caffeesys.cafesystem.shop.service;
 
 public class ContractVo {
-	private String contractCode; // 계약코드
+	private String contractCode; // 계약코드(PK)
 	private String contractOwnerName; // 소유자명
 	private String contractShopName; // 점포명
 	private String contractOwnerPhone; // 소유자연락처
