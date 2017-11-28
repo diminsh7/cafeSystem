@@ -9,7 +9,7 @@
 				<a class="btn btn-default" href="">목록</a>
 				<a class="btn btn-default" href="">직원등록</a>
 			</div>
-		</div>
+		</div> 
 		<div class="clearfix"></div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">

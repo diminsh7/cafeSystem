@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.menu.service;
 
-public class MaterialVO {
+public class MaterialVO {  
 	private int materialCode; // 재료원가관리코드
 	private String menuCode; // 메뉴코드
 	private String tempCategoryCode; //온도코드
