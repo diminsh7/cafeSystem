@@ -41,8 +41,13 @@ public class MenuInfoDao {
 		return sqlSessionTemplate.selectList(NS + "selectMenuInfoCategorySmall");
 	}
 	// 메뉴수정 및 메뉴상세조회
-	public MenuInfoVO selectMenuInfo(String menuName) {
-		System.out.println("MenuInfoDao.java / selectMenuInfo Param menuName: "+menuName);
-		return sqlSessionTemplate.selectOne(NS+"selectMenuInfo", menuName);
+	public MenuInfoVO selectMenuInfo(String menuCode) {
+		System.out.println("MenuInfoDao.java / selectMenuInfo Param menuCode: "+menuCode);
+		return sqlSessionTemplate.selectOne(NS+"selectMenuInfo", menuCode);
+	}
+	// 메뉴수정
+	public int updateMenuInfo(MenuInfoVO menuInfo) {
+		System.out.println("MenuInfoDao.java / updateMenuInfo Param menuInfo: "+menuInfo);
+		return sqlSessionTemplate.update(NS+"updateMenuInfo", menuInfo);
 	}
 }

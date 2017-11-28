@@ -52,10 +52,25 @@ public class MenuInfoController {
 	}
 	// 메뉴상세조회
 	@RequestMapping(value = "/menuInfoDetail", method = RequestMethod.GET)
-	public String detailMenuInfo(Model model, @RequestParam(value = "menuName", required = true) String menuName) {
-		System.out.println("MenuInfoController.java / detailMenuInfo method GET방식 " + menuName);
-		MenuInfoVO menuInfo = menuInfoDao.selectMenuInfo(menuName);
+	public String detailMenuInfo(Model model, @RequestParam(value = "menuCode", required = true) String menuCode) {
+		System.out.println("MenuInfoController.java / detailMenuInfo method GET방식 " + menuCode);
+		MenuInfoVO menuInfo = menuInfoDao.selectMenuInfo(menuCode);
 		model.addAttribute("menuInfo", menuInfo);
 		return "/menu/menuInfoDetail";
+	}
+	// 메뉴수정 페이지요청
+	@RequestMapping(value = "/updateMenuInfo", method = RequestMethod.GET)
+	public String updateMenuInfo(Model model, @RequestParam(value = "menuCode", required = true) String menuCode) {
+		System.out.println("MenuInfoController.java / updateMenuInfo method GET방식 " + menuCode);
+		MenuInfoVO menuInfo = menuInfoDao.selectMenuInfo(menuCode);
+		model.addAttribute("menuInfo", menuInfo);
+		return "/menu/menuInfoUpdateForm";
+	}
+	// 메뉴수정(액션)요청
+	@RequestMapping(value = "/updateMenuInfo", method = RequestMethod.POST)
+	public String updateMenuInfo(MenuInfoVO menuInfo) {
+		System.out.println("MenuInfoController.java / updateMenuInfo method POST방식 " + menuInfo);
+		menuInfoDao.updateMenuInfo(menuInfo);
+		return "redirect:/menuInfoDetail?menuCode=" + menuInfo.getMenuCode();
 	}
 }

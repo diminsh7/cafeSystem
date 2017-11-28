@@ -15,12 +15,12 @@
 	</resultMap>
 	<!-- 메뉴리스트 및 조회 상세전 -->
 	<select id="selectMenuInfoList" parameterType="java.util.Map" resultMap="resultMenuInfo">
-		SELECT c.category_small, m.menu_name, m.menu_start, m.menu_image
+		SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image
 		FROM menu m
 		INNER JOIN category c
 		ON m.menu_category_code = c.category_code
 		<include refid="search"></include>
-        ORDER BY m.menu_name DESC
+        ORDER BY m.menu_code DESC
         LIMIT ${beginRow}, ${pagePerRow}
     </select>
     <!-- 메뉴리스트 및 조회 상세전 행의수 -->
@@ -74,7 +74,14 @@
 		FROM menu m
 		INNER JOIN category c
 		ON m.menu_category_code = c.category_code
-        WHERE m.menu_name = #{menuName}
+        WHERE m.menu_code = #{menuCode}
     </select>
+    <!-- 메뉴수정 -->
+	<update id="updateMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		UPDATE menu
+		SET menu_name = #{menuName}, menu_start = #{menuStart}
+			, menu_image = #{menuImage}, menu_recipe = #{menuRecipe}
+		WHERE menu_code = #{menuCode}
+	</update>
 </mapper>
  

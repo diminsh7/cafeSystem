@@ -81,7 +81,8 @@
 	</select>
     <!-- 매장수정 및 매장상세조회 -->
     <select id="selectShop" parameterType="String" resultMap="resultShop">
-        SELECT s.contract_code, c.contract_owner_name, s.shop_name, s.shop_address, s.shop_call, s.shop_postcode, s.shop_size
+        SELECT s.contract_code, c.contract_owner_name, s.shop_name, s.shop_address
+        	, s.shop_call, s.shop_postcode, s.shop_size
         FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code

@@ -36,6 +36,7 @@
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
+									<th>메뉴코드</th>
 									<th>메뉴카테고리명</th>
 									<th>메뉴명</th>
 									<th>출시일</th>
@@ -45,9 +46,10 @@
 							<tbody>
 								<c:forEach var="menuInfo" items="${menuInfoList}">
 									<tr>
+										<td>${menuInfo.menuCode}</td>
 										<td>${menuInfo.categorySmall}</td>
 										<td><a
-											href="${pageContext.request.contextPath}/menuInfoDetail?menuName=${menuInfo.menuName}">${menuInfo.menuName}</a></td>
+											href="${pageContext.request.contextPath}/menuInfoDetail?menuCode=${menuInfo.menuCode}">${menuInfo.menuName}</a></td>
 										<td>${menuInfo.menuStart}</td>
 										<td>${menuInfo.menuImage}</td>
 									</tr>
