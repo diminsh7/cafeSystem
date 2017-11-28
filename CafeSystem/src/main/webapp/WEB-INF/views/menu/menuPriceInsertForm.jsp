@@ -5,20 +5,43 @@
 	$(document).ready(function(){
 		$('#menuNameSearch').click(function(){
 			var menuName = $('#menuName').val();
-			//console.log(menuName);
-			$.ajax({
-				url:"menuCodeInsert"
-				, type:'GET'
-				, data:{"menuName":menuName}
-				, success:function(data){
-					var result = JSON.parse(data)
-					//console.log(result);
-					$('#menuCode').val(result);
-				}
-				, error:function(request, status, error){
-					alert('일치하는 메뉴명이 없습니다');
-				}
-			})
+			var tempCate = $('#tempCate').val();
+			var sizeCate = $('#sizeCate').val();
+			
+			if(tempCate == 'empty' || sizeCate == 'empty'){
+				alert('카테고리를 선택해주세요');
+				return false;
+			} else {		
+				$.ajax({ //메뉴 코드 자동 등록
+					url:"menuCodeInsert"
+					, type:'GET'
+					, data:{"menuName":menuName}
+					, success:function(data){
+						var result = JSON.parse(data);
+							if(result != null){
+								$('#menuCode').val(result);
+							} else {								
+								alert('일치하는 메뉴명이 없습니다');
+								return false;
+							}
+					}
+					, error:function(request, status, error){
+						alert('메뉴 코드 자동 등록 실패');
+					}
+				});
+				
+				$.ajax({ //메뉴 원가 자동 등록
+					url:"materialInsert"
+					, type:'GET'
+					, data:{"tempCate":tempCate,"sizeCate":sizeCate}
+					, success:function(data){
+						
+					}
+					, error:function(request, status, error){
+						alert('메뉴 원가 자동 등록 실패');
+					}
+				});
+			}
 		});
 	});
 </script>
@@ -45,7 +68,6 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" id="menuName" name="menuName" required="required" class="form-control col-md-7 col-xs-12">
 								</div>
-								<button type="button" id="menuNameSearch">입력</button>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Code</label>
@@ -56,8 +78,8 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Hot/Ice</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="tempCate">
-										<option value="">선택하세요</option>
+									<select class="form-control" id="tempCate" required>
+										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
 												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
@@ -67,10 +89,10 @@
 								</div>
 	                      	</div>
 	                      	<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate">Size</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate" required>Size</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select class="form-control" id="sizeCate">
-										<option value="">선택하세요</option>
+										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Size'}">
 												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
@@ -78,6 +100,7 @@
 										</c:forEach>
 									 </select>
 								</div>
+								<button type="button" id="menuNameSearch">입력</button>
 	                      	</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuTotalCost">Menu Total Cost</label>

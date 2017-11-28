@@ -24,13 +24,22 @@ public class MenuPriceDao {
 		System.out.println("[MenuPriceDao.java / menuPriceList.method] Loading");
 		return sqlSessionTemplate.selectList(NS + "menuPriceList", map);
 	}
+	
 	//메뉴 가격 입력 처리
 	public int menuPriceInsert(MenuPriceVO menuPrice) {
 		System.out.println("[MenuPriceDao.java / menuPriceInsert.method] Loading");
 		return sqlSessionTemplate.insert(NS + "menuPriceInsert", menuPrice);
 	}
-	//메뉴코드 자동입력
+	
+	//메뉴 코드 자동 등록
 	public String menuCodeInsert(String menuName) {
+		System.out.println("[MenuPriceDao.java / menuCodeInsert.method] Loading");
 		return sqlSessionTemplate.selectOne(NS + "menuCodeInsert", menuName);
+	}
+	
+	//메뉴 원가 자동 등록
+	public String materialInsert(Map<String, String> map) { //list로 리턴 넘겨야함
+		System.out.println("[MenuPriceDao.java / materialInsert.method] Loading");
+		return sqlSessionTemplate.selectOne(NS + "materialInsert", map);
 	}
 }
