@@ -37,4 +37,28 @@ public class ItemService {
 		model.addAttribute("itemList", itemDao.selectItemList(map));
 		model.addAttribute("itemCount", itemDao.selectItemCount(map));
 	}
+	// 발주품목등록 과정
+	public int insertItem(ItemVO item) {
+		System.out.println("ItemService.java / insertItem method 확인");
+		System.out.println("ItemService.java / insertItem Param item :" + item);
+		int itemmaxnum = itemDao.selectItemMax();
+		System.out.println("ItemService.java / insertItem의 리턴값 itemmaxnum :" + itemmaxnum);		
+		String item_code_temp = "item_";
+		String itemcode = "item_001";
+		String result_no = null;
+		int result = 0;
+		if(itemmaxnum != 0) {
+			result = itemmaxnum;
+			System.out.println("ItemService.java / insertItem result1 :"+result);
+			result = result + 1;
+			System.out.println("ItemService.java / insertItem result2 :"+result);
+			result_no = String.format("%03d", result); // 자리수 맞추기
+			System.out.println("ItemService.java / insertItem result3 :"+result_no);
+		}
+		itemcode = item_code_temp+ result_no;
+		System.out.println("itemcode : "+ itemcode);
+		item.setItemCode(itemcode);
+		System.out.println("ItemService.java / item:"+item);
+		return itemDao.insertItem(item);
+	}
 }

@@ -1,13 +1,17 @@
 package com.caffeesys.cafesystem.order.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.caffeesys.cafesystem.order.service.ItemDao;
 import com.caffeesys.cafesystem.order.service.ItemService;
+import com.caffeesys.cafesystem.order.service.ItemVO;
 
 @Controller
 public class ItemController {
@@ -30,5 +34,20 @@ public class ItemController {
 		System.out.println("ItemController.java"+currentPage);
 		itemService.selectItemList(model, searchOption, keyword, currentPage);
 		return "/order/itemList";
+	}
+	// 발주품목등록 페이지요청
+	@RequestMapping(value="/insertItem", method = RequestMethod.GET)
+	public String insertItem(Model model) {
+		System.out.println("ItemController.java / insertItem method GET방식 ");
+		List<ItemVO> CategoryItemList = itemDao.selectItemCategorySmall();
+		model.addAttribute("CategoryItemList",CategoryItemList);
+		return "/order/itemInsertForm";
+	}
+	// 발주품목등록(액션)요청
+	@RequestMapping(value="/insertItem", method = RequestMethod.POST)
+	public String insertItem(ItemVO item) {
+		System.out.println("ItemController.java / insertItem method POST방식 " + item);
+		itemService.insertItem(item);
+		return "redirect:/itemList";
 	}
 }

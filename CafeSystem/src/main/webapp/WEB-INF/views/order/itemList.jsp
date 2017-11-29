@@ -8,7 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>발주품목관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a> 
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertItem">발주품목(등록)</a>
 			</div>
 		</div>
@@ -41,7 +41,7 @@
 									<th>품목명</th>
 									<th>품목가격</th>
 									<th>품목이미지</th>
-									<th>품목발주가능여부</th>
+									<th>발주가능여부</th>
 								</tr>
 							</thead>
 							<tbody>
