@@ -70,11 +70,12 @@ public class MaterialController {
 	//수정 폼 이동 컨트롤러
 	@RequestMapping(value = "/updateMaterial", method = RequestMethod.GET)
 	public String updateMaterial(Model model,@RequestParam(value = "materialCode", required = true) int materialCode) throws Exception {
-		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 컨트롤러");
+		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 폼 페이지 이동 컨트롤러");
 		List<MaterialVO> selectManuName = materialDao.selectManuName();
 		List<MaterialVO> selectSize = materialDao.selectSize();
 		List<MaterialVO> selectTemp = materialDao.selectTemp();
 		List<MaterialVO> selectitem = materialDao.selectitem();
+		System.out.println("selectitem : " + selectitem);
 		List<MaterialVO> materiaList= materialDao.selectUpdateMaterial(materialCode);
 		model.addAttribute("ManuNameList",selectManuName);
 		model.addAttribute("Size",selectSize);
@@ -82,6 +83,13 @@ public class MaterialController {
 		model.addAttribute("item",selectitem);
 		model.addAttribute("updateMaterial", materiaList);
 		return "menu/materialUpdateForm";
+	}
+	//수정 실행 updateMaterial 
+	@RequestMapping(value = "/updateMaterial", method = RequestMethod.POST)
+	public String updateMaterial(MaterialVO materialVo) throws Exception {
+		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 실행 컨트롤러");
+		materialDao.updateMaterial(materialVo);
+		return "redirect:/MaterialList";
 	}
 	
 }

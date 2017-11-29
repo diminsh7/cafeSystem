@@ -20,7 +20,7 @@
 					</div>
 					<div class="x_content">
 					
-						<form action="./updateBranchPersonnel" method="post"class="form-horizontal form-label-left" novalidate>
+						<form action="./updateMaterial" method="post"class="form-horizontal form-label-left" novalidate>
 							<c:forEach var="Update" items="${updateMaterial}">
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">메뉴명<span class="required">*</span>
@@ -81,10 +81,12 @@
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">단가<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="materialCost" name="materialCost" required="required"  class="form-control col-md-7 col-xs-12" placeholder="먼저는 아무거나 치고 넘어가기 /원가계산버튼 만들기">
+									<input type="text" id="materialCost" name="materialCost" value="${Update.materialCost}" required="required"  class="form-control col-md-7 col-xs-12">
                       			 </div>
 							</div>
-
+							
+							<input type="hidden" id="materialCode" name="materialCode" value="${Update.materialCode}" required="required"  class="form-control col-md-7 col-xs-12">
+                      			
 							</c:forEach>
 							<div class="ln_solid"></div>
 							<div class="form-group">

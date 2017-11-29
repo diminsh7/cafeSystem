@@ -71,12 +71,11 @@ public class MaterialDao {
 		return sqlSessionTemplate.selectList(NS + "selectUpdateMaterial",materialCode);
 	}
 	
-	/*//수정실행 updateMaterial
-	public int updateMaterial(int materialCode){
+	//수정실행 updateMaterial
+	public int updateMaterial(MaterialVO materialVo){
 		logger.debug("[updateMaterial] 수정실행");
-		System.out.println("materialCode : " + materialCode);
-		
-		return sqlSessionTemplate.delete(NS + "deleteMaterial",materialCode);
-	}*/
+		System.out.println("materialVo : " + materialVo);
+		return sqlSessionTemplate.update(NS + "updateMaterial",materialVo);
+	}
 
 }

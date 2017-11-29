@@ -142,7 +142,7 @@
 			menu_code=#{menuCode},
 			temp_category_code=#{tempCategoryCode},
 			size_category_code=#{sizeCategoryCode},
-			item_code=#{itemName},
+			item_code=#{itemCode},
 			material_measure=#{materialMeasure},
 			material_cost=#{materialCost}
 		WHERE material_code=#{materialCode}
