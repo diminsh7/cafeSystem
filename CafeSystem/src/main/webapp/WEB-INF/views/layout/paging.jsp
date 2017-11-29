@@ -18,10 +18,10 @@
     	<c:forEach var="page" begin="${startPage}" end="${endPage}" step="1">
 			<c:choose>
 				<c:when test="${page == currentPage}">
-					<li class="active"><a>${page}</a></li>
+					<li class="active"><a class="paging">${page}</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="?currentPage=${page}">${page}</a></li>
+					<li><a class="paging" href="?currentPage=${page}">${page}</a></li>
 				</c:otherwise>	
 			</c:choose>	
 		</c:forEach>
