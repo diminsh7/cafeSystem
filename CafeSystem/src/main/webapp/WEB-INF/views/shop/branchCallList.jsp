@@ -34,7 +34,7 @@
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">.</p>
 						<div align="right">전체행의 수 : ${branchCallCount}</div>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table class="table table-hover">
 							<thead>
 								<tr>
 									<th>소유자명</th>
@@ -59,7 +59,7 @@
 								<li class="previous"><a
 									href="${pageContext.request.contextPath}/branchCallList?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
-							<c:if test="${currentPage <= lastPage}">
+							<c:if test="${currentPage < lastPage}">
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/branchCallList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>

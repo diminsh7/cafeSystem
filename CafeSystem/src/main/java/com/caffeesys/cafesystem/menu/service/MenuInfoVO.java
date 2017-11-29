@@ -2,7 +2,7 @@ package com.caffeesys.cafesystem.menu.service;
 
 public class MenuInfoVO {
 	private String menuCode; // 메뉴코드(PK)
-	private String menuCategoryCode; // 메뉴카테고리
+	private String menuCategoryCode; // 메뉴카테고리(FK)
 	private String menuName; // 메뉴명
 	private String menuStart; // 출시일
 	private String menuImage; // 메뉴 이미지

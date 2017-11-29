@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.caffeesys.cafesystem.account.controller.PasingService;
-
 @Service
 public class ContractService {
 	
 	@Autowired
-	PasingService pasingService;
+	AllJustService allJustService; // 페이징 및 검색(shop.controller폴더에)
 	@Autowired
 	private ContractDao contractDao;
 	
@@ -33,7 +31,7 @@ public class ContractService {
 			map = null;
 		}
 		System.out.println("ContractService.java"+map);
-		map = pasingService.paging(model, currentPage, 10, contractDao.selectContractCount(map), map);
+		map = allJustService.paging(model, currentPage, 10, contractDao.selectContractCount(map), map);
 		model.addAttribute("contractList", contractDao.selectContractList(map));
 		model.addAttribute("contractCount", contractDao.selectContractCount(map));
 	}
