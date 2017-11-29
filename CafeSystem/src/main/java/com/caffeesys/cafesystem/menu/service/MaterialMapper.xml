@@ -18,6 +18,17 @@
 		<result property="categorySmall" column="category_small" /><!-- 그 외 카테고리 -->
 	</resultMap>
 	
+	<!-- MenuPrice에서 사용하는 메뉴 원가 자동등록 -->
+	<select id="materialInsert" parameterType="java.util.Map" resultMap="resultMarerial">
+		SELECT
+			material_cost
+		FROM
+			material
+		WHERE
+			temp_category_code = #{tempCate}
+			AND size_category_code = #{sizeCate}
+	</select>
+	
 	<!-- DB menu에서 메뉴명,코드 select -->
 	<select id="selectMenuName" resultMap="resultMarerial">
 		SELECT menu_code, menu_name
@@ -136,13 +147,6 @@
 			material_cost=#{materialCost}
 		WHERE material_code=#{materialCode}
 	</update>
-	
-	
-
-
-
-
-
 </mapper>
 
 
