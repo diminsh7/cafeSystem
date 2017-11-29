@@ -33,7 +33,7 @@
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">메뉴코드클릭-상세조회</p>
 						<div align="right">전체행의 수 : ${menuInfoCount}</div>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table class="table table-hover">
 							<thead>
 								<tr>
 									<th>메뉴코드</th>
@@ -61,7 +61,7 @@
 								<li class="previous"><a
 									href="${pageContext.request.contextPath}/menuInfoList?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
-							<c:if test="${currentPage <= lastPage}">
+							<c:if test="${currentPage < lastPage}">
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/menuInfoList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>

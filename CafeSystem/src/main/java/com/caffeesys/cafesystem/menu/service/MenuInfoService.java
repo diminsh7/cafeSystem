@@ -13,7 +13,7 @@ import com.caffeesys.cafesystem.account.controller.PasingService;
 public class MenuInfoService {
 	
 	@Autowired
-	PasingService pasingService;
+	PasingService pasingService; // 페이징 및 검색(account.controller폴더에)
 	@Autowired
 	private MenuInfoDao menuInfoDao;
 	
