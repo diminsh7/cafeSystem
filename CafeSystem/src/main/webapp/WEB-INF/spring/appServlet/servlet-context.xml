@@ -64,20 +64,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:com/caffeesys/cafesystem/shop/service/ContractMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchManagerMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/account/service/AccountTitleMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/claim/service/ClaimReplyMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/login/service/LoginMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/employee/service/BranchPersonnelMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/shop/service/ShopMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/board/service/BoardMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/menu/service/MenuPriceMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/category/service/CategoryMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/menu/service/MaterialMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/menu/service/MenuInfoMapper.xml</value>
-				<value>classpath:com/caffeesys/cafesystem/account/service/SalesMapper.xml</value>
+				<value>classpath:com/caffeesys/cafesystem/**/**/**.xml</value>
 			</list>
 		</property>
 	</bean>
