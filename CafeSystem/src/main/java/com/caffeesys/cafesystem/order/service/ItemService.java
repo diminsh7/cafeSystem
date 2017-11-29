@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.caffeesys.cafesystem.account.controller.PasingService;
+import com.caffeesys.cafesystem.shop.service.AllJustService;
 
 @Service
 public class ItemService {
 	
 	@Autowired
-	PasingService pasingService; // 페이징 및 검색(account.controller폴더에)
+	AllJustService allJustService; // 페이징 및 검색(shop.controller폴더에)
 	@Autowired
 	private ItemDao itemDao;
 	
@@ -33,7 +33,7 @@ public class ItemService {
 			map = null;
 		}
 		System.out.println("ItemService.java"+map);
-		map = pasingService.paging(model, currentPage, 10, itemDao.selectItemCount(map), map);
+		map = allJustService.paging(model, currentPage, 10, itemDao.selectItemCount(map), map);
 		model.addAttribute("itemList", itemDao.selectItemList(map));
 		model.addAttribute("itemCount", itemDao.selectItemCount(map));
 	}

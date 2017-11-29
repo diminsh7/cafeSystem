@@ -7,13 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.caffeesys.cafesystem.account.controller.PasingService;
-
 @Service
 public class ShopService {
 	
 	@Autowired
-	PasingService pasingService; // 페이징 및 검색(account.controller폴더에)
+	AllJustService allJustService; // 페이징 및 검색(shop.controller폴더에)
 	@Autowired
 	private ShopDao shopDao;
 	
@@ -33,7 +31,7 @@ public class ShopService {
 			map = null;
 		}
 		System.out.println("ShopService.java"+map);
-		map = pasingService.paging(model, currentPage, 10, shopDao.selectShopCount(map), map);
+		map = allJustService.paging(model, currentPage, 10, shopDao.selectShopCount(map), map);
 		model.addAttribute("shopList", shopDao.selectShopList(map));
 		model.addAttribute("shopCount", shopDao.selectShopCount(map));
 	}
@@ -77,7 +75,7 @@ public class ShopService {
 			map = null;
 		}
 		System.out.println("ShopService.java"+map);
-		map = pasingService.paging(model, currentPage, 10, shopDao.selectBranchCallCount(map), map);
+		map = allJustService.paging(model, currentPage, 10, shopDao.selectBranchCallCount(map), map);
 		model.addAttribute("branchCallList", shopDao.selectBranchCallList(map));
 		model.addAttribute("branchCallCount", shopDao.selectBranchCallCount(map));
 	}
