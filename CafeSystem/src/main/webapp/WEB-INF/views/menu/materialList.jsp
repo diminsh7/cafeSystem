@@ -17,6 +17,7 @@ function deleteb(){
 		<div class="page-title">
 			<div class="title_left">
 				<h3>메뉴관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertMaterial">메뉴원가등록</a>
 			</div>
 		</div>
 

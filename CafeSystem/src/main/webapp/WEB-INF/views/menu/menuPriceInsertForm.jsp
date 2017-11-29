@@ -15,7 +15,7 @@
 				$.ajax({ //메뉴 코드 자동 등록
 					url:"menuCodeInsert"
 					, type:'GET'
-					, data:{"menuName":menuName}
+					, data:{"menuName":menuName} 
 					, success:function(data){
 						var result = JSON.parse(data);
 							if(result != null){

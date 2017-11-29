@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caffeesys.cafesystem.menu.service.MaterialDao;
 import com.caffeesys.cafesystem.menu.service.MaterialService;
@@ -26,7 +27,7 @@ public class MaterialController {
 	
 	//메뉴원가등록 폼 요청
 	@RequestMapping(value = "/insertMaterial", method = RequestMethod.GET)
-	public String insertBranchManager(Model model) throws Exception { 
+	public String insertBranchManager(Model model){ 
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 폼 페이지 실행 컨트롤러");
 		List<MaterialVO> selectManuNameList = materialDao.selectManuName();
 		List<MaterialVO> selectSize = materialDao.selectSize();
@@ -42,7 +43,7 @@ public class MaterialController {
 	} 
 	//메뉴원가 등록 실행 
 	@RequestMapping(value = "/insertMaterial", method = RequestMethod.POST)
-	public String insertBranchManager(Model model, MaterialVO materialVo) throws Exception { 
+	public String insertBranchManager(Model model, MaterialVO materialVo){ 
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 등록 컨트롤러");
 		materialService.insertMaterial(materialVo);
 		return "redirect:/MaterialList";
@@ -50,7 +51,7 @@ public class MaterialController {
 	
 	//메뉴원가 리스트 
 	@RequestMapping(value = "/MaterialList")
-	public String selectBranchPersonnelList(Model model) throws Exception { 
+	public String selectBranchPersonnelList(Model model){ 
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
 		List<MaterialVO> materialList = materialDao.selectBranchPersonnelList();
 		model.addAttribute("materialList",materialList);
@@ -69,7 +70,7 @@ public class MaterialController {
 	
 	//수정 폼 이동 컨트롤러
 	@RequestMapping(value = "/updateMaterial", method = RequestMethod.GET)
-	public String updateMaterial(Model model,@RequestParam(value = "materialCode", required = true) int materialCode) throws Exception {
+	public String updateMaterial(Model model,@RequestParam(value = "materialCode", required = true) int materialCode){
 		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 폼 페이지 이동 컨트롤러");
 		List<MaterialVO> selectManuName = materialDao.selectManuName();
 		List<MaterialVO> selectSize = materialDao.selectSize();
@@ -84,12 +85,26 @@ public class MaterialController {
 		model.addAttribute("updateMaterial", materiaList);
 		return "menu/materialUpdateForm";
 	}
-	//수정 실행 updateMaterial 
+	//수정 실행  
 	@RequestMapping(value = "/updateMaterial", method = RequestMethod.POST)
-	public String updateMaterial(MaterialVO materialVo) throws Exception {
+	public String updateMaterial(MaterialVO materialVo){
 		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 실행 컨트롤러");
 		materialDao.updateMaterial(materialVo);
 		return "redirect:/MaterialList";
 	}
+	
+	//단가계산1 materialMeasure
+	@ResponseBody
+	@RequestMapping(value = "/materialCostCla") //2.2 get방식으로 넘어온 값을 받는다.
+	public int materialCostCla(@RequestParam(value = "itemCode") String itemCode
+						,@RequestParam(value = "materialMeasure") int Measure){
+		System.out.println("[menu.controller.materialCostCla.java] : 원가 구하기 컨트롤러(1)");
+		System.out.println("itemCode : " + itemCode);
+		int total = (int)materialService.selectItemPriceSize(itemCode,Measure);
+		System.out.println("total : " + total);
+		
+		return total;
+	};
+	
 	
 }

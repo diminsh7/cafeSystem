@@ -6,8 +6,8 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>메뉴관리</h3>
-				<a class="btn btn-default" href="">목록</a>
-				<a class="btn btn-default" href="">직원등록</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/MaterialList">원가관리목록</a>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertMaterial">메뉴원가등록</a>
 			</div>
 		</div> 
 		<div class="clearfix"></div>

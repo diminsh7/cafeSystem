@@ -1,5 +1,8 @@
 package com.caffeesys.cafesystem.menu.service;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class MaterialVO {  
 	private int materialCode; // 재료원가관리코드
 	private String menuCode; // 메뉴코드
@@ -12,6 +15,8 @@ public class MaterialVO {
 	private String itemName; //품목이름
 	private String tempcate; //온도 명
 	private String sizecate; //사이즈 명
+	private int itemPrice; //품목 가격(원가)
+	private int itemSize; //품목 용량(원가)
 	private String categorySmall; //그 외 카테고리
 	
 	public int getMaterialCode() {
@@ -80,25 +85,37 @@ public class MaterialVO {
 	public void setSizecate(String sizecate) {
 		this.sizecate = sizecate;
 	}
+	public int getItemPrice() {
+		return itemPrice;
+	}
+	public void setItemPrice(int itemPrice) {
+		this.itemPrice = itemPrice;
+	}
+	public int getItemSize() {
+		return itemSize;
+	}
+	public void setItemSize(int itemSize) {
+		this.itemSize = itemSize;
+	}
 	public String getCategorySmall() {
 		return categorySmall;
 	}
 	public void setCategorySmall(String categorySmall) {
 		this.categorySmall = categorySmall;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "MaterialVO [materialCode=" + materialCode + ", menuCode=" + menuCode + ", tempCategoryCode="
 				+ tempCategoryCode + ", sizeCategoryCode=" + sizeCategoryCode + ", itemCode=" + itemCode
 				+ ", materialMeasure=" + materialMeasure + ", materialCost=" + materialCost + ", menuName=" + menuName
-				+ ", itemName=" + itemName + ", tempcate=" + tempcate + ", sizecate=" + sizecate + ", categorySmall="
-				+ categorySmall + "]";
+				+ ", itemName=" + itemName + ", tempcate=" + tempcate + ", sizecate=" + sizecate + ", itemPrice="
+				+ itemPrice + ", itemSize=" + itemSize + ", categorySmall=" + categorySmall + "]";
 	}
-
+	
 	public MaterialVO(int materialCode, String menuCode, String tempCategoryCode, String sizeCategoryCode,
 			String itemCode, String materialMeasure, int materialCost, String menuName, String itemName,
-			String tempcate, String sizecate, String categorySmall) {
+			String tempcate, String sizecate, int itemPrice, int itemSize, String categorySmall) {
 		super();
 		this.materialCode = materialCode;
 		this.menuCode = menuCode;
@@ -111,11 +128,17 @@ public class MaterialVO {
 		this.itemName = itemName;
 		this.tempcate = tempcate;
 		this.sizecate = sizecate;
+		this.itemPrice = itemPrice;
+		this.itemSize = itemSize;
 		this.categorySmall = categorySmall;
 	}
 	
 	public MaterialVO() {
 		super();
+		
 	}
+	
+	
+	
 	
 }
