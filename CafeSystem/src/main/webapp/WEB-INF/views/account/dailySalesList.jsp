@@ -42,6 +42,7 @@
 		$('#fee').click(function() {
 			
 		});
+		$('#datatable').DataTable();
 	});
 </script>
 

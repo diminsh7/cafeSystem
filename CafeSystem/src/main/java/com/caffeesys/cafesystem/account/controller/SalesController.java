@@ -26,7 +26,8 @@ public class SalesController {
 	@RequestMapping(value="/dailySalesList", method=RequestMethod.GET)
 	public String listDailySales() {
 		logger.debug("listDailySales method");
-		return "/account/dailySalesList";
+		return "/account/salesList";
+		/*return "/account/dailySalesList";*/
 	}
 	@ResponseBody
 	@RequestMapping(value="/dailySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
