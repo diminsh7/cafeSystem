@@ -22,7 +22,7 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">  </p>
                      	전 매장별 점주 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-                     	<form name="search" method="post" action="${pageContext.request.contextPath}/branchPersonnelList">
+                     	<form name="search" method="post" action="${pageContext.request.contextPath}/branchManagerList">
 							<select name="searchOption">
 								<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
 								<option value="all"
@@ -61,16 +61,7 @@
                       </c:forEach>                            
                       </tbody>
                     </table>
-                    <ul class="pager">
-							<c:if test="${currentPage > 1}">
-								<li class="previous"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage-1}">이전</a></li>
-							</c:if>
-							<c:if test="${currentPage <= lastPage}">
-								<li class="next"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage+1}">다음</a></li>
-							</c:if>
-						</ul>
+                    
                   </div>
                 </div>
               </div>

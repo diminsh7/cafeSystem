@@ -1,8 +1,6 @@
 package com.caffeesys.cafesystem.employee.service;
   
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -38,12 +36,9 @@ public class BranchManagerDao {
 	}
 	
 	//점주 리스트
-	public List<BranchManagerVO> selectBranchManagerList(int branchManagerCount, int pagePerRow) {
-		System.out.println("[BranchManagerDao.selectBranchManager] 실행");
-		 Map<String, Integer> map = new HashMap<String, Integer>();
-	     map.put("beginRow", (branchManagerCount-1)*pagePerRow);
-	     map.put("pagePerRow", pagePerRow);
-		return sqlSessionTemplate.selectList(NS + "selectBranchManagerList",map);
+	public List<BranchManagerVO> selectBranchManagerList() {
+		System.out.println("[BranchManagerDao.selectBranchManager] 점주 리스트출력 실행");
+		return sqlSessionTemplate.selectList(NS + "selectBranchManagerList");
 	}
 	
 	//점주 상세조회
