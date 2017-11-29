@@ -53,4 +53,26 @@
 			</otherwise>
 		</choose>
 	</sql>
+	<!-- 발주품목등록 -->
+	<insert id="insertItem" parameterType="com.caffeesys.cafesystem.order.service.ItemVO">
+		INSERT INTO item (
+			item_code, item_category_code, item_name, item_size, item_cost, item_profit
+			, item_price, item_detail, item_image, item_able
+		) VALUES (
+			#{itemCode}, #{itemCategoryCode}, #{itemName}, #{itemSize}, #{itemCost}, #{itemProfit}
+			, #{itemPrice}, #{itemDetail}, #{itemImage}, #{itemAble}
+		)
+	</insert>
+	<!-- 발주품목등록의 item_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<select id="selectItemMax" resultType="Integer">
+		select max(CAST(substring(item_code,6) AS DECIMAL)
+		)  
+		from item
+	</select>
+	<!-- 발주품목등록 category에서 소분류 가져오는 select -->
+	<select id="selectItemCategorySmall" resultMap="resultItem">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE '6%'
+	</select>
 </mapper>

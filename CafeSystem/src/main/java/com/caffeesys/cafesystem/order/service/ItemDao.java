@@ -25,4 +25,19 @@ private final String NS = "com.caffeesys.cafesystem.order.service.ItemMapper.";
 		System.out.println("ItemDao.java / selectItemCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectItemCount", map);
 	}
+	// 발주품목등록
+	public int insertItem(ItemVO item) {
+		System.out.println("ItemDao.java / insertItem Param item: "+item);
+		return sqlSessionTemplate.insert(NS+"insertItem", item);
+	}
+	// 발주품목등록의 item_code컬럼에서 글자말고, 숫자의 최대값 증가 select
+	public int selectItemMax() {
+		System.out.println("ItemDao.java / selectItemMax method 확인");
+		return sqlSessionTemplate.selectOne(NS+"selectItemMax");
+	}
+	// 발주품목등록 category에서 소분류 가져오는 select 
+	public List<ItemVO> selectItemCategorySmall(){
+		System.out.println("ItemDao.java / selectItemCategorySmall method 확인");
+		return sqlSessionTemplate.selectList(NS + "selectItemCategorySmall");
+	}
 }
