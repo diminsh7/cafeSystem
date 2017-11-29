@@ -8,7 +8,7 @@
 			var tempCate = $('#tempCate').val();
 			var sizeCate = $('#sizeCate').val();
 			
-			if(tempCate == 'empty' || sizeCate == 'empty'){
+			if(menuName == 'empty' || tempCate == 'empty' || sizeCate == 'empty'){
 				alert('카테고리를 선택해주세요');
 				return false;
 			} else {		
@@ -33,9 +33,16 @@
 				$.ajax({ //메뉴 원가 자동 등록
 					url:"materialInsert"
 					, type:'GET'
-					, data:{"tempCate":tempCate,"sizeCate":sizeCate}
+					, data:{"menuName":menuName,"tempCate":tempCate,"sizeCate":sizeCate}
 					, success:function(data){
-						
+						var result = JSON.parse(data);
+						if(result != 0){
+							$('#menuTotalCost').val(result);
+						} else {
+							alert('메뉴명과 일치하는 정보를 찾을 수 없습니다');
+							$('#menuTotalCost').val("");
+							return false;
+						}
 					}
 					, error:function(request, status, error){
 						alert('메뉴 원가 자동 등록 실패');
@@ -62,12 +69,23 @@
 					</div>
 					<div class="x_content">
 						<br />
-						<form id="menuPriceInsertForm" data-parsley-validate class="form-horizontal form-label-left">
-							<div class="form-group">
+						<form id="menuPriceInsertForm" action="${pageContext.request.contextPath}/menuPriceInsert" method="post" data-parsley-validate class="form-horizontal form-label-left">
+							<!-- <div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuName">Menu Name</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" id="menuName" name="menuName" required="required" class="form-control col-md-7 col-xs-12">
 								</div>
+							</div> -->
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Menu Name</label>
+									<div class="col-md-6 col-sm-6 col-xs-12">
+										<select class="form-control" id="menuName" name="menuName">
+											<option value="empty">선택하세요</option>
+											<c:forEach var="menuNameList" items="${menuNameList}">
+												<option value="${menuNameList}">${menuNameList}</option>
+											</c:forEach>
+										 </select>
+									</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Code</label>
@@ -78,7 +96,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Hot/Ice</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="tempCate" required>
+									<select class="form-control" id="tempCate" name="tempCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
@@ -89,9 +107,9 @@
 								</div>
 	                      	</div>
 	                      	<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate" required>Size</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate">Size</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="sizeCate">
+									<select class="form-control" id="sizeCate" name="sizeCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Size'}">
@@ -103,7 +121,7 @@
 								<button type="button" id="menuNameSearch">입력</button>
 	                      	</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuTotalCost">Menu Total Cost</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuTotalCost">Material Total Cost</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" id="menuTotalCost" name="menuTotalCost" required="required" class="form-control col-md-7 col-xs-12" readonly>
 								</div>
@@ -117,9 +135,9 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" type="button">Cancel</button>
+									<button class="btn btn-primary" type="button">취소</button>
 									<button class="btn btn-primary" type="reset">Reset</button>
-									<button type="submit" class="btn btn-success">Submit</button>
+									<button type="submit" class="btn btn-success">등록</button>
 								</div>
 							</div>
 						</form>

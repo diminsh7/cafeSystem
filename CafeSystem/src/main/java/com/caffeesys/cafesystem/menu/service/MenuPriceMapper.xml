@@ -16,12 +16,12 @@
 	</resultMap>
 	
 	<!-- 메뉴가격관리 총 숫자 -->
-	<select id="menuPriceCount" parameterType="java.util.Map" resultType="int">
+	<select id="menuPriceCount" parameterType="java.util.Map" resultType="Integer">
 		SELECT COUNT(*) FROM menu_price
-		<if test="cate = menu_code">
+		<if test='cate != null and cate == "menu_code"'>
 			WHERE ${cate} = #{input}	
 		</if>
-		<if test="cate = menu_name">
+		<if test='cate != null and cate == "menu_name"'>
 			INNER JOIN menu
 				ON menu_price.menu_code = menu.menu_code
 			WHERE menu.${cate} = #{input}
@@ -46,11 +46,10 @@
 				ON mp.size_category = sizeCate.category_code
 			INNER JOIN category AS tempCate
 				ON mp.temp_category = tempCate.category_code
-			
 		<if test="input != null">
 			WHERE m.${cate} = #{input}
 		</if>
-			ORDER BY mp.menu_code DESC
+			ORDER BY mp.menu_price_code DESC
 		<if test="start != null">
 			LIMIT ${start}, ${pagePerRow}
 		</if>		
@@ -60,18 +59,16 @@
 	<insert id="menuPriceInsert" parameterType="com.caffeesys.cafesystem.menu.service.MenuPriceVO">
 		INSERT INTO
 			menu_price (
-				menu_price_code
-				, menu_code
+				menu_code
 				, temp_category
 				, size_category
 				, menu_totalcost
 				, menu_sellcost
-			) VALUSE (
+			) VALUES (
 				#{menuCode}
 				, #{tempCategory}
 				, #{sizeCategory}
 				, #{menuTotalCost}
-				, #{menuCode}
 				, #{menuSellCost}
 			)
 	</insert>
@@ -86,8 +83,7 @@
 			menu_name = #{menuName}
 	</select>
 	
-	<!-- 메뉴 원가 자동 등록 -->
-	<select id="materialInsert" parameterType="java.util.Map" resultType="Integer">
-		
+	<select id="menuNameSelect" resultType="String">
+		SELECT menu_name FROM menu
 	</select>
 </mapper>

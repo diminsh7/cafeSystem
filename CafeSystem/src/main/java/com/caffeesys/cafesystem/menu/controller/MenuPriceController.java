@@ -17,7 +17,7 @@ public class MenuPriceController {
 	@Autowired
 	MenuPriceService menuPriceService;
 	
-	//메뉴 가격 리스트/검색/카테고리 세션 SET
+	//메뉴 가격 리스트, 검색, 카테고리 세션 SET
 	@RequestMapping("/menuPriceList")
 	public String menuPriceList(Model model
 			, @RequestParam(value="cate", required=false) String cate
@@ -30,13 +30,16 @@ public class MenuPriceController {
 	
 	//메뉴 가격 입력 폼 요청
 	@RequestMapping("menuPriceInsert")
-	public String menuPriceInsert() {
+	public String menuPriceInsert(Model model) {
+		menuPriceService.menuNameSelect(model);
 		return "menu/menuPriceInsertForm";
 	}
 	
 	//메뉴 가격 입력 처리
 	@RequestMapping(value = "menuPriceInsert", method = RequestMethod.POST)
 	public String menuPriceInsert(MenuPriceVO menuPrice) {
+		System.out.println("[MenuPriceController.java / menuPriceInsert.method] Access");
+		menuPriceService.menuPriceInsert(menuPrice);
 		return "redirect:/menuPriceList";
 	}
 	
@@ -53,10 +56,11 @@ public class MenuPriceController {
 	@ResponseBody
 	@RequestMapping(value = "materialInsert")
 	public String materialInsert(@RequestParam(value = "tempCate") String tempCate
-								,@RequestParam(value = "sizeCate") String sizeCate) {
+								,@RequestParam(value = "sizeCate") String sizeCate
+								,@RequestParam(value = "menuName") String menuName) {
 		System.out.println("[MenuPriceController.java / materialInsert.method] Ajax success");
 		//System.out.println("[MenuPriceController.java / materialInsert.method] tempCate param : " + tempCate);
 		//System.out.println("[MenuPriceController.java / materialInsert.method] sizeCate param : " + sizeCate);
-		return menuPriceService.materialInsert(tempCate, sizeCate);
+		return menuPriceService.materialInsert(tempCate, sizeCate, menuName);
 	}
 }
