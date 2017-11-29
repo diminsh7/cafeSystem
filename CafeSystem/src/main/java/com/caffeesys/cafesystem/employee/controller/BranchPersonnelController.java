@@ -45,15 +45,11 @@ public class BranchPersonnelController {
 	//직원 리스트 페이지 요청 컨트롤러
 	//검색 하다가마 말았어요! 
 	@RequestMapping(value = {"/branchPersonnelList"})
-	public String selectBranchManager(Model model, @RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) { 
+	public String selectBranchManager(Model model) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점 직원,매니져 리스트 페이지 요청 컨트롤러");
 		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount(); // 직원 총 수
-		int pagePerRow = 10; //한 페이지에 몇명의 직원를 보여줄 것인가
-		int lastPage = (int) (Math.ceil(branchPersonnelCount / pagePerRow));; //마지막
-		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList(currentPage,pagePerRow);
-		model.addAttribute("currentPage", currentPage); //첫번째 페이지
-		model.addAttribute("branchPersonnelCount", branchPersonnelCount);//몇개보여줄것인가
-		model.addAttribute("lastPage", lastPage);//마지막페이지
+		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList();
+		model.addAttribute("branchPersonnelCount", branchPersonnelCount);
 		model.addAttribute("branchPersonnelList",branchPersonnelList);
 		return "employee/branchPersonnelList";
 		

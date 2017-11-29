@@ -61,16 +61,7 @@
                       </c:forEach>                            
                       </tbody>
                     </table>
-                    <ul class="pager">
-							<c:if test="${currentPage > 1}">
-								<li class="previous"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage-1}">이전</a></li>
-							</c:if>
-							<c:if test="${currentPage <= lastPage}">
-								<li class="next"><a
-									href="${pageContext.request.contextPath}/branchManagerList?currentPage=${currentPage+1}">다음</a></li>
-							</c:if>
-						</ul>
+                    
                   </div>
                 </div>
               </div>

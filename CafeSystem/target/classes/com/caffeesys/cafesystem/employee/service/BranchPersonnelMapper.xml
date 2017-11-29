@@ -91,7 +91,7 @@
 
 	
 	<!-- 지점 직원 리스트   직원코드, 아이디, 이름, 생년월일, 직급-->
-	<select id="selectBranchPersonnelList" resultMap="resultBranchPersonnel" parameterType="java.util.Map">
+	<select id="selectBranchPersonnelList" resultMap="resultBranchPersonnel">
 		SELECT
 			branch_employee.branch_employee_code,
 			branch_employee.branch_employee_id,
@@ -104,7 +104,6 @@
 		WHERE branch_employee.position_category_code = '202'
 		OR branch_employee.position_category_code = '203'
 		ORDER BY branch_employee.branch_employee_code asc
-		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 	
 	<!-- 지점 직원 상세조회  -->
