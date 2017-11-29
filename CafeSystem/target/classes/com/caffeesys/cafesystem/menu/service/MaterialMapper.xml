@@ -22,13 +22,16 @@
 	
 	<!-- MenuPrice에서 사용하는 메뉴 원가 자동등록 -->
 	<select id="materialInsert" parameterType="java.util.Map" resultMap="resultMarerial">
-		SELECT
-			material_cost
+		SELECT 
+			material.material_cost
 		FROM
-			material
+			menu
+			INNER JOIN material
+			ON menu.menu_code = material.menu_code
 		WHERE
-			temp_category_code = #{tempCate}
-			AND size_category_code = #{sizeCate}
+			material.temp_category_code = #{tempCate}
+			AND material.size_category_code = #{sizeCate}
+			AND menu.menu_name = #{menuName}
 	</select>
 	
 	<!-- DB menu에서 메뉴명,코드 select -->

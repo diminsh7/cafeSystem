@@ -1,13 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<script>
+	$(document).ready(function(){
+		$('#cate').change(function(){
+			var cate = $('#cate').val();
+			if(cate == 'menu_code'){
+				$('#input').val('menu_');
+			} else if(cate == 'menu_name'){
+				$('#input').val('');
+			}
+		});	
+	});
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
 				<h3>MenuPrice List <small>MenuPrice List</small></h3>
 			</div>
-			<%-- <c:choose>			
+			 <%-- <c:choose>			
 				<c:when test="${cate != null}">
 						<input type="hidden" id="cate" value="${cate}">
 						<input type="hidden" id="input" value="${input}">
@@ -55,6 +67,7 @@
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
+									<th>no</th>
 									<th>메뉴명</th>
 									<th>구분</th>									
 									<th>사이즈</th>
@@ -65,6 +78,7 @@
 							<tbody>
 								<c:forEach var="menuPriceList" items="${menuPriceList}">
 									<tr>
+										<td>${menuPriceList.menuPriceCode}</td>
 										<td>${menuPriceList.menuName}</td>
 										<td>${menuPriceList.tempCateName}</td>									
 										<td>${menuPriceList.sizeCateName}</td>
