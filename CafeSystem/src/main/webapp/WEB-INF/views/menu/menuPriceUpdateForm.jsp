@@ -16,7 +16,7 @@
 				$.ajax({ //메뉴 코드 자동 등록
 					url:"menuCodeInsert"
 					, type:'GET'
-					, data:{"menuName":menuName} 
+					, data:{"menuName":menuName}
 					, success:function(data){
 						var result = JSON.parse(data);
 							if(result != null){
@@ -52,8 +52,8 @@
 			}
 		});
 		
-		$('#menuPriceInsertBtn').click(function(){
-			result = confirm('등록하시겠습니까?');
+		$('#menuPriceUpdateBtn').click(function(){
+			result = confirm('정말 수정하시겠습니까?');
 			if(result){
 				return true;
 			} else {
@@ -61,8 +61,8 @@
 			}
 		});
 		
-		$('#menuPriceInsertCancelBtn').click(function(){
-			result = confirm('등록을 취소하시겠습니까?');
+		$('#menuPriceUpdateCacelBtn').click(function(){
+			result = confirm('수정을 취소하시겠습니까?');
 			if(result){
 				history.back();
 				return true;
@@ -71,8 +71,8 @@
 			}
 		});
 		
-		$('#menuPriceInsertResetBtn').click(function(){
-			result = confirm('입력하신 내용을 전부 삭제하시겠습니까?');
+		$('#menuPriceUpdateResetBtn').click(function(){
+			result = confirm('수정하신 내용을 되돌리시겠습니까?');
 			if(result){
 				return true;
 			} else {
@@ -98,22 +98,17 @@
 					</div>
 					<div class="x_content">
 						<br />
-						<form id="menuPriceInsertForm" action="${pageContext.request.contextPath}/menuPriceInsert" method="post" data-parsley-validate class="form-horizontal form-label-left">
+						<form id="menuPriceUpdateForm" action="${pageContext.request.contextPath}/menuPriceUpdate" method="post" data-parsley-validate class="form-horizontal form-label-left">
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Menu Name</label>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<select class="form-control" id="menuName" name="menuName">
-											<option value="empty">선택하세요</option>
-											<c:forEach var="menuNameList" items="${menuNameList}">
-												<option value="${menuNameList}">${menuNameList}</option>
-											</c:forEach>
-										 </select>
-									</div>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Name</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input type="text" id="menuName" name="menuName" required="required" class="form-control col-md-7 col-xs-12" value="${menuPrice.menuName}" readonly>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Code</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="menuCode" name="menuCode" required="required" class="form-control col-md-7 col-xs-12" readonly>
+									<input type="text" id="menuCode" name="menuCode" required="required" class="form-control col-md-7 col-xs-12" value="${menuPrice.menuCode}" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -123,7 +118,7 @@
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
-												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
+												<option value="${cateList.categoryCode}" <c:if test="${cateList.categoryCode == menuPrice.tempCategory}">selected="selected"</c:if>>${cateList.categorySmall}</option>
 											</c:if>
 										</c:forEach>
 									 </select>
@@ -136,7 +131,7 @@
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Size'}">
-												<option value="${cateList.categoryCode}">${cateList.categorySmall}</option>
+												<option value="${cateList.categoryCode}" <c:if test="${cateList.categoryCode == menuPrice.sizeCategory}">selected="selected"</c:if>>${cateList.categorySmall}</option>
 											</c:if>
 										</c:forEach>
 									 </select>
@@ -146,21 +141,22 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuTotalCost">Material Total Cost</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="menuTotalCost" name="menuTotalCost" required="required" class="form-control col-md-7 col-xs-12" readonly>
+									<input type="text" id="menuTotalCost" name="menuTotalCost" required="required" class="form-control col-md-7 col-xs-12" value="${menuPrice.menuTotalCost}" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">Menu Sell Cost</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text" value="${menuPrice.menuSellCost}">
 								</div>
-							</div>							
+							</div>
+							<input type="hidden" id="menuPriceCode" name="menuPriceCode" value="${menuPrice.menuPriceCode}">						
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" id="menuPriceInsertCancelBtn" type="button">Cancel</button>
-									<button class="btn btn-primary" id="menuPriceInsertResetBtn" type="reset">Reset</button>
-									<button class="btn btn-success" id="menuPriceInsertBtn" type="submit">등록</button>
+									<button class="btn btn-primary" id="menuPriceUpdateCacelBtn" type="button">Cancel</button>
+									<button class="btn btn-primary" id="menuPriceUpdateResetBtn" type="reset">Reset</button>
+									<button class="btn btn-success" id="menuPriceUpdateBtn" type="submit">등록</button>
 								</div>
 							</div>
 						</form>

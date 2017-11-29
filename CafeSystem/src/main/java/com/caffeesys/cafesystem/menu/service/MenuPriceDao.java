@@ -49,4 +49,20 @@ public class MenuPriceDao {
 		System.out.println("[MenuPriceDao.java / materialInsert.method] Access");
 		return sqlSessionTemplate.selectList("com.caffeesys.cafesystem.menu.service.MaterialMapper.materialInsert", map);
 	}
+	
+	//메뉴 가격 관리 삭제처리
+	public void menuPriceDelete(int menuPriceCode) {
+		System.out.println("[MenuPriceDao.java / menuPriceDelete.method] Access");
+		sqlSessionTemplate.delete(NS + "menuPriceDelete", menuPriceCode);
+	}
+	
+	//메뉴 가격 수정 폼 요청
+	public MenuPriceVO menuPriceUpdateForm(int menuPriceCode){	
+		return sqlSessionTemplate.selectOne(NS + "menuPriceUpdateForm", menuPriceCode);
+	}
+	
+	//메뉴 가격 수정 처리
+	public int menuPriceUpdate(MenuPriceVO menuPrice) {
+		return sqlSessionTemplate.update(NS + "menuPriceUpdate", menuPrice);
+	}
 }
