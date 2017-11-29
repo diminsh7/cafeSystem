@@ -29,21 +29,6 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Stripped table <small>Stripped table subtitle</small></h2>
-						<ul class="nav navbar-right panel_toolbox">
-							<li>
-								<a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-							</li>
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="#">Settings 1</a></li>
-									<li><a href="#">Settings 2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a class="close-link"><i class="fa fa-close"></i></a>						
-							</li>
-						</ul>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -51,10 +36,12 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>#</th>
-									<th>First Name</th>
-									<th>Last Name</th>
-									<th>Username</th>
+									<th>구분</th>
+									<th>품목명</th>
+									<th>용량</th>
+									<th>가격</th>
+									<th>수량</th>
+									<th>담기</th>
 								</tr>
 							</thead>
 							<tbody>

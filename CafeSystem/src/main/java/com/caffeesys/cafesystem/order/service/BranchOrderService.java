@@ -1,5 +1,7 @@
 package com.caffeesys.cafesystem.order.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,4 +15,9 @@ public class BranchOrderService {
 	
 	@Autowired
 	HttpSession session;
+	
+	public List<BranchOrderVO> branchOrderForm(){
+		System.out.println("[BranchOrderService.java / branchOrderForm.method] Access");
+		return branchOrderDao.branchOrderForm();
+	}
 }
