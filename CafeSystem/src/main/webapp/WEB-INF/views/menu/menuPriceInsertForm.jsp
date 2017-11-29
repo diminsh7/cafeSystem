@@ -2,7 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function(){	
+		//select 옵션값이 변하면 불러온 값초기화
+		$('.selectBox').change(function(){
+				$('#menuCode').val('');
+				$('#menuTotalCost').val('');
+		});	
+		
 		//메뉴 코드, 원가 자동 입력
 		$('#menuInfoInsert').click(function(){
 			var menuName = $('#menuName').val();
@@ -16,7 +22,7 @@
 				$.ajax({ //메뉴 코드 자동 등록
 					url:"menuCodeInsert"
 					, type:'GET'
-					, data:{"menuName":menuName}
+					, data:{"menuName":menuName} 
 					, success:function(data){
 						var result = JSON.parse(data);
 							if(result != null){
@@ -102,7 +108,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Menu Name</label>
 									<div class="col-md-6 col-sm-6 col-xs-12">
-										<select class="form-control" id="menuName" name="menuName">
+										<select class="form-control selectBox" id="menuName" name="menuName">
 											<option value="empty">선택하세요</option>
 											<c:forEach var="menuNameList" items="${menuNameList}">
 												<option value="${menuNameList}">${menuNameList}</option>
@@ -119,7 +125,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Hot/Ice</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="tempCate" name="tempCategory">
+									<select class="form-control selectBox" id="tempCate" name="tempCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
@@ -132,7 +138,7 @@
 	                      	<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate">Size</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="sizeCate" name="sizeCategory">
+									<select class="form-control selectBox" id="sizeCate" name="sizeCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Size'}">

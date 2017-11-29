@@ -1,6 +1,7 @@
 package com.caffeesys.cafesystem.menu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -19,34 +20,34 @@ public class MaterialDao {
 	private SqlSessionTemplate sqlSessionTemplate;
 
 	//입력폼에서필요한메뉴명
-	public List<MaterialVO> selectManuName() throws Exception{
+	public List<MaterialVO> selectManuName(){
 		logger.debug("[selectManuName] 메뉴코드, 메뉴명 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectMenuName");	
 	}
 	//입력폼에서필요한 사이즈
-	public List<MaterialVO> selectSize() throws Exception{
+	public List<MaterialVO> selectSize(){
 		logger.debug("[selectSize] 사이즈 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectSize");	
 	}
 	//입력폼에서 필요한 발주품목 
-	public List<MaterialVO> selectTemp() throws Exception{
+	public List<MaterialVO> selectTemp(){
 		logger.debug("[selectitem] 핫 아이스 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectTemp");	
 	}
 	//입력폼에서 필요한 온도 표시 
-	public List<MaterialVO> selectitem() throws Exception{
+	public List<MaterialVO> selectitem(){
 		logger.debug("[selectitem] 품목명 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectitem");	
 	}
 	
 	//코드 마지막 번호 구하기 실행
-	public int selectMaterialCodeMax() throws Exception{
+	public int selectMaterialCodeMax(){
 		logger.debug("[selectMaterialCodeMax] 코드 마지막 번호 구하기 실행");
 		return sqlSessionTemplate.selectOne(NS + "selectMaterialCodeMax");	
 	}
 	
 	//원가관리 등록 실행 
-	public int insertMaterial(MaterialVO materialVo) throws Exception{
+	public int insertMaterial(MaterialVO materialVo){
 		logger.debug("[insertMaterial] 원가 등록 실행");
 		return sqlSessionTemplate.insert(NS + "insertMaterial",materialVo);	
 	}
@@ -65,18 +66,24 @@ public class MaterialDao {
 		return sqlSessionTemplate.delete(NS + "deleteMaterial",materialCode);
 	}
 
-	//수정 폼 selectUpdateMaterial
+	//수정 폼 
 	public List<MaterialVO> selectUpdateMaterial(int materialCode){
 		logger.debug("[updateMaterial] 수정 폼으로 이동");		
 		return sqlSessionTemplate.selectList(NS + "selectUpdateMaterial",materialCode);
 	}
 	
-	/*//수정실행 updateMaterial
-	public int updateMaterial(int materialCode){
+	//수정실행 
+	public int updateMaterial(MaterialVO materialVo){
 		logger.debug("[updateMaterial] 수정실행");
-		System.out.println("materialCode : " + materialCode);
+		System.out.println("materialVo : " + materialVo);
+		return sqlSessionTemplate.update(NS + "updateMaterial",materialVo);
+	}
+	
+	//단가 구하기 전 품목의 가격 용량 구하기 selectItemPriceSize
+	public MaterialVO selectItemPriceSize(String itemCode) {
+		logger.debug("[selectItemPriceSize] 가격 용량 구하기");
+		return sqlSessionTemplate.selectOne(NS + "selectItemPriceSize",itemCode);
 		
-		return sqlSessionTemplate.delete(NS + "deleteMaterial",materialCode);
-	}*/
+	}
 
 }

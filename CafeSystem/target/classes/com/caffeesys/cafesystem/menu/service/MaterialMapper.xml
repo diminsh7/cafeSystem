@@ -15,6 +15,8 @@
 		<result property="itemName" column="item_name" /><!-- 품목이름 -->
 		<result property="tempcate" column="tempcate" /><!-- 온도 명 -->
 		<result property="sizecate" column="sizecate" /><!-- 사이즈 명 -->
+		<result property="itemPrice" column="item_price" /><!-- 품목가격(원가) -->
+		<result property="itemSize" column="item_size" /><!-- 품목용량 -->
 		<result property="categorySmall" column="category_small" /><!-- 그 외 카테고리 -->
 	</resultMap>
 	
@@ -52,8 +54,6 @@
 				tempcategory.category_small as tempcate
 		FROM category as tempcategory
 		WHERE tempcategory.category_middle = 'Temp'
-		
-
 	</select>
 	
 	<!-- DB item에서 품목명,코드 select -->
@@ -69,7 +69,6 @@
 		select max(material_code)  
 		from material;
 	</select>
-	
 	
 	<!-- DB material insert-->
 	<insert id="insertMaterial" parameterType="com.caffeesys.cafesystem.menu.service.MaterialVO">
@@ -145,11 +144,17 @@
 			menu_code=#{menuCode},
 			temp_category_code=#{tempCategoryCode},
 			size_category_code=#{sizeCategoryCode},
-			item_code=#{itemName},
+			item_code=#{itemCode},
 			material_measure=#{materialMeasure},
 			material_cost=#{materialCost}
 		WHERE material_code=#{materialCode}
 	</update>
+	
+	<select id="selectItemPriceSize" resultMap="resultMarerial"> 
+		SELECT item_size, item_price
+		FROM item 
+		WHERE item_code =  #{itemCode}
+	</select>
 </mapper>
 
 

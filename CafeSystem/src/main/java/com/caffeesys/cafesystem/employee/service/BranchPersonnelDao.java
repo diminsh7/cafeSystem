@@ -50,12 +50,9 @@ public class BranchPersonnelDao {
 	}
 	
 	// 직원리스트
-	public List<BranchPersonnelVO> selectBranchPersonnelList(int branchPersonnelCount, int pagePerRow){
+	public List<BranchPersonnelVO> selectBranchPersonnelList(){
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelList] 직원 리스트 출력 실행");
-		 Map<String, Integer> map = new HashMap<String, Integer>();
-	     map.put("beginRow", (branchPersonnelCount-1)*pagePerRow);
-	     map.put("pagePerRow", pagePerRow);
-		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList",map);
+		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList");
 	}
 	
 	// 직원 명수 구하기
