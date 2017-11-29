@@ -56,11 +56,32 @@ public class MenuPriceController {
 	@ResponseBody
 	@RequestMapping(value = "materialInsert")
 	public String materialInsert(@RequestParam(value = "tempCate") String tempCate
-								,@RequestParam(value = "sizeCate") String sizeCate
-								,@RequestParam(value = "menuName") String menuName) {
+			,@RequestParam(value = "sizeCate") String sizeCate
+			,@RequestParam(value = "menuName") String menuName) {
 		System.out.println("[MenuPriceController.java / materialInsert.method] Ajax success");
 		//System.out.println("[MenuPriceController.java / materialInsert.method] tempCate param : " + tempCate);
 		//System.out.println("[MenuPriceController.java / materialInsert.method] sizeCate param : " + sizeCate);
 		return menuPriceService.materialInsert(tempCate, sizeCate, menuName);
+	}
+	
+	//메뉴 가격 삭제 처리
+	@RequestMapping(value = "menuPriceDelete")
+	public String menuPriceDelete(@RequestParam(value = "menuPriceCode", required=true) int menuPriceCode) {
+		menuPriceService.menuPriceDelete(menuPriceCode);
+		return "redirect:/menuPriceList";
+	}
+	//메뉴 가격 수정 폼 요청
+	@RequestMapping(value = "menuPriceUpdate", method = RequestMethod.GET)
+	public String menuPriceUpdate(Model model
+			, @RequestParam(value = "menuPriceCode", required=true) int menuPriceCode) {
+		menuPriceService.menuPriceUpdateForm(model, menuPriceCode);
+		return "menu/menuPriceUpdateForm";
+	}
+	
+	//메뉴 가격 수정 처리
+	@RequestMapping(value = "menuPriceUpdate", method = RequestMethod.POST)
+	public String menuPriceUpdate(MenuPriceVO menuPrice) {
+		menuPriceService.menuPriceUpdate(menuPrice);
+		return "redirect:/menuPriceList";
 	}
 }

@@ -2,7 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script>
-	$(document).ready(function(){
+	$(document).ready(function(){	
+		//검색 카테고리 선택에 따른 검색 기본 양식 제공
 		$('#cate').change(function(){
 			var cate = $('#cate').val();
 			if(cate == 'menu_code'){
@@ -11,6 +12,16 @@
 				$('#input').val('');
 			}
 		});	
+		
+		//삭제 처리 전 삭제 확인
+		$('#menuPriceDelete').click(function(){
+			result = confirm('정말 삭제하시겠습니까?');
+			if(result){
+				return true;
+			} else {
+				return false;
+			}
+		});
 	});
 </script>
 <div class="right_col" role="main">
@@ -58,12 +69,6 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">
-							DataTables has most features enabled by default, so all you need
-							to do to use it with your own tables is to call the construction
-							function:
-							<code>$().DataTable();</code>
-						</p>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -73,6 +78,8 @@
 									<th>사이즈</th>
 									<th>원가</th>
 									<th>판매가</th>
+									<th>수정</th>
+									<th>삭제</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -84,6 +91,8 @@
 										<td>${menuPriceList.sizeCateName}</td>
 										<td>${menuPriceList.menuTotalCost}</td>
 										<td>${menuPriceList.menuSellCost}</td>
+										<td><a id="menuPriceUpdate" href="${pageContext.request.contextPath}/menuPriceUpdate?menuPriceCode=${menuPriceList.menuPriceCode}">수정</a></td>
+										<td><a id="menuPriceDelete" href="${pageContext.request.contextPath}/menuPriceDelete?menuPriceCode=${menuPriceList.menuPriceCode}">삭제</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
