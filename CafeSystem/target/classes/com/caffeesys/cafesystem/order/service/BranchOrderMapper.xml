@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.order.service.BranchOrderMapper">
-	<resultMap type="com.caffeesys.cafesystem.order.service.BranchOrderMapperVO" id="resultBranchOrder">
+	<resultMap type="com.caffeesys.cafesystem.order.service.BranchOrderVO" id="resultBranchOrder">
 		<result property="itemCode" column="item_code" /> <!-- 품목코드 -->
 		<result property="itemCategoryCode" column="item_category_code" /> <!-- 품목카테고리 코드 -->
 		<result property="itemName" column="item_name" /> <!-- 품목명 -->
