@@ -8,12 +8,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="statementNum" column="statement_number"/>
 		<result property="localCode" column="local_category_code"/>
 		<result property="shopCode" column="shop_code"/>
+		<result property="shopName" column="shop_name"/>
 		<result property="dailySalesDate" column="daily_sales_date"/>
 		<result property="dailySalesAmount" column="daily_sales_amount"/>
 	</resultMap>
-	<select id="selectDailySalesList" parameterType="com.caffeesys.cafesystem.account.service.DailySalesVO" resultMap="resultDailySales">
-		SELECT  daily_sales_code,  statement_number,  local_category_code,  shop_code,  daily_sales_date,  daily_sales_amount
-		FROM daily_sales
+	<select id="selectDailySalesList" resultMap="resultDailySales">
+		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d
+		INNER JOIN shop s
+		ON d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
 		ORDER BY daily_sales_code desc
 	</select>
 </mapper>

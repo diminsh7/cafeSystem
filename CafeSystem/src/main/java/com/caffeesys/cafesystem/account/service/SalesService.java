@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 @Service
 public class SalesService implements SalesServiceInter {
 	@Autowired
 	private SalesDao salesDao;
 	
 	@Override
-	public List<DailySalesVO> selectDailySalesList(DailySalesVO dailySales) {
-		List<DailySalesVO> list = salesDao.selectDailySalesList(dailySales);
-		return list;
+	public String selectDailySalesList() {
+		List<DailySalesVO> list = salesDao.selectDailySalesList();
+		Gson gson = new Gson();
+		return gson.toJson(list);
 	}
 }

@@ -14,8 +14,8 @@ public class SalesDao implements SalesDaoInter {
 	private final String NS = "com.caffeesys.cafesystem.account.service.SalesMapper.";
 	
 	@Override
-	public List<DailySalesVO> selectDailySalesList(DailySalesVO dailySales) {
-		List<DailySalesVO> result = sqlSession.selectList(NS+"selectDailySalesList",dailySales);
+	public List<DailySalesVO> selectDailySalesList() {
+		List<DailySalesVO> result = sqlSession.selectList(NS+"selectDailySalesList");
 		return result;
 	}
 
