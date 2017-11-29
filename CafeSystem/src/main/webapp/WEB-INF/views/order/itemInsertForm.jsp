@@ -110,12 +110,15 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">발주가능여부<span>*</span>
+									for="telephone">발주가능여부<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="itemAble" class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="itemAble" type="text">
+									<select name="itemAble" id="itemAble"
+										required="required" data-validate-length-range="8,20"
+										class="form-control col-md-7 col-xs-12">
+										<option value='Y'>발주가능</option>
+										<option value='N'>발주불가능</option>
+									</select>
 								</div>
 							</div>
 							<div class="ln_solid"></div>
