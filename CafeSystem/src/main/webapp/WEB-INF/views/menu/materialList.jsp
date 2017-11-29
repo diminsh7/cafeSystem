@@ -34,20 +34,18 @@ function deleteb(){
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
 						메뉴 원가 리스트 
-				<%-- 		<form name="search" method="post" action="${pageContext.request.contextPath}/">
+				
+					<form action="./MaterialList" method="post" name="search">
 						<select name="searchOption">
-							<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-							<option value="all"
-								<c:out value="${searchOption == 'all'?'selected':''}"/>>관련검색어</option>
-							<option value="account_title_name"
-								<c:out value="${searchOption == 'branch_employee_code'?'selected':''}"/>>직원코드</option>
-							<option value="account_title_content"
-								<c:out value="${searchOption == 'branch_employee_name'?'selected':''}"/>>이름</option>
-							<option value="account_title_content"
-								<c:out value="${searchOption == 'position_category_code'?'selected':''}"/>>직급</option>
-						</select> 
-						<input name="keyword" value="${keyword}"> <input type="submit" value="조회">
-					</form> --%>
+							<option value="menu_name"
+								<c:out value="${map.searchOption == 'menuName'?'selected':''}"/>>메뉴명</option>
+								
+							<option value="itemName"
+								<c:out value="${map.searchOption == 'categorySmall'?'selected':''}"/>>품목명</option>
+						</select>
+						<input name="keyword" value="${keyword}"> 
+						<input type="submit" value="조회">
+					</form>
 											
 					
 						<table id="datatable" class="table table-striped table-bordered">

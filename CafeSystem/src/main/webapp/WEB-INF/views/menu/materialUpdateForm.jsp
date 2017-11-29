@@ -1,6 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+<script>
+$(document).ready(function(){
+	$('#materialcal').click(function(){
+		var itemCode = $('#itemCode').val(); //1. 아이템 코드 가져오기
+		var materialMeasure = $('#materialMeasure').val();
+		$.ajax({
+			url : "materialCostCla" // 2. 가져온 아이템 코드를 컨트롤러 로 넘기기
+			,type : 'GET' //보내는 방식 
+			,data : {"itemCode" : itemCode, "materialMeasure" : materialMeasure} //내가 보내는 값			
+			,success : function(data){
+				var result = JSON.parse(data); //웹 서버와 데이터를 교환하는 데 주로 사용
+				 if(result != 0){
+					 $('#materialCost').val(result)
+				 }
+			}
+		});
+	});
+});
+</script>
+
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -28,9 +49,9 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									 <select name="menuCode" id="menuCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 										<c:forEach var="ManuName" items="${ManuNameList}">
-                       						<option value='${ManuName.menuCode}'>${ManuName.menuName}</option>
+                       						<option value='${ManuName.menuCode}'<c:if test="${ManuName.menuCode == Update.menuCode}">selected="selected"</c:if>>${ManuName.menuName}</option>
                        					</c:forEach>
-									</select>
+                       				</select>
 								</div>
 							</div>
 							
@@ -40,7 +61,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select name="sizeCategoryCode" id="sizeCategoryCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 										<c:forEach var="size" items="${Size}">
-                       						<option value='${size.sizeCategoryCode}'>${size.sizecate}</option>
+                       						<option value='${size.sizeCategoryCode}'<c:if test="${size.sizeCategoryCode == Update.sizeCategoryCode}">selected="selected"</c:if>>${size.sizecate}</option>
                        					</c:forEach>
 									</select>
 								</div>
@@ -52,7 +73,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select name="itemCode" id="itemCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 										<c:forEach var="item" items="${item}">
-                       						<option value='${item.itemCode}'>${item.itemName}</option>
+                       						<option value='${item.itemCode}'<c:if test="${item.itemCode == Update.itemCode}">selected="selected"</c:if>>${item.itemName}</option>
                        					</c:forEach>
 									</select>
 								</div>
@@ -64,7 +85,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<select name="tempCategoryCode" id="tempCategoryCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
 										<c:forEach var="temp" items="${Temp}">
-                       						<option value='${temp.tempCategoryCode}'>${temp.tempcate}</option>
+                       						<option value='${temp.tempCategoryCode}'<c:if test="${temp.tempCategoryCode == Update.tempCategoryCode}">selected="selected"</c:if>>${temp.tempcate}</option>
                        					</c:forEach>
 									</select>
 								</div>
@@ -76,12 +97,13 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									 <input type="text" id="materialMeasure" name="materialMeasure" value="${Update.materialMeasure}" data-validate-linked="email" required="required" class="form-control col-md-7 col-xs-12">
                      			</div>
+                     			 <button type="button" id="materialcal" class="btn btn-default">단가계산</button>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">단가<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="materialCost" name="materialCost" value="${Update.materialCost}" required="required"  class="form-control col-md-7 col-xs-12">
+									<input type="text" id="materialCost" name="materialCost" value="${Update.materialCost}" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
                       			 </div>
 							</div>
 							
