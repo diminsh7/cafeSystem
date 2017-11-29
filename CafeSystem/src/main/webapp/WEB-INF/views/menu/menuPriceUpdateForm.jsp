@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <script>
 	$(document).ready(function(){
+		//select 옵션값이 변하면 불러온 값초기화
+		$('.selectBox').change(function(){
+				$('#menuTotalCost').val('');
+		});	
+		
 		//메뉴 코드, 원가 자동 입력
 		$('#menuInfoInsert').click(function(){
 			var menuName = $('#menuName').val();
@@ -114,7 +119,7 @@
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Hot/Ice</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="tempCate" name="tempCategory">
+									<select class="form-control selectBox" id="tempCate" name="tempCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Temp'}">
@@ -127,7 +132,7 @@
 	                      	<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="sizeCate">Size</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select class="form-control" id="sizeCate" name="sizeCategory">
+									<select class="form-control selectBox" id="sizeCate" name="sizeCategory">
 										<option value="empty">선택하세요</option>
 										<c:forEach var="cateList" items="${cateList}">
 											<c:if test="${cateList.categoryMiddle eq 'Size'}">
