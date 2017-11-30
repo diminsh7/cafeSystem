@@ -102,6 +102,7 @@
 		INNER JOIN category c
 		ON i.item_category_code = c.category_code
 		WHERE i.item_able LIKE 'N'
+		<!-- <include refid="searchX"></include> -->
         ORDER BY i.item_code DESC
         LIMIT ${beginRow}, ${pagePerRow}
     </select>
@@ -112,5 +113,20 @@
         INNER JOIN category c
 		ON i.item_category_code = c.category_code
         WHERE i.item_able LIKE 'N'
+        <!-- <include refid="searchX"></include> -->
     </select>
+    <!-- 발주품목금지리스트 및 조회 상세전 sql조각 -->
+    <!-- <sql id="searchX">
+		<choose>
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
+			</when>
+			<when test = "searchOption.equals('item_name')">
+				WHERE item_name like CONCAT('%',#{keyword},'%')
+			</when>
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql> -->
 </mapper>
