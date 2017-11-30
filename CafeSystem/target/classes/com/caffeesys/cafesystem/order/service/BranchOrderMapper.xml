@@ -12,4 +12,25 @@
 		<result property="itemDetail" column="item_detail" /> <!-- 품목상세-->
 		<result property="itemCateName" column="itemCateName" /> <!-- 품목카테고리명 -->
 	</resultMap>
+	
+	<!-- 지점 발주 화면 요청 & 카테고리별 품목 요청 -->
+	<select id="branchOrderForm" parameterType="java.util.Map" resultMap="resultBranchOrder">
+		SELECT
+			item_code
+			, item_category_code
+			, cate.category_small AS itemCateName
+			, item_name
+			, item_size
+			, item_price
+			, item_detail
+		FROM
+			item
+			INNER JOIN category AS cate
+			ON item.item_category_code = cate.category_code
+		WHERE
+			item_able = #{itemAble}
+			AND cate.category_middle = #{cateMiddle}
+			AND item_category_code = #{itemCate}
+		ORDER BY item_code ASC	
+	</select>
 </mapper>
