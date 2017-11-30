@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <div class="right_col" role="main">
 	<div class="">
@@ -51,7 +52,6 @@
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">
-							카테고리 나중에 join
 						</p>
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
@@ -64,15 +64,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="boardList" items="${boardList}">
-									<tr>
-										<td>${boardList.boardCode}</td>
-										<td>${boardList.categorySmall}</td> 
-										<td>${boardList.employeeCode}</td>
-										<td><a href="${pageContext.request.contextPath}/boardDetail?boardCode=${boardList.boardCode}">${boardList.boardTitle}</a></td>
-										<td>${boardList.boardDate}</td>					
-									</tr>
-								</c:forEach>
+								<c:choose>
+									<c:when test="${fn:length(boardList) > 0 }">
+										<c:forEach var="boardList" items="${boardList}">
+											<tr>
+												<td>${boardList.boardCode}</td>
+												<td>${boardList.categorySmall}</td> 
+												<td>${boardList.employeeCode}</td>
+												<td><a href="${pageContext.request.contextPath}/boardDetail?boardCode=${boardList.boardCode}">${boardList.boardTitle}</a></td>
+												<td>${boardList.boardDate}</td>					
+											</tr>	
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<tr>
+											<td colspan="3">asdsad</td>
+										</tr>
+									</c:otherwise>
+								</c:choose>
 							</tbody>
 						</table>
 						<ul class="pager">
