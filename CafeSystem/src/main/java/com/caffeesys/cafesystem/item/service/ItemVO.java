@@ -1,4 +1,4 @@
-package com.caffeesys.cafesystem.order.service;
+package com.caffeesys.cafesystem.item.service;
 
 public class ItemVO {
 	private String itemCode; // 품목코드(PK)

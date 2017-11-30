@@ -1,4 +1,4 @@
-package com.caffeesys.cafesystem.order.controller;
+package com.caffeesys.cafesystem.item.controller;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.caffeesys.cafesystem.order.service.ItemDao;
-import com.caffeesys.cafesystem.order.service.ItemService;
-import com.caffeesys.cafesystem.order.service.ItemVO;
+import com.caffeesys.cafesystem.item.service.ItemDao;
+import com.caffeesys.cafesystem.item.service.ItemService;
+import com.caffeesys.cafesystem.item.service.ItemVO;
 
 @Controller
 public class ItemController {
@@ -33,7 +33,7 @@ public class ItemController {
 		System.out.println("ItemController.java"+keyword);
 		System.out.println("ItemController.java"+currentPage);
 		itemService.selectItemList(model, searchOption, keyword, currentPage);
-		return "/order/itemList";
+		return "/item/itemList";
 	}
 	// 발주품목등록 페이지요청
 	@RequestMapping(value="/insertItem", method = RequestMethod.GET)
@@ -41,7 +41,7 @@ public class ItemController {
 		System.out.println("ItemController.java / insertItem method GET방식 ");
 		List<ItemVO> CategoryItemList = itemDao.selectItemCategorySmall();
 		model.addAttribute("CategoryItemList",CategoryItemList);
-		return "/order/itemInsertForm";
+		return "/item/itemInsertForm";
 	}
 	// 발주품목등록(액션)요청
 	@RequestMapping(value="/insertItem", method = RequestMethod.POST)
