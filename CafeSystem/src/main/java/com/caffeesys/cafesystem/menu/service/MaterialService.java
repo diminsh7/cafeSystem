@@ -1,11 +1,12 @@
 package com.caffeesys.cafesystem.menu.service;
 
-import java.util.List;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
  
 @Service 
@@ -36,4 +37,27 @@ public class MaterialService {
 		
 		return cal;
 	}
+	
+	//selectBranchPersonnelList 조회검색
+	public void selectBranchPersonnelList(Model model) {
+		logger.debug("selectBranchPersonnelList 실행 ");
+		model.addAttribute("materialList", materialDao.selectBranchPersonnelList());
+	}
+	
+	/*//selectBranchPersonnelList 조회검색
+		public void selectBranchPersonnelList(Model model, String searchOption, String keyword) {
+			logger.debug("selectBranchPersonnelList 실행 ");
+			System.out.println("searchOption : " + searchOption);
+			System.out.println("keyword : " + keyword);
+			Map<String, String> map;
+			if(searchOption != "") {
+				map = new HashMap<String, String>();
+				map.put("searchOption", searchOption);
+				map.put("keyword",keyword);			
+			}else {
+				map = null;
+			}
+			System.out.println("[MaterialService.selectBranchPersonnelList] map : "+map);
+			model.addAttribute("materialList", materialDao.selectBranchPersonnelList(map));
+		}*/
 }
