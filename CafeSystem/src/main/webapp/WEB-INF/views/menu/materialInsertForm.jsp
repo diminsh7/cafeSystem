@@ -1,6 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<script>
+$(document).ready(function(){
+	$('#materialcal').click(function(){
+		var itemCode = $('#itemCode').val(); //1. 아이템 코드 가져오기
+		var materialMeasure = $('#materialMeasure').val();
+		$.ajax({
+			url : "materialCostCla" // 2. 가져온 아이템 코드를 컨트롤러 로 넘기기
+			,type : 'GET' //보내는 방식 
+			,data : {"itemCode" : itemCode, "materialMeasure" : materialMeasure} //내가 보내는 값			
+			,success : function(data){
+				var result = JSON.parse(data); //웹 서버와 데이터를 교환하는 데 주로 사용
+				 if(result != 0){
+					 $('#materialCost').val(result)
+				 }
+			}
+		});
+	});
+});
+</script>
  
 
 <div class="right_col" role="main">
@@ -8,6 +27,7 @@
             <div class="page-title">
               <div class="title_left">
                 <h3> 메뉴관리 </h3>
+                <a class="btn btn-default" href="${pageContext.request.contextPath}/MaterialList">원가관리목록</a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -73,22 +93,20 @@
 						</select>
                         </div>
                       </div>
-                      
+                     
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">용량(ml/g) <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="materialMeasure" name="materialMeasure" data-validate-linked="email" placeholder="ml,g 단위로 적어주세요." required="required" class="form-control col-md-7 col-xs-12">
+                         	 <input type="text" id="materialMeasure" name="materialMeasure" data-validate-linked="email" placeholder="ml,g 단위로 적어주세요." required="required" class="form-control col-md-7 col-xs-12">
                         </div>
+                        <button type="button" id="materialcal" class="btn btn-default">단가계산</button>
                       </div>
-                      
-                      <!-- 원가 구하기 버튼 클릭 추가하기 -->
-                      
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">단가 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="materialCost" name="materialCost" required="required"  class="form-control col-md-7 col-xs-12" placeholder="먼저는 아무거나 치고 넘어가기 /원가계산버튼 만들기">
+                          <input type="text" id="materialCost" name="materialCost" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
                         </div>
                       </div>
                       

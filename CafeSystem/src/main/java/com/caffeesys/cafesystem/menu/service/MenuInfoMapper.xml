@@ -5,7 +5,7 @@
 <mapper namespace="com.caffeesys.cafesystem.menu.service.MenuInfoMapper">
 	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuInfoVO" id="resultMenuInfo">
 		<result property="menuCode" column="menu_code" /> <!-- 메뉴코드(PK) -->
-		<result property="menuCategoryCode" column="menu_category_code" /> <!-- 메뉴카테고리 -->
+		<result property="menuCategoryCode" column="menu_category_code" /> <!-- 메뉴카테고리(FK) -->
 		<result property="menuName" column="menu_name" /> <!-- 메뉴명 -->
 		<result property="menuStart" column="menu_start" /> <!-- 출시일 -->
 		<result property="menuImage" column="menu_image" /> <!-- 메뉴 이미지 -->

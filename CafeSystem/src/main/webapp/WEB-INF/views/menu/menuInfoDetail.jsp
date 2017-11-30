@@ -21,7 +21,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<table id="datatable" class="table table-striped table-bordered">
+						<table class="table table-hover">
 							<thead>
 								<tr>
 									<th>메뉴코드</th>

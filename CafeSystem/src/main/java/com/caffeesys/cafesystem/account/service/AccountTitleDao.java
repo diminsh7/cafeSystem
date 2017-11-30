@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.account.controller.PasingService;
 
+
 @Repository
 public class AccountTitleDao {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleDao.class);
@@ -53,25 +54,6 @@ public class AccountTitleDao {
 		//logger.debug("selectAccountTitle메소드의 mapper리턴:{}",sqlSessionTemplate.selectOne(NS + "selectAccountTitle", accountTitleCode));
 		return sqlSessionTemplate.selectOne(NS + "selectAccountTitle", accountTitleCode);
 	}
-	
-	//계정과목 list select
-	public List<AccountTitleVO> selectAccountTitleList(int currentPage, int pagePerRow){
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("beginRow", (currentPage-1)*pagePerRow); //이숫자부터 시작하겠다:beginRow    현재페이지:currentPage, 한페이지의 행의 수:pagePerRow
-		map.put("pagePerRow",pagePerRow);	//10	
-		//logger.debug("selectAccountTitleList메소드의 리턴값 잘받아왔나 확인{}",
-				//sqlSessionTemplate.selectList(NS + "selectAccountTitleList", map));
-		return sqlSessionTemplate.selectList(NS + "selectAccountTitleList",map);
-				
-	}
-	
-	//계정과목 리스트의 행의 수 
-	public int getAccountTitleCount() {
-		logger.debug("getAccountTitleCount메소드 확인");
-		//logger.debug("getAccountTitleCount메소드  리턴 확인: {}",sqlSessionTemplate.selectOne(NS+"getAccountTitleCount"));
-		return sqlSessionTemplate.selectOne(NS + "getAccountTitleCount");
-	}
-		
 	
 	//계정과목 등록
 	public int insertAccountTitle(AccountTitleVO accountTitleVo) {
