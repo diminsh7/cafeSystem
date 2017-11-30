@@ -50,4 +50,12 @@ public class ItemController {
 		itemService.insertItem(item);
 		return "redirect:/itemList";
 	}
+	// 발주품목상세조회
+	@RequestMapping(value = "/itemDetail", method = RequestMethod.GET)
+	public String detailItem(Model model, @RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / detailItem method GET방식 " + itemCode);
+		ItemVO item = itemDao.selectItem(itemCode);
+		model.addAttribute("item", item);
+		return "/item/itemDetail";
+	}
 }

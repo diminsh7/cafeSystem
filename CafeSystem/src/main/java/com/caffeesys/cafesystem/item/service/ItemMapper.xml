@@ -75,4 +75,13 @@
 		FROM category
 		WHERE category_code LIKE '6%'
 	</select>
+	<!-- 발주품목수정 및 발주품목상세조회 -->
+    <select id="selectItem" parameterType="String" resultMap="resultItem">
+        SELECT i.item_code, c.category_small, i.item_name, i.item_size, i.item_cost
+				, i.item_profit, i.item_price, i.item_detail, i.item_image, i.item_able
+		FROM item i
+		INNER JOIN category c
+		ON i.item_category_code = c.category_code
+        WHERE i.item_code = #{itemCode}
+    </select>
 </mapper>

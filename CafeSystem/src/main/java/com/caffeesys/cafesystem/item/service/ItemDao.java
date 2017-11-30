@@ -40,4 +40,9 @@ private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 		System.out.println("ItemDao.java / selectItemCategorySmall method 확인");
 		return sqlSessionTemplate.selectList(NS + "selectItemCategorySmall");
 	}
+	// 발주품목수정 및 발주품목상세조회
+	public ItemVO selectItem(String itemCode) {
+		System.out.println("ItemDao.java / selectItem Param itemCode: "+itemCode);
+		return sqlSessionTemplate.selectOne(NS+"selectItem", itemCode);
+	}
 }
