@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.account.controller.PasingService;
 
+
 @Service
 public class AccountTitleService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountTitleService.class);
@@ -36,23 +37,10 @@ public class AccountTitleService {
 		}
 		logger.debug("listAll 메소드의  map :{}",map);
 		map = pasingService.paging(model, currentPage, 10, accountTitleDao.accountTitleCount(map), map);
+		model.addAttribute("accountTitleCount",accountTitleDao.accountTitleCount(map));
 		model.addAttribute("accountTitleList",accountTitleDao.listAll(map));
 	}	
-	//accountTitleList의 행의 개수
-	public int getAccountTitleCount() {
-		int accountTitleCount = 0;
-		logger.debug("getAccountTitleCount메소드 확인");
-		accountTitleCount = accountTitleDao.getAccountTitleCount();
-		logger.debug("getAccountTitleCount메솓의 accountTitleCount :{}",accountTitleCount);
-		return accountTitleCount;		
-	}
-	
-	//현재페이지의 행의수를 리스트
-	public List<AccountTitleVO> selectAccountTitleList(int currentPage,int pagePerRow) {
-		List<AccountTitleVO> list = accountTitleDao.selectAccountTitleList(currentPage, pagePerRow);
-		logger.debug("selectAccountTitleList메솓의 list :{}",list);
-		return list;
-	}
+
 	//계정과목 삭제
 	public void deleteAccountTitle(String accountTitleCode) {
 		logger.debug("deleteAccountTitle메소드의 accountTitleCode :{}",accountTitleCode);
@@ -72,7 +60,6 @@ public class AccountTitleService {
 		logger.debug("selectAccountTitle의 리턴값 : {}",accountTitleVo);
 		return accountTitleVo;
 	}
-
 		
 	//계정과목 등록 과정 
 	public void insertAccountTitle(AccountTitleVO accountTitle) {

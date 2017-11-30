@@ -1,22 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script>
-	$(document).ready(function(){	
+	$(document).ready(function() {
 		//검색 카테고리 선택에 따른 검색 기본 양식 제공
-		$('#cate').change(function(){
+		$('#cate').change(function() {
 			var cate = $('#cate').val();
-			if(cate == 'menu_code'){
+			if (cate == 'menu_code') {
 				$('#input').val('menu_');
-			} else if(cate == 'menu_name'){
+			} else if (cate == 'menu_name') {
 				$('#input').val('');
 			}
-		});	
-		
+		});
+
 		//삭제 처리 전 삭제 확인
-		$('#menuPriceDelete').click(function(){
+		$('#menuPriceDelete').click(function() {
 			result = confirm('정말 삭제하시겠습니까?');
-			if(result){
+			if (result) {
 				return true;
 			} else {
 				return false;
@@ -53,23 +53,21 @@
 							</div>
 						</div>
 					</form>
-				<%-- </c:otherwise>
+			<%-- </c:otherwise>
 			</c:choose> --%>
 		</div>
 
 		<div class="clearfix"></div>
-
+		
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							Menu Price LIST <small>Menu Price</small>
-						</h2>
+						<h2>Menu Price LIST <small>Menu Price</small></h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<table id="datatable" class="table table-striped table-bordered">
+						<table class="table table-striped">
 							<thead>
 								<tr>
 									<th>no</th>
@@ -98,12 +96,13 @@
 							</tbody>
 						</table>
 						<c:import url="/WEB-INF/views/layout/paging.jsp" />
-					</div>
-					<div>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/menuPriceInsert">메뉴 가격 등록</a>
-					</div>
+						<div>
+							<a class="btn btn-default" href="${pageContext.request.contextPath}/menuPriceInsert">메뉴 가격 등록</a>
+						</div>
+					</div>	
 				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
