@@ -27,9 +27,9 @@
 								<c:out value="${map.searchOption == 'categorySmall'?'selected':''}"/>>품목카테고리명</option>
 							<option value="item_name"
 								<c:out value="${map.searchOption == 'itemName'?'selected':''}"/>>품목명</option>
-						</select> --%>
+						</select>
 						<input name="keyword" value="${keyword}">
-						<input type="submit" value="조회">
+						<input type="submit" value="조회"> --%>
 					</form>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">품목코드클릭-상세조회</p>
