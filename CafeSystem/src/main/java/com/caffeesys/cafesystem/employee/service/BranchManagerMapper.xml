@@ -92,7 +92,7 @@
 	</insert>	
 	
 	<!-- 점주리스트 코드,아이디,이름,생년월일 ,매장명 2중조인-->
-	<select id="selectBranchManagerList" resultMap="resultBranchManager" parameterType="java.util.Map">
+	<select id="selectBranchManagerList" resultMap="resultBranchManager">
 	SELECT 
 		branch_employee.branch_employee_code,
 		branch_employee.branch_employee_id,
@@ -107,7 +107,6 @@
 	AND branch_employee.shop_code = shop.shop_code
 	WHERE position_category_code = '201'
 	ORDER BY branch_employee_code asc
-	LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 	
 	<!-- 점주 상세조회  3중조인-->

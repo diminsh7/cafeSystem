@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.item.service.ItemMapper">
+	<resultMap type="com.caffeesys.cafesystem.item.service.ItemVO" id="resultItem">
+		<result property="itemCode" column="item_code" /> <!-- 품목코드(PK) -->
+		<result property="itemCategoryCode" column="item_category_code" /> <!-- 품목카테고리(FK) -->
+		<result property="itemName" column="item_name" /> <!-- 품목명 -->
+		<result property="itemSize" column="item_size" /> <!-- 품목용량 -->
+		<result property="itemCost" column="item_cost" /> <!-- 품목원가 -->
+		<result property="itemProfit" column="item_profit" /> <!-- 품목마진 -->
+		<result property="itemPrice" column="item_price" /> <!-- 품목가격 -->
+		<result property="itemDetail" column="item_detail" /> <!-- 품목상세 -->
+		<result property="itemImage" column="item_image" /> <!-- 품목이미지 -->
+		<result property="itemAble" column="item_able" /> <!-- 발주가능여부 -->
+		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
+		<result property="categorySmall" column="category_small" /> <!-- category소분류601~608 -->
+	</resultMap>
+	<!-- 발주품목리스트 및 조회 상세전 -->
+	<select id="selectItemList" parameterType="java.util.Map" resultMap="resultItem">
+		SELECT i.item_code, c.category_small, i.item_name, i.item_price, i.item_image
+				, i.item_able
+		FROM item i
+		INNER JOIN category c
+		ON i.item_category_code = c.category_code
+		<include refid="search"></include>
+        ORDER BY i.item_code DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 발주품목리스트 및 조회 상세전 행의수 -->
+    <select id="selectItemCount" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM item i
+        INNER JOIN category c
+		ON i.item_category_code = c.category_code
+        <include refid="search"></include>
+    </select>
+    <!-- 발주품목리스트 및 조회 상세전 sql조각 -->
+    <sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체검색일 경우 -->
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
+			</when>
+			<!-- 검색 옵션이 다른하나일 경우  -->
+			<when test = "searchOption.equals('item_name')">
+				WHERE item_name like CONCAT('%',#{keyword},'%')
+			</when>
+			<!-- 전체검색이 아닐경우  -->
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- 발주품목등록 -->
+	<insert id="insertItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
+		INSERT INTO item (
+			item_code, item_category_code, item_name, item_size, item_cost, item_profit
+			, item_price, item_detail, item_image, item_able
+		) VALUES (
+			#{itemCode}, #{itemCategoryCode}, #{itemName}, #{itemSize}, #{itemCost}, #{itemProfit}
+			, #{itemPrice}, #{itemDetail}, #{itemImage}, #{itemAble}
+		)
+	</insert>
+	<!-- 발주품목등록의 item_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<select id="selectItemMax" resultType="Integer">
+		select max(CAST(substring(item_code,6) AS DECIMAL)
+		)  
+		from item
+	</select>
+	<!-- 발주품목등록 category에서 소분류 가져오는 select -->
+	<select id="selectItemCategorySmall" resultMap="resultItem">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE '6%'
+	</select>
+</mapper>

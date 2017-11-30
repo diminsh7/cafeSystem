@@ -38,6 +38,7 @@ public class BoardService implements BoardServiceInter {
 		}
 		logger.debug("searchBoardList 메소드의  map :{}",map);
 		map = pasingService.paging(model, currentPage, 10, boardDao.getBoardCount(map), map);
+		model.addAttribute("boardCount", boardDao.getBoardCount(map));
 		model.addAttribute("boardList",boardDao.searchBoardList(map));
 		logger.debug("searchBoardList 메소드의  map :{}",map);
 	}

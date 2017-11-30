@@ -1,13 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<script>
+	$(document).ready(function() {
+		//검색 카테고리 선택에 따른 검색 기본 양식 제공
+		$('#cate').change(function() {
+			var cate = $('#cate').val();
+			if (cate == 'menu_code') {
+				$('#input').val('menu_');
+			} else if (cate == 'menu_name') {
+				$('#input').val('');
+			}
+		});
+
+		//삭제 처리 전 삭제 확인
+		$('#menuPriceDelete').click(function() {
+			result = confirm('정말 삭제하시겠습니까?');
+			if (result) {
+				return true;
+			} else {
+				return false;
+			}
+		});
+	});
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
 				<h3>MenuPrice List <small>MenuPrice List</small></h3>
 			</div>
-			<%-- <c:choose>			
+			 <%-- <c:choose>			
 				<c:when test="${cate != null}">
 						<input type="hidden" id="cate" value="${cate}">
 						<input type="hidden" id="input" value="${input}">
@@ -30,57 +53,56 @@
 							</div>
 						</div>
 					</form>
-				<%-- </c:otherwise>
+			<%-- </c:otherwise>
 			</c:choose> --%>
 		</div>
 
 		<div class="clearfix"></div>
-
+		
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							Menu Price LIST <small>Menu Price</small>
-						</h2>
+						<h2>Menu Price LIST <small>Menu Price</small></h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">
-							DataTables has most features enabled by default, so all you need
-							to do to use it with your own tables is to call the construction
-							function:
-							<code>$().DataTable();</code>
-						</p>
-						<table id="datatable" class="table table-striped table-bordered">
+						<table class="table table-striped">
 							<thead>
 								<tr>
+									<th>no</th>
 									<th>메뉴명</th>
 									<th>구분</th>									
 									<th>사이즈</th>
 									<th>원가</th>
 									<th>판매가</th>
+									<th>수정</th>
+									<th>삭제</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach var="menuPriceList" items="${menuPriceList}">
 									<tr>
+										<td>${menuPriceList.menuPriceCode}</td>
 										<td>${menuPriceList.menuName}</td>
 										<td>${menuPriceList.tempCateName}</td>									
 										<td>${menuPriceList.sizeCateName}</td>
 										<td>${menuPriceList.menuTotalCost}</td>
 										<td>${menuPriceList.menuSellCost}</td>
+										<td><a id="menuPriceUpdate" href="${pageContext.request.contextPath}/menuPriceUpdate?menuPriceCode=${menuPriceList.menuPriceCode}">수정</a></td>
+										<td><a id="menuPriceDelete" href="${pageContext.request.contextPath}/menuPriceDelete?menuPriceCode=${menuPriceList.menuPriceCode}">삭제</a></td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
 						<c:import url="/WEB-INF/views/layout/paging.jsp" />
-					</div>
-					<div>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/menuPriceInsert">메뉴 가격 등록</a>
-					</div>
+						<div>
+							<a class="btn btn-default" href="${pageContext.request.contextPath}/menuPriceInsert">메뉴 가격 등록</a>
+						</div>
+					</div>	
 				</div>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
 </div>
