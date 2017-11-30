@@ -45,4 +45,18 @@ private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 		System.out.println("ItemDao.java / selectItem Param itemCode: "+itemCode);
 		return sqlSessionTemplate.selectOne(NS+"selectItem", itemCode);
 	}
+	// 발주품목수정
+	public int updateItem(ItemVO item) {
+		System.out.println("ItemDao.java / updateItem Param item: "+item);
+		return sqlSessionTemplate.update(NS+"updateItem", item);
+	}
+	// 발주품목삭제 품목명확인하고 삭제
+	public int deleteItem(String itemCode, String itemName) {
+		System.out.println("ItemDao.java / deleteItem Param itemCode: "+itemCode);
+		System.out.println("ItemDao.java / deleteItem Param itemName: "+itemName);
+		ItemVO item = new ItemVO();
+		item.setItemCode(itemCode);
+		item.setItemName(itemName);
+		return sqlSessionTemplate.delete(NS+"deleteItem", item);
+	}
 }

@@ -90,4 +90,3 @@
 		AND menu_name = #{menuName}
     </delete>
 </mapper>
- 

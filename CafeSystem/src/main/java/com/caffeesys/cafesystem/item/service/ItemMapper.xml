@@ -84,4 +84,17 @@
 		ON i.item_category_code = c.category_code
         WHERE i.item_code = #{itemCode}
     </select>
+    <!-- 발주품목수정 -->
+	<update id="updateItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
+		UPDATE item
+		SET item_name = #{itemName}, item_size = #{itemSize}, item_cost = #{itemCost}, item_profit = #{itemProfit}
+			, item_price = #{itemPrice}, item_detail = #{itemDetail}, item_image = #{itemImage}, item_able = #{itemAble}
+		WHERE item_code = #{itemCode}
+	</update>
+	<!-- 발주품목삭제 품목명확인하고 삭제 -->
+    <delete id="deleteItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
+		DELETE FROM item 
+		WHERE item_code = #{itemCode}
+		AND item_name = #{itemName}
+    </delete>
 </mapper>

@@ -58,4 +58,34 @@ public class ItemController {
 		model.addAttribute("item", item);
 		return "/item/itemDetail";
 	}
+	// 발주품목수정 페이지요청
+	@RequestMapping(value = "/updateItem", method = RequestMethod.GET)
+	public String updateItem(Model model, @RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / updateItem method GET방식 " + itemCode);
+		ItemVO item = itemDao.selectItem(itemCode);
+		model.addAttribute("item", item);
+		return "/item/itemUpdateForm";
+	}
+	// 발주품목수정(액션)요청
+	@RequestMapping(value = "/updateItem", method = RequestMethod.POST)
+	public String updateItem(ItemVO item) {
+		System.out.println("ItemController.java / updateItem method POST방식 " + item);
+		itemDao.updateItem(item);
+		return "redirect:/itemDetail?itemCode=" + item.getItemCode();
+	}
+	// 발주품목삭제 페이지요청(메뉴명 입력)
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
+	public String deleteItem(@RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / deleteItem method GET방식 " + itemCode);
+		return "/item/itemDeleteForm";
+	}
+	// 발주품목삭제(액션)요청
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
+	public String deleteItem(@RequestParam(value = "itemCode", required = true) String itemCode,
+			@RequestParam(value = "itemName", required = true) String itemName) {
+		System.out.println("ItemController.java / deleteItem method POST방식 " + itemCode);
+		System.out.println("ItemController.java / deleteItem method POST방식 " + itemName);
+		itemDao.deleteItem(itemCode, itemName);
+		return "redirect:/itemList";
+	}
 }
