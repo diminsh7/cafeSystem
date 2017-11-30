@@ -39,15 +39,12 @@
     <!-- 발주품목리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
-			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('category_small')">
 				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
 			</when>
-			<!-- 검색 옵션이 다른하나일 경우  -->
 			<when test = "searchOption.equals('item_name')">
 				WHERE item_name like CONCAT('%',#{keyword},'%')
 			</when>
-			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
 				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
 			</otherwise>
@@ -97,4 +94,23 @@
 		WHERE item_code = #{itemCode}
 		AND item_name = #{itemName}
     </delete>
+    <!-- 발주품목금지리스트 및 조회 상세전 -->
+    <select id="selectItemListX" parameterType="java.util.Map" resultMap="resultItem">
+		SELECT i.item_code, c.category_small, i.item_name, i.item_price, i.item_image
+				, i.item_able
+		FROM item i
+		INNER JOIN category c
+		ON i.item_category_code = c.category_code
+		WHERE i.item_able LIKE 'N'
+        ORDER BY i.item_code DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 발주품목금지리스트 및 조회 상세전 행의수 -->
+    <select id="selectItemCountX" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM item i
+        INNER JOIN category c
+		ON i.item_category_code = c.category_code
+        WHERE i.item_able LIKE 'N'
+    </select>
 </mapper>

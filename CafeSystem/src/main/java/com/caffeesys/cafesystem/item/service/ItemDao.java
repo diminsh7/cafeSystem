@@ -59,4 +59,14 @@ private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 		item.setItemName(itemName);
 		return sqlSessionTemplate.delete(NS+"deleteItem", item);
 	}
+	// 발주품목금지리스트 및 조회 상세전
+	public List<ItemVO> selectItemListX(Map<String, String> map) {
+		System.out.println("ItemDao.java / selectItemListX method 확인");
+	    return sqlSessionTemplate.selectList(NS+"selectItemListX", map);
+	}
+	// 발주품목금지리스트 및 조회 상세전 행의수
+	public int selectItemCountX(Map<String, String> map) {
+		System.out.println("ItemDao.java / selectItemCountX method 확인");
+		return sqlSessionTemplate.selectOne(NS+"selectItemCountX", map);
+	}
 }

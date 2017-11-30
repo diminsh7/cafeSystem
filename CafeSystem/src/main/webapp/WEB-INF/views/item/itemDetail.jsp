@@ -8,8 +8,9 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>발주품목관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertItem">발주품목(등록)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
+				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertItem">발주품목(등록)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemListX">발주품목(금지리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -51,8 +52,8 @@
 								</tr>
 							</tbody>
 						</table>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateItem?itemCode=${item.itemCode}">수정</a>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/deleteItem?itemCode=${item.itemCode}">삭제</a>
+						<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateItem?itemCode=${item.itemCode}">수정</a>
+						<a class="btn btn-danger" href="${pageContext.request.contextPath}/deleteItem?itemCode=${item.itemCode}">삭제</a>
 					</div>
 				</div>
 			</div>

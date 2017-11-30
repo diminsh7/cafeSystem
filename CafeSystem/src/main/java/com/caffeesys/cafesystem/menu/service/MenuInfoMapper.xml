@@ -34,15 +34,12 @@
     <!-- 메뉴리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
-			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('category_small')">
 				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
 			</when>
-			<!-- 검색 옵션이 다른하나일 경우  -->
 			<when test = "searchOption.equals('menu_name')">
 				WHERE menu_name like CONCAT('%',#{keyword},'%')
 			</when>
-			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
 				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
 			</otherwise>
