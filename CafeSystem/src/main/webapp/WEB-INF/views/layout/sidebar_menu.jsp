@@ -22,7 +22,7 @@
 			<li><a><i class="fa fa-coffee"></i> 메뉴관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/menuInfoList">카페메뉴</a></li>
-					<li><a href="${pageContext.request.contextPath}/materialList">메뉴재료원가</a></li>
+					<li><a href="${pageContext.request.contextPath}/MaterialList">메뉴재료원가</a></li>
 					<li><a href="${pageContext.request.contextPath}/menuPriceList">메뉴가격관리</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span
@@ -88,9 +88,9 @@
 		<ul class="nav side-menu">
 			<li><a href="${pageContext.request.contextPath}/claimList"><i
 					class="fa fa-exclamation-triangle"></i> 고객클레임 </a></li>
-			<li><a href="${pageContext.request.contextPath}/#"><i
+			<li><a href="${pageContext.request.contextPath}/boardList"><i
 					class="fa fa-edit"></i> 통합게시판 </a></li>
-			<li><a href="${pageContext.request.contextPath}/#"><i
+			<li><a href="${pageContext.request.contextPath}/branchCallList"><i
 					class="fa fa-phone-square"></i> 매장연락망</a></li>
 		</ul>
 	</div>
