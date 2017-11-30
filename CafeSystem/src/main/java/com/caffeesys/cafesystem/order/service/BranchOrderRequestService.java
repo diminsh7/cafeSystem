@@ -37,14 +37,14 @@ public class BranchOrderRequestService {
 				System.out.println("점주 또는 매니져 권한으로 발주주문내역 확인 가능");
 				String branchEmployeeCode = login.getEmpCode();
 				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode);
-				List<BranchOrderRequestVO> orderRequestList = RequestDao.seleteOderRequestList(localShopCode);
+				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode);
 				System.out.println("orderRequestList : " + orderRequestList);
 				model.addAttribute("orderRequestList",orderRequestList);
 			}else{
 				System.out.println("점주 또는 매니져 권한미달로 발주주문내역 확인 불가능");
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
-				out.println("<script>alert('권한 미달로 인해 확인이 불가능 합니다.'); history.go(-1);</script>");
+				out.println("<script>alert('각 지점의 점주,매니져만 확인이 가능합다.'); history.go(-1);</script>");
 				out.flush();
 			}
 		}else {

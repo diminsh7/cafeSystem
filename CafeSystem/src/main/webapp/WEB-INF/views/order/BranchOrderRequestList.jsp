@@ -44,9 +44,9 @@
 							<tbody>
 								<c:forEach var="request" items="${orderRequestList}">
 									<tr>
-										<td>${request.statementNumber}</td>
-										<td></td>
-										<td></td>
+										<td><a href="${pageContext.request.contextPath}/BranchOrderRequestDetail?orderCode=${request.orderCode}">${request.statementNumber}</a></td>
+										<td>${request.cal}</td>
+										<td>${request.itemName}</td>
 										<td>${request.cateReceipt}</td>
 										<td>${request.orderRequest}</td>
 										<td>${request.cateOrder}</td>
