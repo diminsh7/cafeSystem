@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.order.service.BranchOrderMapper">
+	<resultMap type="com.caffeesys.cafesystem.order.service.BranchOrderVO" id="resultBranchOrder">
+		<result property="itemCode" column="item_code" /> <!-- 품목코드 -->
+		<result property="itemCategoryCode" column="item_category_code" /> <!-- 품목카테고리 코드 -->
+		<result property="itemName" column="item_name" /> <!-- 품목명 -->
+		<result property="itemSize" column="item_size" /> <!-- 품목용량 -->
+		<result property="itemPrice" column="item_price" /> <!-- 품목가격 -->
+		<result property="itemDetail" column="item_detail" /> <!-- 품목상세-->
+		<result property="itemCateName" column="itemCateName" /> <!-- 품목카테고리명 -->
+	</resultMap>
+</mapper>

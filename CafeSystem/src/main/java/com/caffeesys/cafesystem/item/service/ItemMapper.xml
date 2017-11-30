@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.caffeesys.cafesystem.order.service.ItemMapper">
-	<resultMap type="com.caffeesys.cafesystem.order.service.ItemVO" id="resultItem">
+<mapper namespace="com.caffeesys.cafesystem.item.service.ItemMapper">
+	<resultMap type="com.caffeesys.cafesystem.item.service.ItemVO" id="resultItem">
 		<result property="itemCode" column="item_code" /> <!-- 품목코드(PK) -->
 		<result property="itemCategoryCode" column="item_category_code" /> <!-- 품목카테고리(FK) -->
 		<result property="itemName" column="item_name" /> <!-- 품목명 -->
@@ -54,7 +54,7 @@
 		</choose>
 	</sql>
 	<!-- 발주품목등록 -->
-	<insert id="insertItem" parameterType="com.caffeesys.cafesystem.order.service.ItemVO">
+	<insert id="insertItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
 		INSERT INTO item (
 			item_code, item_category_code, item_name, item_size, item_cost, item_profit
 			, item_price, item_detail, item_image, item_able
