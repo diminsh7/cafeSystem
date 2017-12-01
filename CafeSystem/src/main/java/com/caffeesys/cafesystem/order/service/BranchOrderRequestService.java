@@ -55,4 +55,15 @@ public class BranchOrderRequestService {
 			out.flush();
 		}
 	}
+
+	//상세조회보여질 합계구하기
+	public BranchOrderRequestVO selectOrderRequestDetail(int orderCode) {
+		BranchOrderRequestVO orderDetail = RequestDao.selectOrderRequestDetail(orderCode);
+		int price = orderDetail.getOrderPrice();
+		int amount = orderDetail.getOrderAmount();
+		int cal = price * amount;
+		orderDetail.setCal(cal);
+		System.out.println("orderDetail : "+orderDetail);
+		return orderDetail;
+	}
 }

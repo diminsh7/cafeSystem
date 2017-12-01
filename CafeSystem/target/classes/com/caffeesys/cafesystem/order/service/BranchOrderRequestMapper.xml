@@ -25,7 +25,7 @@
 		<result property="shopName" column="shop_name" /> <!-- 매장 명 -->
 		<result property="divideName" column="divideName" /> <!-- 발주상태 명 -->
 		<result property="headName" column="headName" /> <!-- 발주승인담당자 명 -->
-		<result property="itemName" column="itemName" /> <!-- 제품 명 -->
+		<result property="itemName" column="itemName" /> <!-- 품목 명 -->
 	</resultMap>
 	
 	<!-- DB branch_employee에서 지역매장코드 select -->
@@ -79,11 +79,11 @@
 	</select>
 	
 	<select id="selectOrderRequestDetail" resultMap="resultBranchOrderRequest">
-		SELECT 
+		Select		
 			od.order_code, 
 			od.statement_number,
 			od.order_faulty_divide, 
-			st.statement_name as statementName,
+			st.statement_name as divideName,
 			od.local_category_code, 
 			od.shop_code, 
 			od.item_code,
@@ -91,9 +91,9 @@
 			od.order_amount, 
 			od.order_price,
 			od.receipt_category_code,
-			cate1.category_small as cateReceipt,
+			catereceipt.category_small as cateReceipt,
 			od.order_category_code, 
-			cate2.category_small as cateOrder,
+			cateorder.category_small as cateOrder,
 			od.order_request, 
 			od.order_approval, 
 			od.order_release, 
@@ -105,10 +105,10 @@
 			ON od.order_faulty_divide = st.statement_code
 		INNER JOIN item as it
 			ON  od.item_code = it.item_code
-		INNER JOIN category as cate1
-			ON od.receipt_category_code = cate1.category_code
-		INNER JOIN category as cate2
-			ON od.receipt_category_code = cate2.category_code
+		INNER JOIN category as catereceipt
+			ON od.receipt_category_code = catereceipt.category_code
+		INNER JOIN category as cateorder
+			ON od.order_category_code = cateorder.category_code
 		INNER JOIN head_employee as he
 			ON od.head_employee_code = he.head_employee_code
 		WHERE od.order_code = #{orderCode}

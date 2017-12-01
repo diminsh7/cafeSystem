@@ -18,14 +18,11 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>발주신청내역조회 <small></small></h2>
-
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
-						내역리스트
-			
-											
+						신청내역리스트				
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
