@@ -25,40 +25,42 @@
 						상내역리스트
 			
 						<table id="datatable" class="table table-striped table-bordered">
+							<thead>
 								<tr>
 									<th>전표번호</th>
-									<td>1<td>
 									<th>구분</th>
-									<td>2<td>
-								</tr>
-								<tr>
 									<th>품목명</th>
-									<td>1<td>
 									<th>수량</th>
-									<td>2<td>
 									<th>가격</th>
-									<td>3<td>
 									<th>발주금액</th>
-									<td>4<td>
-								</tr>
-								<tr>
-									<th>현 접수상태</th>	
-									<td>1<td>						
-									<th>배송상태</th>
-									<td>2<td>						
+									<th>현 접수 상태</th>
+									<th>현 배송 상태</th>
 									<th>신청일</th>
-									<td>3<td>							
 									<th>승인일</th>
-									<td>4<td>							
 									<th>출고일</th>
-									<td>5<td>							
-								</tr>
-								<tr>
-									<th>승인 담당자</th>
-									<td>1<td>			
+									<th>승인담당자</th>
 									<th>불량여부</th>
-									<td>2<td>	
 								</tr>
+							</thead>
+							<tbody>
+								<c:forEach var="Detail" items="${orderDetail}">
+									<tr>
+										<td>${Detail.statementNumber}</td>
+										<td>${Detail.orderFaultyDivide}</td>
+										<td>${Detail.itemName}</td>
+										<td>${Detail.orderAmount}</td>
+										<td>${Detail.orderPrice}</td>
+										<td>${Detail.cal}</td>
+										<td>${Detail.cateReceipt}</td>
+										<td>${Detail.cateOrder}</td>
+										<td>${Detail.orderRequest}</td>
+										<td>${Detail.orderApproval}</td>
+										<td>${Detail.orderRelease}</td>
+										<td>${Detail.headEmployeeCode}</td>
+										<td>${Detail.orderFaultyAble}</td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 					</div>
 				</div>
