@@ -12,6 +12,23 @@
 		var cafeItem = "607";
 		var freeze = "608";
 		
+		//장바구니로 옮기기
+		$(document).on('click', '.itemAddBtn', function(){
+			var leftItem = $(this).parents('tr').clone();
+			//console.log('left item: ' + leftItem);
+			leftItem.find('button').removeClass().addClass('itemDelBtn').text('삭제');
+			$('.basket').append(leftItem);
+			//$(this).closest('tr').remove();
+		});	
+		
+		//장바구니에서 삭제
+		$(document).on('click', '.itemDelBtn', function(){
+			var rightItem = $(this).parents('tr').clone();
+			rightItem.find('button').removeClass().addClass('itemAddBtn').text('담기');
+			//$('#tbody').append(rightItem);
+			$(this).closest('tr').remove();
+		});
+		
 		//원두/티 카테고리 품목 요청
 		$('#beanTea').click(function(){			
 			$.ajax({ 
@@ -20,9 +37,7 @@
 				, data:{"itemCate":beanTea}
 				, success:function(data){
 					var list = JSON.parse(data);
-					console.log(list);
 					var tbody = [];
-					console.log(list.itemCateName);
 					$(list).each(function(i, list){
 						tbody.push('<tr>');
 						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
@@ -30,7 +45,7 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -59,7 +74,7 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -88,7 +103,7 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -117,9 +132,9 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
-					})
+					});
 					$('#tbody').empty().html(tbody.join(''));
 				}
 				, error:function(request, status, error){
@@ -146,7 +161,7 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -175,7 +190,7 @@
 						tbody.push('<td>'+list.itemSize+'</td>');
 						tbody.push('<td>'+list.itemPrice+'</td>');
 						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -216,6 +231,14 @@
 				}
 			});
 		});
+		
+		//주문
+		$("#orderBtn").click(function(){
+			result = confirm('주문하시겠습니까?');
+			if(result){
+				$('#basketForm').submit();
+			}
+		})
 	});
 </script>
 
@@ -273,13 +296,13 @@
 							</thead>
 							<tbody id="tbody">
 								<c:forEach var="branchOrderList" items="${branchOrderList}">
-									<tr>
+									<tr class="itemList">
 										<td scope="row">${branchOrderList.itemCateName}</td>
 										<td>${branchOrderList.itemName}</td>
 										<td>${branchOrderList.itemSize}</td>
 										<td>${branchOrderList.itemPrice}</td>
 										<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>	
-										<td><button type="button" id="itemAddBtn">담기</button></td>
+										<td><button type="button" class="itemAddBtn">담기</button></td>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -298,7 +321,8 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-
+					
+					<form id="basketForm" action="${pageContext.request.contextPath}/branchOrderList" method="post">
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -310,18 +334,13 @@
 									<th>삭제</th>
 								</tr>
 							</thead>
-							<tbody>								
-								<tr>
-									<td scope="row"></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>	
-									<td><button type="button" id="itemAddBtn">삭제</button></td>
-								</tr>
+							<tbody class="basket">
 							</tbody>
 						</table>
-
+						<div class="text-center">
+							<button id="orderBtn" type="button">발주신청</button>
+						</div>
+					</form>
 					</div>
 				</div>
 			</div>
