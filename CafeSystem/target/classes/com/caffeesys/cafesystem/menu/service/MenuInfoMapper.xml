@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.menu.service.MenuInfoMapper">
+	<resultMap type="com.caffeesys.cafesystem.menu.service.MenuInfoVO" id="resultMenuInfo">
+		<result property="menuCode" column="menu_code" /> <!-- 메뉴코드(PK) -->
+		<result property="menuCategoryCode" column="menu_category_code" /> <!-- 메뉴카테고리(FK) -->
+		<result property="menuName" column="menu_name" /> <!-- 메뉴명 -->
+		<result property="menuStart" column="menu_start" /> <!-- 출시일 -->
+		<result property="menuImage" column="menu_image" /> <!-- 메뉴 이미지 -->
+		<result property="menuRecipe" column="menu_recipe" /> <!-- 레시피 이미지 -->
+		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
+		<result property="categorySmall" column="category_small" /> <!-- category소분류M101~M109 -->
+	</resultMap>
+	<!-- 메뉴리스트 및 조회 상세전 -->
+	<select id="selectMenuInfoList" parameterType="java.util.Map" resultMap="resultMenuInfo">
+		SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image
+		FROM menu m
+		INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+		<include refid="search"></include>
+        ORDER BY m.menu_code DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 메뉴리스트 및 조회 상세전 행의수 -->
+    <select id="selectMenuInfoCount" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM menu m
+        INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+        <include refid="search"></include>
+    </select>
+    <!-- 메뉴리스트 및 조회 상세전 sql조각 -->
+    <sql id="search">
+		<choose>
+			<!-- 검색 옵션이 전체검색일 경우 -->
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
+			</when>
+			<!-- 검색 옵션이 다른하나일 경우  -->
+			<when test = "searchOption.equals('menu_name')">
+				WHERE menu_name like CONCAT('%',#{keyword},'%')
+			</when>
+			<!-- 전체검색이 아닐경우  -->
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- 메뉴등록 -->
+	<insert id="insertMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		INSERT INTO menu (
+			menu_code, menu_category_code, menu_name, menu_start, menu_image, menu_recipe
+		) VALUES (
+			#{menuCode}, #{menuCategoryCode}, #{menuName}, #{menuStart}, #{menuImage}, #{menuRecipe}
+		)
+	</insert>
+	<!-- 메뉴등록의 menu_code컬럼에서 글자말고, 숫자의 최대값 증가 select -->
+	<select id="selectMenuInfoMax" resultType="Integer">
+		select max(CAST(substring(menu_code,6) AS DECIMAL)
+		)  
+		from menu
+	</select>
+	<!-- 메뉴등록 category에서 소분류 가져오는 select -->
+	<select id="selectMenuInfoCategorySmall" resultMap="resultMenuInfo">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE 'M%'
+	</select>
+	<!-- 메뉴수정 및 메뉴상세조회 -->
+    <select id="selectMenuInfo" parameterType="String" resultMap="resultMenuInfo">
+        SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image, m.menu_recipe
+		FROM menu m
+		INNER JOIN category c
+		ON m.menu_category_code = c.category_code
+        WHERE m.menu_code = #{menuCode}
+    </select>
+    <!-- 메뉴수정 -->
+	<update id="updateMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		UPDATE menu
+		SET menu_name = #{menuName}, menu_start = #{menuStart}
+			, menu_image = #{menuImage}, menu_recipe = #{menuRecipe}
+		WHERE menu_code = #{menuCode}
+	</update>
+	<!-- 메뉴삭제 메뉴명확인하고 삭제 -->
+    <delete id="deleteMenuInfo" parameterType="com.caffeesys.cafesystem.menu.service.MenuInfoVO">
+		DELETE FROM menu 
+		WHERE menu_code = #{menuCode}
+		AND menu_name = #{menuName}
+    </delete>
+</mapper>
+ 

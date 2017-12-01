@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.login.service.LoginMapper">
+	<!-- 세션에 저장될 내용 : 이름, 직원코드, 본사/지점, 직급/부서, 아이디, 비밀번호(생년월일)  -->
+	<resultMap type="com.caffeesys.cafesystem.login.service.LoginVO" id="resultHeadLogin">
+		<result property="id" column="head_employee_id"/>
+		<result property="pw" column="head_employee_birth"/>
+		<result property="name" column="head_employee_name"/>
+		<result property="empCode" column="head_employee_code"/>
+		<result property="position" column="department_category_code"/>
+	</resultMap>
+	<resultMap type="com.caffeesys.cafesystem.login.service.LoginVO" id="resultBranchLogin">
+		<result property="id" column="branch_employee_id"/>
+		<result property="pw" column="branch_employee_birth"/>
+		<result property="name" column="branch_employee_name"/>
+		<result property="empCode" column="branch_employee_code"/>
+		<result property="position" column="position_category_code"/>
+	</resultMap>
+	<select id="headLogin" resultMap="resultHeadLogin" parameterType="com.caffeesys.cafesystem.login.service.LoginVO">
+		SELECT head_employee_id, head_employee_birth, head_employee_name, head_employee_code, department_category_code
+		FROM head_employee
+		WHERE head_employee_id = #{id} AND head_employee_birth = #{pw}
+	</select>
+	<select id="branchLogin" resultMap="resultBranchLogin" parameterType="com.caffeesys.cafesystem.login.service.LoginVO">
+		SELECT branch_employee_id, branch_employee_birth, branch_employee_name, branch_employee_code, position_category_code
+		FROM branch_employee
+		WHERE branch_employee_id = #{id} AND branch_employee_birth = #{pw}
+	</select>
+</mapper>
