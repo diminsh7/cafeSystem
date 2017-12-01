@@ -120,12 +120,10 @@
     <!-- 매장연락망리스트 및 조회 상세전 sql조각 -->
    	<sql id="searchBranchCall">
 		<choose>
-			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('all')">
 				WHERE shop_name like CONCAT('%',#{keyword},'%')
 	      		OR shop_address like CONCAT('%',#{keyword},'%')    
 			</when>
-			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
 				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
 			</otherwise>
