@@ -50,4 +50,56 @@ public class ItemController {
 		itemService.insertItem(item);
 		return "redirect:/itemList";
 	}
+	// 발주품목상세조회
+	@RequestMapping(value = "/itemDetail", method = RequestMethod.GET)
+	public String detailItem(Model model, @RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / detailItem method GET방식 " + itemCode);
+		ItemVO item = itemDao.selectItem(itemCode);
+		model.addAttribute("item", item);
+		return "/item/itemDetail";
+	}
+	// 발주품목수정 페이지요청
+	@RequestMapping(value = "/updateItem", method = RequestMethod.GET)
+	public String updateItem(Model model, @RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / updateItem method GET방식 " + itemCode);
+		ItemVO item = itemDao.selectItem(itemCode);
+		model.addAttribute("item", item);
+		return "/item/itemUpdateForm";
+	}
+	// 발주품목수정(액션)요청
+	@RequestMapping(value = "/updateItem", method = RequestMethod.POST)
+	public String updateItem(ItemVO item) {
+		System.out.println("ItemController.java / updateItem method POST방식 " + item);
+		itemDao.updateItem(item);
+		return "redirect:/itemDetail?itemCode=" + item.getItemCode();
+	}
+	// 발주품목삭제 페이지요청(메뉴명 입력)
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
+	public String deleteItem(@RequestParam(value = "itemCode", required = true) String itemCode) {
+		System.out.println("ItemController.java / deleteItem method GET방식 " + itemCode);
+		return "/item/itemDeleteForm";
+	}
+	// 발주품목삭제(액션)요청
+	@RequestMapping(value = "/deleteItem", method = RequestMethod.POST)
+	public String deleteItem(@RequestParam(value = "itemCode", required = true) String itemCode,
+			@RequestParam(value = "itemName", required = true) String itemName) {
+		System.out.println("ItemController.java / deleteItem method POST방식 " + itemCode);
+		System.out.println("ItemController.java / deleteItem method POST방식 " + itemName);
+		itemDao.deleteItem(itemCode, itemName);
+		return "redirect:/itemList";
+	}
+	// 발주품목금지리스트 및 조회 상세전
+	@RequestMapping(value = "/itemListX")
+	public String listItemX(Model model
+			,@RequestParam(value="searchOption", required=false, defaultValue="category_small")String searchOption
+			,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
+			,@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) throws Exception {
+		System.out.println("ItemController.java / listItemX method");
+		System.out.println("ItemController.java"+model);
+		System.out.println("ItemController.java"+searchOption);
+		System.out.println("ItemController.java"+keyword);
+		System.out.println("ItemController.java"+currentPage);
+		itemService.selectItemListX(model, searchOption, keyword, currentPage);
+		return "/item/itemListX";
+	}
 }

@@ -4,11 +4,11 @@
 <script>
 	$(document).ready(function() {
 		$('#deleteButton').click(function() {
-			if ($('#shopName').val().length < 1) {
-				alert('shopName는 1자이상 이어야 합니다');
-				$('#shopName').focus();
+			if ($('#itemName').val().length < 1) {
+				alert('itemName는 1자이상 이어야 합니다');
+				$('#itemName').focus();
 			} else {
-				$('#deleteShop').submit();
+				$('#deleteItem').submit();
 			}
 		});
 	});
@@ -18,9 +18,10 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>매장기초정보관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a>
-				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
+				<h3>발주품목관리</h3>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
+				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertItem">발주품목(등록)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemListX">발주품목(금지리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -28,33 +29,33 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>매장삭제</h2>
+						<h2>발주품목삭제</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form action="./deleteShop" method="post"
+						<form action="./deleteItem" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약코드<span class="required">*</span>
+									for="name">품목코드<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractCode"
+									<input id="itemCode"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="contractCode" required="required" type="text"
-										value="${param.contractCode}">
+										name="itemCode" required="required" type="text"
+										value="${param.itemCode}">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포명 확인<span class="required">*</span>
+									for="name">품목명 확인<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="shopName"
+									<input id="itemName"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="shopName" required="required" type="text">
+										name="itemName" required="required" type="text">
 								</div>
 							</div>
 							<div class="ln_solid"></div>

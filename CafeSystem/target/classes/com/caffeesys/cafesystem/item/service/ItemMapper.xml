@@ -39,15 +39,12 @@
     <!-- 발주품목리스트 및 조회 상세전 sql조각 -->
     <sql id="search">
 		<choose>
-			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('category_small')">
 				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
 			</when>
-			<!-- 검색 옵션이 다른하나일 경우  -->
 			<when test = "searchOption.equals('item_name')">
 				WHERE item_name like CONCAT('%',#{keyword},'%')
 			</when>
-			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
 				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
 			</otherwise>
@@ -75,4 +72,61 @@
 		FROM category
 		WHERE category_code LIKE '6%'
 	</select>
+	<!-- 발주품목수정 및 발주품목상세조회 -->
+    <select id="selectItem" parameterType="String" resultMap="resultItem">
+        SELECT i.item_code, c.category_small, i.item_name, i.item_size, i.item_cost
+				, i.item_profit, i.item_price, i.item_detail, i.item_image, i.item_able
+		FROM item i
+		INNER JOIN category c
+		ON i.item_category_code = c.category_code
+        WHERE i.item_code = #{itemCode}
+    </select>
+    <!-- 발주품목수정 -->
+	<update id="updateItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
+		UPDATE item
+		SET item_name = #{itemName}, item_size = #{itemSize}, item_cost = #{itemCost}, item_profit = #{itemProfit}
+			, item_price = #{itemPrice}, item_detail = #{itemDetail}, item_image = #{itemImage}, item_able = #{itemAble}
+		WHERE item_code = #{itemCode}
+	</update>
+	<!-- 발주품목삭제 품목명확인하고 삭제 -->
+    <delete id="deleteItem" parameterType="com.caffeesys.cafesystem.item.service.ItemVO">
+		DELETE FROM item 
+		WHERE item_code = #{itemCode}
+		AND item_name = #{itemName}
+    </delete>
+    <!-- 발주품목금지리스트 및 조회 상세전 -->
+    <select id="selectItemListX" parameterType="java.util.Map" resultMap="resultItem">
+		SELECT i.item_code, c.category_small, i.item_name, i.item_price, i.item_image
+				, i.item_able
+		FROM item i
+		INNER JOIN category c
+		ON i.item_category_code = c.category_code
+		WHERE i.item_able LIKE 'N'
+		<!-- <include refid="searchX"></include> -->
+        ORDER BY i.item_code DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 발주품목금지리스트 및 조회 상세전 행의수 -->
+    <select id="selectItemCountX" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM item i
+        INNER JOIN category c
+		ON i.item_category_code = c.category_code
+        WHERE i.item_able LIKE 'N'
+        <!-- <include refid="searchX"></include> -->
+    </select>
+    <!-- 발주품목금지리스트 및 조회 상세전 sql조각 -->
+    <!-- <sql id="searchX">
+		<choose>
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%') 
+			</when>
+			<when test = "searchOption.equals('item_name')">
+				WHERE item_name like CONCAT('%',#{keyword},'%')
+			</when>
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql> -->
 </mapper>

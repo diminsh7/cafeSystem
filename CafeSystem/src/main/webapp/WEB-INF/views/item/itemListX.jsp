@@ -18,22 +18,22 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>발주품목전체조회</h2>
+						<h2>발주품목금지전체조회</h2>
 						<div class="clearfix"></div>
 					</div>
-					<form action="./itemList" method="post" name="search">
-						<select name="searchOption">
+					<form action="./itemListX" method="post" name="searchX">
+						<%-- <select name="searchOption">
 							<option value="category_small"
 								<c:out value="${map.searchOption == 'categorySmall'?'selected':''}"/>>품목카테고리명</option>
 							<option value="item_name"
 								<c:out value="${map.searchOption == 'itemName'?'selected':''}"/>>품목명</option>
 						</select>
 						<input name="keyword" value="${keyword}">
-						<input type="submit" value="조회">
+						<input type="submit" value="조회"> --%>
 					</form>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30">품목코드클릭-상세조회</p>
-						<div align="right">전체행의 수 : ${itemCount}</div>
+						<div align="right">전체행의 수 : ${itemCountX}</div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
@@ -46,7 +46,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="item" items="${itemList}">
+								<c:forEach var="item" items="${itemListX}">
 									<tr>
 										<td><a
 											href="${pageContext.request.contextPath}/itemDetail?itemCode=${item.itemCode}">${item.itemCode}</a></td>
@@ -62,11 +62,11 @@
 						<ul class="pager">
 							<c:if test="${currentPage > 1}">
 								<li class="previous"><a
-									href="${pageContext.request.contextPath}/itemList?currentPage=${currentPage-1}">이전</a></li>
+									href="${pageContext.request.contextPath}/itemListX?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
 							<c:if test="${currentPage < lastPage}">
 								<li class="next"><a
-									href="${pageContext.request.contextPath}/itemList?currentPage=${currentPage+1}">다음</a></li>
+									href="${pageContext.request.contextPath}/itemListX?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>
