@@ -37,7 +37,7 @@
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
-					<li><a href="${pageContext.request.contextPath}/dailySalesList">지점매출조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/salesList">지점매출조회</a></li>
 				</ul></li>
 		</ul>
 	</div>

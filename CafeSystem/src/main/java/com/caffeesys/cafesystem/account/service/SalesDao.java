@@ -1,5 +1,6 @@
 package com.caffeesys.cafesystem.account.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,5 +19,14 @@ public class SalesDao implements SalesDaoInter {
 		List<DailySalesVO> result = sqlSession.selectList(NS+"selectDailySalesList");
 		return result;
 	}
-
+	@Override
+	public List<MonthlySalesVO> selectMonthlySalesList() {
+		List<MonthlySalesVO> result = sqlSession.selectList(NS+"selectMonthlySalesList");
+		return result;
+	}
+	@Override
+	public List<HashMap<String, Object>> selectDailyTop() {
+		List<HashMap<String, Object>> result = sqlSession.selectList(NS+"selectDailyTop");
+		return result;
+	}
 }

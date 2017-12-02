@@ -23,9 +23,9 @@ public class SalesController {
 		logger.debug("insertDailySales method");
 		return "/account/dailySalesInsertForm";
 	}
-	@RequestMapping(value="/dailySalesList", method=RequestMethod.GET)
-	public String listDailySales() {
-		logger.debug("listDailySales method");
+	@RequestMapping(value="/salesList", method=RequestMethod.GET)
+	public String listSales() {
+		logger.debug("listSales method");
 		return "/account/salesList";
 		/*return "/account/dailySalesList";*/
 	}
@@ -34,6 +34,20 @@ public class SalesController {
 	public String jsonDailySalesList() {
 		String list = salesService.selectDailySalesList();
 		logger.debug("jsonDailySalesList method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/monthlySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlySalesList() {
+		String list = salesService.selectMonthlySalesList();
+		logger.debug("jsonMonthlySalesList method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/dailyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonDailyTop() {
+		String list = salesService.selectDailyTop();
+		logger.debug("jsonDailyTop method list : " + list);
 		return list;
 	}
 }
