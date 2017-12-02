@@ -61,4 +61,24 @@ public class ItemService {
 		System.out.println("ItemService.java / item:"+item);
 		return itemDao.insertItem(item);
 	}
+	// 발주품목금지리스트 및 조회 상세전
+	public void selectItemListX(Model model, String searchOption, String keyword, int currentPage) {
+		System.out.println("ItemService.java / selectItemListX method 확인");
+		System.out.println("ItemService.java / selectItemListX Param model :" + model);
+		System.out.println("ItemService.java / selectItemListX Param searchOption :" + searchOption);
+		System.out.println("ItemService.java / selectItemListX Param keyword :" + keyword);
+		System.out.println("ItemService.java / selectItemListX Param currentPage :" + currentPage);
+		Map<String, String> map;
+		if(searchOption != "") {
+			map = new HashMap<String, String>();
+			map.put("searchOption", searchOption);
+			map.put("keyword",keyword);			
+		}else {
+			map = null;
+		}
+		System.out.println("ItemService.java"+map);
+		map = allJustService.paging(model, currentPage, 10, itemDao.selectItemCountX(map), map);
+		model.addAttribute("itemListX", itemDao.selectItemListX(map));
+		model.addAttribute("itemCountX", itemDao.selectItemCountX(map));
+	}
 }
