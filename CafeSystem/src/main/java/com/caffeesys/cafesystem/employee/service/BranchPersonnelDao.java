@@ -108,4 +108,16 @@ public class BranchPersonnelDao {
 		return sqlSessionTemplate.selectOne(NS + "selectBranchPersonnelRowCount",map);
 	}
 	
+	//각 지점에서 보는 직원 리스트를 보기 위해 지역매장 코드 구하기
+	public BranchPersonnelVO selectLocalShopCode(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.selectLocalShopCode] 실행");
+		return sqlSessionTemplate.selectOne(NS + "seleteLocalShopCode",branchEmployeeCode);
+	}
+	
+	//각 지점에서 보는 직원 리스트
+	public List<BranchPersonnelVO> selectBranchPersonnelInfoList(BranchPersonnelVO localShopCode) {
+		System.out.println("[BranchManagerDao.selectBranchPersonnelInfoList] 실행");
+		return  sqlSessionTemplate.selectList(NS + "selectBranchPersonnelInfoList",localShopCode);
+	}
+	
 }

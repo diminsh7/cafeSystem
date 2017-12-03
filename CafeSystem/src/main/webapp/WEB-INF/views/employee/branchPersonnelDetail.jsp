@@ -17,8 +17,6 @@ function deleteb(){
 		<div class="page-title">
 			<div class="title_left">
 				<h3>지점인사관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchPersonnelList">목록</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertformbranchPersonneel">직원등록</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>

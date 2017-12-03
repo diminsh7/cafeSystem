@@ -211,7 +211,6 @@
 		OR branch_employee.position_category_code = '202'
 		OR branch_employee.position_category_code = '203'
 		ORDER BY branch_employee.branch_employee_code asc
-		LIMIT #{beginRow}, #{pagePerRow}
 	</select>
 	
 	<!-- refid에 사용 되는 search -->
@@ -236,5 +235,36 @@
 		SELECT COUNT(*) FROM branch_personnel
 		 <!-- WHERE절 include 태그로 삽입 -->
 	     <include refid="search"></include>  
+	</select>
+	
+	<!-- DB branch_employee에서 지역매장코드 select -->
+	<select id="seleteLocalShopCode" resultMap="resultBranchPersonnel">
+		SELECT local_category_code, shop_code
+		FROM branch_employee
+		WHERE branch_employee_code = #{branchEmployeeCode}
+	</select>
+	
+	
+	<!-- 지점에서 확인하는 직원리스트 -->
+	<select id="selectBranchPersonnelInfoList" resultMap="resultBranchPersonnel">
+	SELECT
+		branch_employee.branch_employee_code,
+		branch_employee.branch_employee_id,
+		branch_employee.branch_employee_name,
+		branch_employee.branch_employee_birth,
+		category.category_small
+		
+	FROM branch_employee INNER JOIN category
+	ON branch_employee.position_category_code = category.category_code
+	WHERE 
+		(branch_employee.position_category_code = '202'
+		OR branch_employee.position_category_code = '203')
+		AND(
+			branch_employee.local_category_code = #{localCategoryCode}
+			and branch_employee.shop_code = #{shopCode}
+		)
+	ORDER BY branch_employee.branch_employee_code asc
+	
+	
 	</select>
 </mapper>
