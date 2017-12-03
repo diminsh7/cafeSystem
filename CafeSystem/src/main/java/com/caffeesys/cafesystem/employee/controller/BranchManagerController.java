@@ -1,6 +1,9 @@
 package com.caffeesys.cafesystem.employee.controller; 
  
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -82,5 +85,10 @@ public class BranchManagerController {
 		return "redirect:/branchManagerList";
 	}
 	
-
+	//점주본인 신상정보 조회
+	@RequestMapping(value = "/selectBranchManager", method = RequestMethod.GET)
+	public String selectBranchManager(Model model,HttpSession session) throws IOException {
+		branchManagerService.selectBranchManager(model,session);
+		return "employee/branchManagerinfo";
+	}
 }
