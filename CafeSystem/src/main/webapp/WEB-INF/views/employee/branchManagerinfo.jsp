@@ -57,7 +57,7 @@
 							
 							</tbody>
 						</table>
-						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
+						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchManager?branchEmployeeCode=${branchManager.branchEmployeeCode}">수정</a>
 					</div>
 					</c:forEach>
 				</div>
