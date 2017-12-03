@@ -13,7 +13,7 @@
 		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
 		<result property="categorySmall" column="category_small" /> <!-- category소분류M101~M109 -->
 	</resultMap>
-	<!-- 메뉴리스트 및 조회 상세전 -->
+	<!-- 메뉴리스트 및 조회 상세전(지점도 포함) -->
 	<select id="selectMenuInfoList" parameterType="java.util.Map" resultMap="resultMenuInfo">
 		SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image
 		FROM menu m
@@ -23,7 +23,7 @@
         ORDER BY m.menu_code DESC
         LIMIT ${beginRow}, ${pagePerRow}
     </select>
-    <!-- 메뉴리스트 및 조회 상세전 행의수 -->
+    <!-- 메뉴리스트 및 조회 상세전 행의수(지점도 포함) -->
     <select id="selectMenuInfoCount" parameterType="java.util.Map" resultType="Integer">
         SELECT COUNT(*)
         FROM menu m
@@ -31,7 +31,7 @@
 		ON m.menu_category_code = c.category_code
         <include refid="search"></include>
     </select>
-    <!-- 메뉴리스트 및 조회 상세전 sql조각 -->
+    <!-- 메뉴리스트 및 조회 상세전 sql조각(지점도 포함) -->
     <sql id="search">
 		<choose>
 			<when test = "searchOption.equals('category_small')">
@@ -65,7 +65,7 @@
 		FROM category
 		WHERE category_code LIKE 'M%'
 	</select>
-	<!-- 메뉴수정 및 메뉴상세조회 -->
+	<!-- 메뉴수정 및 메뉴상세조회(메뉴상세조회 지점도 포함) -->
     <select id="selectMenuInfo" parameterType="String" resultMap="resultMenuInfo">
         SELECT m.menu_code, c.category_small, m.menu_name, m.menu_start, m.menu_image, m.menu_recipe
 		FROM menu m
