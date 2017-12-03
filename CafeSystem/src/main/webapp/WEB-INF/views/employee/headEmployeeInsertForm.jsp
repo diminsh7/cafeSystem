@@ -7,7 +7,7 @@
             <div class="page-title">
               <div class="title_left">
                 <h3> 본사인사관리 </h3>
-                <a class="btn btn-default" href="${pageContext.request.contextPath}/">직원목록</a>
+                <a class="btn btn-default" href="${pageContext.request.contextPath}/headEmployeeList">직원목록</a>
               </div>
             </div>
             <div class="clearfix"></div>
@@ -22,16 +22,16 @@
                   </div>
                   <div class="x_content">
 
-                    <form id="materialInsert" name="materialInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/insertMaterial" method="post" novalidate >
+                    <form id="headEmployeelInsert" name="headEmployeelInsert" class="form-horizontal form-label-left" action="${pageContext.request.contextPath}/insertHeadEmployee" method="post" novalidate >
 
                       <span class="section">본사 직원 등록</span>
                       
                       <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">부서코드<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">부서<span class="required">*</span>
                         </label>                
                         	<div class="col-md-6 col-sm-6 col-xs-12">																													
                        			<select name="departmentCategoryCode" id="departmentCategoryCode" required="required" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-									<c:forEach var="temp" items="${department}">
+									<c:forEach var="department" items="${department}">
                        					<option value='${department.departmentCategoryCode}'>${department.cateDepartment}</option>
                        				</c:forEach>
 								</select>
@@ -74,7 +74,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">주소 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="headEmployeeAddress" name="headEmployeeAddress" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
+                          <input type="text" id="headEmployeeAddress" name="headEmployeeAddress" required="required"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       
@@ -82,7 +82,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">입사일 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="date" id="headEmployeeJoin" name="headEmployeeJoin" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
+                          <input type="date" id="headEmployeeJoin" name="headEmployeeJoin" required="required"  class="form-control col-md-7 col-xs-12" >
                         </div>
                       </div>
                       
@@ -90,7 +90,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">월급 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="headEmployeeSalary" name="headEmployeeSalary" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
+                          <input type="text" id="headEmployeeSalary" name="headEmployeeSalary" required="required"  class="form-control col-md-7 col-xs-12" >
                         </div>
                       </div>
                       
@@ -110,7 +110,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">월급계좌번호 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="headEmployeeBanknum" name="headEmployeeBanknum" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
+                          <input type="text" id="headEmployeeBanknum" name="headEmployeeBanknum" required="required"  class="form-control col-md-7 col-xs-12" >
                         </div>
                       </div>
                       
@@ -118,7 +118,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="number">근로계약서 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="headEmployeeContract" name="headEmployeeContract" required="required"  class="form-control col-md-7 col-xs-12" readonly="readonly">
+                          <input type="file" id="headEmployeeContract" name="headEmployeeContract" required="required"  class="form-control col-md-7 col-xs-12" >
                         </div>
                       </div>
                       <div class="ln_solid"></div>
