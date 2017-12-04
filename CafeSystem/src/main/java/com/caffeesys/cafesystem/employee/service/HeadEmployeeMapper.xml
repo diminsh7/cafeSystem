@@ -98,6 +98,15 @@
 		ON he.department_category_code = cate1.category_code
 	INNER JOIN category as cate2
 		ON he.bonus_category_code = cate2.category_code
+
+	<if test="input != null">
+			<if test="cate == cateDepartment">
+			WHERE cate1.${cate} = #{input}
+			</if>
+			<if  test="cate != cateDepartment">
+			WHERE he.${cate} = #{input}
+			</if>
+	</if>	
 	</select>
 	
 	<!-- 선택직원 상세 조회 -->

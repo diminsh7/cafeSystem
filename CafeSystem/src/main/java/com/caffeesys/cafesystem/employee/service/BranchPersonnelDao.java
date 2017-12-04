@@ -96,8 +96,6 @@ public class BranchPersonnelDao {
 		return  sqlSessionTemplate.delete(NS + "deleteBranchPersonnel",branchEmployeeCode);	
 	}
 	
-
-	
 	//검색된 행의 갯수, 컬럼말고 row 
 	public int selectBranchPessonnelrow(Map<String, String> map) {
 		System.out.println("[BranchManagerDao.selectBranchPessonnelrow] 실행");

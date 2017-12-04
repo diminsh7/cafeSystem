@@ -43,13 +43,15 @@ public class HeadEmployeeController {
 	}
 	
 	//본사직원리스트
-	@RequestMapping(value = "/headEmployeeList", method = RequestMethod.GET)
-	public String selectHeadEmployee(Model model) { 
+	@RequestMapping(value = "/headEmployeeList")
+	public String selectHeadEmployee(Model model
+			,@RequestParam(value="cate", required=false) String cate
+			,@RequestParam(value="input", required=false) String input) { 
 		System.out.println("[employee.controller.HeadEmployeeController.java] : 본사직원리스트 컨트롤러");
-		int headEmployeeCount = headDao.selectHeadEmployeeCount(); //본사직원인원
-		List<HeadEmployeeVO> headEmployeeList = headDao.selectHeadEmployeeList();
-		model.addAttribute("headEmployeeCount",headEmployeeCount);
-		model.addAttribute("headEmployeeList",headEmployeeList);
+		System.out.println("cate : " + cate);
+		System.out.println("input : " + input);
+		headService.selectHeadEmployeeCount(model,cate,input);
+		
 		return "/employee/headEmployeeList";
 	}
 	

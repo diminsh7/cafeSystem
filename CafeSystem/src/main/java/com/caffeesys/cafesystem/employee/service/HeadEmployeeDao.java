@@ -1,6 +1,7 @@
 package com.caffeesys.cafesystem.employee.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -48,9 +49,9 @@ public class HeadEmployeeDao {
 	}
 	
 	//본사직원 리스트
-	public List<HeadEmployeeVO> selectHeadEmployeeList() {
+	public List<HeadEmployeeVO> selectHeadEmployeeList(Map<String, String> map) {
 		logger.debug("[selectHeadEmployeeList] 본사직원리스트");
-		return sqlSessionTemplate.selectList(NS + "selectHeadEmployeeList");
+		return sqlSessionTemplate.selectList(NS + "selectHeadEmployeeList",map);
 	}
 	
 	//본사직원 상세 조회

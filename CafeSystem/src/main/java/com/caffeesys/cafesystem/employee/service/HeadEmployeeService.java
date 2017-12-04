@@ -1,9 +1,16 @@
 package com.caffeesys.cafesystem.employee.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.employee.controller.AllService;
 
 @Service
 public class HeadEmployeeService {
@@ -11,6 +18,10 @@ public class HeadEmployeeService {
 	
 	@Autowired
 	private HeadEmployeeDao headDao;
+	
+	@Autowired
+	private AllService allService;
+	
 
 	//본사직원 등록(직원코드 자동증가)
 	public int insertHeadEmployee(HeadEmployeeVO headEmployeeVo) {
@@ -37,6 +48,28 @@ public class HeadEmployeeService {
 		headEmployeeVo.setHeadEmployeeCode(headEmployeeCode);
 		
 		return headDao.insertHeadEmployee(headEmployeeVo);
+	}
+
+	//본사직원 조회 검색
+	public void selectHeadEmployeeCount(Model model, String cate, String input) {
+		logger.debug("[selectHeadEmployeeCount] 실행");
+		System.out.println("cate :" + cate);
+		System.out.println("input :" + input);
+		Map<String, String> map;
+		if(cate != "") {
+			map = new HashMap<String, String>();
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
+			map = null;
+		}
+		
+		map = allService.paging(model,map);
+		List<HeadEmployeeVO> headEmployeeList = headDao.selectHeadEmployeeList(map);
+		model.addAttribute("headEmployeeList",headEmployeeList);
+		int headEmployeeCount = headDao.selectHeadEmployeeCount(); //본사직원인원
+		model.addAttribute("headEmployeeCount",headEmployeeCount);
+		
 	};
 
 }
