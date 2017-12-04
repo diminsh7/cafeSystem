@@ -8,7 +8,7 @@ public class ShopVO {
 	private String shopName; // 점포명
 	private String shopAddress; // 점포주소
 	private String shopCall; // 점포연락처
-	private char shopPostcode; // 점포우편번호
+	private String shopPostcode; // 점포우편번호
 	private int shopSize; // 점포규모
 	private String contractOwnerName; // contract소유자이름
 	private String categoryCode; // category코드
@@ -50,10 +50,10 @@ public class ShopVO {
 	public void setShopCall(String shopCall) {
 		this.shopCall = shopCall;
 	}
-	public char getShopPostcode() {
+	public String getShopPostcode() {
 		return shopPostcode;
 	}
-	public void setShopPostcode(char shopPostcode) {
+	public void setShopPostcode(String shopPostcode) {
 		this.shopPostcode = shopPostcode;
 	}
 	public int getShopSize() {
@@ -88,7 +88,7 @@ public class ShopVO {
 				+ contractOwnerName + ", categoryCode=" + categoryCode + ", categorySmall=" + categorySmall + "]";
 	}
 	public ShopVO(String localCategoryCode, String shopCode, String contractCode, String shopName, String shopAddress,
-			String shopCall, char shopPostcode, int shopSize, String contractOwnerName, String categoryCode,
+			String shopCall, String shopPostcode, int shopSize, String contractOwnerName, String categoryCode,
 			String categorySmall) {
 		super();
 		this.localCategoryCode = localCategoryCode;
@@ -107,6 +107,5 @@ public class ShopVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
 	
 }

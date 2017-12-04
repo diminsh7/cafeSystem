@@ -53,7 +53,6 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopName"
 										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
 										name="shopName" type="text">
 								</div>
 							</div>
@@ -64,7 +63,6 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopAddress"
 										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
 										name="shopAddress" type="text">
 								</div>
 							</div>
@@ -75,8 +73,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopCall"
 										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="shopCall" type="text"  placeholder="ex)00-000-0000">
+										name="shopCall" type="text" placeholder="ex)00-000-0000">
 								</div>
 							</div>
 							<div class="item form-group">
@@ -86,7 +83,6 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopPostcode"
 										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
 										name="shopPostcode" type="text">
 								</div>
 							</div>
@@ -97,7 +93,6 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopSize"
 										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
 										name="shopSize" type="text">
 								</div>
 							</div>
