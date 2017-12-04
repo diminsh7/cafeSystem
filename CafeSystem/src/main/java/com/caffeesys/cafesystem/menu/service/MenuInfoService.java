@@ -17,7 +17,7 @@ public class MenuInfoService {
 	@Autowired
 	private MenuInfoDao menuInfoDao;
 	
-	// 메뉴리스트 및 조회 상세전
+	// 메뉴리스트 및 조회 상세전(지점도 포함)
 	public void selectMenuInfoList(Model model, String searchOption, String keyword, int currentPage) {
 		System.out.println("MenuInfoService.java / selectMenuInfoList method 확인");
 		System.out.println("MenuInfoService.java / selectMenuInfoList Param model :" + model);

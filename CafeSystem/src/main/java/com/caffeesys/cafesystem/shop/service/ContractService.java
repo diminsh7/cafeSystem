@@ -1,15 +1,25 @@
 package com.caffeesys.cafesystem.shop.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.caffeesys.cafesystem.login.service.LoginVO;
+
 @Service
 public class ContractService {
 	
+	@Autowired
+	private HttpServletResponse response;
 	@Autowired
 	AllJustService allJustService; // 페이징 및 검색(shop.controller폴더에)
 	@Autowired
@@ -58,5 +68,34 @@ public class ContractService {
 		contract.setContractCode(contractcode);
 		System.out.println("ContractService.java / contract:"+contract);
 		return contractDao.insertContract(contract);
+	}
+	
+	// 계약서상세조회(지점)
+	public void branchContractList(Model model,HttpSession session) throws IOException{
+		System.out.println("ContractService.java / branchContractList method 확인");
+		System.out.println("session : " + session.getAttribute("loginInfo"));
+		Object se = session.getAttribute("loginInfo");
+		if(se != null) {
+			LoginVO login = (LoginVO) session.getAttribute("loginInfo");
+			if(login.getEmpCode().equals("") || login.getPosition().equals("201")) {
+				System.out.println("점주권한으로 계약서정보 확인가능");
+				String branchEmployeeCode = login.getEmpCode();
+				List<ContractVo> contractList = contractDao.branchContractList(branchEmployeeCode);
+				System.out.println("contractList : " + contractList);
+				model.addAttribute("contractList",contractList);
+			}else{
+				System.out.println("권한 기준 확인 불가능");
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('권한 기준 확인 불가능'); history.go(-1);</script>");
+				out.flush();
+			}
+		}else {
+			System.out.println("로그인 후 확인 가능");
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인 후 확인 가능'); history.go(-1);</script>");
+			out.flush();
+		}
 	}
 }
