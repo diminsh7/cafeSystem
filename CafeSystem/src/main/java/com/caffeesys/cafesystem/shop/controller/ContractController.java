@@ -1,5 +1,9 @@
 package com.caffeesys.cafesystem.shop.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,5 +87,13 @@ public class ContractController {
 		System.out.println("ContractController.java / deleteContract method POST방식 " + contractOwnerName);
 		contractDao.deleteContract(contractCode, contractOwnerName);
 		return "redirect:/contractList";
+	}
+	
+	// 계약서상세조회(지점)
+	@RequestMapping(value = "/branchContractList", method = RequestMethod.GET)
+	public String branchContractList(Model model,HttpSession session) throws IOException{
+		System.out.println("ContractController.java / branchContractList method GET방식 ");
+		contractService.branchContractList(model, session);
+		return "/shop/branchContractList";
 	}
 }
