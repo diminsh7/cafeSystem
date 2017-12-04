@@ -46,4 +46,12 @@ public class BranchOrderService {
 
 		return gson.toJson(branchOrderDao.branchOrderForm(map));
 	}
+	
+	//수량에 따른 가격 계산
+	public String itemPriceCal(int itemCount, String itemCodeSelect) {
+		int itemPrice = branchOrderDao.itemPriceCal(itemCodeSelect);
+		int itemPriceResult = itemCount*itemPrice;
+		return gson.toJson(itemPriceResult);
+	}
+	
 }

@@ -33,4 +33,14 @@
 			AND item_category_code = #{itemCate}
 		ORDER BY item_code ASC	
 	</select>
+	
+	<!-- 수량에 따른 가격 계산 -->
+	<select id="itemPriceCal" parameterType="String" resultType="Integer">
+		SELECT
+			item_price
+		FROM
+			item
+		WHERE 
+			item_code = #{itemCode}
+	</select>
 </mapper>
