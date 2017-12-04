@@ -20,14 +20,21 @@ public class BranchOrderController {
 			, @RequestParam(value="itemCate", required=false, defaultValue="601") String itemCate) {
 		//System.out.println("[BranchOrderController.java / branchOrderForm.method] Access");
 		branchOrderService.branchOrderForm(model, itemCate);
-		return "order/BranchOrderForm";
+		return "order/branchOrderForm";
 	}
 	
 	//카테고리별 품목 요청
 	@ResponseBody
 	@RequestMapping(value = "branchOrder/itemSelect", produces = "application/text; charset=utf8")
 	public String branchOrderForm(@RequestParam(value="itemCate", required=true) String itemCate) {
-		System.out.println("카테고리 품목별로 가져오기");
+		//System.out.println("카테고리 품목별로 가져오기");
 		return branchOrderService.branchOrderForm(itemCate);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "branchOrder/itemPriceCal")
+	public String itemPriceCal(@RequestParam(value="itemCount", required=true) int itemCount
+			, @RequestParam(value="itemCodeSelect", required=true) String itemCodeSelect) {	
+		return branchOrderService.itemPriceCal(itemCount, itemCodeSelect);
 	}
 }

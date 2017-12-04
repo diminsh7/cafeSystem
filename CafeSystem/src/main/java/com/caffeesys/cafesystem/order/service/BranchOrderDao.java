@@ -20,4 +20,9 @@ public class BranchOrderDao {
 		//System.out.print("[BranchOrderDao.java / branchOrderForm.method] Access");
 		return sqlSessionTemplate.selectList(NS + "branchOrderForm", map);
 	}
+	
+	//수량에 따른 가격 계산
+	public int itemPriceCal(String itemCodeSelect) {
+		return sqlSessionTemplate.selectOne(NS + "itemPriceCal", itemCodeSelect);
+	}
 }
