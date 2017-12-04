@@ -96,11 +96,7 @@ public class BranchPersonnelDao {
 		return  sqlSessionTemplate.delete(NS + "deleteBranchPersonnel",branchEmployeeCode);	
 	}
 	
-	//지점직원검색
-	public List<BranchPersonnelVO> selectBranchPersonnelSearch(Map<String, String> map){
-		System.out.println("[BranchManagerDao.selectBranchPersonnelSearch] 실행");
-		return sqlSessionTemplate.selectList(NS + "selectPersonnelAllList",map);
-	}
+
 	
 	//검색된 행의 갯수, 컬럼말고 row 
 	public int selectBranchPessonnelrow(Map<String, String> map) {

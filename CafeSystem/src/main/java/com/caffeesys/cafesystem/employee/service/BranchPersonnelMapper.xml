@@ -101,13 +101,21 @@
 			
 		FROM branch_employee INNER JOIN category
 		ON branch_employee.position_category_code = category.category_code
-		WHERE branch_employee.position_category_code = '202'
-		OR branch_employee.position_category_code = '203'
-		<if test="input != null">
-		AND branch_employee.${cate} = #{input}
-		AND( branch_employee.position_category_code = '202'
-		OR branch_employee.position_category_code = '203')
+		
+		WHERE
+		<if test="input == null">
+			branch_employee.position_category_code = '202'
+			OR branch_employee.position_category_code = '203'
 		</if>
+		<if test="input != null">
+			<if test="cate == category_small">
+			category.${cate} = #{input}
+			</if>
+			<if  test="cate != category_small">
+			 branch_employee.${cate} = #{input}
+			</if>
+		</if>
+		
 		ORDER BY branch_employee.branch_employee_code asc
 	</select>
 	
@@ -197,50 +205,6 @@
 		 DELETE FROM branch_personnel WHERE branch_employee_code = #{branchEmployeeCode}
 	</delete>
 	
-	
-	
-	<!-- 지점직원검색조회 / 검색 -->
-	<select id="selectPersonnelAllList" parameterType="java.util.Map" resultMap="resultBranchPersonnel">
-		SELECT
-			branch_employee.branch_employee_code,
-			branch_employee.branch_employee_id,
-			branch_employee.branch_employee_name,
-			branch_employee.branch_employee_birth,
-			category.category_small
-			
-		FROM branch_employee INNER JOIN category
-		ON branch_employee.position_category_code = category.category_code
-		
-		<include refid="search"></include>  
-		
-		OR branch_employee.position_category_code = '202'
-		OR branch_employee.position_category_code = '203'
-		ORDER BY branch_employee.branch_employee_code asc
-	</select>
-	
-	<!-- refid에 사용 되는 search -->
-	 <sql id="search">
-		<choose>
-		 	<!--CONCAT : 둘 이상의 문자열 값을 연결한 결과인 문자열을 반환 -->
-			<!-- 검색 옵션이 전체 검색일 경우 -->
-			<when test = "searchOption.equals('all')">
-				WHERE branch_employee_code like CONCAT('%',#{keyword},'%')
-	      		OR branch_employee_name like CONCAT('%',#{keyword},'%')    
-				OR category_small like CONCAT('%',#{keyword},'%')  
-			</when>
-			<!-- 전체검색이 아닐경우  -->
-			<otherwise>
-				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
-			</otherwise>
-		</choose>
-	</sql>
-	
-	<!-- 검색한게 몇개인지 -->
-	<select id="selectBranchPersonnelRowCount" parameterType="java.util.Map" resultType="Integer">
-		SELECT COUNT(*) FROM branch_personnel
-		 <!-- WHERE절 include 태그로 삽입 -->
-	     <include refid="search"></include>  
-	</select>
 	
 	<!-- DB branch_employee에서 지역매장코드 select -->
 	<select id="seleteLocalShopCode" resultMap="resultBranchPersonnel">
