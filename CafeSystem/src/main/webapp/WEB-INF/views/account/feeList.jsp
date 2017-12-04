@@ -2,7 +2,25 @@
 	pageEncoding="UTF-8"%>
 	
 <script>
-
+	$(document).ready(function() {
+		$.get("/feeListJson", function(data) {
+			var list = JSON.parse(data);
+			console.log(data);
+			$('#feeTable').DataTable({
+				data : list,
+				columns : [
+					{data : "feeCode"},
+					{data : "statementNum"},
+					{data : "shopName"},
+					{data : "feeMonth"},
+					{data : "feePrice"},
+					{data : "feeAuto"},
+					{data : "feeReal"},
+					{data : "feeRemain"}
+				]
+			});
+		});
+	});
 </script>
 
 <div class="right_col" role="main">
