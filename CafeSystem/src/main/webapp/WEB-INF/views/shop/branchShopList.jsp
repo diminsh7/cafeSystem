@@ -8,8 +8,8 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>매장기초정보관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a>
-				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/branchContractList">계약서정보(리스트)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/branchShopList">매장정보(리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -34,19 +34,19 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>${shop.contractCode}</td>
-									<td>${shop.contractOwnerName}</td>
-									<td>${shop.shopName}</td>
-									<td>${shop.shopAddress}</td>
-									<td>${shop.shopCall}</td>
-									<td>${shop.shopPostcode}</td>
-									<td>${shop.shopSize}</td>
-								</tr>
+								<c:forEach var="shop" items="${shopList}">
+									<tr>
+										<td>${shop.contractCode}</td>
+										<td>${shop.contractOwnerName}</td>
+										<td>${shop.shopName}</td>
+										<td>${shop.shopAddress}</td>
+										<td>${shop.shopCall}</td>
+										<td>${shop.shopPostcode}</td>
+										<td>${shop.shopSize}</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
-						<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateShop?contractCode=${shop.contractCode}">수정</a>
-						<a class="btn btn-danger" href="${pageContext.request.contextPath}/deleteShop?contractCode=${shop.contractCode}">삭제</a>
 					</div>
 				</div>
 			</div>

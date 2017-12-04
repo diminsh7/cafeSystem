@@ -68,11 +68,17 @@ public class ShopDao {
 	// 매장연락망리스트 및 조회
 	public List<ShopVO> selectBranchCallList(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectBranchCallList method 확인");
-	     return sqlSessionTemplate.selectList(NS+"selectBranchCallList", map);
+	    return sqlSessionTemplate.selectList(NS+"selectBranchCallList", map);
 	}
 	// 매장연락망리스트 및 조회 행의수
 	public int selectBranchCallCount(Map<String, String> map) {
 		System.out.println("ShopDao.java / selectBranchCallCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectBranchCallCount", map);
+	}
+	
+	// 매장상세조회(지점)
+	public List<ShopVO> branchShopList(String branchEmployeeCode) {
+		System.out.println("ShopDao.java / branchShopList Param branchEmployeeCode: "+branchEmployeeCode);
+		return sqlSessionTemplate.selectList(NS+"branchShopList", branchEmployeeCode);
 	}
 }
