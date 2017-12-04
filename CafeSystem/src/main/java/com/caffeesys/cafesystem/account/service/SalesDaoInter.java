@@ -7,4 +7,6 @@ public interface SalesDaoInter {
 	public List<DailySalesVO> selectDailySalesList();
 	public List<MonthlySalesVO> selectMonthlySalesList();
 	public List<HashMap<String, Object>> selectDailyTop();
+	public List<HashMap<String, Object>> selectMonthlyTop();
+	public List<FeeVO> selectFeeList();
 }

@@ -29,4 +29,14 @@ public class SalesDao implements SalesDaoInter {
 		List<HashMap<String, Object>> result = sqlSession.selectList(NS+"selectDailyTop");
 		return result;
 	}
+	@Override
+	public List<HashMap<String, Object>> selectMonthlyTop() {
+		List<HashMap<String, Object>> result = sqlSession.selectList(NS+"selectMonthlyTop");
+		return result;
+	}
+	@Override
+	public List<FeeVO> selectFeeList() {
+		List<FeeVO> result = sqlSession.selectList(NS+"selectFeeList");
+		return result;
+	}
 }

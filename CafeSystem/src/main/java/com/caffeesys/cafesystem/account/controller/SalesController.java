@@ -27,7 +27,6 @@ public class SalesController {
 	public String listSales() {
 		logger.debug("listSales method");
 		return "/account/salesList";
-		/*return "/account/dailySalesList";*/
 	}
 	@ResponseBody
 	@RequestMapping(value="/dailySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
@@ -48,6 +47,25 @@ public class SalesController {
 	public String jsonDailyTop() {
 		String list = salesService.selectDailyTop();
 		logger.debug("jsonDailyTop method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/monthlyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlyTop() {
+		String list = salesService.selectMonthlyTop();
+		logger.debug("jsonMonthlyTop method list : " + list);
+		return list;
+	}
+	@RequestMapping(value="/feeList", method=RequestMethod.GET)
+	public String listFee() {
+		logger.debug("listFee method");
+		return "/account/feeList";
+	}
+	@ResponseBody
+	@RequestMapping(value="/feeListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonFeeList() {
+		String list = salesService.selectFeeList();
+		logger.debug("jsonFeeList method list : " + list);
 		return list;
 	}
 }
