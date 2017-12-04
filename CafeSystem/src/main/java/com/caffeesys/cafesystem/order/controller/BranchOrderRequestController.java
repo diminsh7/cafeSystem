@@ -23,9 +23,11 @@ public class BranchOrderRequestController {
 	
 	//지점에  따른 리스트 출력
 	@RequestMapping(value = "/branchOrderRequestList", method = RequestMethod.GET)
-	public String seleteBranchOrderRequestList(Model model,HttpSession session) throws IOException{
+	public String seleteBranchOrderRequestList(Model model,HttpSession session
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input) throws IOException{
 		System.out.println("[order.controller.insertBranchManager] 점주에 따른 리스트 출력 컨트롤러");
-		RequestService.selectBranchOrderRequestList(model,session);
+		RequestService.selectBranchOrderRequestList(model,session,cate,input);
 		return "/order/BranchOrderRequestList";
 	}
 	

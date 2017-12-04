@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.caffeesys.cafesystem.employee.controller.BranchPasingService;
+import com.caffeesys.cafesystem.employee.controller.AllService;
 import com.caffeesys.cafesystem.login.service.LoginVO;
 
 @Service
@@ -26,9 +26,9 @@ public class BranchPersonnelService {
 	private BranchPersonnelDao branchPersonnelDao;
 	
 	@Autowired
-	private BranchPasingService pasingServiec;
+	private AllService allService;
 	
-	//테이블 두개에 들어가서 입력되야하기 때문에 서비스를 나눔, 1->employee테이블에 등록 2->manager테이블에 등록
+	//employee테이블에 등록 2->manager테이블에 등록
 	//점주 등록과정 1->employee테이블
 	public int insertBranchEmployee(BranchPersonnelVO branchPersonnelVo) {
 		System.out.println("[BranchPersonnelService.insertBranchEmployee] 실행");
@@ -71,30 +71,10 @@ public class BranchPersonnelService {
 		return branchPersonnelDao.insertBranchPersonnel(branchPersonnelVo); 
 	}
 	
-	//검색한 내용 목록
-	public void selectBranchPersonSearch(Model model, String searchOption, String keyword, int currentPage) {
-		System.out.println("========[BranchManagerService.selectBranchPersonSearch 코드 구하기 시작]==========");
-		System.out.println(" BranchManagerService searchOption : " + searchOption ); //셀렉트박스
-		System.out.println(" BranchManagerService keyword : " + keyword ); //입력 내용
-		
-		Map<String, String> map;
-		if(searchOption != "") {
-			map = new HashMap<String, String>();
-			map.put("searchOption", searchOption);
-			map.put("keyword",keyword);			
-		}else {
-			map = null;
-		}
-		System.out.println("BranchManagerService map : " + map);
-		map = pasingServiec.paging(model, currentPage, 10, branchPersonnelDao.selectBranchPessonnelrow(map), map);
-		model.addAttribute("accountTitleList",branchPersonnelDao.selectBranchPersonnelSearch(map));
-		
-	}
-	
 	//각 지점에서 보는 직원 리스트 
 	public List<BranchPersonnelVO> selectBranchPersonneelInfoList(Model model, HttpSession session) throws IOException {
 		// ==========================selectBranchManager==============================
-				System.out.println("BranchManagerService.selectBranchManager 실행");
+				System.out.println("BranchManagerService.selectBranchPersonneelInfoList 실행");
 				System.out.println("session : " + session.getAttribute("loginInfo"));
 				Object se = session.getAttribute("loginInfo");
 				if(se != null) {
@@ -121,5 +101,28 @@ public class BranchPersonnelService {
 					out.flush();
 				}
 		return null;
+	}
+	
+	//리스트 & 검색
+	public void selectBranchPersonneel(Model model, String cate, String input) {
+		System.out.println("========[BranchManagerService.selectBranchPersonneel 리스트]==========");
+		System.out.println("cate :" + cate);
+		System.out.println("input :" + input);
+		Map<String, String> map;
+		if(cate != "") {
+			map = new HashMap<String, String>();
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
+			map = null;
+		}
+		
+		map = allService.paging(model,map);
+		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList(map);
+		model.addAttribute("branchPersonnelList",branchPersonnelList);
+		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount();
+		model.addAttribute("branchPersonnelCount", branchPersonnelCount);
+		
+		
 	}
 }

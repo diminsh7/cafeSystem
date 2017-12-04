@@ -29,7 +29,7 @@ public class BranchPersonnelDao {
 		return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeLocal");
 	}
 
-	// 점주 등록
+	// 직원 등록
 	// 지점 인사관리 테이블등록
 	public int insertBranchEmployee(BranchPersonnelVO branchPersonnelVO) {
 		System.out.println("[BranchPersonnelDao.insertBranchEmployee] 직원,매니져 등록 / 지점인사테이블에 입력 ");
@@ -49,9 +49,9 @@ public class BranchPersonnelDao {
 	}
 	
 	// 직원리스트
-	public List<BranchPersonnelVO> selectBranchPersonnelList(){
+	public List<BranchPersonnelVO> selectBranchPersonnelList(Map<String, String> map){
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelList] 직원 리스트 출력 실행");
-		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList");
+		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList",map);
 	}
 	
 	// 직원 명수 구하기

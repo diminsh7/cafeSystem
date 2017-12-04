@@ -36,7 +36,7 @@
 	</select>
 
 	<!-- DB order에서 매장에 따른 발주내용  select -->
-	<select id="selectOderRequestList" resultMap="resultBranchOrderRequest">
+	<select id="selectOderRequestList" resultMap="resultBranchOrderRequest" parameterType="java.util.Map">
 		SELECT 
 			OD.order_code, 
 			OD.statement_number,

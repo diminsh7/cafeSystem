@@ -5,13 +5,16 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import com.caffeesys.cafesystem.employee.controller.AllService;
 import com.caffeesys.cafesystem.login.service.LoginVO;
 
 @Service
@@ -23,10 +26,13 @@ public class BranchOrderRequestService {
 	
 	@Autowired
 	private BranchOrderRequestDao RequestDao;
+	
+	@Autowired
+	private AllService allService;
 
 	
 	//발주리스트 & 권한 확인
-	public void selectBranchOrderRequestList(Model model,HttpSession session) throws IOException{
+	public void selectBranchOrderRequestList(Model model,HttpSession session, String cate, String input) throws IOException{
 		System.out.println("BranchOrderRequestService.seleteBranchOrderRequestList 실행");
 		System.out.println("session : " + session.getAttribute("loginInfo"));
 		Object se = session.getAttribute("loginInfo");
@@ -35,9 +41,20 @@ public class BranchOrderRequestService {
 			System.out.println("login.getPosition() : " + login.getPosition());
 			if(login.getPosition().equals("201") || login.getPosition().equals("202")) {
 				System.out.println("점주 또는 매니져 권한으로 발주주문내역 확인 가능");
+				Map<String, String> map;
+				if(cate != "") {
+					map = new HashMap<String, String>();
+					map.put("cate", cate);
+					map.put("input", input);
+				} else {
+					map = null;
+				}
+				
+				map = allService.paging(model,map);
+				
 				String branchEmployeeCode = login.getEmpCode();
 				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode);
-				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode);
+				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map);
 				System.out.println("orderRequestList : " + orderRequestList);
 				model.addAttribute("orderRequestList",orderRequestList);
 			}else{

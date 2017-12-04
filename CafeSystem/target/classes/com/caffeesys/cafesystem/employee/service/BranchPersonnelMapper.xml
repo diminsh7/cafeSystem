@@ -91,7 +91,7 @@
 
 	
 	<!-- 지점 직원 리스트   직원코드, 아이디, 이름, 생년월일, 직급-->
-	<select id="selectBranchPersonnelList" resultMap="resultBranchPersonnel">
+	<select id="selectBranchPersonnelList" resultMap="resultBranchPersonnel" parameterType="java.util.Map">
 		SELECT
 			branch_employee.branch_employee_code,
 			branch_employee.branch_employee_id,
@@ -103,6 +103,11 @@
 		ON branch_employee.position_category_code = category.category_code
 		WHERE branch_employee.position_category_code = '202'
 		OR branch_employee.position_category_code = '203'
+		<if test="input != null">
+		AND branch_employee.${cate} = #{input}
+		AND( branch_employee.position_category_code = '202'
+		OR branch_employee.position_category_code = '203')
+		</if>
 		ORDER BY branch_employee.branch_employee_code asc
 	</select>
 	

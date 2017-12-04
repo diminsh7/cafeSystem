@@ -47,24 +47,16 @@ public class BranchPersonnelController {
 	
 	//직원 리스트 페이지 요청 컨트롤러
 	@RequestMapping(value = {"/branchPersonnelList"})
-	public String selectBranchPersonneel(Model model) { 
+	public String selectBranchPersonneel(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점 직원,매니져 리스트 페이지 요청 컨트롤러");
-		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount(); // 직원 총 수
-		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList();
-		model.addAttribute("branchPersonnelCount", branchPersonnelCount);
-		model.addAttribute("branchPersonnelList",branchPersonnelList);
+		System.out.println("cate : " + cate);
+		System.out.println("input : " + input);
+		branchPersonnelService.selectBranchPersonneel(model,cate,input);
 		return "employee/branchPersonnelList";
 		
-		/*,@RequestParam(value="searchOption", required=false, defaultValue="all")String searchOption
-		,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
-		,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) throws Exception {
-	System.out.println("[employee.controller.selectBranchManager.java] : 직원 리스트페이지 요청 컨트롤러\"");
-	System.out.println("model : " + model);
-	System.out.println("searchOption : " + searchOption);
-	System.out.println("keyword : " + keyword);
-	System.out.println("currentPage : " + currentPage);
-	branchPersonnelService.selectBranchPersonSearch(model, searchOption, keyword, currentPage);*/
-	}
+		}
 	
 	//선택 직원 상세페이지 요청 컨트롤러 
 	@RequestMapping(value = {"/branchPersonnelDetail"}, method = RequestMethod.GET)
