@@ -2,11 +2,17 @@ package com.caffeesys.cafesystem.menu.service;
 
 
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+
+import com.caffeesys.cafesystem.employee.controller.AllService;
 
  
 @Service 
@@ -15,6 +21,8 @@ public class MaterialService {
 
 	@Autowired
 	private MaterialDao materialDao;
+	@Autowired
+	private AllService allService;
 
 	//원가등록  selectMaterialCodeMax
 	public void insertMaterial(MaterialVO aterialVo){
@@ -39,25 +47,20 @@ public class MaterialService {
 	}
 	
 	//selectBranchPersonnelList 조회검색
-	public void selectBranchPersonnelList(Model model) {
+	public void selectBranchPersonnelList(Model model, String cate, String input) {
 		logger.debug("selectBranchPersonnelList 실행 ");
-		model.addAttribute("materialList", materialDao.selectBranchPersonnelList());
+		System.out.println("cate :" + cate);
+		System.out.println("input :" + input);
+		Map<String, String> map;
+		if(cate != "") {
+			map = new HashMap<String, String>();
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
+			map = null;
+		}
+		map = allService.paging(model,map);
+		List<MaterialVO> materialList = materialDao.selectBranchPersonnelList(map);
+		model.addAttribute("materialList",materialList);
 	}
-	
-	/*//selectBranchPersonnelList 조회검색
-		public void selectBranchPersonnelList(Model model, String searchOption, String keyword) {
-			logger.debug("selectBranchPersonnelList 실행 ");
-			System.out.println("searchOption : " + searchOption);
-			System.out.println("keyword : " + keyword);
-			Map<String, String> map;
-			if(searchOption != "") {
-				map = new HashMap<String, String>();
-				map.put("searchOption", searchOption);
-				map.put("keyword",keyword);			
-			}else {
-				map = null;
-			}
-			System.out.println("[MaterialService.selectBranchPersonnelList] map : "+map);
-			model.addAttribute("materialList", materialDao.selectBranchPersonnelList(map));
-		}*/
 }

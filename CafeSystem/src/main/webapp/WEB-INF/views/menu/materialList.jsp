@@ -35,18 +35,22 @@ function deleteb(){
 						<p class="text-muted font-13 m-b-30"></p>
 						메뉴 원가 리스트 
 				
-					<form action="./MaterialList" method="post" name="search">
-						<select name="searchOption">
-							<option value="menu_name"
-								<c:out value="${map.searchOption == 'menuName'?'selected':''}"/>>메뉴명</option>
-								
-							<option value="itemName"
-								<c:out value="${map.searchOption == 'categorySmall'?'selected':''}"/>>품목명</option>
-						</select>
-						<input name="keyword" value="${keyword}"> 
-						<input type="submit" value="조회">
-					</form>
-											
+						<form id="SearchForm" action="${pageContext.request.contextPath}/materialList" method="post">
+							<div>
+								<div>
+									<select name="cate" id="cate" required class="input-sm">
+										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
+										<option value="menu_code" class="input-sm">메뉴명</option>
+										<option value="item_name" class="input-sm">품목코드</option>
+									</select>
+									<div class="input-group">
+										<input type="text" name="input" id="input" value="${input}" required class="input-sm"> <span>
+		 								<input type="submit" class="btn btn-default" id="SearchBtn" value="검색">
+										</span>
+									</div>
+								</div>
+							</div>
+						</form>		
 					
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>

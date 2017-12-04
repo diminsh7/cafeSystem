@@ -52,10 +52,13 @@ public class MaterialController {
 
 	//메뉴원가 리스트 
 	@RequestMapping(value = "/materialList")
-	public String selectBranchPersonnelList(Model model){  
+	public String selectBranchPersonnelList(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input) {  
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
-
-		materialService.selectBranchPersonnelList(model);
+		System.out.println("cate : " + cate);
+		System.out.println("input : " + input);
+		materialService.selectBranchPersonnelList(model,cate,input);
 		return "menu/materialList";
 	} 
 	
