@@ -17,43 +17,47 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>발주신청내역조회 <small></small></h2>
-
+						<h2>발주신청상세내역조회 <small></small></h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
-						내역리스트
+						상내역리스트
 			
-											
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th>전표번호</th>
-									<th>총가격</th>
-									<th>제품명</th>
-									<th>접수상태</th>
+									<th>구분</th>
+									<th>품목명</th>
+									<th>수량</th>
+									<th>가격</th>
+									<th>발주금액</th>
+									<th>현 접수 상태</th>
+									<th>현 배송 상태</th>
 									<th>신청일</th>
-									<th>배송상태</th>
-									<th>발주승인 담당자</th>
-									<th>발주/불량구분</th>
-									<th>환불 신청</th>
-									<th>취소 신청</th>
+									<th>승인일</th>
+									<th>출고일</th>
+									<th>승인담당자</th>
+									<th>불량여부</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="request" items="${orderRequestList}">
+								<c:forEach var="Detail" items="${orderDetail}">
 									<tr>
-										<td><a href="${pageContext.request.contextPath}/BranchOrderRequestDetail?orderCode=${request.orderCode}">${request.statementNumber}</a></td>
-										<td>${request.cal}</td>
-										<td>${request.itemName}</td>
-										<td>${request.cateReceipt}</td>
-										<td>${request.orderRequest}</td>
-										<td>${request.cateOrder}</td>
-										<td>${request.headName}</td>
-										<td>${request.divideName}</td>
-										<td><a href="">환불신청</a></td>
-										<td><a href="">취소신청</a></td>
+										<td>${Detail.statementNumber}</td>
+										<td>${Detail.orderFaultyDivide}</td>
+										<td>${Detail.itemName}</td>
+										<td>${Detail.orderAmount}</td>
+										<td>${Detail.orderPrice}</td>
+										<td>${Detail.cal}</td>
+										<td>${Detail.cateReceipt}</td>
+										<td>${Detail.cateOrder}</td>
+										<td>${Detail.orderRequest}</td>
+										<td>${Detail.orderApproval}</td>
+										<td>${Detail.orderRelease}</td>
+										<td>${Detail.headEmployeeCode}</td>
+										<td>${Detail.orderFaultyAble}</td>
 									</tr>
 								</c:forEach>
 							</tbody>

@@ -53,7 +53,7 @@
 		)  
 		from contract
 	</select>
-     <!-- 계약서수정 및 계약서상세조회 -->
+    <!-- 계약서수정 및 계약서상세조회 -->
 	<select id="selectContract" parameterType="String" resultMap="resultContract">
         SELECT contract_code, contract_owner_name, contract_shop_name, contract_owner_phone
             	, contract_start_date, contract_end_date, contract_photo
@@ -74,4 +74,13 @@
 		WHERE contract_code = #{contractCode}
 		AND contract_owner_name = #{contractOwnerName}
     </delete>
+    
+    <!-- 계약서상세조회(지점) -->
+	<select id="branchContractList" parameterType="String" resultMap="resultContract">
+        SELECT c.contract_code, c.contract_owner_name, c.contract_shop_name, c.contract_owner_phone, c.contract_start_date, c.contract_end_date, c.contract_photo
+		FROM contract c
+		INNER JOIN branch_employee b
+		ON c.contract_owner_name = b.branch_employee_name
+		WHERE branch_employee_code = #{branchEmployeeCode}
+    </select>
 </mapper>
