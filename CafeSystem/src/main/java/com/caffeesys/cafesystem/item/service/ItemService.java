@@ -61,6 +61,7 @@ public class ItemService {
 		System.out.println("ItemService.java / item:"+item);
 		return itemDao.insertItem(item);
 	}
+	
 	// 발주품목금지리스트 및 조회 상세전
 	public void selectItemListX(Model model, String searchOption, String keyword, int currentPage) {
 		System.out.println("ItemService.java / selectItemListX method 확인");

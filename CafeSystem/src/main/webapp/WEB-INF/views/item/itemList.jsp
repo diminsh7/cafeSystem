@@ -68,7 +68,7 @@
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/itemList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
-						</ul>
+						</ul>	
 					</div>
 				</div>
 			</div>

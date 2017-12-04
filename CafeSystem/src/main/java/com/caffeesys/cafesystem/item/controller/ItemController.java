@@ -88,6 +88,7 @@ public class ItemController {
 		itemDao.deleteItem(itemCode, itemName);
 		return "redirect:/itemList";
 	}
+	
 	// 발주품목금지리스트 및 조회 상세전
 	@RequestMapping(value = "/itemListX")
 	public String listItemX(Model model
