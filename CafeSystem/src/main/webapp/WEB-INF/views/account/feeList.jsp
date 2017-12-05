@@ -17,7 +17,8 @@
 					{data : "feeAuto"},
 					{data : "feeReal"},
 					{data : "feeRemain"}
-				]
+				],
+				order : [0, "desc"]
 			});
 		});
 	});
