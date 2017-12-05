@@ -20,6 +20,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="branch_employee_birth" property="branchEmployeeBirth"/>		<!-- 지점직원 생년월일 -->
 		<result column="category_small"	property="categoryPosition"/>				<!-- 부서 -->
 	</resultMap>
+	<resultMap type="com.caffeesys.cafesystem.employee.service.BranchPersonnelVO" id="resultBranchPersonnel">
+		<result column="local_category_code"  property="localCategoryCode"/>	<!-- 지역코드 -->
+		<result column="shop_code" property="shopCode"  /><!-- 매장코드 -->
+	</resultMap>
 	<!-- 검색한 list  -->
 	<select id="branchSalaryList" parameterType="java.util.Map" resultMap="resultBranchSalary">
 		SELECT bs.branch_salary_workmonth
@@ -81,9 +85,63 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and position_category_code != "201"  	
 	</select>
 	
-	<select id="branchEmployeeSalaryInsert" parameterType="string" resultType="string">
+	<!-- 직원코드의 급여 select -->
+	<select id="branchEmployeeSalaryInsert" parameterType="String" resultType="Integer">
 		SELECT branch_personnel_salary 
 		FROM branch_personnel
 		WHERE branch_employee_code = #{branchEmployeeCode}
 	</select>
+	
+	<!-- 계정과목의 branch_salary_code컬럼에서 글자말고, 오른쪽 숫자의 최대값 select -->
+	<select id="branchSalaryCodeMax" resultType="Integer">
+		select max(CAST(substring(branch_salary_code,13) AS DECIMAL))
+		from branch_salary
+	</select>
+	
+	<!-- 계정과목의 branch_salary_code컬럼에서 글자말고,가운데 숫자의 최대값 select -->
+	<select id="branchSalaryCodeMidMax" resultType="Integer">
+		select  max(CAST(substring(branch_salary_code,9) AS DECIMAL))
+		from branch_salary
+	</select>
+	
+	<!-- 전표번호 등록할때 오늘의 날짜 171203이런형식 -->
+	<select id="statementDate" resultType="String">
+		SELECT DATE_FORMAT(now(),'%y%m%d');		
+	</select>
+	
+	<!--전표전호 등록할때 local,shop코드 selelct  -->
+	<select id="bEmployeeLocalShop" parameterType="String" resultMap="resultBranchPersonnel">
+		SELECT local_category_code, shop_code FROM branch_employee
+			WHERE branch_employee_code = #{branchEmployeeCode}
+	</select>
+	<!-- 지점직원 급여명세서 등록 -->
+	<insert id="branchSalaryInsert">
+		INSERT INTO branch_salary(
+			branch_salary_code
+			,statement_number
+			,branch_employee_code
+			,branch_salary_workmonth
+			,branch_employee_salary
+			,branch_salary_health
+			,branch_salary_insurance
+			,branch_salary_persion
+			,branch_salary_payments
+			,branch_salary_deduction
+			,branch_salary_receipts
+			,branch_salary_paydate)
+		VALUES(
+			#{branchSalaryCode}
+			,#{statementNumber}
+			,#{branchEmployeeCode}
+			,#{branchSalaryWorkmonth}
+			,#{branchEmployeeSalary}
+			,#{branchSalaryHealth}
+			,#{branchSalaryInsurance}
+			,#{branchSalaryPersion}
+			,#{branchSalaryPayments}
+			,#{branchSalaryDeduction}
+			,#{branchSalaryReceipts}
+			,#{branchSalaryPaydate});	
+	</insert>
+	
 </mapper>
