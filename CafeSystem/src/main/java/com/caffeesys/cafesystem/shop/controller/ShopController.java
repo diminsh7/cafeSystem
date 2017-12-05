@@ -1,6 +1,9 @@
 package com.caffeesys.cafesystem.shop.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -104,5 +107,13 @@ public class ShopController {
 		System.out.println("ShopController.java"+currentPage);
 		shopService.selectBranchCallList(model, searchOption, keyword, currentPage);
 		return "/shop/branchCallList";
+	}
+	
+	// 매장상세조회(지점)
+	@RequestMapping(value = "/branchShopList", method = RequestMethod.GET)
+	public String branchShopList(Model model,HttpSession session) throws IOException{
+		System.out.println("ShopController.java / branchShopList method GET방식 ");
+		shopService.branchShopList(model, session);
+		return "/shop/branchShopList";
 	}
 }

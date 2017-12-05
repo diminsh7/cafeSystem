@@ -7,8 +7,8 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>메뉴관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/menuInfoList">메뉴(전체리스트)</a> 
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertMenuInfo">메뉴(등록)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/menuInfoList">메뉴(전체리스트)</a> 
+				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertMenuInfo">메뉴(등록)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -97,7 +97,7 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<button id="send" type="submit" class="btn btn-success">수정</button>
+									<button id="send" type="submit" class="btn btn-warning">수정</button>
 								</div>
 							</div>
 						</form>

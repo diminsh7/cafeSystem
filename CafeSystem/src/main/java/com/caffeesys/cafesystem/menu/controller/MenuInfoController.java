@@ -88,4 +88,26 @@ public class MenuInfoController {
 		menuInfoDao.deleteMenuInfo(menuCode, menuName);
 		return "redirect:/menuInfoList";
 	}
+	// 메뉴리스트 및 조회 상세전(지점)
+	@RequestMapping(value = "/branchMenuInfoList")
+	public String listMenuInfoBranch(Model model
+			,@RequestParam(value="searchOption", required=false, defaultValue="category_small")String searchOption
+			,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
+			,@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage) throws Exception {
+		System.out.println("MenuInfoController.java / listMenuInfo method");
+		System.out.println("MenuInfoController.java"+model);
+		System.out.println("MenuInfoController.java"+searchOption);
+		System.out.println("MenuInfoController.java"+keyword);
+		System.out.println("MenuInfoController.java"+currentPage);
+		menuInfoService.selectMenuInfoList(model, searchOption, keyword, currentPage);
+		return "/menu/branchMenuInfoList";
+	}
+	// 메뉴상세조회(지점)
+	@RequestMapping(value = "/branchMenuInfoDetail", method = RequestMethod.GET)
+	public String detailMenuInfoBranch(Model model, @RequestParam(value = "menuCode", required = true) String menuCode) {
+		System.out.println("MenuInfoController.java / detailMenuInfo method GET방식 " + menuCode);
+		MenuInfoVO menuInfo = menuInfoDao.selectMenuInfo(menuCode);
+		model.addAttribute("menuInfo", menuInfo);
+		return "/menu/branchMenuInfoDetail";
+	}
 }

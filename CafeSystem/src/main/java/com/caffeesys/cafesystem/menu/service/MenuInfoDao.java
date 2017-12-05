@@ -15,12 +15,12 @@ public class MenuInfoDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	// 메뉴리스트 및 조회 상세전
+	// 메뉴리스트 및 조회 상세전(지점도 포함)
 	public List<MenuInfoVO> selectMenuInfoList(Map<String, String> map) {
 		System.out.println("MenuInfoDao.java / selectMenuInfoList method 확인");
 	    return sqlSessionTemplate.selectList(NS+"selectMenuInfoList", map);
 	}
-	// 메뉴리스트 및 조회 상세전 행의수
+	// 메뉴리스트 및 조회 상세전 행의수(지점도 포함)
 	public int selectMenuInfoCount(Map<String, String> map) {
 		System.out.println("MenuInfoDao.java / selectMenuInfoCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectMenuInfoCount", map);
@@ -40,7 +40,7 @@ public class MenuInfoDao {
 		System.out.println("MenuInfoDao.java / selectMenuInfoCategorySmall method 확인");
 		return sqlSessionTemplate.selectList(NS + "selectMenuInfoCategorySmall");
 	}
-	// 메뉴수정 및 메뉴상세조회
+	// 메뉴수정 및 메뉴상세조회(메뉴상세조회 지점도 포함)
 	public MenuInfoVO selectMenuInfo(String menuCode) {
 		System.out.println("MenuInfoDao.java / selectMenuInfo Param menuCode: "+menuCode);
 		return sqlSessionTemplate.selectOne(NS+"selectMenuInfo", menuCode);

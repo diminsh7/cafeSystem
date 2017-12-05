@@ -8,7 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>매장연락망관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchCallList">매장연락망(전체리스트)</a> 
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/branchCallList">매장연락망(전체리스트)</a> 
 			</div>
 		</div>
 		<div class="clearfix"></div>
