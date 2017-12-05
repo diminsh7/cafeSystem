@@ -5,7 +5,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>급여명세서관리<small>지점</small></h3>
+				<h3>급여명세서관리<small>본사</small></h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>	
@@ -15,7 +15,7 @@
 					<div class="x_title">
 						<h2>급여명세서 리스트</h2>
 						<div class="col-md-0 col-sm-0 col-xs-0 form-group pull-right top_search">
-							<a class="btn btn-primary" href="${pageContext.request.contextPath}/branchSalaryInsert">급여명세서 등록</a>
+							<a class="btn btn-primary" href="${pageContext.request.contextPath}/headSalaryInsert">급여명세서 등록</a>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -25,7 +25,7 @@
 						<h2>급여명세서 목록</h2>
 					</p>
 					
-					<form name="search" method="post" action="${pageContext.request.contextPath}/branchSalaryList">
+					<form name="search" method="post" action="${pageContext.request.contextPath}/headSalaryList">
 						<legend>검색</legend>
 						<ul>
 							<li>
@@ -41,11 +41,11 @@
 						<%-- <!-- <div name="searchOption"> -->
 						직원 코드 검색: <input name="keyword" value="${keyword}"> 
 						<input type="submit" value="조회">
-						<div value="searchOption" value="branch_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
+						<div value="searchOption" value="head_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
 						<input type="submit" value="조회">		 --%>		
 					</form>
 					<!-- 레코드의 갯수를 출력 -->
-					${branchSalaryCount}개의 게시물이 있습니다.
+					${headSalaryCount}개의 게시물이 있습니다.
 					<table id="datatable" class="table table-striped table-bordered">
 						<tr>
 							<th>귀속연월</th>
@@ -58,28 +58,28 @@
 							<th>실수령액</th>
 							<th>상세정보</th>
 						</tr>
-						<c:forEach var="branchSalaryList" items="${branchSalaryList}">
+						<c:forEach var="headSalaryList" items="${headSalaryList}">
 							<tr>
-								<td>${branchSalaryList.branchSalaryWorkmonth}</td>
-								<td>${branchSalaryList.branchEmployeeCode}</td>
-								<td>${branchSalaryList.branchEmployeeName}</td>
-								<td>${branchSalaryList.branchEmployeeBirth}</td>
-								<td>${branchSalaryList.categoryPosition}</td>
-								<td>${branchSalaryList.branchSalaryPayments}</td>
-								<td>${branchSalaryList.branchSalaryDeduction}</td>
-								<td>${branchSalaryList.branchSalaryReceipts}</td>
-								<td><a href="${pageContext.request.contextPath}/branchSalaryDetail?branchEmployeeCode=${branchSalaryList.branchEmployeeCode}">상세보기</a></td>
+								<td>${headSalaryList.headSalaryWorkmonth}</td>
+								<td>${headSalaryList.headEmployeeCode}</td>
+								<td>${headSalaryList.headEmployeeName}</td>
+								<td>${headSalaryList.headEmployeeBirth}</td>
+								<td>${headSalaryList.categoryDepartment}</td>
+								<td>${headSalaryList.headSalaryPayments}</td>
+								<td>${headSalaryList.headSalaryDeduction}</td>
+								<td>${headSalaryList.headSalaryReceipts}</td>
+								<td><a href="${pageContext.request.contextPath}/headSalaryDetail?headEmployeeCode=${headSalaryList.headEmployeeCode}">상세보기</a></td>
 							</tr>
 						</c:forEach>
 					</table>
 						<ul class="pager">
 							<c:if test="${currentPage>1}">
 								<li class="previous"><a
-									href="${pageContext.request.contextPath}/branchSalaryList?currentPage=${currentPage-1}">이전</a></li>
+									href="${pageContext.request.contextPath}/headSalaryList?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
 							<c:if test="${currentPage<=lastPage}">
 								<li class="next"><a
-									href="${pageContext.request.contextPath}/branchSalaryList?currentPage=${currentPage+1}">다음</a></li>
+									href="${pageContext.request.contextPath}/headSalaryList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
 						</ul>
 					</div>

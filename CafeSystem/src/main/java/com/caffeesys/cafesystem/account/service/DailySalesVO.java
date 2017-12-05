@@ -5,6 +5,7 @@ public class DailySalesVO {
 	private String statementNum;	//전표번호
 	private String localCode;		//지역코드
 	private String shopCode;		//매장코드
+	private String shopName;		//매장명
 	private String dailySalesDate;	//날짜
 	private int dailySalesAmount;	//일매출액
 	
@@ -32,6 +33,12 @@ public class DailySalesVO {
 	public void setShopCode(String shopCode) {
 		this.shopCode = shopCode;
 	}
+	public String getShopName() {
+		return shopName;
+	}
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
 	public String getDailySalesDate() {
 		return dailySalesDate;
 	}
@@ -48,7 +55,9 @@ public class DailySalesVO {
 	@Override
 	public String toString() {
 		return "DailySalesVO [dailySalesCode=" + dailySalesCode + ", statementNum=" + statementNum + ", localCode="
-				+ localCode + ", shopCode=" + shopCode + ", dailySalesDate=" + dailySalesDate + ", dailySalesAmount="
-				+ dailySalesAmount + "]";
+				+ localCode + ", shopCode=" + shopCode + ", shopName=" + shopName + ", dailySalesDate=" + dailySalesDate
+				+ ", dailySalesAmount=" + dailySalesAmount + "]";
 	}
+	
+	
 }

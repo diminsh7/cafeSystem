@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.account.controller.PasingService;
+import com.caffeesys.cafesystem.employee.service.BranchPersonnelVO;
 import com.caffeesys.cafesystem.login.service.LoginVO;
 import com.google.gson.Gson;
 
@@ -65,11 +66,92 @@ public class BranchSalaryService {
 		model.addAttribute("branchCodeList", branchCodeList);	//로그인한 매장의 직원코드 갖고오기
 	}
 	
+	
 	//지점직원 급여명세서 등록 폼에 쓸 직원 급여 가져오는 메소드 직원코드를 눌렀을때 자동으로 입력
-	public String branchEmployeeSalaryInsert(String branchCodeList) {
-		logger.debug("branchEmployeeSalaryInsert메소드 확인");
-		logger.debug("branchEmployeeSalaryInsert메소드 확인 :{}",gson.toJson(branchSalaryDao.branchEmployeeSalaryInsert(branchCodeList)));
-		return gson.toJson(branchSalaryDao.branchEmployeeSalaryInsert(branchCodeList));
+	public String branchEmployeeSalaryInsert(String branchEmployeeCode) {
+		
+		logger.debug("branchEmployeeSalaryInsert메소드 확인 map :{}",branchEmployeeCode);
+		logger.debug("branchEmployeeSalaryInsert메소드 확인 :{}",gson.toJson(branchSalaryDao.branchEmployeeSalaryInsert(branchEmployeeCode)));
+		return gson.toJson(branchSalaryDao.branchEmployeeSalaryInsert(branchEmployeeCode));
 	}
 	
+	
+	
+	//지점직원 급여명세서코드 등록 처리 과정
+	public void branchSalaryInsert(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryInsert 메소드의 branchSalary :{}",branchSalary);	
+		
+		//BranchSalaryWorkmonth 월로 갖고왔으니 data타입으로 변경 후 등록과정
+		String BranchSalaryWorkmonth = branchSalary.getBranchSalaryWorkmonth(); //2017-10 
+		BranchSalaryWorkmonth = BranchSalaryWorkmonth+"-01";	//2017-10-01
+		branchSalary.setBranchSalaryWorkmonth(BranchSalaryWorkmonth);
+		
+		//전표번호 등록 과정
+		String statementDate = branchSalaryDao.statementDate();	//날짜 get
+		logger.debug("branchSalaryInsert 메소드 statementDate :{}", statementDate);
+		String bEmployeeCode= branchSalary.getBranchEmployeeCode();	//선택직원 코드 get
+		BranchPersonnelVO BranchPersonnel = branchSalaryDao.bEmployeeLocalShop(bEmployeeCode);//선택한 직원의 매장코드,shop코드 get
+		String branchLocal = BranchPersonnel.getLocalCategoryCode();
+		String branchShop= BranchPersonnel.getShopCode();
+		String statementLocal = branchLocal+branchShop;
+		
+		String statementNumber = statementDate + "-" + statementLocal + "-" + "A";
+		logger.debug("전표번효 :{}",statementNumber);
+		
+		//지점직원 급여명세서코드 등록 과정
+		int branchSalaryCodeMax;
+		int branchSalaryCodeMidMax;
+		int result = 0;
+		int result2 = 0;
+		String result_no = null;
+		String result_no2 = null;
+		String branchSalaryCode = null;
+		String branch_salary_code = "_";
+		String branch_salary_code2 = "bsalary_";
+		
+		branchSalaryCodeMax = branchSalaryDao.branchSalaryCodeMax();
+		logger.debug("branchSalaryInsert메소드의 branchSalaryCodeMax:{}",branchSalaryCodeMax);
+		branchSalaryCodeMidMax = branchSalaryDao.branchSalaryCodeMidMax();
+		logger.debug("branchSalaryInsert메소드의 branchSalaryCodeMidMax:{}",branchSalaryCodeMidMax);
+
+		
+		if(branchSalaryCodeMax != 0 && branchSalaryCodeMax < 9999) {
+			result = branchSalaryCodeMax;
+			logger.debug("branchSalaryInsert 메소드 result1 :{}",result);//22
+			result = result + 1;
+			logger.debug("branchSalaryInsert 메소드 result2 :{}",result);//23
+			result_no = String.format("%04d", result);	//자리수 맞추기
+			logger.debug("branchSalaryInsert 메소드 result_no :{}",result_no);//0023
+			
+			result2 = branchSalaryCodeMidMax;
+			logger.debug("branchSalaryInsert 메소드 result2-1 :{}",result2);	//1
+			result_no2 = String.format("%03d", result2);	//자리수 맞추기		
+			logger.debug("branchSalaryInsert 메소드 result_no2 :{}",result_no2);//001
+			
+		}else if(branchSalaryCodeMax == 9999) {
+			result = branchSalaryCodeMax;
+			logger.debug("branchSalaryInsert 메소드 result1 :{}",result);//9999
+			result = result - 9998;
+			logger.debug("branchSalaryInsert 메소드 result2 :{}",result);//1
+			result_no = String.format("%04d", result);	//자리수 맞추기
+			logger.debug("branchSalaryInsert 메소드 result_no :{}",result_no);//0001
+			
+			result2 = branchSalaryCodeMidMax;
+			logger.debug("branchSalaryInsert 메소드 result2-1 :{}",result2);	//1
+			result2 = result2 + 1;
+			logger.debug("branchSalaryInsert 메소드 result2-2 :{}",result2);	//2
+			result_no2 = String.format("%03d", result2);	//자리수 맞추기		
+			logger.debug("branchSalaryInsert 메소드 result_no2 :{}",result_no2);//002
+		}
+		
+		branchSalaryCode =branch_salary_code2 + result_no2 +branch_salary_code+ result_no;	//bsalary_001_0023
+		logger.debug("branchSalaryInsert 메소드 bSalaryCode :{}",branchSalaryCode);	//bsalary_001_0023
+		branchSalary.setBranchSalaryCode(branchSalaryCode);	
+		
+		
+		
+		//logger.debug("branchSalaryInsert 메소드의 branchSalaryCodeMax :{}",branchSalaryCodeMax);
+		logger.debug("branchSalaryInsert 메소드의 branchSalary :{}",branchSalary);
+		branchSalaryDao.branchSalaryInsert(branchSalary);
+	}
 }

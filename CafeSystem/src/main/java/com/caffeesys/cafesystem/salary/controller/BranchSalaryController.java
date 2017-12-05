@@ -1,13 +1,12 @@
 package com.caffeesys.cafesystem.salary.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -20,6 +19,7 @@ public class BranchSalaryController {
 	private static final Logger logger = LoggerFactory.getLogger(BranchSalaryController.class);
 	@Autowired
 	private BranchSalaryService branchSalaryService;
+	
 	//지점직원 급여명세서 목록
 	@RequestMapping(value="/branchSalaryList")
 	public String branchSalaryList(Model model
@@ -36,19 +36,30 @@ public class BranchSalaryController {
 	}
 	
 	//지점 직원 급여명세서 등록 폼 요청
-	@RequestMapping(value="/branchSalaryInsert")
+	@RequestMapping(value="branchSalaryInsert")
 	public String branchSalaryInsert(Model model) {
 		branchSalaryService.branchCodeList(model);
 		return "salary/branchSalaryInsertForm";	
 	}
 	
-	//
+	//지점 직원 급여명세서 등록 처리
+	@RequestMapping(value="branchSalaryInsert" , method = RequestMethod.POST)
+	public String branchSalaryInsert(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryInsert메소드의  branchSalary :{}",branchSalary);
+		branchSalaryService.branchSalaryInsert(branchSalary);
+		return "redirect:/branchSalaryList";
+	}
+	//지점직원 급여명세서 등록 폼에 쓸 직원 급여 가져오는 메소드 직원코드를 눌렀을때 자동으로 입력
 	@ResponseBody
 	@RequestMapping(value="branchEmployeeSalaryInsert")
 	public String branchEmployeeSalaryInsert(@RequestParam(value = "branchCodeList") String branchCodeList) {
 		logger.debug("branchEmployeeSalaryInsert 메소드 확인 branchCodeList :{}", branchCodeList);
 		return branchSalaryService.branchEmployeeSalaryInsert(branchCodeList);
 	}
+	
+	
+	
+	//등록 폼에 사용할 전표 갖고오기
 	
 	//지점직원 급여명세서 등록 처리
 	
