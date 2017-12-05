@@ -69,7 +69,7 @@
 			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">발주</a></li>
+					<li><a href="${pageContext.request.contextPath}/branchOrderForm">발주</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">장바구니</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">발주신청내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">불량품목신청</a></li>

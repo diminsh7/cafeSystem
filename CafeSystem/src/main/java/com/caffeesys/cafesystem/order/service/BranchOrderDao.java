@@ -21,6 +21,12 @@ public class BranchOrderDao {
 		return sqlSessionTemplate.selectList(NS + "branchOrderForm", map);
 	}
 	
+	//지점 발주 처리
+	public int branchOrderInsert(BranchOrderAddVO branchOrderAdd) {
+		System.out.println("branchOrderAdd: " + branchOrderAdd);
+		return sqlSessionTemplate.insert(NS + "branchOrderAdd", branchOrderAdd);
+	}
+	
 	//수량에 따른 가격 계산
 	public int itemPriceCal(String itemCodeSelect) {
 		return sqlSessionTemplate.selectOne(NS + "itemPriceCal", itemCodeSelect);

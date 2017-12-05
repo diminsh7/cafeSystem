@@ -5,6 +5,7 @@
 <script>
 	
 	$(document).ready(function(){
+		//카테고리별로 품목을 불러오기 위한 카테고리 변수
 		var beanTea = "601";
 		var syrupSource = "602";
 		var powder = "603";
@@ -13,13 +14,14 @@
 		var cafeItem = "607";
 		var freeze = "608";
 				
-		//수량 증가 시 
+		//주문 수량 증가 시 
 		$(document).on('click', '.countPlus', function(){
 			
 			//수량(숫자) 증가
 			var itemCountSelect = $(this).parents('td').find('input');
 			var itemCount = itemCountSelect.val();
-			var itemCodeSelect = $(this).parents('tr').children('.itemCode').text();
+			var itemCodeSelect = $(this).parents('tr').children('.itemCodeBlock').find('input').val();
+			console.log("itemCodeSelect: " + itemCodeSelect);
 			itemCount++;
 			itemCountSelect.val(itemCount);
 			
@@ -39,12 +41,12 @@
 			});
 		});
 		
-		//수량 감소
+		//주문 수량 감소 시
 		$(document).on('click', '.countMinus', function(){
 			var itemSelect = $(this).parents('td').find('input');
 			var itemCount = itemSelect.val();
-			var itemCodeSelect = $(this).parents('tr').children('.itemCode').text();
-			if(itemCount < 1){
+			var itemCodeSelect = $(this).parents('tr').children('.itemCodeBlock').find('input').val();
+			if(itemCount < 2){
 				alert('최소 수량입니다');
 			} else {
 				itemCount--;
@@ -72,7 +74,7 @@
 		//장바구니로 옮기기
 		$(document).on('click', '.itemAddBtn', function(){
 			var leftItem = $(this).parents('tr').clone();
-			leftItem.find('.itemPrice').before('<td><button type="button" class="countMinus">-</button><input type="text" class="itemCount" style="text-align: center; width: 25px;" value=1><button type="button" class="countPlus">+</button></td>');
+			leftItem.find('.itemPrice').before('<td><button type="button" class="countMinus">-</button><input type="text" name="orderAmount" style="text-align: center; width: 25px;" value=1><button type="button" class="countPlus">+</button></td>');
 			leftItem.find('.itemAddBtn').removeClass().addClass('itemDelBtn').text('삭제');
 			$('.basket').append(leftItem);
 			//$(this).parents('tr').remove();
@@ -97,12 +99,12 @@
 					var list = JSON.parse(data);
 					var tbody = [];
 					$(list).each(function(i, list){						
-						tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -126,12 +128,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -155,12 +157,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -184,11 +186,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					});
@@ -212,11 +215,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -240,11 +244,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -268,13 +273,13 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){					
-						tbody.push('<tr>');
-						tbody.push('<td scope="row" class="itemCode">'+list.itemCode+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
 						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td class="itemPrice"><input type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
@@ -350,11 +355,11 @@
 							<tbody id="tbody">
 								<c:forEach var="branchOrderList" items="${branchOrderList}">								
 									<tr class="itemList">
-										<td class="itemCode">${branchOrderList.itemCode}</td>
+										<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="${branchOrderList.itemCode}" readonly></td>
 										<td>${branchOrderList.itemCateName}</td>
 										<td>${branchOrderList.itemName}</td>
 										<td>${branchOrderList.itemSize}</td>
-										<td class="itemPrice"><input class="itemPriceNum" type="text" style="text-align:center; width:60px;" value="${branchOrderList.itemPrice}" readonly></td>			
+										<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="${branchOrderList.itemPrice}" readonly></td>			
 										<td><button type="button" class="itemAddBtn">담기</button></td>
 									</tr>
 								</c:forEach>
@@ -375,7 +380,7 @@
 					</div>
 					<div class="x_content">
 					
-					<form id="basketForm" action="${pageContext.request.contextPath}/branchOrderList" method="post">
+					<form id="basketForm" action="${pageContext.request.contextPath}/branchOrderForm" method="post">
 						<table class="table table-striped">
 							<thead>
 								<tr>
