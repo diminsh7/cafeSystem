@@ -54,4 +54,10 @@ public class ContractDao {
 		contract.setContractOwnerName(contractOwnerName);
 		return sqlSessionTemplate.delete(NS+"deleteContract", contract);
 	}
+	
+	// 계약서상세조회(지점)
+	public List<ContractVo> branchContractList(String branchEmployeeCode) {
+		System.out.println("ContractDao.java / branchContractList Param branchEmployeeCode: "+branchEmployeeCode);
+		return sqlSessionTemplate.selectList(NS+"branchContractList", branchEmployeeCode);
+	}
 }

@@ -82,7 +82,7 @@
     <!-- 매장수정 및 매장상세조회 -->
     <select id="selectShop" parameterType="String" resultMap="resultShop">
         SELECT s.contract_code, c.contract_owner_name, s.shop_name, s.shop_address
-        	, s.shop_call, s.shop_postcode, s.shop_size
+        		, s.shop_call, s.shop_postcode, s.shop_size
         FROM shop s
 		INNER JOIN contract c
 		ON s.contract_code = c.contract_code
@@ -120,15 +120,25 @@
     <!-- 매장연락망리스트 및 조회 상세전 sql조각 -->
    	<sql id="searchBranchCall">
 		<choose>
-			<!-- 검색 옵션이 전체검색일 경우 -->
 			<when test = "searchOption.equals('all')">
 				WHERE shop_name like CONCAT('%',#{keyword},'%')
 	      		OR shop_address like CONCAT('%',#{keyword},'%')    
 			</when>
-			<!-- 전체검색이 아닐경우  -->
 			<otherwise>
 				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
 			</otherwise>
 		</choose>
 	</sql>
+	
+	<!-- 매장상세조회(지점) -->
+    <select id="branchShopList" parameterType="String" resultMap="resultShop">
+        SELECT s.contract_code, c.contract_owner_name, s.shop_name, s.shop_address
+        		, s.shop_call, s.shop_postcode, s.shop_size
+        FROM shop s
+		INNER JOIN contract c
+		ON s.contract_code = c.contract_code
+		INNER JOIN branch_employee b
+		ON c.contract_owner_name = b.branch_employee_name
+        WHERE branch_employee_code = #{branchEmployeeCode}
+    </select>
 </mapper>

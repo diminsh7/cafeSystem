@@ -43,19 +43,30 @@ public class MaterialController {
 	} 
 	//메뉴원가 등록 실행 
 	@RequestMapping(value = "/insertMaterial", method = RequestMethod.POST)
-	public String insertBranchManager(Model model, MaterialVO materialVo){ 
+	public String insertBranchManager(Model model, MaterialVO materialVo) {
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 등록 컨트롤러");
 		materialService.insertMaterial(materialVo);
-		return "redirect:/MaterialList";
+		return "redirect:/materialList";
 	} 
 	
-	//메뉴원가 리스트 
+/*	//메뉴원가 리스트 
 	@RequestMapping(value = "/MaterialList")
-	public String selectBranchPersonnelList(Model model){ 
+	public String selectBranchPersonnelList(Model model
+			,@RequestParam(value="searchOption", required=false, defaultValue="category_small")String searchOption
+			,@RequestParam(value="keyword", required=false, defaultValue="") String keyword){  
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
-		List<MaterialVO> materialList = materialDao.selectBranchPersonnelList();
-		model.addAttribute("materialList",materialList);
-		System.out.println("materialList : " + materialList);
+		System.out.println("MenuInfoController.java"+searchOption);
+		System.out.println("MenuInfoController.java"+keyword);
+		materialService.selectBranchPersonnelList(model,searchOption,keyword);
+		return "menu/materialList";
+	} 
+	*/
+	//메뉴원가 리스트 
+	@RequestMapping(value = "/materialList")
+	public String selectBranchPersonnelList(Model model){  
+		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
+
+		materialService.selectBranchPersonnelList(model);
 		return "menu/materialList";
 	} 
 	
@@ -65,7 +76,7 @@ public class MaterialController {
 		System.out.println("[menu.controller.deleteMaterial.java] : 메뉴원가 삭제 컨트롤러");
 		System.out.println("materialCode : " + materialCode);
 		materialDao.deleteMaterial(materialCode);
-		return "redirect:/MaterialList";
+		return "redirect:/materialList";
 	}
 	
 	//수정 폼 이동 컨트롤러
@@ -90,7 +101,7 @@ public class MaterialController {
 	public String updateMaterial(MaterialVO materialVo){
 		System.out.println("[menu.controller.updateMaterial.java] : 메뉴원가 수정 실행 컨트롤러");
 		materialDao.updateMaterial(materialVo);
-		return "redirect:/MaterialList";
+		return "redirect:/materialList";
 	}
 	
 	//단가계산1 materialMeasure

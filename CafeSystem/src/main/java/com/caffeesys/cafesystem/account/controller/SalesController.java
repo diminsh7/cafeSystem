@@ -1,15 +1,12 @@
 package com.caffeesys.cafesystem.account.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caffeesys.cafesystem.account.service.DailySalesVO;
 import com.caffeesys.cafesystem.account.service.SalesService;
@@ -23,15 +20,52 @@ public class SalesController {
 	
 	@RequestMapping(value="/dailySalesInsertForm", method=RequestMethod.GET)
 	public String insertDailySales() {
-		logger.debug("insertDailySalesInsert()");
+		logger.debug("insertDailySales method");
 		return "/account/dailySalesInsertForm";
 	}
-	@RequestMapping(value="/dailySalesList", method=RequestMethod.GET)
-	public ModelAndView ListDailySales(DailySalesVO dailySales) {
-		ModelMap model = new ModelMap();
-		List<DailySalesVO> list = salesService.selectDailySalesList(dailySales);
-		logger.debug("ListDailySales method dailySalesList : " + list);
-		model.addAttribute("dailySalesList", list);
-		return new ModelAndView("/account/dailySalesList", model);
+	@RequestMapping(value="/salesList", method=RequestMethod.GET)
+	public String listSales() {
+		logger.debug("listSales method");
+		return "/account/salesList";
+	}
+	@ResponseBody
+	@RequestMapping(value="/dailySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonDailySalesList() {
+		String list = salesService.selectDailySalesList();
+		logger.debug("jsonDailySalesList method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/monthlySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlySalesList() {
+		String list = salesService.selectMonthlySalesList();
+		logger.debug("jsonMonthlySalesList method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/dailyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonDailyTop() {
+		String list = salesService.selectDailyTop();
+		logger.debug("jsonDailyTop method list : " + list);
+		return list;
+	}
+	@ResponseBody
+	@RequestMapping(value="/monthlyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlyTop() {
+		String list = salesService.selectMonthlyTop();
+		logger.debug("jsonMonthlyTop method list : " + list);
+		return list;
+	}
+	@RequestMapping(value="/feeList", method=RequestMethod.GET)
+	public String listFee() {
+		logger.debug("listFee method");
+		return "/account/feeList";
+	}
+	@ResponseBody
+	@RequestMapping(value="/feeListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonFeeList() {
+		String list = salesService.selectFeeList();
+		logger.debug("jsonFeeList method list : " + list);
+		return list;
 	}
 }

@@ -8,7 +8,8 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>발주품목관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemList">발주품목(전체리스트)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/itemListX">발주품목(금지리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -116,8 +117,8 @@
 									<select name="itemAble" id="itemAble"
 										required="required" data-validate-length-range="8,20"
 										class="form-control col-md-7 col-xs-12">
-										<option value='Y'>발주가능</option>
-										<option value='N'>발주불가능</option>
+										<option value='Y'>(Y)발주가능</option>
+										<option value='N'>(N)발주불가능</option>
 									</select>
 								</div>
 							</div>
