@@ -1,5 +1,8 @@
 package com.caffeesys.cafesystem.account.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.caffeesys.cafesystem.CommonService;
 import com.caffeesys.cafesystem.account.service.DailySalesVO;
 import com.caffeesys.cafesystem.account.service.SalesService;
 
@@ -19,6 +23,8 @@ public class SalesController {
 	
 	@Autowired
 	private SalesService salesService;
+	@Autowired
+	private CommonService commonService;
 	
 	@RequestMapping(value="/dailySalesInsertForm", method=RequestMethod.GET)
 	public String insertDailySales() {
@@ -79,6 +85,8 @@ public class SalesController {
 	public String jsonFeeListByShop(HttpSession session) {
 		logger.debug("jsonFeeListByShop method");
 		//session 정보 이용해서 매장가져오고 그걸로 수수료 select하기
+		List<HashMap<String, Object>> localshopCode = commonService.localShopCodeSelect();
+		localshopCode.get(0).get("local_category_code");
 		return "";
 	}
 }

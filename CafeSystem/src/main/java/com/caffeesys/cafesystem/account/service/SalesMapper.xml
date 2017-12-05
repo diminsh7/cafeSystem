@@ -72,4 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND m.shop_code=s.shop_code
 		ORDER BY fee_code desc
 	</select>
+	<select id="selectFeeListByShop" parameterType="" resultMap="resultFee">
+		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
+		FROM fee f, monthly_sales m, shop s
+		WHERE f.monthly_sales_code=m.monthly_sales_code
+		AND m.local_category_code=s.local_category_code
+		AND m.shop_code=s.shop_code
+		AND m.local_category_code='001'
+		AND m.shop_code='001'
+		ORDER BY fee_code desc
+	</select>
 </mapper>
