@@ -21,7 +21,7 @@ public class FaultyController {
 	@Autowired
 	private FaultyDao faultyDao;
 	
-	// 불량품목리스트 및 조회 상세전
+	// 불량품목리스트 및 조회 상세전(본사)
 	@RequestMapping(value = "/faultyList")
 	public String listFaulty(Model model
 			,@RequestParam(value="searchOption", required=false, defaultValue="category_small")String searchOption
@@ -35,7 +35,7 @@ public class FaultyController {
 		faultyService.selectFaultyList(model, searchOption, keyword, currentPage);
 		return "/item/faultyList";
 	}
-	// 불량품목등록 페이지요청
+	// 불량품목등록 페이지요청(지점)
 	@RequestMapping(value="/insertFaulty", method = RequestMethod.GET)
 	public String insertFaulty(Model model) {
 		System.out.println("FaultyController.java / insertFaulty method GET방식 ");
@@ -47,11 +47,34 @@ public class FaultyController {
 		model.addAttribute("CategoryFaultyList",CategoryFaultyList);
 		return "/item/faultyInsertForm";
 	}
-	// 불량품목등록(액션)요청
+	// 불량품목등록(액션)요청(지점)
 	@RequestMapping(value="/insertFaulty", method = RequestMethod.POST)
 	public String insertFaulty(FaultyVO faulty) {
 		System.out.println("FaultyController.java / insertFaulty method POST방식 " + faulty);
 		faultyService.insertFaulty(faulty);
 		return "redirect:/faultyList";
+	}
+	// 불량품목상세조회(본사)
+	@RequestMapping(value = "/faultyDetail", method = RequestMethod.GET)
+	public String detailFaulty(Model model, @RequestParam(value = "faultyCode", required = true) int faultyCode) {
+		System.out.println("FaultyController.java / detailFaulty method GET방식 " + faultyCode);
+		FaultyVO faulty = faultyDao.selectFaulty(faultyCode);
+		model.addAttribute("faulty", faulty);
+		return "/item/faultyDetail";
+	}
+	// 불량품목수정 페이지요청(지점)
+	@RequestMapping(value = "/updateFaulty", method = RequestMethod.GET)
+	public String updateFaulty(Model model, @RequestParam(value = "faultyCode", required = true) int faultyCode) {
+		System.out.println("FaultyController.java / updateFaulty method GET방식 " + faultyCode);
+		FaultyVO faulty = faultyDao.selectFaulty(faultyCode);
+		model.addAttribute("faulty", faulty);
+		return "/item/faultyUpdateForm";
+	}
+	// 불량품목수정(액션)요청(지점)
+	@RequestMapping(value = "/updateFaulty", method = RequestMethod.POST)
+	public String updateFaulty(FaultyVO faulty) {
+		System.out.println("FaultyController.java / updateFaulty method POST방식 " + faulty);
+		faultyDao.updateFaulty(faulty);
+		return "redirect:/faultyDetail?faultyCode=" + faulty.getFaultyCode();
 	}
 }

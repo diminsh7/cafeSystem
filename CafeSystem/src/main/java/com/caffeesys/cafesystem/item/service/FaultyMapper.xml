@@ -16,7 +16,7 @@
 		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
 		<result property="categorySmall" column="category_small" /> <!-- category소분류801~804 -->
 	</resultMap>
-	<!-- 불량품목리스트 및 조회 상세전 -->
+	<!-- 불량품목리스트 및 조회 상세전(본사)-->
 	<select id="selectFaultyList" parameterType="java.util.Map" resultMap="resultFaulty">
 		SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
 		FROM faulty f
@@ -28,7 +28,7 @@
         ORDER BY f.statement_number DESC
         LIMIT ${beginRow}, ${pagePerRow}
     </select>
-    <!-- 불량품목리스트 및 조회 상세전 행의수 -->
+    <!-- 불량품목리스트 및 조회 상세전 행의수(본사) -->
     <select id="selectFaultyCount" parameterType="java.util.Map" resultType="Integer">
         SELECT COUNT(*)
         FROM faulty f
@@ -38,7 +38,7 @@
 		ON f.faulty_category = c.category_code
         <include refid="search"></include>
     </select>
-    <!-- 불량품목리스트 및 조회 상세전 sql조각 -->
+    <!-- 불량품목리스트 및 조회 상세전 sql조각(본사) -->
     <sql id="search">
 		<choose>
 			<when test = "searchOption.equals('item_name')">
@@ -52,7 +52,7 @@
 			</otherwise>
 		</choose>
 	</sql>
-	<!-- 불량품목등록 -->
+	<!-- 불량품목등록(지점) -->
 	<insert id="insertFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
 		INSERT INTO faulty (
 			faulty_code, statement_number, item_code, faulty_category, faulty_amount, faulty_image, faulty_reason
@@ -60,22 +60,39 @@
 			#{faultyCode}, #{statementNumber}, #{itemCode}, #{faultyCategory}, #{faultyAmount}, #{faultyImage}, #{faultyReason}
 		)
 	</insert>
-	<!-- 불량품목등록 전표번호 가져오는 select -->
+	<!-- 불량품목등록 전표번호 가져오는 select(지점) -->
 	<select id="selectFaultyStatementNumber" resultMap="resultFaulty">
 		SELECT order_code, statement_number
 		FROM order_service
 		ORDER BY statement_number DESC
 	</select>
-	<!-- 불량품목등록 item명 가져오는 select -->
+	<!-- 불량품목등록 item명 가져오는 select(지점) -->
 	<select id="selectFaultyItemName" resultMap="resultFaulty">
 		SELECT item_code, item_name
 		FROM item
 		ORDER BY item_code ASC
 	</select>
-	<!-- 불량품목등록 category에서 소분류 가져오는 select -->
+	<!-- 불량품목등록 category에서 소분류 가져오는 select(지점) -->
 	<select id="selectFaultyCategorySmall" resultMap="resultFaulty">
 		SELECT category_code, category_small
 		FROM category
 		WHERE category_code LIKE '8%'
 	</select>
+	<!-- 불량품목수정 및 발주품목상세조회(본사,지점) -->
+    <select id="selectFaulty" parameterType="int" resultMap="resultFaulty">
+        SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
+        		, f.faulty_amount, f.faulty_image, f.faulty_reason
+		FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+        WHERE f.faulty_code = #{faultyCode}
+    </select>
+    <!-- 발주품목수정(지점) -->
+	<update id="updateFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
+		UPDATE faulty
+		SET faulty_amount = #{faultyAmount}, faulty_image = #{faultyImage}, faulty_reason = #{faultyReason}
+		WHERE faulty_code = #{faultyCode}
+	</update>
 </mapper>

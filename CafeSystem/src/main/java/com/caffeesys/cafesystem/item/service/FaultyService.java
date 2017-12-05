@@ -17,7 +17,7 @@ public class FaultyService {
 	@Autowired
 	private FaultyDao faultyDao;
 	
-	// 불량품목리스트 및 조회 상세전
+	// 불량품목리스트 및 조회 상세전(본사)
 	public void selectFaultyList(Model model, String searchOption, String keyword, int currentPage) {
 		System.out.println("FaultyService.java / selectFaultyList method 확인");
 		System.out.println("FaultyService.java / selectFaultyList Param model :" + model);
@@ -37,7 +37,7 @@ public class FaultyService {
 		model.addAttribute("faultyList", faultyDao.selectFaultyList(map));
 		model.addAttribute("faultyCount", faultyDao.selectFaultyCount(map));
 	}
-	// 불량품목등록 과정
+	// 불량품목등록 과정(지점)
 	public int insertFaulty(FaultyVO faulty) {
 		System.out.println("FaultyService.java / insertFaulty method 확인");
 		System.out.println("FaultyService.java / insertFaulty Param item :" + faulty);
