@@ -12,7 +12,7 @@
 		<result property="itemDetail" column="item_detail" /> <!-- 품목상세-->
 		<result property="itemCateName" column="itemCateName" /> <!-- 품목카테고리명 -->
 	</resultMap>
-	
+
 	<!-- 지점 발주 화면 요청 & 카테고리별 품목 요청 -->
 	<select id="branchOrderForm" parameterType="java.util.Map" resultMap="resultBranchOrder">
 		SELECT
@@ -43,4 +43,34 @@
 		WHERE 
 			item_code = #{itemCode}
 	</select>
+	
+	<insert id="branchOrderAdd" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderAddVO">
+		INSERT INTO order_service (
+				statement_number
+				, order_faulty_divide
+				, local_category_code
+				, shop_code
+				, item_code
+				, order_amount
+				, order_price
+				, receipt_category_code
+				, order_category_code
+				, order_request <!-- DATE Type -->
+				, head_employee_code
+				, order_faulty_able		
+			) VALUES (
+				#{statementNumber}
+				, #{orderFaultyDivide}
+				, #{localCategoryCode}
+				, #{shopCode}
+				, #{itemCode}
+				, #{orderAmount}
+				, #{orderPrice}
+				, #{receiptCategoryCode}
+				, #{orderCategoryCode}
+				, now()
+				, #{headEmployeeCode}
+				, #{orderFaultyAble}
+			)
+	</insert>
 </mapper>

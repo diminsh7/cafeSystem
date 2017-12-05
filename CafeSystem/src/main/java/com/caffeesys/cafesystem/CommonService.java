@@ -1,13 +1,29 @@
 package com.caffeesys.cafesystem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.caffeesys.cafesystem.login.service.LoginVO;
+
 @Service
 public class CommonService {
+	
+	@Autowired
+	HttpSession session;
+	
+	@Autowired
+	CommonDao commonDao;
+	
 	// 검색 목록 페이징 (목록 페이징 매개변수 + map 검색조건과 검색어가 담겨서 옴)
 	public Map<String, String> paging(Model model, int currentPage, int pagePerRow, int count, Map<String, String> map) {
 		if (map != null) {
@@ -36,6 +52,26 @@ public class CommonService {
 		map.put("start", Integer.toString((currentPage - 1) * pagePerRow));
 		map.put("pagePerRow", Integer.toString(pagePerRow));
 		return map;
+	}
+	
+	//전표번호 생성을 위한 현재 날짜 불러오기 (YY-MM-DD)
+	public String dateSelect() {
+		SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yy.MM.dd", Locale.KOREA );
+		Date date = new Date();
+		String nowDate = mSimpleDateFormat.format( date );
+		String currentDate = nowDate.replace(".", "");
+		System.out.println (currentDate);
+
+		return currentDate;
+	}
+	
+	//지역, 매장 코드 불러오기
+	public List<HashMap<String, Object>> localShopCodeSelect(){
+		LoginVO login = (LoginVO) session.getAttribute("loginInfo");
+		String employeeCode = login.getEmpCode();
+		System.out.println("employeeCode: " + employeeCode);
+
+		return commonDao.localShopCodeSelect(employeeCode);
 	}
 
 }
