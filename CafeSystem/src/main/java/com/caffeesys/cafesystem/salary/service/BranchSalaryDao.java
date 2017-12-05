@@ -1,5 +1,6 @@
 package com.caffeesys.cafesystem.salary.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.caffeesys.cafesystem.employee.service.BranchPersonnelVO;
 import com.caffeesys.cafesystem.login.service.LoginVO;
 
 
@@ -41,9 +43,44 @@ public class BranchSalaryDao {
 	}
 	
 	//지점직원 급여명세서 등록 폼에 쓸 직원 급여 가져오는 메소드 <직원코드를 눌렀을때 자동으로 입력>
-	public String branchEmployeeSalaryInsert(String branchCodeList){
-		logger.debug("branchEmployeeSalaryInsert메소드 확인 branchCodeList :{}",branchCodeList);
-		logger.debug("branchEmployeeSalaryInsert메소드 확인 branchEmployeeSalaryInsert: {}",sqlSessionTemplate.selectOne(NS + "branchSalaryInsert", branchCodeList));
-		return sqlSessionTemplate.selectOne(NS + "branchEmployeeSalaryInsert", branchCodeList);
+	public int branchEmployeeSalaryInsert(String branchEmployeeCode){
+		
+		logger.debug("branchEmployeeSalaryInsert메소드 확인 branchSalaryInsert :{}",branchEmployeeCode);
+		logger.debug("branchEmployeeSalaryInsert메소드 확인 branchEmployeeCode: {}",sqlSessionTemplate.selectOne(NS + "branchEmployeeSalaryInsert", branchEmployeeCode));
+		return sqlSessionTemplate.selectOne(NS + "branchEmployeeSalaryInsert", branchEmployeeCode);
+	}
+	
+	//급여명세서 등록 처리
+	public int branchSalaryInsert(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryInsert 메소드확인");
+		return sqlSessionTemplate.insert(NS + "branchSalaryInsert" , branchSalary);
+	}
+	
+	//명세서코드등록할때 오른쪽 숫자 최대값 select
+	public int branchSalaryCodeMax() {
+		logger.debug("branchSalaryCodeMax 메소드 확인");
+		logger.debug("branchSalaryCodeMax 메소드 확인 : {}",sqlSessionTemplate.selectOne(NS + "branchSalaryCodeMax"));
+		return sqlSessionTemplate.selectOne(NS + "branchSalaryCodeMax");
+	}
+	
+	//명세서코드등록할때 가운데 숫자 최대값 select
+	public int branchSalaryCodeMidMax() {
+		logger.debug("branchSalaryCodeMidMax 메소드 확인");
+		logger.debug("branchSalaryCodeMax 메소드 확인 : {}",sqlSessionTemplate.selectOne(NS + "branchSalaryCodeMidMax"));
+		return sqlSessionTemplate.selectOne(NS + "branchSalaryCodeMidMax");
+	}
+	
+	//전표번호 등록할때의 날짜select
+	public String statementDate() {
+		logger.debug("statementDate메소드 확인");
+		logger.debug("statementDate메소드 확인 :{}",sqlSessionTemplate.selectOne(NS + "statementDate"));
+		return sqlSessionTemplate.selectOne(NS + "statementDate");
+	}
+	
+	//전표번호 등록할때 local, shop코드selext
+	public BranchPersonnelVO bEmployeeLocalShop(String bEmployeeCode) {
+		logger.debug("bEmployeeLocalShop메소드 확인");
+		logger.debug("bEmployeeLocalShop메소드 확인 :{}",sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode));
+		return sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode);
 	}
 }
