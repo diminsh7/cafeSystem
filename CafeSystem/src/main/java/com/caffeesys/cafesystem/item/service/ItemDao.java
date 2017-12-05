@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ItemDao {
 	
-private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
+	private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
