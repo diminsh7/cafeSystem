@@ -49,7 +49,7 @@
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/#">매장정보조회</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">가맹계약서조회</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">가맹수수료조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/feeListByShop">가맹수수료조회</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-users"></i> 직원관리 <span
 					class="fa fa-chevron-down"></span></a>
