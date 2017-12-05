@@ -72,6 +72,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>	
 	
 	
+	<!-- 명세서 코드의 최대값 select -->
+	<select id="getStatementMax" parameterType="String" resultType="java.util.HashMap">
+		select  max(CAST(substring(statement_number,17) AS DECIMAL)) as getStatementMax
+		FROM branch_salary
+		WHERE statement_number like CONCAT('%',#{statementNumber},'%');
+			
+	</select>
+	
 	<!-- 급여 명세서 등록 할때 우리 매장의 직원들 select -->
 	<select id="branchCodeList" parameterType="String" resultType="String">
 		SELECT branch_employee_code 

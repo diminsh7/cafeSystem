@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script>
-	$('document').ready(function(){
+	$(document).ready(function(){
 		//select 옵션값이 변하면 불러온 값초기화
 		$('.selectBox').change(function(){
 				$('#menuCode').val('');
@@ -109,7 +109,7 @@
 								</div>
 							</div>
 	                   		<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryWorkmonth">귀속년월</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryWorkmonth" required="required">귀속년월</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryWorkmonth" name="branchSalaryWorkmonth" class="form-control col-md-7 col-xs-12" type="month">
 								</div>
@@ -159,7 +159,7 @@
 								</div>
 							</div>	
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryPaydate">실지급일자</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryPaydate" required="required">실지급일자</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryPaydate" name="branchSalaryPaydate" class="form-control col-md-7 col-xs-12" type="date">
 								</div>

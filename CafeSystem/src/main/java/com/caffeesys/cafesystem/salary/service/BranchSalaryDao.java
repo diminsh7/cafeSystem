@@ -83,4 +83,10 @@ public class BranchSalaryDao {
 		logger.debug("bEmployeeLocalShop메소드 확인 :{}",sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode));
 		return sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode);
 	}
+	
+	public HashMap<String, Object> getStatementMax(String statementNumber) {
+		logger.debug("getStatementMax메소드 확인");
+		logger.debug("getStatementMax메소드 리턴 :{}",sqlSessionTemplate.selectOne(NS+"getStatementMax", statementNumber));	//숫자 또는 null값이 리턴됨
+		return sqlSessionTemplate.selectOne(NS+"getStatementMax", statementNumber);
+	}
 }
