@@ -15,47 +15,80 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>발주품목상세조회</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>품목코드</th>
-									<th>품목카테고리명</th>
-									<th>품목명</th>
-									<th>품목용량</th>
-									<th>품목원가</th>
-									<th>품목마진</th>
-									<th>품목가격</th>
-									<th>품목상세</th>
-									<th>품목이미지</th>
-									<th>발주가능여부</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>${item.itemCode}</td>
-									<td>${item.categorySmall}</td>
-									<td>${item.itemName}</td>
-									<td>${item.itemSize}</td>
-									<td>${item.itemCost}</td>
-									<td>${item.itemProfit}</td>
-									<td>${item.itemPrice}</td>
-									<td>${item.itemDetail}</td>
-									<td>${item.itemImage}</td>
-									<td>${item.itemAble}</td>
-								</tr>
-							</tbody>
-						</table>
-						<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateItem?itemCode=${item.itemCode}">수정</a>
-						<a class="btn btn-danger" href="${pageContext.request.contextPath}/deleteItem?itemCode=${item.itemCode}">삭제</a>
+						<br />
+						<form class="form-horizontal form-label-left">
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목코드</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemCode}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목카테고리명</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.categorySmall}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목명</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemName}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목용량</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemSize}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목원가</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemCost}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목마진</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemProfit}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목가격</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemPrice}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목상세</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemDetail}</div>
+									</div>
+								</div>
+								<%-- <div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">품목이미지</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemImage}</div>
+									</div>
+								</div> --%>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">발주가능여부</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${item.itemAble}</div>
+									</div>
+								</div>
+							</form>
+						</div>
 					</div>
-				</div>
+				<a class="btn btn-warning" href="${pageContext.request.contextPath}/updateItem?itemCode=${item.itemCode}">수정</a>
+				<a class="btn btn-danger" href="${pageContext.request.contextPath}/deleteItem?itemCode=${item.itemCode}">삭제</a>
 			</div>
 		</div>
 	</div>

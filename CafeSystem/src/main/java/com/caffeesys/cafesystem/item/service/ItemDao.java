@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class ItemDao {
 	
-private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
+	private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -59,6 +59,7 @@ private final String NS = "com.caffeesys.cafesystem.item.service.ItemMapper.";
 		item.setItemName(itemName);
 		return sqlSessionTemplate.delete(NS+"deleteItem", item);
 	}
+	
 	// 발주품목금지리스트 및 조회 상세전
 	public List<ItemVO> selectItemListX(Map<String, String> map) {
 		System.out.println("ItemDao.java / selectItemListX method 확인");

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.item.service.FaultyMapper">
+	<resultMap type="com.caffeesys.cafesystem.item.service.FaultyVO" id="resultFaulty">
+		<result property="faultyCode" column="faulty_code" /> <!-- 불량품목관리코드(PK) -->
+		<result property="statementNumber" column="statement_number" /> <!-- 불량발생전표번호(FK) -->
+		<result property="itemCode" column="item_code" /> <!-- 품목코드(FK) -->
+		<result property="faultyCategory" column="faulty_category" /> <!-- 불량카테고리(FK) -->
+		<result property="faultyAmount" column="faulty_amount" /> <!-- 불량수량 -->
+		<result property="faultyImage" column="faulty_image" /> <!-- 불량이미지 -->
+		<result property="faultyReason" column="faulty_reason" /> <!-- 불량상세사유 -->
+		<result property="orderCode" column="order_code" /> <!-- order코드 -->
+		<result property="itemName" column="item_name" /> <!-- item명 -->
+		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
+		<result property="categorySmall" column="category_small" /> <!-- category소분류801~804 -->
+	</resultMap>
+	<!-- 불량품목리스트 및 조회 상세전(본사) -->
+	<select id="selectFaultyList" parameterType="java.util.Map" resultMap="resultFaulty">
+		SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
+		FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+		<include refid="search"></include>
+        ORDER BY f.statement_number DESC
+        LIMIT ${beginRow}, ${pagePerRow}
+    </select>
+    <!-- 불량품목리스트 및 조회 상세전 행의수(본사) -->
+    <select id="selectFaultyCount" parameterType="java.util.Map" resultType="Integer">
+        SELECT COUNT(*)
+        FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+        <include refid="search"></include>
+    </select>
+    <!-- 불량품목리스트 및 조회 상세전 sql조각(본사) -->
+    <sql id="search">
+		<choose>
+			<when test = "searchOption.equals('item_name')">
+				WHERE i.item_name like CONCAT('%',#{keyword},'%') 
+			</when>
+			<when test = "searchOption.equals('category_small')">
+				WHERE c.category_small like CONCAT('%',#{keyword},'%')
+			</when>
+			<otherwise>
+				WHERE ${searchOption} like CONCAT('%',#{keyword},'%')
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 불량품목등록(지점) -->
+	<insert id="insertFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
+		INSERT INTO faulty (
+			faulty_code, statement_number, item_code, faulty_category, faulty_amount, faulty_image, faulty_reason
+		) VALUES (
+			#{faultyCode}, #{statementNumber}, #{itemCode}, #{faultyCategory}, #{faultyAmount}, #{faultyImage}, #{faultyReason}
+		)
+	</insert>
+	<!-- 불량품목등록 전표번호 가져오는 select(지점) -->
+	<select id="selectFaultyStatementNumber" parameterType="int" resultMap="resultFaulty">
+        SELECT order_code, statement_number
+		FROM `order`
+		WHERE order_code = #{orderCode}
+    </select>
+	<!-- 불량품목등록 item명 가져오는 select(지점) -->
+	<select id="selectFaultyItemName" resultMap="resultFaulty">
+		SELECT item_code, item_name
+		FROM item
+		ORDER BY item_code ASC
+	</select>
+	<!-- 불량품목등록 category에서 소분류 가져오는 select(지점) -->
+	<select id="selectFaultyCategorySmall" resultMap="resultFaulty">
+		SELECT category_code, category_small
+		FROM category
+		WHERE category_code LIKE '8%'
+	</select>
+	<!-- 불량품목수정(지점) 및 발주품목상세조회(본사) -->
+    <select id="selectFaulty" parameterType="int" resultMap="resultFaulty">
+        SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
+        		, f.faulty_amount, f.faulty_image, f.faulty_reason
+		FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+        WHERE f.faulty_code = #{faultyCode}
+    </select>
+    <!-- 불량품목수정(지점) -->
+	<update id="updateFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
+		UPDATE faulty
+		SET faulty_amount = #{faultyAmount}, faulty_image = #{faultyImage}, faulty_reason = #{faultyReason}
+		WHERE faulty_code = #{faultyCode}
+	</update>
+	<!-- 불량품목삭제 불량수량확인하고 삭제(지점) -->
+    <delete id="deleteFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
+		DELETE FROM faulty 
+		WHERE faulty_code = #{faultyCode}
+		AND faulty_amount = #{faultyAmount}
+    </delete>
+    
+    <!-- 불량품목상세조회(지점) -->
+	<select id="branchFaultyList" parameterType="java.util.Map" resultMap="resultFaulty">
+		SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
+        		, f.faulty_amount, f.faulty_image, f.faulty_reason
+		FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+		INNER JOIN `order` o
+		ON f.statement_number = o.statement_number
+		INNER JOIN branch_employee b
+		ON o.local_category_code = b.local_category_code 
+		AND o.shop_code = b.shop_code
+		WHERE branch_employee_code = #{branchEmployeeCode}
+        ORDER BY f.statement_number DESC
+    </select>
+</mapper>
