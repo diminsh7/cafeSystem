@@ -41,12 +41,12 @@ public class FaultyController {
 	
 	// 불량품목등록 페이지요청(지점)
 	@RequestMapping(value="/insertFaulty", method = RequestMethod.GET)
-	public String insertFaulty(Model model/*, @RequestParam(value = "statementNumber", required = true) String statementNumber*/) {
+	public String insertFaulty(Model model, @RequestParam(value = "orderCode", required = true) int orderCode) {
 		System.out.println("FaultyController.java / insertFaulty method GET방식 ");
-		List<FaultyVO> StatementNumberList = faultyDao.selectFaultyStatementNumber(/*statementNumber*/);
+		FaultyVO StatementNumber = faultyDao.selectFaultyStatementNumber(orderCode);
 		List<FaultyVO> ItemNameList = faultyDao.selectFaultyItemName();
 		List<FaultyVO> CategoryFaultyList = faultyDao.selectFaultyCategorySmall();
-		model.addAttribute("StatementNumberList",StatementNumberList);
+		model.addAttribute("StatementNumber",StatementNumber);
 		model.addAttribute("ItemNameList",ItemNameList);
 		model.addAttribute("CategoryFaultyList",CategoryFaultyList);
 		return "/item/faultyInsertForm";
