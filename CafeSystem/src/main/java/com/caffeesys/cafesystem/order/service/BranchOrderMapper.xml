@@ -45,7 +45,7 @@
 	</select>
 	
 	<insert id="branchOrderAdd" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderAddVO">
-		INSERT INTO order_service (
+		INSERT INTO `order` (
 				statement_number
 				, order_faulty_divide
 				, local_category_code

@@ -30,7 +30,7 @@ public class BranchOrderController {
 	public String branchOrderForm(BranchOrderCommand branchOrderCommand) {
 		//System.out.println(branchOrderCommand);
 		branchOrderService.branchOrderInsert(branchOrderCommand);
-		return "order/BranchOrderRequestList";
+		return "redirect:/branchOrderRequestList";
 	}
 	
 	//카테고리별 품목 요청

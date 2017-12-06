@@ -60,7 +60,7 @@ public class CommonService {
 		Date date = new Date();
 		String nowDate = mSimpleDateFormat.format( date );
 		String currentDate = nowDate.replace(".", "");
-		System.out.println (currentDate);
+		//System.out.println (currentDate);
 
 		return currentDate;
 	}
@@ -69,7 +69,7 @@ public class CommonService {
 	public List<HashMap<String, Object>> localShopCodeSelect(){
 		LoginVO login = (LoginVO) session.getAttribute("loginInfo");
 		String employeeCode = login.getEmpCode();
-		System.out.println("employeeCode: " + employeeCode);
+		//System.out.println("employeeCode: " + employeeCode);
 
 		return commonDao.localShopCodeSelect(employeeCode);
 	}
