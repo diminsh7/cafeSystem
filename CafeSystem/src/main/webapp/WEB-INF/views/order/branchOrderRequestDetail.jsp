@@ -25,6 +25,7 @@ $(document).ready(function(){
 		<div class="page-title">
 			<div class="title_left">
 				<h3>발주관리</h3>
+				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchOrderRequestList">발주목록</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -52,10 +53,8 @@ $(document).ready(function(){
 									<th>배송상태</th>
 									<th>승인담당장</th>
 									<th>불량여부</th>
-									<th> </th>
 									<th>불량신청</th>
-									
-
+									<th style="display: none"> </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -74,9 +73,8 @@ $(document).ready(function(){
 									<td><input class="orderCate" type="hidden" value="${detail.orderCategoryCode}">${detail.cateOrder}</td><!-- 배송상태 -->
 									<td>${detail.headName}</td><!-- 승인담당장 -->
 									<td>${detail.orderFaultyAble}</td><!-- 불량여부 -->
-									<td><input class="orderCode" type="hidden" value="${detail.orderCode}"> </td>
 									<td><button class="DeliveryBtn" type="button">불량신청</button></td>
-									<!-- <td><a href="${pageContext.request.contextPath}/insertFaulty?orderCode=${detail.orderCode}">불량신청</a></td> -->
+									<td><input class="orderCode" type="hidden" value="${detail.orderCode}"> </td>
 								</tr>
 								</c:forEach>
 							</tbody>

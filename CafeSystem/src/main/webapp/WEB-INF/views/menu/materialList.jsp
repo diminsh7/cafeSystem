@@ -55,7 +55,7 @@ function deleteb(){
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
-									<th>메뉴명</th>W
+									<th>메뉴명</th>
 									<th>사이즈</th>
 									<th>품목코드</th>
 									<th>Hot/Ice</th>
