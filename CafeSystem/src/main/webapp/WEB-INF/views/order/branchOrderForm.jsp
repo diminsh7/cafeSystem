@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <script>
+	
 	$(document).ready(function(){
+		//카테고리별로 품목을 불러오기 위한 카테고리 변수
 		var beanTea = "601";
 		var syrupSource = "602";
 		var powder = "603";
@@ -11,22 +13,80 @@
 		var takeOutItem = "606";
 		var cafeItem = "607";
 		var freeze = "608";
+				
+		//주문 수량 증가 시 
+		$(document).on('click', '.countPlus', function(){
+			
+			//수량(숫자) 증가
+			var itemCountSelect = $(this).parents('td').find('input');
+			var itemCount = itemCountSelect.val();
+			var itemCodeSelect = $(this).parents('tr').children('.itemCodeBlock').find('input').val();
+			console.log("itemCodeSelect: " + itemCodeSelect);
+			itemCount++;
+			itemCountSelect.val(itemCount);
+			
+			//수량에 따른 총액 계산
+			var itemPriceSelect = $(this).parents('tr').children('.itemPrice').find('input');
+			$.ajax({
+				url:"branchOrder/itemPriceCal"
+					, type:'GET'
+					, data:{"itemCount":itemCount, "itemCodeSelect":itemCodeSelect}
+					, success:function(data){
+						var itemPriceResult = JSON.parse(data);
+						itemPriceSelect.val(itemPriceResult);	
+					}
+					, error:function(request, status, error){
+						alert('실패');
+					}
+			});
+		});
+		
+		//주문 수량 감소 시
+		$(document).on('click', '.countMinus', function(){
+			var itemSelect = $(this).parents('td').find('input');
+			var itemCount = itemSelect.val();
+			var itemCodeSelect = $(this).parents('tr').children('.itemCodeBlock').find('input').val();
+			if(itemCount < 2){
+				alert('최소 수량입니다');
+			} else {
+				itemCount--;
+				itemSelect.val(itemCount);
+				
+				var itemPriceSelect = $(this).parents('tr').children('.itemPrice').find('input');
+				$.ajax({
+					url:"branchOrder/itemPriceCal"
+						, type:'GET'
+						, data:{"itemCount":itemCount, "itemCodeSelect":itemCodeSelect}
+						, success:function(data){
+							var itemPriceResult = JSON.parse(data);
+							itemPriceSelect.val(itemPriceResult);
+							
+							$('#orderPrice').val();
+							
+						}
+						, error:function(request, status, error){
+							alert('실패');
+						}
+				});
+			}
+		});
 		
 		//장바구니로 옮기기
 		$(document).on('click', '.itemAddBtn', function(){
 			var leftItem = $(this).parents('tr').clone();
-			//console.log('left item: ' + leftItem);
-			leftItem.find('button').removeClass().addClass('itemDelBtn').text('삭제');
+			leftItem.find('.itemPrice').before('<td><button type="button" class="countMinus">-</button><input type="text" name="orderAmount" style="text-align: center; width: 25px;" value=1><button type="button" class="countPlus">+</button></td>');
+			leftItem.find('.itemAddBtn').removeClass().addClass('itemDelBtn').text('삭제');
 			$('.basket').append(leftItem);
-			//$(this).closest('tr').remove();
+			//$(this).parents('tr').remove();
 		});	
 		
 		//장바구니에서 삭제
 		$(document).on('click', '.itemDelBtn', function(){
 			var rightItem = $(this).parents('tr').clone();
-			rightItem.find('button').removeClass().addClass('itemAddBtn').text('담기');
+			rightItem.find('.itemDelBtn').removeClass().addClass('itemAddBtn').text('담기');
+			//rightItem.find('.itemCountBlock').remove();
 			//$('#tbody').append(rightItem);
-			$(this).closest('tr').remove();
+			$(this).parents('tr').remove();
 		});
 		
 		//원두/티 카테고리 품목 요청
@@ -38,13 +98,13 @@
 				, success:function(data){
 					var list = JSON.parse(data);
 					var tbody = [];
-					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+					$(list).each(function(i, list){						
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -68,12 +128,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -97,12 +157,12 @@
 					var tbody = [];
 					console.log(list.itemCateName);
 					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -125,13 +185,13 @@
 					console.log(list);
 					var tbody = [];
 					console.log(list.itemCateName);
-					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+					$(list).each(function(i, list){tbody.push('<tr>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					});
@@ -154,13 +214,13 @@
 					console.log(list);
 					var tbody = [];
 					console.log(list.itemCateName);
-					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+					$(list).each(function(i, list){tbody.push('<tr>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -183,13 +243,13 @@
 					console.log(list);
 					var tbody = [];
 					console.log(list.itemCateName);
-					$(list).each(function(i, list){
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+					$(list).each(function(i, list){tbody.push('<tr>');
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
 						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
 					})
@@ -212,17 +272,15 @@
 					console.log(list);
 					var tbody = [];
 					console.log(list.itemCateName);
-					$(list).each(function(i, list){
-						tbody.push('<form>');
-						tbody.push('<tr>');
-						tbody.push('<td scope="row">'+list.itemCateName+'</td>');
+					$(list).each(function(i, list){					
+						tbody.push('<tr class="itemList">');
+						tbody.push('<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="'+list.itemCode+'" readonly></td>');
+						tbody.push('<td>'+list.itemCateName+'</td>');
 						tbody.push('<td>'+list.itemName+'</td>');
 						tbody.push('<td>'+list.itemSize+'</td>');
-						tbody.push('<td>'+list.itemPrice+'</td>');
-						tbody.push('<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>');
-						tbody.push('<td><button type="button" id="itemAddBtn">담기</button></td>');
+						tbody.push('<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="'+list.itemPrice+'" readonly></td>');
+						tbody.push('<td><button type="button" class="itemAddBtn">담기</button></td>');
 						tbody.push('</tr>');
-						tbody.push('</form>');
 					})
 					$('#tbody').empty().html(tbody.join(''));
 				}
@@ -286,22 +344,22 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
+									<th>코드</th>
 									<th>구분</th>
 									<th>품목명</th>
 									<th>용량(g/ml)</th>
 									<th>가격(원)</th>
-									<th>수량</th>
 									<th>담기</th>
 								</tr>
 							</thead>
 							<tbody id="tbody">
-								<c:forEach var="branchOrderList" items="${branchOrderList}">
+								<c:forEach var="branchOrderList" items="${branchOrderList}">								
 									<tr class="itemList">
-										<td scope="row">${branchOrderList.itemCateName}</td>
+										<td class="itemCodeBlock"><input type="text" style="text-align: center; width: 70px" name="itemCode" value="${branchOrderList.itemCode}" readonly></td>
+										<td>${branchOrderList.itemCateName}</td>
 										<td>${branchOrderList.itemName}</td>
 										<td>${branchOrderList.itemSize}</td>
-										<td>${branchOrderList.itemPrice}</td>
-										<td><input type="number" id="numberUpDown" name="numberUpDown" style="text-align:center; width:45px;" min="0" value="0"></td>	
+										<td class="itemPrice"><input name="orderPrice" type="text" style="text-align:center; width:60px;" value="${branchOrderList.itemPrice}" readonly></td>			
 										<td><button type="button" class="itemAddBtn">담기</button></td>
 									</tr>
 								</c:forEach>
@@ -322,15 +380,16 @@
 					</div>
 					<div class="x_content">
 					
-					<form id="basketForm" action="${pageContext.request.contextPath}/branchOrderList" method="post">
+					<form id="basketForm" action="${pageContext.request.contextPath}/branchOrderForm" method="post">
 						<table class="table table-striped">
 							<thead>
 								<tr>
+									<th>코드</th>
 									<th>구분</th>
 									<th>품목명</th>
 									<th>용량(g/ml)</th>
-									<th>가격(원)</th>
 									<th>수량</th>
+									<th>가격(원)</th>								
 									<th>삭제</th>
 								</tr>
 							</thead>
