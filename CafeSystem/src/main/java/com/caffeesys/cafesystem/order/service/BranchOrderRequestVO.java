@@ -76,7 +76,7 @@ public class BranchOrderRequestVO {
 		this.orderPrice = orderPrice;
 	}
 	public int getCal() {
-		return cal = orderPrice * orderAmount;
+		return cal;
 	}
 	public void setCal(int cal) {
 		this.cal = cal;

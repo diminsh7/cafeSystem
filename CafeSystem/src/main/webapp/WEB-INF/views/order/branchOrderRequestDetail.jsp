@@ -2,23 +2,11 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<script>
-function deleteb(){
-	if (confirm("한번 삭제하면 다시 생성할 수 없습니다.") == true){  //삭제처리
-		document.$('#DeleteButton').submit();
-	}else{   
-			return false; //삭제 취소
-	};
-};
-</script>
-
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>지점인사관리</h3>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchPersonnelList">목록</a>
-				<a class="btn btn-default" href="${pageContext.request.contextPath}/insertformbranchPersonneel">직원등록</a>
+				<h3>발주관리</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -26,10 +14,10 @@ function deleteb(){
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>선택직원상세조회</h2>
+						<h2>선택전표 상세조회</h2>
 						<div class="clearfix"></div>
 					</div>
-					<div class="clearfix">
+					<div class="x_content">
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -46,24 +34,29 @@ function deleteb(){
 									<th>배송상태</th>
 									<th>승인담당장</th>
 									<th>불량여부</th>
+									<th>불량신청</th>
+
 								</tr>
 							</thead>
 							<tbody>
+							 <c:forEach var="detail" items="${orderDetail}">
 								<tr>
-									<td>${orderDetail.statementNumber}</td>
-									<td>${orderDetail.divideName}</td>
-									<td>${orderDetail.itemName}</td>
-									<td>${orderDetail.orderAmount}</td>
-									<td>${orderDetail.orderPrice}</td>
-									<td>${orderDetail.cal}</td>
-									<td>${orderDetail.orderRequest}</td>
-									<td>${orderDetail.orderApproval}</td>
-									<td>${orderDetail.orderRelease}</td>
-									<td>${orderDetail.cateReceipt}</td>
-									<td>${orderDetail.cateOrder}</td>
-									<td>${orderDetail.headName}</td>
-									<td>${orderDetail.orderFaultyAble}</td>
+									<td>${detail.statementNumber}</td><!-- 전표번호 -->
+									<td>${detail.divideName}</td><!-- 발주상태 -->
+									<td>${detail.itemName}</td><!-- 품목명 -->
+									<td>${detail.orderAmount}</td><!-- 수량 -->
+									<td>${detail.orderPrice}</td><!-- 가격 -->
+									<td>${detail.cal}</td><!-- 발주금액 -->
+									<td>${detail.orderRequest}</td><!-- 신청일 -->
+									<td>${detail.orderApproval}</td><!-- 승인일 -->
+									<td>${detail.orderRelease}</td><!-- 출고일 -->
+									<td>${detail.cateReceipt}</td><!-- 접수상태 -->
+									<td>${detail.cateOrder}</td><!-- 배송상태 -->
+									<td>${detail.headName}</td><!-- 승인담당장 -->
+									<td>${detail.orderFaultyAble}</td><!-- 불량여부 -->
+									<td><a href="${pageContext.request.contextPath}/?ordercode=${detail.orderCode}">불량신청</a></td>
 								</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 					</div>

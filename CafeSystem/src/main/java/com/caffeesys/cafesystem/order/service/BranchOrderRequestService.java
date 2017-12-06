@@ -32,7 +32,7 @@ public class BranchOrderRequestService {
 
 	
 	//발주리스트 & 권한 확인
-	public void selectBranchOrderRequestList(Model model,HttpSession session, String cate, String input) throws IOException{
+	public List<BranchOrderRequestVO> selectBranchOrderRequestList(Model model,HttpSession session, String cate, String input) throws IOException{
 		System.out.println("BranchOrderRequestService.seleteBranchOrderRequestList 실행");
 		System.out.println("session : " + session.getAttribute("loginInfo"));
 		Object se = session.getAttribute("loginInfo");
@@ -56,7 +56,8 @@ public class BranchOrderRequestService {
 				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode);
 				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map);
 				System.out.println("orderRequestList : " + orderRequestList);
-				model.addAttribute("orderRequestList",orderRequestList);
+				return orderRequestList;
+				
 			}else{
 				System.out.println("점주 또는 매니져 권한미달로 발주주문내역 확인 불가능");
 				response.setContentType("text/html; charset=UTF-8");
@@ -71,15 +72,13 @@ public class BranchOrderRequestService {
 			out.println("<script>alert('로그인이 되어 있지 않습니다.'); history.go(-1);</script>");
 			out.flush();
 		}
+		return null;
 	}
-
+	
+	
 	//상세조회보여질 합계구하기
-	public BranchOrderRequestVO selectOrderRequestDetail(int orderCode) {
-		BranchOrderRequestVO orderDetail = RequestDao.selectOrderRequestDetail(orderCode);
-		int price = orderDetail.getOrderPrice();
-		int amount = orderDetail.getOrderAmount();
-		int cal = price * amount;
-		orderDetail.setCal(cal);
+	public  List<BranchOrderRequestVO> selectOrderRequestDetail(String statementNumber) {
+		 List<BranchOrderRequestVO> orderDetail = RequestDao.selectOrderRequestDetail(statementNumber);
 		System.out.println("orderDetail : "+orderDetail);
 		return orderDetail;
 	}

@@ -33,10 +33,10 @@ public class BranchOrderRequestDao {
 	}
 	
 	//선택전표번호 상세조회
-	public BranchOrderRequestVO selectOrderRequestDetail(int orderCode) {
+	public List<BranchOrderRequestVO> selectOrderRequestDetail(String statementNumber) {
 		logger.debug("[selectOrderRequestDetail] 선택 전표번호 상세내용 가져오기 실행");
 		
-		return sqlSessionTemplate.selectOne(NS + "selectOrderRequestDetail",orderCode);		
+		return sqlSessionTemplate.selectList(NS + "selectOrderRequestDetail",statementNumber);		
 	}
 
 }
