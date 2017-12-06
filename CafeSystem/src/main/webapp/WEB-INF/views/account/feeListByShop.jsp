@@ -25,7 +25,7 @@
 				});
 			},
 			error:function(request, status, error){
-				alert('실패');
+				alert('우리 지점의 가맹수수료 조회 실패');
 			}
 		});
 	});

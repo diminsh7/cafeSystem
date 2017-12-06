@@ -9,6 +9,8 @@ public interface SalesDaoInter {
 	public List<MonthlySalesVO> selectMonthlySalesList();
 	public List<HashMap<String, Object>> selectDailyTop();
 	public List<HashMap<String, Object>> selectMonthlyTop();
+	public List<DailySalesVO> selectDailySalesListByShop(Map<String, Object> param);
+	public List<MonthlySalesVO> selectMonthlySalesListByShop(Map<String, Object> param);
 	public List<FeeVO> selectFeeList();
 	public List<FeeVO> selectFeeListByShop(Map<String, Object> param);
 }
