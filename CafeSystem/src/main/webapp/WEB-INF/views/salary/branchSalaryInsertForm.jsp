@@ -3,10 +3,16 @@
 <!DOCTYPE html>
 <script>
 	$('document').ready(function(){
+		//select 옵션값이 변하면 불러온 값초기화
+		$('.selectBox').change(function(){
+				$('#menuCode').val('');
+				$('#menuTotalCost').val('');
+		});	
 		
 		//급여 자동 입력
-		$('#branchEmployeeSalary').click(function(){
+		$('#branchEmployeeSalarySearch').click(function(){
 			var branchCodeList = $('#branchEmployeeCode').val();
+			
 			if(branchCodeList == 'empty'){
 				alert('직원코드를 선택해 주세요');
 				return false;
@@ -16,9 +22,21 @@
 					, type:"GET"
 					, data:{"branchCodeList":branchCodeList}
 					, success:function(data){
-						var result = JSON.parse(data);
-							if(result != null){
-								$('#branchEmployeeSalary').val(result);
+						var Salary = JSON.parse(data);	//급여
+						var Health= Salary*0.03			//건강보험
+						var Insurance = Salary*0.0065	//고용보험
+						var Persion = Salary*0.045		//국민연금
+						var Deduction = Salary*0.03 + Salary*0.0065 + Salary*0.045//공제합계
+						var Receipts = Salary-Deduction	//실수령액
+							if(Salary != null){
+								$('#branchEmployeeSalary').val(Salary);
+								$('#branchSalaryHealth').val(Health);
+								$('#branchSalaryInsurance').val(Insurance);
+								$('#branchSalaryPersion').val(Persion);
+								$('#branchSalaryPayments').val(Salary);
+								$('#branchSalaryDeduction').val(Deduction);
+								$('#branchSalaryReceipts').val(Receipts);
+								
 							}else{
 								alert('급여 못갖고옴');
 								return false;
@@ -30,6 +48,27 @@
 					});
 				}
 		});
+		$('#branchEmployeeSalaryChange').click(function(){
+			var branchSalaryChange = $('#branchEmployeeSalary').val();
+			var Health2= branchSalaryChange*0.03
+			var Insurance2 = branchSalaryChange*0.0065
+			var Persion2 = branchSalaryChange*0.045
+			var Deduction2 = branchSalaryChange*0.03 + branchSalaryChange*0.0065 + branchSalaryChange*0.045
+			var Receipts2 = branchSalaryChange-Deduction2
+			if(branchSalaryChange == 'empty'){
+				alert('직원코드를 선택해 주세요');
+				return false;
+			}else{
+				$('#branchEmployeeSalary').val(branchSalaryChange);
+				$('#branchSalaryHealth').val(Health2);
+				$('#branchSalaryInsurance').val(Insurance2);
+				$('#branchSalaryPersion').val(Persion2);
+				$('#branchSalaryPayments').val(branchSalaryChange);
+				$('#branchSalaryDeduction').val(Deduction2);
+				$('#branchSalaryReceipts').val(Receipts2);
+			}
+		})
+			
 	});
 
 </script>
@@ -61,18 +100,18 @@
 											</c:forEach>
 										 </select>
 									</div>
-									<button class="btn btn-primary" type="button" id="branchEmployeeSalary" >검색</button>
+									<button class="btn btn-primary" type="button" id="branchEmployeeSalarySearch" >검색</button>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">전표번호</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="menuCode" name="menuCode" required="required" class="form-control col-md-7 col-xs-12" readonly>
+									<input type="text" id="menuCode" name="menuCode" class="form-control col-md-7 col-xs-12" readonly>
 								</div>
 							</div>
 	                   		<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">귀속년월</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryWorkmonth">귀속년월</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="date">
+									<input id="branchSalaryWorkmonth" name="branchSalaryWorkmonth" class="form-control col-md-7 col-xs-12" type="month">
 								</div>
 							</div>
 							<div class="form-group">
@@ -80,41 +119,43 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" id="branchEmployeeSalary" name="branchEmployeeSalary" required="required" class="form-control col-md-7 col-xs-12" >
 								</div>
+								<button class="btn btn-primary" type="button" id="branchEmployeeSalaryChange" >급여 변경</button>
 							</div>
+							
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">건강보험</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryHealth">건강보험</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">고용보험</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="branchSalaryHealth" name="branchSalaryHealth" class="form-control col-md-7 col-xs-12" type="text" readonly>
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">국민연금</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryInsurance">고용보험</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="branchSalaryInsurance" name="branchSalaryInsurance" class="form-control col-md-7 col-xs-12" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryPersion">국민연금</label>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<input id="branchSalaryPersion" name="branchSalaryPersion" class="form-control col-md-7 col-xs-12" type="text" readonly>
 								</div>
 							</div>	
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">지급합계</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryPayments">지급합계</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="branchSalaryPayments" name="branchSalaryPayments" class="form-control col-md-7 col-xs-12" type="text" readonly>
 								</div>
 							</div>	
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">공제합계</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryDeduction">공제합계</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="branchSalaryDeduction" name="branchSalaryDeduction" class="form-control col-md-7 col-xs-12" type="text" readonly>
 								</div>
 							</div>	
 							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuSellCost">실수령액</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryReceipts">실수령액</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="menuSellCost" name="menuSellCost" class="form-control col-md-7 col-xs-12" type="text">
+									<input id="branchSalaryReceipts" name="branchSalaryReceipts" class="form-control col-md-7 col-xs-12" type="text">
 								</div>
 							</div>	
 							<div class="form-group">
@@ -126,9 +167,9 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" id="menuPriceInsertCancelBtn" type="button">Cancel</button>
-									<button class="btn btn-primary" id="menuPriceInsertResetBtn" type="reset">Reset</button>
-									<button class="btn btn-success" id="menuPriceInsertBtn" type="submit">등록</button>
+									<button class="btn btn-primary" id="branchSalaryInsertCancelBtn" type="button">Cancel</button>
+									<button class="btn btn-primary" id="branchSalaryInsertResetBtn" type="reset">Reset</button>
+									<button class="btn btn-success" id="branchSalaryInsertBtn" type="submit">등록</button>
 								</div>
 							</div>
 						</form>

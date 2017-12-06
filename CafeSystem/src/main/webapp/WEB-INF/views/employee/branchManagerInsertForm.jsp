@@ -42,8 +42,8 @@
                         </label>                
                         	<div class="col-md-6 col-sm-6 col-xs-12">																													
                        			<select name="shopCode" id="shopCode" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12">
-                       				<c:forEach var="BMShop" items="${branchManagerShopCode}">
-                       					<option value='${BMShop.shopCode}'>${BMShop.shopCode}</option>
+                       				<c:forEach var="BMlocal" items="${localList}">
+                       					<option value='${BMlocal.categoryCode}'>${BMlocal.categorySmall}</option>
                        				</c:forEach>
                        			</select>
                         	</div>                        

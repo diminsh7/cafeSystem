@@ -12,7 +12,7 @@
 		<result property="itemDetail" column="item_detail" /> <!-- 품목상세-->
 		<result property="itemCateName" column="itemCateName" /> <!-- 품목카테고리명 -->
 	</resultMap>
-	
+
 	<!-- 지점 발주 화면 요청 & 카테고리별 품목 요청 -->
 	<select id="branchOrderForm" parameterType="java.util.Map" resultMap="resultBranchOrder">
 		SELECT
@@ -33,4 +33,56 @@
 			AND item_category_code = #{itemCate}
 		ORDER BY item_code ASC	
 	</select>
+	
+	<!-- 수량에 따른 가격 계산 -->
+	<select id="itemPriceCal" parameterType="String" resultType="Integer">
+		SELECT
+			item_price
+		FROM
+			item
+		WHERE 
+			item_code = #{itemCode}
+	</select>
+	
+	<!-- 발주 신청 처리 -->
+	<insert id="branchOrderAdd" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderAddVO">
+		INSERT INTO `order` (
+				statement_number
+				, order_faulty_divide
+				, local_category_code
+				, shop_code
+				, item_code
+				, order_amount
+				, order_price
+				, receipt_category_code
+				, order_category_code
+				, order_request <!-- DATE Type -->
+				, head_employee_code
+				, order_faulty_able		
+			) VALUES (
+				#{statementNumber}
+				, #{orderFaultyDivide}
+				, #{localCategoryCode}
+				, #{shopCode}
+				, #{itemCode}
+				, #{orderAmount}
+				, #{orderPrice}
+				, #{receiptCategoryCode}
+				, #{orderCategoryCode}
+				, now()
+				, #{headEmployeeCode}
+				, #{orderFaultyAble}
+			)
+	</insert>
+	
+	<!-- 발주 취소 신청 -->
+	<update id="branchOrderCancel" parameterType="java.util.Map">
+		UPDATE
+			order
+		SET
+			receipt_category_code = #{receiptCategoryCode}
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
+	
 </mapper>

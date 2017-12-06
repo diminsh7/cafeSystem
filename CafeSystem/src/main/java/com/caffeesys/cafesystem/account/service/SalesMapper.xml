@@ -8,12 +8,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="statementNum" column="statement_number"/>
 		<result property="localCode" column="local_category_code"/>
 		<result property="shopCode" column="shop_code"/>
+		<result property="shopName" column="shop_name"/>
 		<result property="dailySalesDate" column="daily_sales_date"/>
 		<result property="dailySalesAmount" column="daily_sales_amount"/>
 	</resultMap>
-	<select id="selectDailySalesList" parameterType="com.caffeesys.cafesystem.account.service.DailySalesVO" resultMap="resultDailySales">
-		SELECT  daily_sales_code,  statement_number,  local_category_code,  shop_code,  daily_sales_date,  daily_sales_amount
-		FROM daily_sales
+	<resultMap type="com.caffeesys.cafesystem.account.service.MonthlySalesVO" id="resultMonthlySales">
+		<result property="monthlySalesCode" column="monthly_sales_code"/>
+		<result property="statementNum" column="statement_number"/>
+		<result property="localCode" column="local_category_code"/>
+		<result property="shopCode" column="shop_code"/>
+		<result property="shopName" column="shop_name"/>
+		<result property="monthlySalesDate" column="monthly_sales_date"/>
+		<result property="monthlySalesAmount" column="monthly_sales_amount"/>
+		<result property="monthlySalesMoneydue" column="monthly_sales_moneydue"/>
+	</resultMap>
+	<resultMap type="com.caffeesys.cafesystem.account.service.FeeVO" id="resultFee">
+		<result property="feeCode" column="fee_code"/>
+		<result property="statementNum" column="statement_number"/>
+		<result property="shopName" column="shop_name"/>
+		<result property="feeMonth" column="fee_month"/>
+		<result property="feePrice" column="fee_price"/>
+		<result property="feeAuto" column="fee_autodate"/>
+		<result property="feeReal" column="fee_realdate"/>
+		<result property="feeRemain" column="fee_remain"/>
+	</resultMap>
+	<select id="selectDailySalesList" resultMap="resultDailySales">
+		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d
+		INNER JOIN shop s
+		ON d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
 		ORDER BY daily_sales_code desc
+	</select>
+	<select id="selectMonthlySalesList" resultMap="resultMonthlySales">
+		SELECT monthly_sales_code,  statement_number,  m.local_category_code,  m.shop_code, s.shop_name, monthly_sales_date,  monthly_sales_amount, monthly_sales_moneydue
+		FROM monthly_sales m
+		INNER JOIN shop s
+		ON m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
+		ORDER BY monthly_sales_code desc
+	</select>
+	<select id="selectDailyTop" resultType="java.util.HashMap">
+		SELECT shop_name, daily_sales_amount
+		FROM daily_sales d
+		INNER JOIN shop s
+		ON d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
+		WHERE daily_sales_date='2017-10-19'
+		ORDER BY daily_sales_amount desc
+		LIMIT 5;
+	</select>
+	<select id="selectMonthlyTop" resultType="java.util.HashMap">
+		SELECT shop_name, monthly_sales_amount
+		FROM monthly_sales m
+		INNER JOIN shop s
+		ON m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
+		WHERE monthly_sales_date='2017-09-30'
+		ORDER BY monthly_sales_amount desc
+		LIMIT 5;
+	</select>
+	<select id="selectFeeList" resultMap="resultFee">
+		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
+		FROM fee f, monthly_sales m, shop s
+		WHERE f.monthly_sales_code=m.monthly_sales_code
+				AND m.local_category_code=s.local_category_code
+				AND m.shop_code=s.shop_code
+		ORDER BY fee_code desc
 	</select>
 </mapper>

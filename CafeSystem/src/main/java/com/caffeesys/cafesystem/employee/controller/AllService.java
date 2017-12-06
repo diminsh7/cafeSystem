@@ -18,4 +18,3 @@ public class AllService { //검색
 		return map;
 	}
 }
-

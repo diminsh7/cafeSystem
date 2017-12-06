@@ -4,23 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<script>
- $(document).ready(function(){
-	 $(document).on('click', '.cancelBtn', function(){
-		 var orderCate = $(this).parents('tr').find('.orderCate').val();
-		 console.log(orderCate);
-		 if(orderCate == '711'){
-			 alert('멘트');
-			return false;
-		 }else{
-			 $(location).attr('href','${pageContext.request.contextPath}/branchOrderCancel?statementNumber=${orderRequestList.statementNumber}&receiptCategoryCode=${orderRequestList.receiptCategoryCode}&orderCategoryCode=${orderRequestList.orderCategoryCode}');
-			
-		 }
-		 
-	 })
- })				
-
-</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
