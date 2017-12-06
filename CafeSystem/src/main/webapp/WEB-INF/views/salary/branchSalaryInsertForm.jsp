@@ -2,13 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script>
-	$(document).ready(function(){
-		//select 옵션값이 변하면 불러온 값초기화
-		$('.selectBox').change(function(){
-				$('#menuCode').val('');
-				$('#menuTotalCost').val('');
-		});	
-		
+	$(document).ready(function(){		
 		//급여 자동 입력
 		$('#branchEmployeeSalarySearch').click(function(){
 			var branchCodeList = $('#branchEmployeeCode').val();

@@ -22,6 +22,42 @@
 		<result column="category_small"	property="categoryDepartment"/>			<!-- 부서 -->
   	</resultMap>
   	
+  	
+  	<!-- 계정과목의 head_salary_code컬럼에서 글자말고, 오른쪽 숫자의 최대값 select -->
+	<select id="headSalaryCodeMax" resultType="Integer">
+		select max(CAST(substring(head_salary_code,13) AS DECIMAL))
+		from head_salary
+	</select>
+	
+	<!-- 계정과목의 head_salary_code컬럼에서 글자말고,가운데 숫자의 최대값 select -->
+	<select id="headSalaryCodeMidMax" resultType="Integer">
+		select  max(CAST(substring(head_salary_code,9) AS DECIMAL))
+		from head_salary
+	</select>
+  	
+  	<!-- 직원코드의 보너스코드의 보너스 금액 select -->
+  	<select id="headEmployeeBonusSelect" parameterType="String" resultType="String">
+  		select category_small
+		FROM category
+		WHERE 
+			category_code= (select bonus_category_code
+				FROM head_employee
+				WHERE head_employee_code = #{headEmployeeCode})
+  	</select>
+  	
+  	<!-- 직원코드의 급여 select -->
+	<select id="headEmployeeSalaryInsert" parameterType="String" resultType="String">
+		SELECT head_employee_salary 
+		FROM head_employee
+		WHERE head_employee_code = #{headEmployeeCode}
+	</select>
+	
+  	<!-- 급여명세서 등록할때 직원들 select -->
+  	<select id="headCodeList" resultType="String">
+  		SELECT head_employee_code 
+		FROM head_employee
+  	</select>
+  	
   	<!-- 검색한 list -->
   	<select id="headSalaryList" parameterType="java.util.Map" resultMap="resultHeadSalary">
   		SELECT hs.head_salary_workmonth
@@ -60,7 +96,7 @@
 		<sql id="search">
 			<choose>
 				<!-- 직원코드로 검색할 경우 -->
-				<when test='keyword1 != null or keyword1="branch_employee_code"'>
+				<when test='keyword1 != null or keyword1="head_employee_code"'>
 					WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%') 	
 				</when>
 				<!-- 데이터타입으로 검색할 경우  -->
@@ -69,5 +105,35 @@
 				</otherwise>
 			</choose>
 		</sql>		
+		
+		<!-- 등록 처리 -->
+  	<insert id="headSalaryInsert">
+		INSERT INTO head_salary(
+			head_salary_code
+			,head_employee_code
+			,head_salary_workmonth
+			,head_employee_salary
+			,head_salary_bonus
+			,head_salary_health
+			,head_salary_insurance
+			,head_salary_persion
+			,head_salary_payments
+			,head_salary_deduction
+			,head_salary_receipts
+			,head_salary_paydate)
+		VALUES(
+			#{headSalaryCode}
+			,#{headEmployeeCode}
+			,#{headSalaryWorkmonth}
+			,#{headEmployeeSalary}
+			,#{headSalaryBonus}
+			,#{headSalaryHealth}
+			,#{headSalaryInsurance}
+			,#{headSalaryPersion}
+			,#{headSalaryPayments}
+			,#{headSalaryDeduction}
+			,#{headSalaryReceipts}
+			,#{headSalaryPaydate})	
+  	</insert>
   	
   </mapper>

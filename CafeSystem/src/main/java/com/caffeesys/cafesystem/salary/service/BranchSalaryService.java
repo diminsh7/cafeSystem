@@ -63,6 +63,7 @@ public class BranchSalaryService {
 		map.put("empCode", empCode);
 		map.put("position", position);*/
 		List<LoginVO> branchCodeList = branchSalaryDao.branchCodeList(empCode);
+		logger.debug("branchCodeList 메소드의 branchCodeList :{}",branchCodeList);
 		model.addAttribute("branchCodeList", branchCodeList);	//로그인한 매장의 직원코드 갖고오기
 	}	
 	

@@ -1,90 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script>
-	$(document).ready(function() {
-		$.ajax({
-			url:"headSalaryListJson"
-			, type = "GET"
-			, data:{"headSalaryList":headSalaryList}
-			, success:function(data) {
-				var headSalaryList = JSON.parse(data);
-				console.log(data);
-				$('#HeadSalaryTable').DataTable({
-					data : headSalaryList,
-					columns : [
-						{data : "headSalaryWorkmonth"},
-						{data : "headEmployeeCode"},
-						{data : "headEmployeeName"},
-						{data : "headEmployeeBirth"},
-						{data : "categoryDepartment"},
-						{data : "headSalaryPayments"},
-						{data : "headSalaryDeduction"},
-						{data : "headSalaryReceipts"}
-					]
-				});
-			}		
-		});
-	});
-</script>
-<div class="right_col" role="main">
-	<div class="">
-		<div class="page-title">
-			<div class="title_left">
-				<h3>급여명세서관리<small>본사</small></h3>
-			</div>
-		</div>
-		<div class="clearfix"></div>
-		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
-				<div class="x_panel">
-					<div class="x_title">
-						<h2>급여명세서 리스트</h2>
-						<div class="clearfix"></div>
-					</div>
-					<div class="x_content">
-							<form name="search" method="post" action="${pageContext.request.contextPath}/headSalaryList">
-								<legend>검색</legend>
-								<ul>
-									<li>
-										<label>직원코드 검색</label>
-									
-										<input type="text" name="keyword1" value="${keyword1}">
-									</li>
-									<li>
-										<label>기간검색</label>
-										<input type="Date" name="keyword2" value="${keyword2}">
-									</li>
-								</ul>
-								<input type="submit" value="조회">
-								<!-- <div name="searchOption"> -->
-								<%-- 직원 코드 검색: <input name="keyword" value="${keyword}"> 
-								<input type="submit" value="조회">
-								<div value="searchOption" value="head_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
-								<input type="submit" value="조회" --%>			
-							</form>
-						<table id="HeadSalaryTable" class="table table-striped table-bordered">
-							<thead>
-								<tr>
-									<th>귀속연월</th>
-									<th>직원코드</th>
-									<th>이름</th>
-									<th>생년월일</th>
-									<th>부서</th>
-									<th>지급합계</th>
-									<th>공제합계</th>
-									<th>실수령액</th>
-									<th>상세정보</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<%-- <!DOCTYPE html>
+<!DOCTYPE html>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -114,19 +30,19 @@
 						<ul>
 							<li>
 								<label>직원코드 검색</label>
-							</li>
 								<input type="text" name="keyword1" value="${keyword1}">
+							</li>
 							<li>
 								<label>기간검색</label>
 								<input type="Date" name="keyword2" value="${keyword2}">
 							</li>
 						</ul>
 						<input type="submit" value="조회">
-						<!-- <div name="searchOption"> -->
+						<%-- <!-- <div name="searchOption"> -->
 						직원 코드 검색: <input name="keyword" value="${keyword}"> 
 						<input type="submit" value="조회">
 						<div value="searchOption" value="head_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
-						<input type="submit" value="조회">				
+						<input type="submit" value="조회">	 --%>			
 					</form>
 					<!-- 레코드의 갯수를 출력 -->
 					${headSalaryCount}개의 게시물이 있습니다.
@@ -172,6 +88,3 @@
 		</div>
 	</div>
 </div>
-
-
- --%>

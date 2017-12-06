@@ -84,6 +84,7 @@ public class BranchSalaryDao {
 		return sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode);
 	}
 	
+	//전표번호의 최대값select
 	public HashMap<String, Object> getStatementMax(String statementNumber) {
 		logger.debug("getStatementMax메소드 확인");
 		logger.debug("getStatementMax메소드 리턴 :{}",sqlSessionTemplate.selectOne(NS+"getStatementMax", statementNumber));	//숫자 또는 null값이 리턴됨

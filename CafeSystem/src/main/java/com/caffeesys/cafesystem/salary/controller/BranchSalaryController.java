@@ -58,9 +58,6 @@ public class BranchSalaryController {
 	}
 	
 	
-	
-	//등록 폼에 사용할 전표 갖고오기
-	
 	//지점직원 급여명세서 등록 처리
 	
 	
