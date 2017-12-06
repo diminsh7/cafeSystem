@@ -1,26 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+    pageEncoding="UTF-8"%>
+
 <script>
 	$(document).ready(function() {
-		$.get("/feeListJson", function(data) {
-			var list = JSON.parse(data);
-			console.log(data);
-			$('#feeTable').DataTable({
-				data : list,
-				columns : [
-					{data : "feeCode"},
-					{data : "statementNum"},
-					{data : "shopName"},
-					{data : "feeMonth"},
-					{data : "feePrice"},
-					{data : "feeAuto"},
-					{data : "feeReal"},
-					{data : "feeRemain"}
-				],
-				order : [0, "desc"]
-			});
-		});
+		
 	});
 </script>
 
@@ -38,13 +21,13 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>가맹 수수료 조회</h2>
+						<h2>우리 매장 가맹 수수료 조회</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<div class="form-group" style="float: right;">
 							<form
-								action="${pageContext.request.contextPath}/feeSearch" method="get">
+								action="${pageContext.request.contextPath}/#" method="get">
 								<select class="input-sm" style="float: left;">
 									<option value="">날짜</option>
 									<option value="">매장</option>

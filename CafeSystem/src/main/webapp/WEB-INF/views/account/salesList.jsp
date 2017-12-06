@@ -28,7 +28,8 @@
 					"data" : "dailySalesDate"
 				}, {
 					"data" : "dailySalesAmount"
-				} ]
+				} ],
+				order : [0, "desc"]
 			});
 		});
 		$.get("/monthlySalesListJson", function(data) {
@@ -50,7 +51,8 @@
 					"data" : "monthlySalesAmount"
 				}, {
 					"data" : "monthlySalesMoneydue"
-				} ]
+				} ],
+				order : [0, "desc"]
 			});
 		});
 		// 일매출, 월매출 리스트 끝

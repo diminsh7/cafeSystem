@@ -1,5 +1,7 @@
 package com.caffeesys.cafesystem.account.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,5 +69,16 @@ public class SalesController {
 		String list = salesService.selectFeeList();
 		logger.debug("jsonFeeList method list : " + list);
 		return list;
+	}
+	@RequestMapping(value="/feeListByShop", method=RequestMethod.GET)
+	public String listFeeByShop() {
+		logger.debug("listFeeByShop method");
+		return "/account/feeListByShop";
+	}
+	@RequestMapping(value="/feeListByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonFeeListByShop(HttpSession session) {
+		logger.debug("jsonFeeListByShop method");
+		//session 정보 이용해서 매장가져오고 그걸로 수수료 select하기
+		return "";
 	}
 }
