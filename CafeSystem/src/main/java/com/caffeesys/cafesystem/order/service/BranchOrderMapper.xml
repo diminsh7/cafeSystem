@@ -78,7 +78,7 @@
 	<!-- 발주 취소 신청 -->
 	<update id="branchOrderCancel" parameterType="java.util.Map">
 		UPDATE
-			order
+			`order`
 		SET
 			receipt_category_code = #{receiptCategoryCode}
 		WHERE

@@ -2,7 +2,27 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<script>
+$(document).ready(function(){
+		$('.cancelBtn').click(function(){			
+			 var orderCate = $(this).parents('tr').find('.orderCate').val();
+			 var receiptCate = $(this).parents('tr').find('.receiptCate').val();
+			 var statmentNumber = $(this).parents('tr').find('.statementNumber').text();
+			 
+			console.log("statmentNumber: " + statmentNumber);
+			if(orderCate == '711'){
+				alert('해당 상품은 배송중이므로 취소가 불가능합니다.');
+				return false;
+			}else{
+				result = confirm('정말 해당 주문을 취소신청 하시겠습니까?');
+				if(result){
+					 $(location).attr('href','${pageContext.request.contextPath}/branchOrderCancel?statementNumber='+statmentNumber+'&receiptCategoryCode='+receiptCate+'&orderCategoryCode='+orderCate+'');
+					 alert('정상 처리되었습니다');
+				}
+			}      
+		});		
+});          
+</script>
 
 <div class="right_col" role="main">
 	<div class="">
@@ -26,7 +46,7 @@
 						<p class="text-muted font-13 m-b-30"></p>
 						신청내역 리스트
 						
-						<form id="SearchForm" action="${pageContext.request.contextPath}/branchOrderRequestList"method="post">
+						<form id="SearchForm" action="${pageContext.request.contextPath}/branchOrderRequestList" method="post">
 							<div>
 								<div>
 									<select name="cate" id="cate" required class="input-sm">
@@ -63,7 +83,7 @@
 							<tbody>
 								<c:forEach var="request" items="${orderRequestList}">
 									<tr>
-										<td><a href="${pageContext.request.contextPath}/branchOrderRequestDetail?statementNumber=${request.statementNumber}">${request.statementNumber}</a></td>
+										<td class="statementNumber"><a href="${pageContext.request.contextPath}/branchOrderRequestDetail?statementNumber=${request.statementNumber}">${request.statementNumber}</a></td>
 										<td>${request.cal}</td>
 										<td><input class="receiptCate"type="hidden" value="${request.receiptCategoryCode}">${request.cateReceipt}</td>
 										<td><input class="orderCate" type="hidden" value="${request.orderCategoryCode}" >${request.orderRequest}</td>

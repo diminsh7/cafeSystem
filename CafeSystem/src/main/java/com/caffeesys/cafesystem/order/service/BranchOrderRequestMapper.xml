@@ -62,19 +62,19 @@
 	 
 	FROM `order` as OD INNER JOIN category as cate   
 		ON OD.receipt_category_code = cate.category_code
-	INNER JOIN category as categ
+	LEFT JOIN category as categ
 		ON OD.order_category_code = categ.category_code
-	INNER JOIN shop as sh
+	LEFT JOIN shop as sh
 		ON OD.local_category_code = sh.local_category_code
 		AND OD.shop_code = sh.shop_code
-	INNER JOIN statement as st
+	LEFT JOIN statement as st
 		ON st.statement_code = OD.order_faulty_divide
-	INNER JOIN head_employee as head
+	LEFT JOIN head_employee as head
 		ON OD.head_employee_code = head.head_employee_code
-	INNER JOIN item as it
+	LEFT JOIN item as it
 		ON OD.item_code = it.item_code
 	
-	WHERE OD.local_category_code = '001' AND OD.shop_code = '001'
+	WHERE OD.local_category_code = #{localCategoryCode} AND OD.shop_code = #{shopCode}
 		AND (OD.order_faulty_divide = 'C' 
 		OR OD.order_faulty_divide = 'D' 
 		OR OD.order_faulty_divide = 'E')
