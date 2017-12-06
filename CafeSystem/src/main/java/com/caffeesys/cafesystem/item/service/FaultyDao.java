@@ -55,4 +55,13 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / updateFaulty Param faulty: "+faulty);
 		return sqlSessionTemplate.update(NS+"updateFaulty", faulty);
 	}
+	// 불량품목삭제 불량수량확인하고 삭제
+	public int deleteFaulty(int faultyCode, int faultyAmount) {
+		System.out.println("FaultyDao.java / deleteFaulty Param faultyCode: "+faultyCode);
+		System.out.println("FaultyDao.java / deleteFaulty Param faultyAmount: "+faultyAmount);
+		FaultyVO faulty = new FaultyVO();
+		faulty.setFaultyCode(faultyCode);
+		faulty.setFaultyAmount(faultyAmount);
+		return sqlSessionTemplate.delete(NS+"deleteFaulty", faulty);
+	}
 }

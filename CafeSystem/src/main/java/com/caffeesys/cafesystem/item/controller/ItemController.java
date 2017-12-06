@@ -73,7 +73,7 @@ public class ItemController {
 		itemDao.updateItem(item);
 		return "redirect:/itemDetail?itemCode=" + item.getItemCode();
 	}
-	// 발주품목삭제 페이지요청(메뉴명 입력)
+	// 발주품목삭제 페이지요청(품목명 입력)
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET)
 	public String deleteItem(@RequestParam(value = "itemCode", required = true) String itemCode) {
 		System.out.println("ItemController.java / deleteItem method GET방식 " + itemCode);

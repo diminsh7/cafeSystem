@@ -77,4 +77,19 @@ public class FaultyController {
 		faultyDao.updateFaulty(faulty);
 		return "redirect:/faultyDetail?faultyCode=" + faulty.getFaultyCode();
 	}
+	// 불량품목삭제 페이지요청(불량수량 입력)
+	@RequestMapping(value = "/deleteFaulty", method = RequestMethod.GET)
+	public String deleteFaulty(@RequestParam(value = "faultyCode", required = true) int faultyCode) {
+		System.out.println("FaultyController.java / deleteFaulty method GET방식 " + faultyCode);
+		return "/item/faultyDeleteForm";
+	}
+	// 불량품목삭제(액션)요청
+	@RequestMapping(value = "/deleteFaulty", method = RequestMethod.POST)
+	public String deleteFaulty(@RequestParam(value = "faultyCode", required = true) int faultyCode,
+			@RequestParam(value = "faultyAmount", required = true) int faultyAmount) {
+		System.out.println("FaultyController.java / deleteFaulty method POST방식 " + faultyCode);
+		System.out.println("FaultyController.java / deleteFaulty method POST방식 " + faultyAmount);
+		faultyDao.deleteFaulty(faultyCode, faultyAmount);
+		return "redirect:/faultyList";
+	}
 }

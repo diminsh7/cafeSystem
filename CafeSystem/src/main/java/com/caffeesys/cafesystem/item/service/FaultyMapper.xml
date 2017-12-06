@@ -63,7 +63,7 @@
 	<!-- 불량품목등록 전표번호 가져오는 select(지점) -->
 	<select id="selectFaultyStatementNumber" resultMap="resultFaulty">
 		SELECT order_code, statement_number
-		FROM order_service
+		FROM `order`
 		ORDER BY statement_number DESC
 	</select>
 	<!-- 불량품목등록 item명 가져오는 select(지점) -->
@@ -89,10 +89,16 @@
 		ON f.faulty_category = c.category_code
         WHERE f.faulty_code = #{faultyCode}
     </select>
-    <!-- 발주품목수정(지점) -->
+    <!-- 불량품목수정(지점) -->
 	<update id="updateFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
 		UPDATE faulty
 		SET faulty_amount = #{faultyAmount}, faulty_image = #{faultyImage}, faulty_reason = #{faultyReason}
 		WHERE faulty_code = #{faultyCode}
 	</update>
+	<!-- 불량품목삭제 불량수량확인하고 삭제 -->
+    <delete id="deleteFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
+		DELETE FROM faulty 
+		WHERE faulty_code = #{faultyCode}
+		AND faulty_amount = #{faultyAmount}
+    </delete>
 </mapper>
