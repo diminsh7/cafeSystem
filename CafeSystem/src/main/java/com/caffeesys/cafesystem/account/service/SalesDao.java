@@ -2,6 +2,7 @@ package com.caffeesys.cafesystem.account.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class SalesDao implements SalesDaoInter {
 	@Override
 	public List<FeeVO> selectFeeList() {
 		List<FeeVO> result = sqlSession.selectList(NS+"selectFeeList");
+		return result;
+	}
+	@Override
+	public List<FeeVO> selectFeeListByShop(Map<String, Object> param) {
+		List<FeeVO> result = sqlSession.selectList(NS+"selectFeeListByShop", param);
 		return result;
 	}
 }

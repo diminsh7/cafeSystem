@@ -2,6 +2,7 @@ package com.caffeesys.cafesystem.account.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,12 @@ public class SalesService implements SalesServiceInter {
 	@Override
 	public String selectFeeList() {
 		List<FeeVO> list = salesDao.selectFeeList();
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+	@Override
+	public String selectFeeListByShop(Map<String, Object> param) {
+		List<FeeVO> list = salesDao.selectFeeListByShop(param);
 		Gson gson = new Gson();
 		return gson.toJson(list);
 	}

@@ -3,7 +3,31 @@
 
 <script>
 	$(document).ready(function() {
-		
+		$.ajax({
+			url : "/feeListByShopJson",
+			type : "GET",
+			success:function(data){
+				var list = JSON.parse(data);
+				console.log(data);
+				$('#feeTable').DataTable({
+					data : list,
+					columns : [
+						{data : "feeCode"},
+						{data : "statementNum"},
+						{data : "shopName"},
+						{data : "feeMonth"},
+						{data : "feePrice"},
+						{data : "feeAuto"},
+						{data : "feeReal"},
+						{data : "feeRemain"}
+					],
+					order : [0, "desc"]
+				});
+			},
+			error:function(request, status, error){
+				alert('실패');
+			}
+		});
 	});
 </script>
 

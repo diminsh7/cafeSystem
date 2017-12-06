@@ -2,6 +2,7 @@ package com.caffeesys.cafesystem.account.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caffeesys.cafesystem.CommonService;
-import com.caffeesys.cafesystem.account.service.DailySalesVO;
 import com.caffeesys.cafesystem.account.service.SalesService;
 
 @Controller
@@ -81,12 +81,18 @@ public class SalesController {
 		logger.debug("listFeeByShop method");
 		return "/account/feeListByShop";
 	}
+	@ResponseBody
 	@RequestMapping(value="/feeListByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String jsonFeeListByShop(HttpSession session) {
+	public String jsonFeeListByShop() {
 		logger.debug("jsonFeeListByShop method");
 		//session 정보 이용해서 매장가져오고 그걸로 수수료 select하기
 		List<HashMap<String, Object>> localshopCode = commonService.localShopCodeSelect();
-		localshopCode.get(0).get("local_category_code");
-		return "";
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("local", localshopCode.get(0).get("local_category_code"));
+		param.put("shop", localshopCode.get(0).get("shop_code"));
+		logger.debug("jsonFeeListByShop method param : " + param);
+		String list = salesService.selectFeeListByShop(param);
+		logger.debug("jsonFeeListByShop method list : " + list);
+		return list;
 	}
 }
