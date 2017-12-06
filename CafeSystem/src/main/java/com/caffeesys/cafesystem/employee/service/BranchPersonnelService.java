@@ -1,24 +1,34 @@
 package com.caffeesys.cafesystem.employee.service;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
-import com.caffeesys.cafesystem.employee.controller.BranchPasingService;
+import com.caffeesys.cafesystem.employee.controller.AllService;
+import com.caffeesys.cafesystem.login.service.LoginVO;
 
 @Service
 public class BranchPersonnelService {
 
 	@Autowired
+	private HttpServletResponse response;
+	
+	@Autowired
 	private BranchPersonnelDao branchPersonnelDao;
 	
 	@Autowired
-	private BranchPasingService pasingServiec;
+	private AllService allService;
 	
-	//테이블 두개에 들어가서 입력되야하기 때문에 서비스를 나눔, 1->employee테이블에 등록 2->manager테이블에 등록
+	//employee테이블에 등록 2->manager테이블에 등록
 	//점주 등록과정 1->employee테이블
 	public int insertBranchEmployee(BranchPersonnelVO branchPersonnelVo) {
 		System.out.println("[BranchPersonnelService.insertBranchEmployee] 실행");
@@ -61,23 +71,58 @@ public class BranchPersonnelService {
 		return branchPersonnelDao.insertBranchPersonnel(branchPersonnelVo); 
 	}
 	
-	//검색한 내용 목록
-	public void selectBranchPersonSearch(Model model, String searchOption, String keyword, int currentPage) {
-		System.out.println("========[BranchManagerService.selectBranchPersonSearch 코드 구하기 시작]==========");
-		System.out.println(" BranchManagerService searchOption : " + searchOption ); //셀렉트박스
-		System.out.println(" BranchManagerService keyword : " + keyword ); //입력 내용
-		
+	//각 지점에서 보는 직원 리스트 
+	public List<BranchPersonnelVO> selectBranchPersonneelInfoList(Model model, HttpSession session) throws IOException {
+		// ==========================selectBranchManager==============================
+				System.out.println("BranchManagerService.selectBranchPersonneelInfoList 실행");
+				System.out.println("session : " + session.getAttribute("loginInfo"));
+				Object se = session.getAttribute("loginInfo");
+				if(se != null) {
+					LoginVO login = (LoginVO) session.getAttribute("loginInfo");
+					System.out.println("login.getPosition() : " + login.getPosition());
+					if(login.getPosition().equals("201") || login.getPosition().equals("202")) {
+						System.out.println("권한확인 완료");
+						String branchEmployeeCode = login.getEmpCode();
+						BranchPersonnelVO localShopCode =branchPersonnelDao.selectLocalShopCode(branchEmployeeCode);
+						List<BranchPersonnelVO> BranchPersonnelInfoList = branchPersonnelDao.selectBranchPersonnelInfoList(localShopCode);
+						model.addAttribute("BranchPersonnelInfoList",BranchPersonnelInfoList);
+					}else{
+						System.out.println("점주와 매니져만 확인가능");
+						response.setContentType("text/html; charset=UTF-8");
+						PrintWriter out = response.getWriter();
+						out.println("<script>alert('권한 미달로 인해 확인이 불가능 합니다..'); history.go(-1);</script>");
+						out.flush();
+					}
+				}else {
+					System.out.println("로그인이 되어 있지 않음");
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>alert('로그인이 되어 있지 않습니다.'); history.go(-1);</script>");
+					out.flush();
+				}
+		return null;
+	}
+	
+	//리스트 & 검색
+	public void selectBranchPersonneel(Model model, String cate, String input) {
+		System.out.println("========[BranchManagerService.selectBranchPersonneel 리스트]==========");
+		System.out.println("cate :" + cate);
+		System.out.println("input :" + input);
 		Map<String, String> map;
-		if(searchOption != "") {
+		if(cate != "") {
 			map = new HashMap<String, String>();
-			map.put("searchOption", searchOption);
-			map.put("keyword",keyword);			
-		}else {
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
 			map = null;
 		}
-		System.out.println("BranchManagerService map : " + map);
-		map = pasingServiec.paging(model, currentPage, 10, branchPersonnelDao.selectBranchPessonnelrow(map), map);
-		model.addAttribute("accountTitleList",branchPersonnelDao.selectBranchPersonnelSearch(map));
+		
+		map = allService.paging(model,map);
+		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList(map);
+		model.addAttribute("branchPersonnelList",branchPersonnelList);
+		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount();
+		model.addAttribute("branchPersonnelCount", branchPersonnelCount);
+		
 		
 	}
 }

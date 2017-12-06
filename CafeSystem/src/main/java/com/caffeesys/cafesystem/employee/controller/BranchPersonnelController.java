@@ -1,6 +1,9 @@
 package com.caffeesys.cafesystem.employee.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +26,7 @@ public class BranchPersonnelController {
 	
 	//지점 직원 입펵 페이지 실행 컨트롤러
 	@RequestMapping(value = "/insertformbranchPersonneel", method = RequestMethod.GET)
-	public String insertBranchManager(Model model) { 
+	public String insertBranchPersonneel(Model model) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점직원 입력 폼 페이지 실행 컨트롤러");
 		List<BranchPersonnelVO> ShopCodeList = branchPersonnelDao.selectBranchPersonnelShopcode();
 		List<BranchPersonnelVO> localList = branchPersonnelDao.selectBranchPersonnelLocal();
@@ -34,7 +37,7 @@ public class BranchPersonnelController {
 	
 	//직원 입력 실행 컨트롤러
 	@RequestMapping(value = "/insertBranchPersonnel", method = RequestMethod.POST)
-	public String insertBranchManager(BranchPersonnelVO branchPersonnelVo) { 
+	public String insertBranchPersonneel(BranchPersonnelVO branchPersonnelVo) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점직원 입력 실행 컨트롤러");
 		System.out.println("branchPersonnelVo : " + branchPersonnelVo);
 		branchPersonnelService.insertBranchEmployee(branchPersonnelVo); //지점인사관리테이블 insert
@@ -43,30 +46,21 @@ public class BranchPersonnelController {
 	}  
 	
 	//직원 리스트 페이지 요청 컨트롤러
-	//검색 하다가마 말았어요! 
 	@RequestMapping(value = {"/branchPersonnelList"})
-	public String selectBranchManager(Model model) { 
+	public String selectBranchPersonneel(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 지점 직원,매니져 리스트 페이지 요청 컨트롤러");
-		int branchPersonnelCount = branchPersonnelDao.selectBranchPersonnelCount(); // 직원 총 수
-		List<BranchPersonnelVO> branchPersonnelList = branchPersonnelDao.selectBranchPersonnelList();
-		model.addAttribute("branchPersonnelCount", branchPersonnelCount);
-		model.addAttribute("branchPersonnelList",branchPersonnelList);
+		System.out.println("cate : " + cate);
+		System.out.println("input : " + input);
+		branchPersonnelService.selectBranchPersonneel(model,cate,input);
 		return "employee/branchPersonnelList";
 		
-		/*,@RequestParam(value="searchOption", required=false, defaultValue="all")String searchOption
-		,@RequestParam(value="keyword", required=false, defaultValue="") String keyword
-		,@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) throws Exception {
-	System.out.println("[employee.controller.selectBranchManager.java] : 직원 리스트페이지 요청 컨트롤러\"");
-	System.out.println("model : " + model);
-	System.out.println("searchOption : " + searchOption);
-	System.out.println("keyword : " + keyword);
-	System.out.println("currentPage : " + currentPage);
-	branchPersonnelService.selectBranchPersonSearch(model, searchOption, keyword, currentPage);*/
-	}
+		}
 	
 	//선택 직원 상세페이지 요청 컨트롤러 
 	@RequestMapping(value = {"/branchPersonnelDetail"}, method = RequestMethod.GET)
-	public String selectBranchManagerDetail(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) { 
+	public String selectBranchPersonneelDetail(Model model,@RequestParam(value = "branchEmployeeCode", required = true) String branchEmployeeCode) { 
 		System.out.println("[employee.controller.BranchPersonnelController.java] : 선택 지원 상페 페이지 요청 컨트롤러");
 		List<BranchPersonnelVO> branchPersonnelDetail = branchPersonnelDao.selectBranchPersonnelDetail(branchEmployeeCode);
 		model.addAttribute("branchPersonnelDetail",branchPersonnelDetail);
@@ -101,6 +95,12 @@ public class BranchPersonnelController {
 		return "redirect:/branchPersonnelList";
 	}
 	
-	//조회 실행 컨트
+	//각 지점에서 보는 직원 리스트
+	@RequestMapping(value = {"/branchPersonnelInfoList"})
+	public String selectBranchPersonneelInfoList(Model model,HttpSession session) throws IOException { 
+		System.out.println("[employee.controller.BranchPersonnelController.java] : 각 지점에서 보는 직원 리스트요청 컨트롤러");
+		branchPersonnelService.selectBranchPersonneelInfoList(model,session);
+		return "employee/branchPersonnelInfoList";
+	}
 	
 }

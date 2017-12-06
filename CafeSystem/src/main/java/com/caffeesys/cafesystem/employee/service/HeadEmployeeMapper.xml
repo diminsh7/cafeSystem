@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper   
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caffeesys.cafesystem.employee.service.HeadEmployeeMapper">
+	<resultMap type="com.caffeesys.cafesystem.employee.service.HeadEmployeeVO" id="resultHeadEmployee">
+			<result property="headEmployeeCode" column="head_employee_code" /><!-- 직원코드 -->
+			<result property="departmentCategoryCode" column="department_category_code" /><!-- 부서코드 -->
+			<result property="headEmployeeId" column="head_employee_id" /><!-- 아이디 -->
+			<result property="headEmployeeName" column="head_employee_name" /><!-- 이름 -->
+			<result property="headEmployeeBirth" column="head_employee_birth" /><!-- 생년월일 -->
+			<result property="headEmployeePhone" column="head_employee_phone" /><!-- 전화번호 -->
+			<result property="headEmployeeAddress" column="head_employee_address" /><!-- 주소 -->
+			<result property="headEmployeeJoin" column="head_employee_join" /><!-- 입사일 -->
+			<result property="headEmployeeSalary" column="head_employee_salary" /><!-- 월급 -->
+			<result property="bonusCategoryCode" column="bonus_category_code" /><!-- 상여금코드 -->
+			<result property="headEmployeeBanknum" column="head_employee_banknum" /><!-- 월급계좌번호-->
+			<result property="headEmployeeContract" column="head_employee_contract" /><!-- 근로계약서 -->
+			<result property="cateDepartment" column="cateDepartment" /><!-- 부서명 -->
+			<result property="cateBonus" column="cate_bonus" /><!-- 상여금 -->
+	</resultMap>
+	
+	<!-- DB category에서 Department select -->
+	<select id="selectDpartment" resultMap="resultHeadEmployee">
+		SELECT deparcate.category_code as department_category_code, 
+				deparcate.category_small as cateDepartment
+		FROM category as deparcate
+		WHERE deparcate.category_middle = 'Department'
+	</select>
+	
+	<!-- DB category에서 Bonus select -->
+	<select id="selectBonus" resultMap="resultHeadEmployee">
+		SELECT bocate.category_code as bonus_category_code, 
+				bocate.category_small as cate_bonus
+		FROM category as bocate
+		WHERE bocate.category_middle = 'Bonus'
+	</select>
+	<!-- DB head_employee에서 직원코드 숫자 최댓값 구하는 select -->
+	<select id="selectHeadEmployeeCodeMax" resultType="Integer">
+		select max(CAST(substring(head_employee_code,6) AS DECIMAL))  
+		from head_employee
+	</select>
+	
+	<!-- DB head_employee insert-->
+	<insert id="insertHeadEmployee" parameterType="com.caffeesys.cafesystem.employee.service.HeadEmployeeVO">
+		INSERT INTO head_employee (
+			head_employee_code, 
+			department_category_code, 
+			head_employee_id, 
+			head_employee_name,
+			head_employee_birth, 
+			head_employee_phone, 
+			head_employee_address, 
+			head_employee_join, 
+			head_employee_salary, 
+			bonus_category_code, 
+			head_employee_banknum, 
+			head_employee_contract
+		) VALUES (
+			#{headEmployeeCode}, 
+			#{departmentCategoryCode},
+			#{headEmployeeId}, 
+			#{headEmployeeName}, 
+			#{headEmployeeBirth}, 
+			#{headEmployeePhone}, 
+			#{headEmployeeAddress}, 
+			#{headEmployeeJoin}, 
+			#{headEmployeeSalary}, 
+			#{bonusCategoryCode}, 
+			#{headEmployeeBanknum}, 
+			#{headEmployeeContract}
+		)
+	</insert>
+
+	<!-- 본사직원 인원 수 구하기 -->
+	<select id="selectHeadEmployeeCount" resultType="Integer">
+		SELECT count(*) FROM head_employee
+	</select>
+	
+	<!-- 본사 리스트 -->
+	<select id="selectHeadEmployeeList" resultMap="resultHeadEmployee">
+	SELECT
+		he.head_employee_code, 
+		he.department_category_code, 
+		cate1.category_small as cateDepartment,
+		he.head_employee_id, 
+		he.head_employee_name, 
+		he.head_employee_birth, 
+		he.head_employee_phone, 
+		he.head_employee_address, 
+		he.head_employee_join, 
+		he.head_employee_salary, 
+		he.bonus_category_code, 
+		cate2.category_small as cate_bonus,
+		he.head_employee_banknum, 
+		he.head_employee_contract
+	FROM head_employee as he INNER JOIN category as cate1
+		ON he.department_category_code = cate1.category_code
+	INNER JOIN category as cate2
+		ON he.bonus_category_code = cate2.category_code
+
+	<if test="input != null">
+			<if test="cate == cateDepartment">
+			WHERE cate1.${cate} = #{input}
+			</if>
+			<if  test="cate != cateDepartment">
+			WHERE he.${cate} = #{input}
+			</if>
+	</if>	
+	</select>
+	
+	<!-- 선택직원 상세 조회 -->
+	<select id="selectHeadEmployeeDetail" resultMap="resultHeadEmployee">
+		SELECT
+			he.head_employee_code, 
+			he.department_category_code, 
+			cate1.category_small as cateDepartment,
+			he.head_employee_id, 
+			he.head_employee_name, 
+			he.head_employee_birth, 
+			he.head_employee_phone, 
+			he.head_employee_address, 
+			he.head_employee_join, 
+			he.head_employee_salary, 
+			he.bonus_category_code, 
+			cate2.category_small as cate_bonus,
+			he.head_employee_banknum, 
+			he.head_employee_contract
+		FROM head_employee as he INNER JOIN category as cate1
+			ON he.department_category_code = cate1.category_code
+		INNER JOIN category as cate2
+			ON he.bonus_category_code = cate2.category_code
+		WHERE he.head_employee_code = #{headEmployeeCode}
+	</select>
+	
+	<!-- 선택 본사 직원 삭제 -->
+	<delete id="deleteHeadEmployee" parameterType="com.caffeesys.cafesystem.employee.service.HeadEmployeeVO">
+		DELETE FROM head_employee WHERE head_employee_code=#{headEmployeeCode}
+	</delete>
+	
+	<!-- 직원 수정 폼에 들어갈 내용 조회  -->
+	<select id="selectUupdateHeadEmployee" resultMap="resultHeadEmployee">
+		SELECT
+			he.head_employee_code, 
+			he.department_category_code, 
+			cate1.category_small as cateDepartment,
+			he.head_employee_id, 
+			he.head_employee_name, 
+			he.head_employee_birth, 
+			he.head_employee_phone, 
+			he.head_employee_address, 
+			he.head_employee_join, 
+			he.head_employee_salary, 
+			he.bonus_category_code, 
+			cate2.category_small as cate_bonus,
+			he.head_employee_banknum, 
+			he.head_employee_contract
+		FROM head_employee as he INNER JOIN category as cate1
+			ON he.department_category_code = cate1.category_code
+		INNER JOIN category as cate2
+			ON he.bonus_category_code = cate2.category_code
+		WHERE he.head_employee_code = #{headEmployeeCode}
+	</select>
+	
+	<!-- 직원 정보 수정 -->
+	<update id="updateHeadEmployee" parameterType="com.caffeesys.cafesystem.employee.service.HeadEmployeeVO">
+		UPDATE head_employee
+		SET
+			department_category_code=#{departmentCategoryCode},
+			head_employee_id=#{headEmployeeId},
+			head_employee_name=#{headEmployeeName},
+			head_employee_phone=#{headEmployeePhone},
+			head_employee_address=#{headEmployeeAddress},
+			head_employee_salary=#{headEmployeeSalary},
+			bonus_category_code=#{bonusCategoryCode},
+			head_employee_banknum=#{headEmployeeBanknum}
+		WHERE
+			head_employee_code=#{headEmployeeCode}
+	</update>
+
+</mapper>

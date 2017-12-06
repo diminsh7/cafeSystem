@@ -29,7 +29,7 @@ public class BranchPersonnelDao {
 		return sqlSessionTemplate.selectList(NS + "selectBranchEmployeeLocal");
 	}
 
-	// 점주 등록
+	// 직원 등록
 	// 지점 인사관리 테이블등록
 	public int insertBranchEmployee(BranchPersonnelVO branchPersonnelVO) {
 		System.out.println("[BranchPersonnelDao.insertBranchEmployee] 직원,매니져 등록 / 지점인사테이블에 입력 ");
@@ -49,9 +49,9 @@ public class BranchPersonnelDao {
 	}
 	
 	// 직원리스트
-	public List<BranchPersonnelVO> selectBranchPersonnelList(){
+	public List<BranchPersonnelVO> selectBranchPersonnelList(Map<String, String> map){
 		System.out.println("[BranchPersonnelDao.selectBranchPersonnelList] 직원 리스트 출력 실행");
-		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList");
+		return sqlSessionTemplate.selectList(NS + "selectBranchPersonnelList",map);
 	}
 	
 	// 직원 명수 구하기
@@ -96,16 +96,22 @@ public class BranchPersonnelDao {
 		return  sqlSessionTemplate.delete(NS + "deleteBranchPersonnel",branchEmployeeCode);	
 	}
 	
-	//지점직원검색
-	public List<BranchPersonnelVO> selectBranchPersonnelSearch(Map<String, String> map){
-		System.out.println("[BranchManagerDao.selectBranchPersonnelSearch] 실행");
-		return sqlSessionTemplate.selectList(NS + "selectPersonnelAllList",map);
-	}
-	
 	//검색된 행의 갯수, 컬럼말고 row 
 	public int selectBranchPessonnelrow(Map<String, String> map) {
 		System.out.println("[BranchManagerDao.selectBranchPessonnelrow] 실행");
 		return sqlSessionTemplate.selectOne(NS + "selectBranchPersonnelRowCount",map);
+	}
+	
+	//각 지점에서 보는 직원 리스트를 보기 위해 지역매장 코드 구하기
+	public BranchPersonnelVO selectLocalShopCode(String branchEmployeeCode) {
+		System.out.println("[BranchManagerDao.selectLocalShopCode] 실행");
+		return sqlSessionTemplate.selectOne(NS + "seleteLocalShopCode",branchEmployeeCode);
+	}
+	
+	//각 지점에서 보는 직원 리스트
+	public List<BranchPersonnelVO> selectBranchPersonnelInfoList(BranchPersonnelVO localShopCode) {
+		System.out.println("[BranchManagerDao.selectBranchPersonnelInfoList] 실행");
+		return  sqlSessionTemplate.selectList(NS + "selectBranchPersonnelInfoList",localShopCode);
 	}
 	
 }

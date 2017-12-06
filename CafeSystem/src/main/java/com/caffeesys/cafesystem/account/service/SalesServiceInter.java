@@ -1,7 +1,9 @@
 package com.caffeesys.cafesystem.account.service;
 
-import java.util.List;
-
 public interface SalesServiceInter {
-	public List<DailySalesVO> selectDailySalesList(DailySalesVO dailySales);
-}
+	public String selectDailySalesList();
+	public String selectMonthlySalesList();
+	public String selectDailyTop();
+	public String selectMonthlyTop();
+	public String selectFeeList();
+}	

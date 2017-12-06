@@ -8,7 +8,7 @@
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/shopList">매장정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/contractList">가맹계약서</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">가맹수수료</a></li>
+					<li><a href="${pageContext.request.contextPath}/feeList">가맹수수료</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-users"></i> 직원관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
@@ -37,7 +37,7 @@
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/accountTitleList">계정과목</a></li>
-					<li><a href="${pageContext.request.contextPath}/dailySalesList">지점매출조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/salesList">지점매출조회</a></li>
 				</ul></li>
 		</ul>
 	</div>
@@ -69,7 +69,7 @@
 			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">발주</a></li>
+					<li><a href="${pageContext.request.contextPath}/branchOrderForm">발주</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">장바구니</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">발주신청내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">불량품목신청</a></li>

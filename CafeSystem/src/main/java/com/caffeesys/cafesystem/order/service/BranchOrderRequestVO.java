@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.order.service;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BranchOrderRequestVO {
 
@@ -26,7 +26,7 @@ public class BranchOrderRequestVO {
 	private String shopName; //매장명
 	private String divideName; //발주상태명
 	private String headName; //승인담당자명
-	
+	private String itemName; //품목명
 	public int getOrderCode() {
 		return orderCode;
 	}
@@ -159,6 +159,13 @@ public class BranchOrderRequestVO {
 	public void setHeadName(String headName) {
 		this.headName = headName;
 	}
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	
 	@Override
 	public String toString() {
 		return "BranchOrderRequestVO [orderCode=" + orderCode + ", statementNumber=" + statementNumber
@@ -169,13 +176,15 @@ public class BranchOrderRequestVO {
 				+ ", orderRelease=" + orderRelease + ", headEmployeeCode=" + headEmployeeCode + ", orderFaultyAble="
 				+ orderFaultyAble + ", branchEmployeeCode=" + branchEmployeeCode + ", cateReceipt=" + cateReceipt
 				+ ", cateOrder=" + cateOrder + ", shopName=" + shopName + ", divideName=" + divideName + ", headName="
-				+ headName + "]";
+				+ headName + ", itemName=" + itemName + "]";
 	}
+	
 	public BranchOrderRequestVO(int orderCode, String statementNumber, String orderFaultyDivide,
 			String localCategoryCode, String shopCode, String itemCode, int orderAmount, int orderPrice, int cal,
 			String receiptCategoryCode, String orderCategoryCode, Date orderRequest, Date orderApproval,
 			Date orderRelease, String headEmployeeCode, char orderFaultyAble, String branchEmployeeCode,
-			String cateReceipt, String cateOrder, String shopName, String divideName, String headName) {
+			String cateReceipt, String cateOrder, String shopName, String divideName, String headName,
+			String itemName) {
 		super();
 		this.orderCode = orderCode;
 		this.statementNumber = statementNumber;
@@ -199,11 +208,11 @@ public class BranchOrderRequestVO {
 		this.shopName = shopName;
 		this.divideName = divideName;
 		this.headName = headName;
+		this.itemName = itemName;
 	}
+	
 	public BranchOrderRequestVO() {
 		super();
 	}
-	
-	
 	
 }
