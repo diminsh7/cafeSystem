@@ -49,24 +49,16 @@ public class MaterialController {
 		return "redirect:/materialList";
 	} 
 	
-/*	//메뉴원가 리스트 
-	@RequestMapping(value = "/MaterialList")
-	public String selectBranchPersonnelList(Model model
-			,@RequestParam(value="searchOption", required=false, defaultValue="category_small")String searchOption
-			,@RequestParam(value="keyword", required=false, defaultValue="") String keyword){  
-		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
-		System.out.println("MenuInfoController.java"+searchOption);
-		System.out.println("MenuInfoController.java"+keyword);
-		materialService.selectBranchPersonnelList(model,searchOption,keyword);
-		return "menu/materialList";
-	} 
-	*/
+
 	//메뉴원가 리스트 
 	@RequestMapping(value = "/materialList")
-	public String selectBranchPersonnelList(Model model){  
+	public String selectBranchPersonnelList(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input) {  
 		System.out.println("[menu.controller.MaterialController.java] : 메뉴원가 리스트 출력 컨트롤러");
-
-		materialService.selectBranchPersonnelList(model);
+		System.out.println("cate : " + cate);
+		System.out.println("input : " + input);
+		materialService.selectBranchPersonnelList(model,cate,input);
 		return "menu/materialList";
 	} 
 	

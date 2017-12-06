@@ -10,6 +10,7 @@
 		<result property="localCategoryCode" column="local_category_code" /> <!-- 지역코드 -->
 		<result property="shopCode" column="shop_code" /> <!-- 매장코드-->
 		<result property="itemCode" column="item_code" /> <!-- 품목코드 -->
+		<result property="cal" column="cal" /> <!-- 수량 가격 계산 -->
 		<result property="orderAmount" column="order_amount" /> <!-- 수량 -->
 		<result property="orderPrice" column="order_price" /> <!-- 가격 -->
 		<result property="receiptCategoryCode" column="receipt_category_code" /> <!--접수상태코드 -->
@@ -25,7 +26,7 @@
 		<result property="shopName" column="shop_name" /> <!-- 매장 명 -->
 		<result property="divideName" column="divideName" /> <!-- 발주상태 명 -->
 		<result property="headName" column="headName" /> <!-- 발주승인담당자 명 -->
-		<result property="itemName" column="itemName" /> <!-- 제품 명 -->
+		<result property="itemName" column="itemName" /> <!-- 품목 명 -->
 	</resultMap>
 	
 	<!-- DB branch_employee에서 지역매장코드 select -->
@@ -36,8 +37,8 @@
 	</select>
 
 	<!-- DB order에서 매장에 따른 발주내용  select -->
-	<select id="selectOderRequestList" resultMap="resultBranchOrderRequest">
-		SELECT 
+	<select id="selectOderRequestList" resultMap="resultBranchOrderRequest" parameterType="java.util.Map">
+		SELECT DISTINCT
 			OD.order_code, 
 			OD.statement_number,
 			OD.order_faulty_divide,
@@ -58,42 +59,47 @@
 			OD.shop_code,
 			head.head_employee_name as headName,
 			it.item_name as itemName
-			 
-		FROM `order` as OD INNER JOIN category as cate   
-			ON OD.receipt_category_code = cate.category_code
-		INNER JOIN category as categ
-			ON OD.order_category_code = categ.category_code
-		INNER JOIN shop as sh
-			ON OD.local_category_code = sh.local_category_code
-			AND OD.shop_code = sh.shop_code
-		INNER JOIN statement as st
-			ON st.statement_code = OD.order_faulty_divide
-		INNER JOIN head_employee as head
-			ON OD.head_employee_code = head.head_employee_code
-		INNER JOIN item as it
-			ON OD.item_code = it.item_code
-		WHERE OD.local_category_code = #{localCategoryCode} AND OD.shop_code = #{shopCode}
-			AND (OD.order_faulty_divide = 'C' 
-			OR OD.order_faulty_divide = 'D' 
-			OR OD.order_faulty_divide = 'E')
+	 
+	FROM `order` as OD INNER JOIN category as cate   
+		ON OD.receipt_category_code = cate.category_code
+	INNER JOIN category as categ
+		ON OD.order_category_code = categ.category_code
+	INNER JOIN shop as sh
+		ON OD.local_category_code = sh.local_category_code
+		AND OD.shop_code = sh.shop_code
+	INNER JOIN statement as st
+		ON st.statement_code = OD.order_faulty_divide
+	INNER JOIN head_employee as head
+		ON OD.head_employee_code = head.head_employee_code
+	INNER JOIN item as it
+		ON OD.item_code = it.item_code
+	
+	WHERE OD.local_category_code = '001' AND OD.shop_code = '001'
+		AND (OD.order_faulty_divide = 'C' 
+		OR OD.order_faulty_divide = 'D' 
+		OR OD.order_faulty_divide = 'E')
+	
+	GROUP BY OD.statement_number		
 	</select>
 	
+	<!-- DB order에서 매장에 따른 상세발주내용  select -->
 	<select id="selectOrderRequestDetail" resultMap="resultBranchOrderRequest">
-		SELECT 
+		Select		
 			od.order_code, 
 			od.statement_number,
 			od.order_faulty_divide, 
-			st.statement_name as statementName,
+			st.statement_name as divideName,
 			od.local_category_code, 
 			od.shop_code, 
 			od.item_code,
 			it.item_name as itemName,
 			od.order_amount, 
 			od.order_price,
+			(order_amount * order_price)as cal,
 			od.receipt_category_code,
-			cate1.category_small as cateReceipt,
+			catereceipt.category_small as cateReceipt,
 			od.order_category_code, 
-			cate2.category_small as cateOrder,
+			cateorder.category_small as cateOrder,
 			od.order_request, 
 			od.order_approval, 
 			od.order_release, 
@@ -105,13 +111,13 @@
 			ON od.order_faulty_divide = st.statement_code
 		INNER JOIN item as it
 			ON  od.item_code = it.item_code
-		INNER JOIN category as cate1
-			ON od.receipt_category_code = cate1.category_code
-		INNER JOIN category as cate2
-			ON od.receipt_category_code = cate2.category_code
+		INNER JOIN category as catereceipt
+			ON od.receipt_category_code = catereceipt.category_code
+		INNER JOIN category as cateorder
+			ON od.order_category_code = cateorder.category_code
 		INNER JOIN head_employee as he
 			ON od.head_employee_code = he.head_employee_code
-		WHERE od.order_code = #{orderCode}
+		WHERE od.statement_number = #{statementNumber}
 	
 	</select>
 	

@@ -22,7 +22,23 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">  </p>
                      	전 부서 직원 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-					
+					<form id="SearchForm" action="${pageContext.request.contextPath}/headEmployeeList" method="post">
+							<div>
+								<div>
+									<select name="cate" id="cate" required class="input-sm">
+										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
+										<option value="head_employee_code" class="input-sm">직원코드</option>
+										<option value="head_employee_name" class="input-sm">이름</option>
+										<option value="cateDepartment" class="input-sm">부서</option>
+									</select>
+									<div class="input-group">
+										<input type="text" name="input" id="input" value="${input}" required class="input-sm"> <span>
+		 								<input type="submit" class="btn btn-default" id="SearchBtn" value="검색">
+										</span>
+									</div>
+								</div>
+							</div>
+						</form>
 					
                      <div align="right"> 총 직원 : ${headEmployeeCount} 명</div>
                     <table id="datatable" class="table table-striped table-bordered">
@@ -54,4 +70,3 @@
              </div>
             </div>
            </div>
-           

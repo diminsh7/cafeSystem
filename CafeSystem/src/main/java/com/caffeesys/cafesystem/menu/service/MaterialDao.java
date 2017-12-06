@@ -1,6 +1,7 @@
 package com.caffeesys.cafesystem.menu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
@@ -52,16 +53,11 @@ public class MaterialDao {
 	}
 	
 	//리스트
-	public List<MaterialVO> selectBranchPersonnelList(){
+	public List<MaterialVO> selectBranchPersonnelList(Map<String, String> map){
 		logger.debug("[selectBranchPersonnelList] 지점리스트 가져오기 실행");
-		return sqlSessionTemplate.selectList(NS + "selectMaterialList");
+		return sqlSessionTemplate.selectList(NS + "selectMaterialList",map);
 	}
 	
-	/*//리스트
-		public List<MaterialVO> selectBranchPersonnelList(Map<String, String> map){
-			logger.debug("[selectBranchPersonnelList] 지점리스트 가져오기 실행");
-			return sqlSessionTemplate.selectList(NS + "selectMaterialList",map);
-		}*/
 	
 	//삭제 
 	public int deleteMaterial(int materialCode){

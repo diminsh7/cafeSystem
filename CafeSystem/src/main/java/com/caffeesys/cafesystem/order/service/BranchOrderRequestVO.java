@@ -1,6 +1,6 @@
 package com.caffeesys.cafesystem.order.service;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class BranchOrderRequestVO {
 
@@ -76,7 +76,7 @@ public class BranchOrderRequestVO {
 		this.orderPrice = orderPrice;
 	}
 	public int getCal() {
-		return cal = orderPrice * orderAmount;
+		return cal;
 	}
 	public void setCal(int cal) {
 		this.cal = cal;
