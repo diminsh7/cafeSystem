@@ -41,9 +41,9 @@ public class FaultyController {
 	
 	// 불량품목등록 페이지요청(지점)
 	@RequestMapping(value="/insertFaulty", method = RequestMethod.GET)
-	public String insertFaulty(Model model) {
+	public String insertFaulty(Model model/*, @RequestParam(value = "statementNumber", required = true) String statementNumber*/) {
 		System.out.println("FaultyController.java / insertFaulty method GET방식 ");
-		List<FaultyVO> StatementNumberList = faultyDao.selectFaultyStatementNumber();
+		List<FaultyVO> StatementNumberList = faultyDao.selectFaultyStatementNumber(/*statementNumber*/);
 		List<FaultyVO> ItemNameList = faultyDao.selectFaultyItemName();
 		List<FaultyVO> CategoryFaultyList = faultyDao.selectFaultyCategorySmall();
 		model.addAttribute("StatementNumberList",StatementNumberList);

@@ -31,6 +31,11 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / insertFaulty Param faulty: "+faulty);
 		return sqlSessionTemplate.insert(NS+"insertFaulty", faulty);
 	}
+	/*// 불량품목등록 전표번호 가져오는 select(지점)
+	public List<FaultyVO> selectFaultyStatementNumber(String statementNumber){
+		System.out.println("FaultyDao.java / selectFaultyStatementNumber Param statementNumber: "+statementNumber);
+		return sqlSessionTemplate.selectList(NS + "selectFaultyStatementNumber", statementNumber);
+	}*/
 	// 불량품목등록 전표번호 가져오는 select(지점)
 	public List<FaultyVO> selectFaultyStatementNumber(){
 		System.out.println("FaultyDao.java / selectFaultyStatementNumber method 확인");

@@ -50,7 +50,7 @@ public class FaultyService {
 	// 불량품목등록 과정(지점)
 	public int insertFaulty(FaultyVO faulty) {
 		System.out.println("FaultyService.java / insertFaulty method 확인");
-		System.out.println("FaultyService.java / insertFaulty Param item :" + faulty);
+		System.out.println("FaultyService.java / insertFaulty Param faulty :" + faulty);
 		return faultyDao.insertFaulty(faulty);
 	}
 	

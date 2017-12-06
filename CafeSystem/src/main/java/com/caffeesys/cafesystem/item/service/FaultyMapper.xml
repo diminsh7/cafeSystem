@@ -62,6 +62,12 @@
 		)
 	</insert>
 	<!-- 불량품목등록 전표번호 가져오는 select(지점) -->
+	<!-- <select id="selectFaultyStatementNumber" parameterType="String" resultMap="resultFaulty">
+        SELECT statement_number
+		FROM `order`
+		WHERE statement_number = #{statementNumber}
+    </select> -->
+	<!-- 불량품목등록 전표번호 가져오는 select(지점) -->
 	<select id="selectFaultyStatementNumber" resultMap="resultFaulty">
 		SELECT order_code, statement_number
 		FROM `order`
