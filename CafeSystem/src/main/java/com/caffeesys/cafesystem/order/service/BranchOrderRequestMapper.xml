@@ -109,13 +109,13 @@
 			
 		FROM `order` as od INNER JOIN statement as st
 			ON od.order_faulty_divide = st.statement_code
-		INNER JOIN item as it
+		LEFT JOIN item as it
 			ON  od.item_code = it.item_code
-		INNER JOIN category as catereceipt
+		LEFT JOIN category as catereceipt
 			ON od.receipt_category_code = catereceipt.category_code
-		INNER JOIN category as cateorder
+		LEFT JOIN category as cateorder
 			ON od.order_category_code = cateorder.category_code
-		INNER JOIN head_employee as he
+		LEFT JOIN head_employee as he
 			ON od.head_employee_code = he.head_employee_code
 		WHERE od.statement_number = #{statementNumber}
 	

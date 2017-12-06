@@ -10,7 +10,7 @@ $(document).ready(function(){
 			 var statmentNumber = $(this).parents('tr').find('.statementNumber').text();
 			 
 			console.log("statmentNumber: " + statmentNumber);
-			if(orderCate == '711'){
+			if(orderCate == '711' || orderCate == '710'){
 				alert('해당 상품은 배송중이므로 취소가 불가능합니다.');
 				return false;
 			}else{

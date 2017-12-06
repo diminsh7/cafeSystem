@@ -2,6 +2,24 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+<script>
+$(document).ready(function(){ 
+	$(document).on('click', '.DeliveryBtn', function(){
+		 var orderCate = $(this).parents('tr').find('.orderCate').val();
+		 var orderCode = $(this).parents('tr').find('.orderCode').val();
+		 console.log("orderCate : " + orderCate); 
+		 console.log("orderCode : " + orderCode); 
+		 if(orderCate != '711'){
+			 alert('배송이 완료 되지 않은 상품입니다.');
+			 return false;
+		 }else{
+			 $(location).attr('href','${pageContext.request.contextPath}/insertFaulty?orderCode='+orderCode+'');
+		 }
+	})	 
+})
+
+</script>
+
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -34,7 +52,9 @@
 									<th>배송상태</th>
 									<th>승인담당장</th>
 									<th>불량여부</th>
+									<th> </th>
 									<th>불량신청</th>
+									
 
 								</tr>
 							</thead>
@@ -51,10 +71,12 @@
 									<td>${detail.orderApproval}</td><!-- 승인일 -->
 									<td>${detail.orderRelease}</td><!-- 출고일 -->
 									<td>${detail.cateReceipt}</td><!-- 접수상태 -->
-									<td>${detail.cateOrder}</td><!-- 배송상태 -->
+									<td><input class="orderCate" type="hidden" value="${detail.orderCategoryCode}">${detail.cateOrder}</td><!-- 배송상태 -->
 									<td>${detail.headName}</td><!-- 승인담당장 -->
 									<td>${detail.orderFaultyAble}</td><!-- 불량여부 -->
-									<td><a href="${pageContext.request.contextPath}/?ordercode=${detail.orderCode}">불량신청</a></td>
+									<td><input class="orderCode" type="hidden" value="${detail.orderCode}"> </td>
+									<td><button class="DeliveryBtn" type="button">불량신청</button></td>
+									<!-- <td><a href="${pageContext.request.contextPath}/insertFaulty?orderCode=${detail.orderCode}">불량신청</a></td> -->
 								</tr>
 								</c:forEach>
 							</tbody>
