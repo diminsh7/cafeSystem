@@ -11,12 +11,12 @@
 		<result property="faultyAmount" column="faulty_amount" /> <!-- 불량수량 -->
 		<result property="faultyImage" column="faulty_image" /> <!-- 불량이미지 -->
 		<result property="faultyReason" column="faulty_reason" /> <!-- 불량상세사유 -->
-		<result property="orderCode" column="order_code" /> <!-- order_service코드 -->
+		<result property="orderCode" column="order_code" /> <!-- order코드 -->
 		<result property="itemName" column="item_name" /> <!-- item명 -->
 		<result property="categoryCode" column="category_code" /> <!-- category코드 -->
 		<result property="categorySmall" column="category_small" /> <!-- category소분류801~804 -->
 	</resultMap>
-	<!-- 불량품목리스트 및 조회 상세전(본사)-->
+	<!-- 불량품목리스트 및 조회 상세전(본사) -->
 	<select id="selectFaultyList" parameterType="java.util.Map" resultMap="resultFaulty">
 		SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
 		FROM faulty f
@@ -52,6 +52,7 @@
 			</otherwise>
 		</choose>
 	</sql>
+	
 	<!-- 불량품목등록(지점) -->
 	<insert id="insertFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
 		INSERT INTO faulty (
@@ -78,7 +79,7 @@
 		FROM category
 		WHERE category_code LIKE '8%'
 	</select>
-	<!-- 불량품목수정 및 발주품목상세조회(본사,지점) -->
+	<!-- 불량품목수정(지점) 및 발주품목상세조회(본사) -->
     <select id="selectFaulty" parameterType="int" resultMap="resultFaulty">
         SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
         		, f.faulty_amount, f.faulty_image, f.faulty_reason
@@ -95,10 +96,28 @@
 		SET faulty_amount = #{faultyAmount}, faulty_image = #{faultyImage}, faulty_reason = #{faultyReason}
 		WHERE faulty_code = #{faultyCode}
 	</update>
-	<!-- 불량품목삭제 불량수량확인하고 삭제 -->
+	<!-- 불량품목삭제 불량수량확인하고 삭제(지점) -->
     <delete id="deleteFaulty" parameterType="com.caffeesys.cafesystem.item.service.FaultyVO">
 		DELETE FROM faulty 
 		WHERE faulty_code = #{faultyCode}
 		AND faulty_amount = #{faultyAmount}
     </delete>
+    
+    <!-- 불량품목상세조회(지점) -->
+	<select id="branchFaultyList" parameterType="java.util.Map" resultMap="resultFaulty">
+		SELECT f.faulty_code, f.statement_number, i.item_name, c.category_small
+        		, f.faulty_amount, f.faulty_image, f.faulty_reason
+		FROM faulty f
+		INNER JOIN item i
+		ON f.item_code = i.item_code
+		INNER JOIN category c
+		ON f.faulty_category = c.category_code
+		INNER JOIN `order` o
+		ON f.statement_number = o.statement_number
+		INNER JOIN branch_employee b
+		ON o.local_category_code = b.local_category_code 
+		AND o.shop_code = b.shop_code
+		WHERE branch_employee_code = #{branchEmployeeCode}
+        ORDER BY f.statement_number DESC
+    </select>
 </mapper>

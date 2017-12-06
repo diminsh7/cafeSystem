@@ -8,7 +8,7 @@ public class FaultyVO {
 	private int faultyAmount; // 불량수량
 	private String faultyImage; // 불량이미지
 	private String faultyReason; // 불량상세사유
-	private int orderCode; // order_service코드
+	private int orderCode; // order코드
 	private String itemName; // item명
 	private String categoryCode; // category코드
 	private String categorySmall; // category소분류801~804

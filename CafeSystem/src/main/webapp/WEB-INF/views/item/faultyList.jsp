@@ -9,7 +9,6 @@
 			<div class="title_left">
 				<h3>불량품목관리</h3>
 				<a class="btn btn-primary" href="${pageContext.request.contextPath}/faultyList">불량품목(전체리스트)</a>
-				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertFaulty">불량품목(등록)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>

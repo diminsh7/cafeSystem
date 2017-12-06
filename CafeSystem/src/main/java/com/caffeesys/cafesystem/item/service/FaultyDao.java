@@ -25,6 +25,7 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / selectFaultyCount method 확인");
 		return sqlSessionTemplate.selectOne(NS+"selectFaultyCount", map);
 	}
+	
 	// 불량품목등록(지점)
 	public int insertFaulty(FaultyVO faulty) {
 		System.out.println("FaultyDao.java / insertFaulty Param faulty: "+faulty);
@@ -45,7 +46,7 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / selectFaultyCategorySmall method 확인");
 		return sqlSessionTemplate.selectList(NS + "selectFaultyCategorySmall");
 	}
-	// 불량품목수정 및 발주품목상세조회(본사,지점)
+	// 불량품목수정(지점) 및 발주품목상세조회(본사)
 	public FaultyVO selectFaulty(int faultyCode) {
 		System.out.println("FaultyDao.java / selectFaulty Param faultyCode: "+faultyCode);
 		return sqlSessionTemplate.selectOne(NS+"selectFaulty", faultyCode);
@@ -55,7 +56,7 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / updateFaulty Param faulty: "+faulty);
 		return sqlSessionTemplate.update(NS+"updateFaulty", faulty);
 	}
-	// 불량품목삭제 불량수량확인하고 삭제
+	// 불량품목삭제 불량수량확인하고 삭제(지점)
 	public int deleteFaulty(int faultyCode, int faultyAmount) {
 		System.out.println("FaultyDao.java / deleteFaulty Param faultyCode: "+faultyCode);
 		System.out.println("FaultyDao.java / deleteFaulty Param faultyAmount: "+faultyAmount);
@@ -63,5 +64,11 @@ public class FaultyDao {
 		faulty.setFaultyCode(faultyCode);
 		faulty.setFaultyAmount(faultyAmount);
 		return sqlSessionTemplate.delete(NS+"deleteFaulty", faulty);
+	}
+	
+	// 불량품목상세조회(지점)
+	public List<FaultyVO> branchFaultyList(String branchEmployeeCode) {
+		System.out.println("FaultyDao.java / branchFaultyList Param branchEmployeeCode: "+branchEmployeeCode);
+		return sqlSessionTemplate.selectList(NS+"branchFaultyList", branchEmployeeCode);
 	}
 }

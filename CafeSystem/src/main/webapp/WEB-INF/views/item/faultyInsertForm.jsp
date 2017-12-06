@@ -8,7 +8,7 @@
 		<div class="page-title">
 			<div class="title_left">
 				<h3>불량품목관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/faultyList">불량품목(전체리스트)</a>
+				<a class="btn btn-primary" href="${pageContext.request.contextPath}/branchFaultyList">불량품목(지점리스트)</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -20,7 +20,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form id="shopInsertForm" action="${pageContext.request.contextPath}/insertFaulty" method="post"
+						<form id="faultyInsertForm" action="${pageContext.request.contextPath}/insertFaulty" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -94,7 +94,7 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-md-offset-3">
-									<a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/faultyList">취소</a>
+									<a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/branchFaultyList">취소</a>
 									<button id="send" type="submit" class="btn btn-success">등록</button>
 								</div>
 							</div>

@@ -32,7 +32,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form id="shopInsertForm" action="${pageContext.request.contextPath}/insertItem" method="post"
+						<form id="itemInsertForm" action="${pageContext.request.contextPath}/insertItem" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"

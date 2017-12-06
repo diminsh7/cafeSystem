@@ -1,6 +1,9 @@
 package com.caffeesys.cafesystem.item.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +38,7 @@ public class FaultyController {
 		faultyService.selectFaultyList(model, searchOption, keyword, currentPage);
 		return "/item/faultyList";
 	}
+	
 	// 불량품목등록 페이지요청(지점)
 	@RequestMapping(value="/insertFaulty", method = RequestMethod.GET)
 	public String insertFaulty(Model model) {
@@ -52,7 +56,7 @@ public class FaultyController {
 	public String insertFaulty(FaultyVO faulty) {
 		System.out.println("FaultyController.java / insertFaulty method POST방식 " + faulty);
 		faultyService.insertFaulty(faulty);
-		return "redirect:/faultyList";
+		return "redirect:/branchFaultyList";
 	}
 	// 불량품목상세조회(본사)
 	@RequestMapping(value = "/faultyDetail", method = RequestMethod.GET)
@@ -75,21 +79,29 @@ public class FaultyController {
 	public String updateFaulty(FaultyVO faulty) {
 		System.out.println("FaultyController.java / updateFaulty method POST방식 " + faulty);
 		faultyDao.updateFaulty(faulty);
-		return "redirect:/faultyDetail?faultyCode=" + faulty.getFaultyCode();
+		return "redirect:/branchFaultyList";
 	}
-	// 불량품목삭제 페이지요청(불량수량 입력)
+	// 불량품목삭제 페이지요청(불량수량 입력)(지점)
 	@RequestMapping(value = "/deleteFaulty", method = RequestMethod.GET)
 	public String deleteFaulty(@RequestParam(value = "faultyCode", required = true) int faultyCode) {
 		System.out.println("FaultyController.java / deleteFaulty method GET방식 " + faultyCode);
 		return "/item/faultyDeleteForm";
 	}
-	// 불량품목삭제(액션)요청
+	// 불량품목삭제(액션)요청(지점)
 	@RequestMapping(value = "/deleteFaulty", method = RequestMethod.POST)
 	public String deleteFaulty(@RequestParam(value = "faultyCode", required = true) int faultyCode,
 			@RequestParam(value = "faultyAmount", required = true) int faultyAmount) {
 		System.out.println("FaultyController.java / deleteFaulty method POST방식 " + faultyCode);
 		System.out.println("FaultyController.java / deleteFaulty method POST방식 " + faultyAmount);
 		faultyDao.deleteFaulty(faultyCode, faultyAmount);
-		return "redirect:/faultyList";
+		return "redirect:/branchFaultyList";
+	}
+	
+	// 불량품목상세조회(지점)
+	@RequestMapping(value = "/branchFaultyList", method = RequestMethod.GET)
+	public String branchFaultyList(Model model,HttpSession session) throws IOException{
+		System.out.println("FaultyController.java / branchFaultyList method GET방식 ");
+		faultyService.branchFaultyList(model, session);
+		return "/item/branchFaultyList";
 	}
 }
