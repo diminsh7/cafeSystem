@@ -51,10 +51,10 @@ public class BranchOrderController {
 	
 	//발주 취소 신청
 	@RequestMapping(value = "branchOrderCancel", method = RequestMethod.GET)
-	public String branchOrderCancel(@RequestParam(value = "statmentNumber", required=true) String statmentNumber
+	public String branchOrderCancel(@RequestParam(value = "statementNumber", required=true) String statementNumber
 			, @RequestParam(value = "receiptCategoryCode", required=true) String receiptCategoryCode
 			, @RequestParam(value = "orderCategoryCode", required=true) String orderCategoryCode) {
-		branchOrderService.branchOrderCancel(statmentNumber, receiptCategoryCode, orderCategoryCode);
+		branchOrderService.branchOrderCancel(statementNumber, receiptCategoryCode, orderCategoryCode);
 		return "redirect:/branchOrderRequestList";
 	}
 }
