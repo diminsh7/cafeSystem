@@ -41,7 +41,7 @@
 									<th>품목카테고리명</th>
 									<th>품목명</th>
 									<th>품목가격</th>
-									<th>품목이미지</th>
+									<!-- <th>품목이미지</th> -->
 									<th>발주가능여부</th>
 								</tr>
 							</thead>
@@ -53,7 +53,7 @@
 										<td>${item.categorySmall}</td>
 										<td>${item.itemName}</td>
 										<td>${item.itemPrice}</td>
-										<td>${item.itemImage}</td>
+										<%-- <td>${item.itemImage}</td> --%>
 										<td>${item.itemAble}</td>
 									</tr>
 								</c:forEach>
@@ -68,7 +68,7 @@
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/itemList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
-						</ul>
+						</ul>	
 					</div>
 				</div>
 			</div>
