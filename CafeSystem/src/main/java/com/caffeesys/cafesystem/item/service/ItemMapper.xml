@@ -106,6 +106,7 @@
         ORDER BY i.item_code DESC
         LIMIT ${beginRow}, ${pagePerRow}
     </select>
+    
     <!-- 발주품목금지리스트 및 조회 상세전 행의수 -->
     <select id="selectItemCountX" parameterType="java.util.Map" resultType="Integer">
         SELECT COUNT(*)

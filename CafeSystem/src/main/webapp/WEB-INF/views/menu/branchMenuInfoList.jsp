@@ -39,7 +39,7 @@
 									<th>메뉴카테고리명</th>
 									<th>메뉴명</th>
 									<th>출시일</th>
-									<th>메뉴이미지</th>
+									<!-- <th>메뉴이미지</th> -->
 								</tr>
 							</thead>
 							<tbody>
@@ -50,7 +50,7 @@
 										<td>${menuInfo.categorySmall}</td>
 										<td>${menuInfo.menuName}</td>
 										<td>${menuInfo.menuStart}</td>
-										<td>${menuInfo.menuImage}</td>
+										<%-- <td>${menuInfo.menuImage}</td> --%>
 									</tr>
 								</c:forEach>
 							</tbody>

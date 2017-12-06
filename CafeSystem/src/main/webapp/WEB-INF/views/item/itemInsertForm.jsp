@@ -2,6 +2,17 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+	// 품목원가+품목마진=품목가격
+	function call() {
+		if (document.getElementById("itemCost").value
+				&& document.getElementById("itemProfit").value) {
+			document.getElementById('itemPrice').value = parseInt(document
+					.getElementById('itemCost').value)
+					+ parseInt(document.getElementById('itemProfit').value);
+		}
+	}
+</script>
 <!-- page content -->
 <div class="right_col" role="main">
 	<div class="">
@@ -21,7 +32,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form id="shopInsertForm" action="${pageContext.request.contextPath}/insertItem" method="post"
+						<form id="itemInsertForm" action="${pageContext.request.contextPath}/insertItem" method="post"
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
@@ -65,7 +76,7 @@
 									<input id="itemCost"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="itemCost" type="text">
+										name="itemCost" type="text" onkeyup='call()'>
 								</div>
 							</div>
 							<div class="item form-group">
@@ -76,7 +87,7 @@
 									<input id="itemProfit"
 										class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="itemProfit" type="text">
+										name="itemProfit" type="text" onkeyup='call()'>
 								</div>
 							</div>
 							<div class="item form-group">
@@ -86,7 +97,7 @@
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="itemPrice" class="form-control col-md-7 col-xs-12"
 										data-validate-length-range="6" data-validate-words="2"
-										name="itemPrice" type="text">
+										name="itemPrice" type="text" placeholder="품목원가, 품목마진 등록시 자동입력">
 								</div>
 							</div>
 							<div class="item form-group">
