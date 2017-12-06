@@ -95,6 +95,18 @@ public class SalesController {
 		logger.debug("jsonFeeListByShop method list : " + list);
 		return list;
 	}
+	//지점의 일매출 그래프 json
+	
+	//지점의 월매출 그래프 json
+	@ResponseBody
+	@RequestMapping(value="/monthlyGraphJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlyGraph() {
+		logger.debug("jsonMonthlyGraph method");
+		Map<String, Object> param = getLocalShopCode();
+		String list = salesService.selectMonthlyGraph(param);
+		logger.debug("jsonMonthlyGraph method list : " + list);
+		return list;
+	}
 	//본사의 가맹수수료 조회 page
 	@RequestMapping(value="/feeList", method=RequestMethod.GET)
 	public String listFee() {

@@ -69,6 +69,38 @@
 			}
 		});
 		// 일매출, 월매출 리스트 끝
+		
+		// 일매출, 월매출 그래프 시작
+		// 월매출 그래프
+		var mGraphData = [];
+		$.ajax({
+			url : "/monthlyGraphJson",
+			type : "GET",
+			success:function(data){
+				var list = JSON.parse(data);
+				console.log(data);
+				$(list).each(function(i, list) {
+					mGraphData.push(list.monthly_sales_amount);
+				});
+				createGraph(mCtx, mGraphLineData, mOptions);
+			},
+			error:function(request, status, error){
+				alert('우리 지점의 월매출 그래프 그리기 실패');
+			}
+		});
+		var mGraphLineData = {};
+		var mCtx = document.getElementById("monthlyGraph");
+		var mOptions = {};
+		function createGraph(ctx, data, options){
+			var ctxGet = ctx.getContext("2d");
+			var myLine = new Chart(ctxGet, {
+				type : 'line',
+				data : data,
+				options: options,
+				responsive : true
+			});
+		}
+		// 일매출, 월매출 그래프 끝
 	});
 
 </script>
@@ -150,7 +182,7 @@
 												<div class="clearfix"></div>
 											</div>
 											<div class="x_content"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-													<canvas id="monthlyTop"></canvas>
+													<canvas id="monthlyGraph"></canvas>
 											</div>
 										</div>
 									</div>

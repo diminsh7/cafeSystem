@@ -56,6 +56,13 @@ public class SalesService implements SalesServiceInter {
 		Gson gson = new Gson();
 		return gson.toJson(list);
 	}
+	//지점의 월매출 그래프
+	@Override
+	public String selectMonthlyGraph(Map<String, Object> param) {
+		List<HashMap<String, Object>> list = salesDao.selectMonthlyGraph(param);
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
 	//본사의 가맹수수료 조회
 	@Override
 	public String selectFeeList() {

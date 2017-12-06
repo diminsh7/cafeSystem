@@ -51,6 +51,12 @@ public class SalesDao implements SalesDaoInter {
 		List<MonthlySalesVO> result = sqlSession.selectList(NS+"selectMonthlySalesListByShop", param);
 		return result;
 	}
+	//지점의 월매출 그래프
+	@Override
+	public List<HashMap<String, Object>> selectMonthlyGraph(Map<String, Object> param) {
+		List<HashMap<String, Object>> result = sqlSession.selectList(NS+"selectMonthlyGraph", param);
+		return result;
+	}
 	//본사의 가맹수수료 조회
 	@Override
 	public List<FeeVO> selectFeeList() {
