@@ -44,6 +44,7 @@
 			item_code = #{itemCode}
 	</select>
 	
+	<!-- 발주 신청 처리 -->
 	<insert id="branchOrderAdd" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderAddVO">
 		INSERT INTO `order` (
 				statement_number
@@ -73,4 +74,15 @@
 				, #{orderFaultyAble}
 			)
 	</insert>
+	
+	<!-- 발주 취소 신청 -->
+	<update id="branchOrderCancel" parameterType="java.util.Map">
+		UPDATE
+			order
+		SET
+			receipt_category_code = #{receiptCategoryCode}
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
+	
 </mapper>

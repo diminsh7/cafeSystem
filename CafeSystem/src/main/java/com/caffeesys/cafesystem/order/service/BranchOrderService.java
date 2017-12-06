@@ -30,11 +30,12 @@ public class BranchOrderService {
 	
 	Gson gson = new Gson();
 	
+	Map<String, String> map = new HashMap<String, String>();
+	
 	//지점 발주 화면 요청 (첫화면 원두/티)
 	public void branchOrderForm(Model model, String itemCate){
 		//System.out.println("[BranchOrderService.java / branchOrderForm.method] Access");
-		//불러올 리스트 조건 map에 담아서 dao 호출
-		Map<String, String> map = new HashMap<String, String>();	
+		//불러올 리스트 조건 map에 담아서 dao 호출	
 		map.put("itemAble", "Y");
 		map.put("cateMiddle", "Item");
 		map.put("itemCate", itemCate);
@@ -79,7 +80,6 @@ public class BranchOrderService {
 	//카테고리별 품목 요청
 	public String branchOrderForm(String itemCate){
 		//불러올 리스트 조건 map에 담아서 dao 호출
-		Map<String, String> map = new HashMap<String, String>();	
 		map.put("itemAble", "Y");
 		map.put("cateMiddle", "Item");
 		map.put("itemCate", itemCate);
@@ -94,4 +94,26 @@ public class BranchOrderService {
 		return gson.toJson(itemPriceResult);
 	}
 	
+	//발주 취소 신청
+	public void branchOrderCancel(String statementNumber, String receiptCategoryCode, String orderCategoryCode) {
+		/*receiptCategoryCode 접수상태코드: 702발주신청완료, 703발주승인/결제완료, 704발주취소신청, 705발주취소승인
+		orderCategoryCode 배송상태코드: 709배송준비중, 710배송중, 711배송완료*/
+		
+		//발주 승인 전&배송준비중(Default)에는 발주 바로 취소 시킴
+		if(receiptCategoryCode.equals("702") && orderCategoryCode.equals("709")) {
+			System.out.println("바로 발주 취소 시키는 상황");
+			receiptCategoryCode = "705"; //바로 발주취소승인
+			map.put("statementNumber", statementNumber);
+			map.put("receiptCategoryCode", receiptCategoryCode);
+			branchOrderDao.branchOrderCancel(map);
+			
+		//발주승인은 했지만 배송준비중인 경우에는 본사담당직원의 승인 후 취소 처리
+		} else if(receiptCategoryCode.equals("703") && orderCategoryCode.equals("709")) {
+			System.out.println("발주취소신청으로 상태만 변경(취소신청이 들어간 상태)");
+			receiptCategoryCode = "704"; //발주취소신청
+			map.put("statementNumber", statementNumber);
+			map.put("receiptCategoryCode", receiptCategoryCode);
+			branchOrderDao.branchOrderCancel(map);
+		} 
+	}
 }
