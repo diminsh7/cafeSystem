@@ -30,8 +30,8 @@
 						<ul>
 							<li>
 								<label>직원코드 검색</label>
-							</li>
 								<input type="text" name="keyword1" value="${keyword1}">
+							</li>
 							<li>
 								<label>기간검색</label>
 								<input type="Date" name="keyword2" value="${keyword2}">

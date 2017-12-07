@@ -50,7 +50,7 @@
 		});
 		$('#headEmployeeSalaryChange').click(function(){
 			var headSalaryChange = $('#headEmployeeSalary').val();//급여
-				
+				headSalaryChange = Number(headSalaryChange);
 			var bonus2 = $('#headSalaryBonus').val();	//상여금
 			console.log(bonus2)
 			var health2= headSalaryChange*0.03	//건강보험
@@ -70,7 +70,8 @@
 				$('#headSalaryDeduction').val(deduction2);
 				$('#headSalaryReceipts').val(receipts2);
 			}
-		})		
+		})
+			
 	});
 	</script>
 <div class="right_col" role="main">

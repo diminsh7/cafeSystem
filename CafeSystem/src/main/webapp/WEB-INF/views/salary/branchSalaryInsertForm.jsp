@@ -96,12 +96,6 @@
 									</div>
 									<button class="btn btn-primary" type="button" id="branchEmployeeSalarySearch" >검색</button>
 							</div>
-							<div class="form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">전표번호</label>
-								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input type="text" id="menuCode" name="menuCode" class="form-control col-md-7 col-xs-12" readonly>
-								</div>
-							</div>
 	                   		<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryWorkmonth" required="required">귀속년월</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">

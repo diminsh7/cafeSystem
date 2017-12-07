@@ -20,14 +20,20 @@ public class HeadSalaryController {
 	@Autowired 
 	private HeadSalaryService headSalaryService;
 	
+	
+	
 	//본사직원 급여명세서 목록
 	@RequestMapping(value="/headSalaryList")
-	public String headhSalaryList(Model model
+	public String headSalaryList(Model model
 			, @RequestParam(value="keyword1", required=false, defaultValue="")String keyword1
 			, @RequestParam(value="keyword2", required=false ) String keyword2
 			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) throws Exception {	
 		logger.debug("headSalaryList메소드 확인");
 		headSalaryService.headSalaryList(model, keyword1, keyword2, currentPage);
+		/*logger.debug("headSalaryList메소드 model :{}",model);
+		logger.debug("headSalaryList메소드 searchOption :{}",searchOption);
+		logger.debug("headSalaryList메소드 searchOption :{}",searchOption);
+		logger.debug("headSalaryList메소드 currentPage :{}",currentPage);*/
 		return "salary/headSalaryList";
 	}
 	

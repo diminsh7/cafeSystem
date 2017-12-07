@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	<!-- 검색한 list  -->
 	<select id="branchSalaryList" parameterType="java.util.Map" resultMap="resultBranchSalary">
-		SELECT bs.branch_salary_workmonth
+		SELECT  DATE_FORMAT(bs.branch_salary_workmonth,'%Y-%m') as branch_salary_workmonth
 			, bs.branch_employee_code
 			, be.branch_employee_name
 			, be.branch_employee_birth
@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- WHERE절 include 태그로 삽입 -->
 	     <include refid="search"></include>  		
 		ORDER BY bs.branch_employee_code ASC	
-	   	LIMIT ${beginRow}, ${pagePerRow};
+	   	LIMIT ${beginRow}, ${pagePerRow}
 	</select>
 	
 	<!-- 검색한 레코드 개수 -->
@@ -59,16 +59,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<sql id="search">
-		<choose>
-			<!-- 직원코드로 검색할 경우 -->
-			<when test='keyword1 != null or keyword1="branch_employee_code"'>
-				WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%')				
-			</when>
-			<!-- 데이터타입으로 검색할 경우  -->
-			<otherwise>			
-				WHERE date_format(bs.branch_salary_workmonth,'%Y-%m-%d') = #{keyword2}
-			</otherwise>
-		</choose>
+		<!-- 맨처음 들어갈때 공백일 경우 -->
+		<if test='keyword1 == "" and keyword2 == null' >
+			WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%')
+		</if>
+		<!-- 다른조건 검색하다가 아무것도 없이 검색할 경우 -->
+		<if test='keyword1=="" and keyword2 == ""'>
+			WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%')
+		</if>
+		<!-- 직원코드로 검색할 경우 -->
+		<if test='keyword1 != "" and keyword2 == "" '>
+			WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%')
+		</if>
+		<!-- 날짜 검색만 할 경우 -->
+		<if test='keyword1 == "" and  keyword2 != null and keyword2 != ""'>
+			WHERE date_format(bs.branch_salary_workmonth,'%Y-%m-%d') = #{keyword2}
+		</if>
+		<!-- 직원코드 & 날짜검색 둘다 할경우 -->
+		<if test='keyword1 != "" and keyword2 != ""'> 
+			WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%') 
+			and date_format(bs.branch_salary_workmonth,'%Y-%m-%d') =  #{keyword2}
+		</if>
 	</sql>	
 	
 	

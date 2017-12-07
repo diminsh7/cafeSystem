@@ -37,7 +37,7 @@ public class BranchSalaryService {
 	public void branchSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
 		logger.debug("branchSalaryList메소드 확인");
 		Map<String, String> map;
-		if(keyword1 != "") {
+		if(keyword1 != null) {
 			map = new HashMap<String, String>();
 			map.put("keyword1", keyword1);
 			map.put("keyword2", keyword2);			

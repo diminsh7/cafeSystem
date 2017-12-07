@@ -60,7 +60,7 @@
   	
   	<!-- 검색한 list -->
   	<select id="headSalaryList" parameterType="java.util.Map" resultMap="resultHeadSalary">
-  		SELECT hs.head_salary_workmonth
+  		SELECT DATE_FORMAT(hs.head_salary_workmonth,'%Y-%m') as head_salary_workmonth
 			, hs.head_employee_code
 			, he.head_employee_name
 			, he.head_employee_birth
@@ -75,8 +75,8 @@
 				on he.department_category_code=cate.category_code
 			<!-- WHERE절 include 태그로 삽입 -->
 	    	 <include refid="search"></include>
-				ORDER BY hs.head_employee_code ASC	
-  	
+			ORDER BY hs.head_employee_code ASC	
+			LIMIT ${beginRow}, ${pagePerRow};
   	</select>
   	
 	<!-- 검색한 레코드 개수 -->
@@ -89,21 +89,31 @@
 				on he.department_category_code=cate.category_code 
 			<!-- WHERE절 include 태그로 삽입 -->
 	    	 <include refid="search"></include>
-			ORDER BY hs.head_salary_workmonth ASC 			
-			
+			ORDER BY hs.head_salary_workmonth ASC 				
 	</select>
 	
-		<sql id="search">
-			<choose>
-				<!-- 직원코드로 검색할 경우 -->
-				<when test='keyword1 != null or keyword1="head_employee_code"'>
-					WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%') 	
-				</when>
-				<!-- 데이터타입으로 검색할 경우  -->
-				<otherwise>			
-						WHERE date_format(hs.head_salary_workmonth,'%Y-%m-%d') = #{keyword2}
-				</otherwise>
-			</choose>
+		<sql id="search">	
+			<!-- 맨처음 들어갈때 공백일 경우 -->
+			<if test='keyword1 == "" and keyword2 == null' >
+				WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%') 	
+			</if>
+			<!-- 다른조건 검색하다가 아무것도 없이 검색할 경우 -->
+			<if test='keyword1=="" and keyword2 == ""'>
+				WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%')		
+			</if>
+			<!-- 직원코드로 검색할 경우 -->
+			<if test='keyword1 != "" and keyword2 == "" '>
+				WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%')
+			</if>
+			<!-- 날짜 검색만 할 경우 -->
+			<if test='keyword1 == "" and  keyword2 != null and keyword2 != ""'>
+				WHERE date_format(hs.head_salary_workmonth,'%Y-%m-%d') = #{keyword2}
+			</if>
+			<!-- 직원코드 & 날짜검색 둘다 할경우 -->
+			<if test='keyword1 != "" and keyword2 != ""'> 
+				WHERE hs.head_employee_code like CONCAT('%',#{keyword1},'%')
+				and date_format(hs.head_salary_workmonth,'%Y-%m-%d') = #{keyword2}
+			</if>
 		</sql>		
 		
 		<!-- 등록 처리 -->
