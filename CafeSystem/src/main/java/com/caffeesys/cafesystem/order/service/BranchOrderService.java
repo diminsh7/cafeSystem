@@ -103,19 +103,25 @@ public class BranchOrderService {
 		
 		//발주 승인 전&배송준비중(Default)에는 발주 바로 취소 시킴
 		if(receiptCategoryCode.equals("702") && orderCategoryCode.equals("709")) {
+			////취소테이블(order_cancel)로 들어가게 함 관리코드,전표번호,요청상태,취소신청일
+			
 			System.out.println("바로 발주 취소 시키는 상황");
 			receiptCategoryCode = "705"; //바로 발주취소승인
 			map.put("statementNumber", statementNumber);
 			map.put("receiptCategoryCode", receiptCategoryCode);
 			branchOrderDao.branchOrderCancel(map);
+			branchOrderDao.insertBranchOrderCancel(map);
 			
 		//발주승인은 했지만 배송준비중인 경우에는 본사담당직원의 승인 후 취소 처리
 		} else if(receiptCategoryCode.equals("703") && orderCategoryCode.equals("709")) {
+			////버튼을 누르면 지점이보는 발주 리스트에서 접수상태가 취소신청으로 변경
+				
 			System.out.println("발주취소신청으로 상태만 변경(취소신청이 들어간 상태)");
 			receiptCategoryCode = "704"; //발주취소신청
 			map.put("statementNumber", statementNumber);
 			map.put("receiptCategoryCode", receiptCategoryCode);
 			branchOrderDao.branchOrderCancel(map);
+			////취소테이블(order_cancel)로 들어가게 함 관리코드,전표번호,요청상태,취소신청일
 		} 
 	}
 }
