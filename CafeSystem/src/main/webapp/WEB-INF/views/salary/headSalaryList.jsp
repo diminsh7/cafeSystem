@@ -30,8 +30,8 @@
 						<ul>
 							<li>
 								<label>직원코드 검색</label>
-							</li>
 								<input type="text" name="keyword1" value="${keyword1}">
+							</li>
 							<li>
 								<label>기간검색</label>
 								<input type="Date" name="keyword2" value="${keyword2}">
@@ -42,7 +42,7 @@
 						직원 코드 검색: <input name="keyword" value="${keyword}"> 
 						<input type="submit" value="조회">
 						<div value="searchOption" value="head_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
-						<input type="submit" value="조회">		 --%>		
+						<input type="submit" value="조회">	 --%>			
 					</form>
 					<!-- 레코드의 갯수를 출력 -->
 					${headSalaryCount}개의 게시물이 있습니다.
@@ -88,5 +88,3 @@
 		</div>
 	</div>
 </div>
-
-

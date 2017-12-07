@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.caffeesys.cafesystem.account.service.AccountTitleService;
+
 import com.caffeesys.cafesystem.salary.service.BranchSalaryService;
 import com.caffeesys.cafesystem.salary.service.BranchSalaryVO;
 
@@ -49,26 +49,40 @@ public class BranchSalaryController {
 		branchSalaryService.branchSalaryInsert(branchSalary);
 		return "redirect:/branchSalaryList";
 	}
+	
 	//지점직원 급여명세서 등록 폼에 쓸 직원 급여 가져오는 메소드 직원코드를 눌렀을때 자동으로 입력
 	@ResponseBody
 	@RequestMapping(value="branchEmployeeSalaryInsert")
 	public String branchEmployeeSalaryInsert(@RequestParam(value = "branchCodeList") String branchCodeList) {
 		logger.debug("branchEmployeeSalaryInsert 메소드 확인 branchCodeList :{}", branchCodeList);
 		return branchSalaryService.branchEmployeeSalaryInsert(branchCodeList);
+	}	
+	
+	//지점직원 급여명세서 상세정보 보여주기 form
+	@RequestMapping(value="branchSalaryDetail")
+	public String branchSalaryDetail(Model model
+			,@RequestParam(value="branchSalaryCode", required=true) String branchSalaryCode) {
+		logger.debug("branchSalaryDetail메소드의 branchSalaryCode 확인 :{}",branchSalaryCode);
+		branchSalaryService.selectBranchSalaryDetail(model, branchSalaryCode);
+		return "/salary/branchSalaryDetailForm";
 	}
 	
-	
-	
-	//등록 폼에 사용할 전표 갖고오기
-	
-	//지점직원 급여명세서 등록 처리
-	
-	
-	
-	//지점직원 급여명세서 상세정보
-	
 	//지점직원 급여명세서 수정 폼
-	
+	@RequestMapping(value="branchSalaryUpdate")
+	public String selectbranchSalaryUpdate(Model model
+			,@RequestParam(value="branchSalaryCode", required=true) String branchSalaryCode) {
+		logger.debug("branchSalaryUpdate메소드의 branchSalaryCode 확인 :{}",branchSalaryCode);
+		branchSalaryService.selectbranchSalaryUpdate(model, branchSalaryCode);
+		return "/salary/branchSalaryUpdateForm";
+	}
+	//지점직원 급여명세서 수정 처리
+	@RequestMapping(value="branchSalaryUpdate", method = RequestMethod.POST )
+	public String branchSalaryUpdate(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryUpdate 메소드의 branchSalary :{}",branchSalary);
+		branchSalaryService.branchSalaryUpdate(branchSalary);
+		return "redirect:/branchSalaryList";	
+	}
+
 	//지점직원 급여명세서 수정처리
 	
 	//지점직원 급여명세서 삭제
