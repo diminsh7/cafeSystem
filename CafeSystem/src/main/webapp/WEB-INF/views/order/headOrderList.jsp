@@ -42,7 +42,7 @@
 									<th>no</th>
 									<th>전표번호</th>
 									<th>구분</th>									
-									<th>매장번호</th>
+									<th>매장명</th>
 									<!-- <th>금액</th> -->
 									<th>접수상태</th>
 									<th>배송상태</th>
@@ -56,8 +56,8 @@
 								<c:forEach var="headOrderList" items="${headOrderList}">
 									<tr>
 										<td>${headOrderList.orderCode}</td>
-										<td>${headOrderList.statementNumber}</td>
-										<td>${headOrderList.orderFaultyDivide}</td>
+										<td><a href="${pageContext.request.contextPath}/headOrderDetail?statementNumber=${headOrderList.statementNumber}">${headOrderList.statementNumber}</a></td>
+										<td>${headOrderList.faultyDivideName}</td>
 										<td>${headOrderList.shopName}</td>									
 										<%-- <td>${headOrderList.}</td> --%>
 										<td>${headOrderList.receiptCateName}</td>

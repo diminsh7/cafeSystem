@@ -24,6 +24,11 @@ public class HeadOrderDao {
 		return sqlSessionTemplate.selectList(NS + "headOrderList");
 	}
 	
+	//본사 입장의 발주 내용 상세보기 페이지 요청
+	public List<HeadOrderVO> headOrderDetail(String statementNumber){
+		return sqlSessionTemplate.selectList(NS + "headOrderDetail", statementNumber);
+	}
+	
 	//headOrderList 페이징을 위한 글 갯수
 	public int headOrderCount(Map<String, String> map) {
 		return sqlSessionTemplate.selectOne(NS + "headOrderCount", map);

@@ -22,6 +22,7 @@ public class HeadOrderVO {
 	private String itemName; // 품목명
 	private String receiptCateName; // 접수상태코드명
 	private String orderCateName; // 배송상태코드명
+	private String orderPriceComma; // 금액 3자리수 콤마
 
 	@Override
 	public String toString() {
@@ -31,8 +32,8 @@ public class HeadOrderVO {
 				+ ", receiptCateCode=" + receiptCateCode + ", orderCateCode=" + orderCateCode + ", orderRequest="
 				+ orderRequest + ", orderApproval=" + orderApproval + ", orderRelease=" + orderRelease
 				+ ", headEmployeeCode=" + headEmployeeCode + ", orderFaultyAble=" + orderFaultyAble + ", shopName="
-				+ shopName + ", faultyDivideName=" + faultyDivideName + ", itemName=" + itemName
-				+ ", receiptCateName=" + receiptCateName + ", orderCateName=" + orderCateName + "]";
+				+ shopName + ", faultyDivideName=" + faultyDivideName + ", itemName=" + itemName + ", receiptCateName="
+				+ receiptCateName + ", orderCateName=" + orderCateName + ", orderPriceComma=" + orderPriceComma + "]";
 	}
 
 	public int getOrderCode() {
@@ -193,6 +194,14 @@ public class HeadOrderVO {
 
 	public void setshopName(String shopName) {
 		this.shopName = shopName;
+	}
+
+	public String getOrderPriceComma() {
+		return orderPriceComma;
+	}
+
+	public void setOrderPriceComma(String orderPriceComma) {
+		this.orderPriceComma = orderPriceComma;
 	}
 
 }

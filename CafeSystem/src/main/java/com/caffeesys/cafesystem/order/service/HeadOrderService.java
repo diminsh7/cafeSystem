@@ -52,6 +52,25 @@ public class HeadOrderService {
 		model.addAttribute("headOrderList", headOrderList);
 	}
 	
+	//본사 입장의 발주 내용 상세보기 페이지 요청
+	public void headOrderDetail(Model model, String statementNumber) {
+		List<HeadOrderVO> headOrder = headOrderdao.headOrderDetail(statementNumber);
+		//해당 발주의 총계를 구하기 위해 각 품목의 수량대비 가격을 산출해 전부 합산
+		int orderPriceAdd = 0;
+		for(int i=0; i<headOrder.size(); i++) {
+			int itemPrice = headOrder.get(i).getOrderPrice(); //품목별 가격 itemPrice
+			orderPriceAdd += itemPrice;
+			headOrder.get(i).setOrderPriceComma(commonService.comma(itemPrice)); //
+		}
+		
+		//3자리수마다 ,
+		String orderAllPrice = commonService.comma(orderPriceAdd);
+
+		model.addAttribute("headOrder", headOrder);
+		model.addAttribute("statementNumber", statementNumber);
+		model.addAttribute("orderAllPrice", orderAllPrice);
+	}
+	
 	//발주승인
 	public void headOrderPro(String statementNumber) {
 		LoginVO loginSession = (LoginVO) session.getAttribute("loginInfo");

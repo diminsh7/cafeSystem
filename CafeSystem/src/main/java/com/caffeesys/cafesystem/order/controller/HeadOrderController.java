@@ -26,8 +26,16 @@ public class HeadOrderController {
 			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		logger.debug("[HeadOrderController.java / headOrderList.method] Access");
 		headOrderService.headOrderList(model, currentPage, cate, input);
-		//return null;
 		return "order/headOrderList";
+	}
+	
+	//본사 입장의 발주 내용 상세보기 페이지 요청
+	@RequestMapping("headOrderDetail")
+	public String headOrderDetail(Model model
+			, @RequestParam(value="statementNumber", required = true) String statementNumber) {
+		logger.debug("[HeadOrderController.java / headOrderDetail.method] Access");
+		headOrderService.headOrderDetail(model, statementNumber);
+		return "order/headOrderDetail";
 	}
 	
 	//본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함) -> Service부터 작업해야함 Controller만 있는 상태

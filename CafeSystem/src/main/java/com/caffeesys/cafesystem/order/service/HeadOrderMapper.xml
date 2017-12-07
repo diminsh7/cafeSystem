@@ -45,16 +45,17 @@
 			, head_employee_code
 			, order_faulty_able
 			, statement.statement_name AS faultyDivideName
-			, shop.shop_name
+			, shop.shop_name AS shopName
 			, item.item_name AS itemName
-			, receiptCate.category_small AS receiptCate
-			, orderCate.category_small AS orderCate	
+			, receiptCate.category_small AS receiptCateName
+			, orderCate.category_small AS orderCateName
 		FROM 
 			`order`
 			INNER JOIN statement
 				ON `order`.order_faulty_divide = statement.statement_code
 			INNER JOIN shop
-				ON `order`.local_category_code AND `order`.shop_code = shop.local_category_code AND shop.shop_code
+				ON `order`.local_category_code = shop.local_category_code 
+					AND `order`.shop_code = shop.shop_code	
 			INNER JOIN item
 				ON `order`.item_code = item.item_code
 			INNER JOIN category AS receiptCate
@@ -65,6 +66,8 @@
 			receipt_category_code &lt;&gt; '704' AND '705'
 		GROUP BY 
 			statement_number
+		ORDER BY
+			order_code DESC
 	</select>
 	
 	<!-- headOrderList 페이징을 위한 글 갯수 -->
@@ -75,6 +78,41 @@
 			`order`
 		WHERE
 			receipt_category_code &lt;&gt; '704' AND '705'
+	</select>
+	
+	<!-- 본사 입장의 발주 내용 상세보기 페이지 요청 -->
+	<select id="headOrderDetail" parameterType="String" resultMap="resultHeadOrder">
+		SELECT
+			statement_number
+			, order_amount
+			, order_price
+			, receipt_category_code
+			, order_category_code
+			, order_request
+			, order_approval
+			, order_release
+			, head_employee_code
+			, order_faulty_able
+			, statement.statement_name AS faultyDivideName
+			, shop.shop_name AS shopName
+			, item.item_name AS itemName
+			, receiptCate.category_small AS receiptCateName
+			, orderCate.category_small AS orderCateName
+		FROM 
+			`order`
+			INNER JOIN statement
+				ON `order`.order_faulty_divide = statement.statement_code
+			INNER JOIN shop
+				ON `order`.local_category_code = shop.local_category_code 
+					AND `order`.shop_code = shop.shop_code	
+			INNER JOIN item
+				ON `order`.item_code = item.item_code
+			INNER JOIN category AS receiptCate
+				ON `order`.receipt_category_code = receiptCate.category_code
+			INNER JOIN category AS orderCate
+				ON	`order`.order_category_code = orderCate.category_code
+		WHERE
+			statement_number = #{statementNumber}	
 	</select>
 	
 	<!-- 발주승인 -->
