@@ -3,4 +3,51 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.order.service.HeadOrderMapper">
+	
+	<!-- 발주승인 -->
+	<update id="headOrderPro" parameterType="java.util.Map">
+		UPDATE
+			'order'
+		SET
+			receipt_category_code = #{receiptCategoryCode} <!-- 발주승인/결제완료 = 703 -->
+			, order_approval = now(); <!-- 승인일 입력 -->
+			, head_employee_code = #{headEmployeeCode} <!-- 발주승인 담당자 입력 -->
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
+	
+	<!-- 취소승인 -->
+	<update id="headOrderCancelPro" parameterType="java.util.Map">
+		UPDATE
+			order_cancel
+		SET
+			receipt_category_code = #{receiptCategoryCode}
+			, order_cancel_approval = now();
+			, head_employee_code = #{headEmployeeCode}
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
+	
+	<!-- 환불 승인 -->
+	<update id="headOrderRefundPro" parameterType="java.util.Map">
+		UPDATE
+			order_cancel
+		SET
+			order_refund_statement = #{refundStatementNumber}
+			, order_refund_able = #{orderRefundAble}
+			, order_refund_date = now();
+			, order_refund_admin = #{orderRefundAdmin}
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
+	
+	<!-- 배송상태 변경 -->
+	<update id="headOrderDelivery" parameterType="java.util.Map">
+		UPDATE
+			'order'
+		SET
+			order_category_code = #{orderDeliveryCode}
+		WHERE
+			statement_number = #{statementNumber}
+	</update>
 </mapper>
