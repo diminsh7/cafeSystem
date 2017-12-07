@@ -52,12 +52,12 @@
 		value=".jsp" /> <property name="order" value="1" /> </bean> -->
 
 	<!-- commons dbcp를 사용하여 커넥션 풀 생성 -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/teamproject" />
-		<property name="username" value="synths" />
-		<property name="password" value="tifkffk" />
-	</bean>
+  	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+  		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+ 		<property name="url" value="jdbc:mysql://192.168.123.174:3306/test_cafesystem" />
+ 		<property name="username" value="cafesystem" />
+ 		<property name="password" value="emdkdk25!" />
+  	</bean>
 	
 	<!-- mybatis 세션생성을 위한 팩토리 생성 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
