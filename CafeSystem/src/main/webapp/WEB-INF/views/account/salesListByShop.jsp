@@ -71,6 +71,59 @@
 		// 일매출, 월매출 리스트 끝
 		
 		// 일매출, 월매출 그래프 시작
+		// 일매출 그래프
+		var dGraphLabels = [];
+		var dGraphData = [];
+		$.ajax({
+			url : "/dailyGraphJson",
+			type : "GET",
+			success:function(data){
+				var list = JSON.parse(data);
+				console.log(data);
+				$(list).each(function(i, list) {
+					dGraphLabels.push(list.daily_sales_date);
+					dGraphData.push(list.daily_sales_amount);
+				});
+				createGraph(dCtx, dGraphLineData, dOptions);
+			},
+			error:function(request, status, error){
+				alert('우리 지점의 일매출 그래프 그리기 실패');
+			}
+		});
+		var dGraphLineData = {
+				labels : dGraphLabels,
+				datasets : [
+			        {
+			            label: "일매출",
+			            data : dGraphData,
+			            lineTension: 0,
+			            fill: false,
+			            borderColor: 'skyblue',
+			            backgroundColor: 'transparent',
+			            borderDash: [5, 5],
+			            pointBorderColor: 'rgba(47,182,230,1)',
+			            pointBackgroundColor: 'rgba(47,182,230,1)',
+			            pointRadius: 5,
+			            pointHoverRadius: 10,
+			            pointHitRadius: 30,
+			            pointBorderWidth: 2,
+			            pointStyle: 'rectRounded'
+			        }
+			    ]
+		};
+		var dCtx = document.getElementById("dailyGraph");
+		var dOptions = {
+				legend: { display: false },
+	      		title: {
+	        	display: true,
+	        	text: '주간 매출'
+	      		},
+	      		scales:{yAxes: [{
+	      		      ticks: {
+	      		        min: 1200000
+	      		      }
+	      		    }]}
+		};
 		// 월매출 그래프
 		var mGraphData = [];
 		$.ajax({
@@ -169,11 +222,11 @@
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="x_panel">
 											<div class="x_title">
-												<h2>2017-10-19 매출 TOP5<small>Daily Sales TOP5</small></h2>
+												<h2>2017-12-04 ~ 2017-12-10  매출<small>Weekly Sales</small></h2>
 												<div class="clearfix"></div>
 											</div>
 											<div class="x_content"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>
-													<canvas id="dailyTop"></canvas>
+													<canvas id="dailyGraph"></canvas>
 											</div>
 										</div>
 									</div>

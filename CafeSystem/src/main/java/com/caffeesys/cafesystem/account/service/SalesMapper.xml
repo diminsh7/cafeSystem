@@ -80,6 +80,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND m.shop_code=#{shop}
 		ORDER BY monthly_sales_code desc
 	</select>
+	<select id="selectDailyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d, shop s
+		WHERE d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
+		AND d.local_category_code=#{local}
+		AND d.shop_code=#{shop}
+		AND daily_sales_date BETWEEN '2017-12-04' AND '2017-12-10'
+		ORDER BY daily_sales_code asc
+	</select>
 	<select id="selectMonthlyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
 		SELECT  s.shop_name, monthly_sales_date,  monthly_sales_amount
 		FROM monthly_sales m, shop s

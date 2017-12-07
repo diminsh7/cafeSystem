@@ -96,7 +96,15 @@ public class SalesController {
 		return list;
 	}
 	//지점의 일매출 그래프 json
-	
+	@ResponseBody
+	@RequestMapping(value="/dailyGraphJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonDailyGraph() {
+		logger.debug("jsonDailyGraph method");
+		Map<String, Object> param = getLocalShopCode();
+		String list = salesService.selectDailyGraph(param);
+		logger.debug("jsonDailyGraph method list : " + list);
+		return list;
+	}
 	//지점의 월매출 그래프 json
 	@ResponseBody
 	@RequestMapping(value="/monthlyGraphJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
