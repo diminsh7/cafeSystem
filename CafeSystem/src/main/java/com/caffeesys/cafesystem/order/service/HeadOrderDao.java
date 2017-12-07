@@ -37,24 +37,24 @@ public class HeadOrderDao {
 	//발주승인
 	public void headOrderPro(Map<String, String> map) {
 		logger.debug("[HeadOrderDao.class / headOrderPro.method] map param: " + map);
-		sqlSessionTemplate.update(NS + "headOrderPro");
+		sqlSessionTemplate.update(NS + "headOrderPro", map);
 	}
 	
 	//취소승인
 	public void headOrderCancelPro(Map<String, String> map) {
 		logger.debug("[HeadOrderDao.class / headOrderCancelPro.method] map param: " + map);
-		sqlSessionTemplate.update(NS + "headOrderCancelPro");
+		sqlSessionTemplate.update(NS + "headOrderCancelPro", map);
 	}
 	
 	//환불승인
 	public void headOrderRefundPro(Map<String, String> map) {
 		logger.debug("[HeadOrderDao.class / headOrderRefundPro.method] map param: " + map);
-		sqlSessionTemplate.update(NS + "headOrderRefundPro");
+		sqlSessionTemplate.update(NS + "headOrderRefundPro", map);
 	}
 	
 	//배송상태 변경
 	public void headOrderDelivery(Map<String, String> map) {
 		logger.debug("[HeadOrderDao.class / headOrderDelivery.method] map param: " + map);
-		sqlSessionTemplate.update(NS + "headOrderDelivery");
+		sqlSessionTemplate.update(NS + "headOrderDelivery", map);
 	}
 }

@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
+<script>
+	$(document).ready(function(){
+		//발주 승인 버튼 클릭
+		$('#orderApprovalBtn').click(function(){
+			var result = confirm('정말 해당 발주를 승인하시겠습니까?');
+			//var statementNumber = $(this).parents('x_title').find('h2').text();
+			
+			if(result){
+				$(location).attr('href', '${pageContext.request.contextPath}/headOrder?statementNumber=${statementNumber}');
+			}
+		})
+	})
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
@@ -52,7 +65,9 @@
 						</table>
 						<div class="text-center">
 							<button type="button" class="btn btn-primary" onclick="history.back();">뒤로가기</button>
-							<c:if test="${headOrder.get(0).getHeadEmployeeCode() eq null}"><button type="button" class="btn btn-success">발주승인</button></c:if>
+							<%-- <c:if test="${headOrder.get(0).getHeadEmployeeCode() eq null}"> --%>
+								<button type="button" class="btn btn-success" id="orderApprovalBtn">발주승인</button>
+							<%-- </c:if> --%>
 						</div>
 					</div>	
 				</div>

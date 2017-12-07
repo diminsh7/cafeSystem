@@ -118,10 +118,10 @@
 	<!-- 발주승인 -->
 	<update id="headOrderPro" parameterType="java.util.Map">
 		UPDATE
-			'order'
+			`order`
 		SET
 			receipt_category_code = #{receiptCategoryCode} <!-- 발주승인/결제완료 = 703 -->
-			, order_approval = now(); <!-- 승인일 입력 -->
+			, order_approval = now() <!-- 승인일 입력 -->
 			, head_employee_code = #{headEmployeeCode} <!-- 발주승인 담당자 입력 -->
 		WHERE
 			statement_number = #{statementNumber}
@@ -155,7 +155,7 @@
 	<!-- 배송상태 변경 -->
 	<update id="headOrderDelivery" parameterType="java.util.Map">
 		UPDATE
-			'order'
+			`order`
 		SET
 			order_category_code = #{orderDeliveryCode}
 		WHERE

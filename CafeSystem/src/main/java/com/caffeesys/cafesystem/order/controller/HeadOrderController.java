@@ -54,7 +54,8 @@ public class HeadOrderController {
 	public String headOrderPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / headOrderPro.method] Access");
 		headOrderService.headOrderPro(statementNumber);
-		return "redirect:order/headOrderList";
+		return "redirect:/headOrderList";
+		//return "redirect:/headOrderList";
 	}
 	
 	//취소승인(order_cancel 테이블로 입력)
@@ -62,7 +63,7 @@ public class HeadOrderController {
 	public String orderCancelPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / orderCancelPro.method] Access");
 		headOrderService.headOrderCancelPro(statementNumber);
-		return "redirect:order/headOrderList";
+		return "redirect:/headOrderList";
 	}
 	
 	//환불승인
@@ -70,7 +71,7 @@ public class HeadOrderController {
 	public String orderRefundPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / orderRefundPro.method] Access");
 		headOrderService.headOrderRefundPro(statementNumber);
-		return "redirect:order/headOrderList";
+		return "redirect:/headOrderList";
 	}
 	
 	//배송상태 변경 || orderDeliveryCode 변수명 주의 !! DB에는 order_category_code로 되어있음!
@@ -79,7 +80,7 @@ public class HeadOrderController {
 			,@RequestParam(value="orderDeliveryCode", required=true) String orderDeliveryCode) {
 		logger.debug("[HeadOrderController.class / orderDelivery.method] Access");
 		headOrderService.orderDelivery(statementNumber, orderDeliveryCode);
-		return "redirect:order/headOrderList";
+		return "redirect:/headOrderList";
 	}
 	
 	//불량처리(Order 테이블에 새로운 전표번호가 발급되면서 Insert 되는 형식?)

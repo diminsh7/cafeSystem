@@ -39,11 +39,9 @@
 						<table class="table table-striped">
 							<thead>
 								<tr>
-									<th>no</th>
 									<th>전표번호</th>
 									<th>구분</th>									
 									<th>매장명</th>
-									<!-- <th>금액</th> -->
 									<th>접수상태</th>
 									<th>배송상태</th>
 									<th>발주신청일</th>
@@ -55,11 +53,9 @@
 							<tbody>
 								<c:forEach var="headOrderList" items="${headOrderList}">
 									<tr>
-										<td>${headOrderList.orderCode}</td>
 										<td><a href="${pageContext.request.contextPath}/headOrderDetail?statementNumber=${headOrderList.statementNumber}">${headOrderList.statementNumber}</a></td>
 										<td>${headOrderList.faultyDivideName}</td>
 										<td>${headOrderList.shopName}</td>									
-										<%-- <td>${headOrderList.}</td> --%>
 										<td>${headOrderList.receiptCateName}</td>
 										<td>${headOrderList.orderCateName}</td>
 										<td>${headOrderList.orderRequest}</td>
