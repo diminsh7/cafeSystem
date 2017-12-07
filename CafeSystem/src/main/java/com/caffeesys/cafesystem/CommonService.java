@@ -32,13 +32,12 @@ public class CommonService {
 		} else {
 			map = new HashMap<String, String>();
 		}
-		
+		System.out.println("count: " + count);
 		int page = 1;
 		int maxPage = (int)((double)count/pagePerRow+0.95);
 		int startPage = (((int)((double)page / 10 + 0.9)) - 1 ) * 10 + 1;
 		int endPage = startPage+10-1;
 		if(endPage > maxPage) endPage = maxPage;
-		
 		int lastPage = count / pagePerRow;
 		if ((count % pagePerRow) != 0) {
 			lastPage += 1;

@@ -18,12 +18,27 @@ public class HeadOrderController {
 	@Autowired
 	HeadOrderService headOrderService;
 	
-	//본사 입장에서의 발주 리스트 요청
+	//본사 입장에서의 발주 리스트 페이지 요청 (취소신청, 취소승인 건 제외)
 	@RequestMapping("headOrderList")
-	public String headOrderList(Model model) {
+	public String headOrderList(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
 		logger.debug("[HeadOrderController.java / headOrderList.method] Access");
-		headOrderService.headOrderList(model);
+		headOrderService.headOrderList(model, currentPage, cate, input);
+		//return null;
 		return "order/headOrderList";
+	}
+	
+	//본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함) -> Service부터 작업해야함 Controller만 있는 상태
+	@RequestMapping("headOrderCancelList")
+	public String headOrderCancelList(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		logger.debug("[HeadOrderController.java / headOrderList.method] Access");
+		//headOrderService.headOrderList(model, currentPage, cate, input);
+		return "order/headOrderCancelList";
 	}
 	
 	//발주승인

@@ -36,10 +36,18 @@ public class HeadOrderService {
 	receiptCategoryCode 접수상태코드: 702발주신청완료, 703발주승인/결제완료, 704발주취소신청, 705발주취소승인
 	orderCategoryCode 배송상태코드: 709배송준비중, 710배송중, 711배송완료*/
 	
-	//본사 입장에서의 발주 리스트 요청
-	public void headOrderList(Model model) {
-		//아직 Mapper에 쿼리 없음
-		List<HeadOrderCancelVO> headOrderList =  headOrderdao.headOrderList();
+	//본사 입장에서의 발주 리스트 페이지 요청 (취소신청, 취소승인 건 제외)
+	public void headOrderList(Model model, int currentPage, String cate, String input) {
+		Map<String, String> map;
+		if(cate != "") {
+			map = new HashMap<String, String>();
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
+			map = null;
+		}		
+		map = commonService.paging(model, currentPage, 2, headOrderdao.headOrderCount(map), map);	
+		List<HeadOrderVO> headOrderList =  headOrderdao.headOrderList();
 		logger.debug("[HeadOrderService.class / headOrderList.method] headOrderList param: " + headOrderList);
 		model.addAttribute("headOrderList", headOrderList);
 	}
