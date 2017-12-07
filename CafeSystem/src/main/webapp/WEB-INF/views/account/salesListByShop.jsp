@@ -88,9 +88,41 @@
 				alert('우리 지점의 월매출 그래프 그리기 실패');
 			}
 		});
-		var mGraphLineData = {};
+		var mGraphLineData = {
+				labels : ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+				datasets : [
+			        {
+			            label: "월매출",
+			            data : mGraphData,
+			            lineTension: 0,
+			            fill: false,
+			            borderColor: 'skyblue',
+			            backgroundColor: 'transparent',
+			            borderDash: [5, 5],
+			            pointBorderColor: 'rgba(47,182,230,1)',
+			            pointBackgroundColor: 'rgba(47,182,230,1)',
+			            pointRadius: 5,
+			            pointHoverRadius: 10,
+			            pointHitRadius: 30,
+			            pointBorderWidth: 2,
+			            pointStyle: 'rectRounded'
+			        }
+			    ]
+		};
 		var mCtx = document.getElementById("monthlyGraph");
-		var mOptions = {};
+		var mOptions = {
+				legend: { display: false },
+	      		title: {
+	        	display: true,
+	        	text: '2017년 월 매출 추이'
+	      		},
+	      		scales:{yAxes: [{
+	      		      ticks: {
+	      		        min: 12000000
+	      		      }
+	      		    }]}
+		};
+		
 		function createGraph(ctx, data, options){
 			var ctxGet = ctx.getContext("2d");
 			var myLine = new Chart(ctxGet, {
@@ -178,7 +210,7 @@
 									<div class="col-md-6 col-sm-6 col-xs-12">
 										<div class="x_panel">
 											<div class="x_title">
-												<h2>9월 매출 TOP5<small>Monthly Sales TOP5</small></h2>
+												<h2>2017년 월별 매출<small>2017 Monthly Sales</small></h2>
 												<div class="clearfix"></div>
 											</div>
 											<div class="x_content"><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; left: 0px; right: 0px; top: 0px; bottom: 0px;"></iframe>

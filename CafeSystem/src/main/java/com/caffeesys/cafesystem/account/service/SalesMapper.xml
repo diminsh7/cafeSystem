@@ -84,8 +84,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT  s.shop_name, monthly_sales_date,  monthly_sales_amount
 		FROM monthly_sales m, shop s
 		WHERE m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
-		AND m.local_category_code='001'
-		AND m.shop_code='001'
+		AND m.local_category_code=#{local}
+		AND m.shop_code=#{shop}
 		AND monthly_sales_date BETWEEN '2017-01-01' AND '2017-12-31'
 		ORDER BY monthly_sales_code asc
 	</select>
