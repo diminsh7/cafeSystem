@@ -32,7 +32,26 @@ public class BranchSalaryService {
 	Gson gson = new Gson();
 	
 	private static final Logger logger = LoggerFactory.getLogger(BranchSalaryService.class);
+	//급여명세서 상세데이터 보여주기위해 select
+	public BranchSalaryVO selectBranchSalaryDetail(Model model, String branchSalaryCode) {
+		logger.debug("selectBranchSalaryDetail메소드의 branchEmployeeCode :{}",branchSalaryCode);
+		BranchSalaryVO branchSalary = branchSalaryDao.selectBranchSalaryDetail(branchSalaryCode);
+		model.addAttribute("branchSalary",branchSalary);
+		return branchSalary;
+	}
 	
+	//급여명세서 수정하기위해 select
+	public BranchSalaryVO selectbranchSalaryUpdate(Model model, String branchSalaryCode) {
+		logger.debug("selectbranchSalaryUpdate메소드의 branchEmployeeCode :{}",branchSalaryCode);
+		BranchSalaryVO branchSalary = branchSalaryDao.selectBranchSalaryDetail(branchSalaryCode);
+		model.addAttribute("branchSalary",branchSalary);
+		return branchSalary;
+	}
+	//급여명세서 수정 처리
+	public void branchSalaryUpdate(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryInsert 메소드의 branchSalary :{}",branchSalary);
+		branchSalaryDao.branchSalaryUpdate(branchSalary);
+	}
 	//검색한 급여명세서 list 
 	public void branchSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
 		logger.debug("branchSalaryList메소드 확인");
@@ -46,6 +65,7 @@ public class BranchSalaryService {
 		}
 		logger.debug("branchSalaryList 메소드의  map :{}",map);//{keyword=2017-09, searchOption=branch_salary_workmonth}
 		map = pasingService.paging(model, currentPage, 10, branchSalaryDao.branchSalaryCount(map), map);
+		logger.debug("branchSalaryList 메소드의  branchSalaryDao.branchSalaryCount(map) :{}",branchSalaryDao.branchSalaryList(map));
 		model.addAttribute("branchSalaryCount",branchSalaryDao.branchSalaryCount(map));
 		model.addAttribute("branchSalaryList",branchSalaryDao.branchSalaryList(map));
 	}

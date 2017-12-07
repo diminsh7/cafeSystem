@@ -68,7 +68,7 @@
 								<td>${branchSalaryList.branchSalaryPayments}</td>
 								<td>${branchSalaryList.branchSalaryDeduction}</td>
 								<td>${branchSalaryList.branchSalaryReceipts}</td>
-								<td><a href="${pageContext.request.contextPath}/branchSalaryDetail?branchEmployeeCode=${branchSalaryList.branchEmployeeCode}">상세보기</a></td>
+								<td><a href="${pageContext.request.contextPath}/branchSalaryDetail?branchSalaryCode=${branchSalaryList.branchSalaryCode}">상세보기</a></td>
 							</tr>
 						</c:forEach>
 					</table>

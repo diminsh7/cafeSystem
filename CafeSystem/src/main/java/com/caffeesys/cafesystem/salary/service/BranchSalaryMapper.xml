@@ -24,6 +24,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="local_category_code"  property="localCategoryCode"/>	<!-- 지역코드 -->
 		<result column="shop_code" property="shopCode"  /><!-- 매장코드 -->
 	</resultMap>
+	
+	<!--수정 update  -->
+	<update id="branchSalaryUpdate" parameterType="com.caffeesys.cafesystem.salary.service.BranchSalaryVO">
+		UPDATE branch_salary 
+		SET branch_employee_salary = #{branchEmployeeSalary}
+			,branch_salary_health = #{branchSalaryHealth}
+			,branch_salary_insurance = #{branchSalaryInsurance}
+			,branch_salary_persion = #{branchSalaryPersion}
+			,branch_salary_payments= #{branchSalaryPayments}
+			,branch_salary_deduction= #{branchSalaryDeduction}
+			,branch_salary_receipts= #{branchSalaryReceipts}
+			,branch_salary_paydate= #{branchSalaryPaydate}
+		WHERE 	branch_salary_code = #{branchSalaryCode}
+	</update>
+	<!--디테일 select, 수정 select  -->
+	<select id="selectBranchSalaryDetail" parameterType="String" resultMap="resultBranchSalary">
+		select branch_salary_code
+			, statement_number
+			, branch_employee_code
+			, DATE_FORMAT(branch_salary_workmonth,'%Y-%m') as branch_salary_workmonth
+			, branch_employee_salary
+			, branch_salary_health
+			, branch_salary_insurance
+			, branch_salary_persion
+			, branch_salary_payments
+			, branch_salary_deduction
+			, branch_salary_receipts
+			, branch_salary_paydate
+		FROM branch_salary
+		WHERE branch_salary_code = #{branchSalaryCode}
+	</select>
 	<!-- 검색한 list  -->
 	<select id="branchSalaryList" parameterType="java.util.Map" resultMap="resultBranchSalary">
 		SELECT  DATE_FORMAT(bs.branch_salary_workmonth,'%Y-%m') as branch_salary_workmonth
@@ -34,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, bs.branch_salary_payments
 			, bs.branch_salary_deduction
 			, bs.branch_salary_receipts	
+			, bs.branch_salary_code
 	    FROM branch_salary bs 
 	    INNER JOIN branch_employee be
 			ON bs.branch_employee_code = be.branch_employee_code
