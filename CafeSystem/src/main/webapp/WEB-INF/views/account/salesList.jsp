@@ -144,7 +144,7 @@
 		            	  hoverBorderWidth: 0
 				        }
 				    ]
-				}
+				};
 			var mCtx = document.getElementById("monthlyTop");
 			var mOptions = {
 			      		legend: { display: false },

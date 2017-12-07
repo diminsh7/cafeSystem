@@ -64,12 +64,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY monthly_sales_amount desc
 		LIMIT 5;
 	</select>
+	<select id="selectDailySalesListByShop" parameterType="java.util.Map" resultMap="resultDailySales">
+		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d, shop s
+		WHERE d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
+		AND d.local_category_code=#{local}
+		AND d.shop_code=#{shop}
+		ORDER BY daily_sales_code desc
+	</select>
+	<select id="selectMonthlySalesListByShop" parameterType="java.util.Map" resultMap="resultMonthlySales">
+		SELECT monthly_sales_code,  statement_number,  m.local_category_code,  m.shop_code, s.shop_name, monthly_sales_date,  monthly_sales_amount, monthly_sales_moneydue
+		FROM monthly_sales m, shop s
+		WHERE m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
+		AND m.local_category_code=#{local}
+		AND m.shop_code=#{shop}
+		ORDER BY monthly_sales_code desc
+	</select>
+	<select id="selectDailyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d, shop s
+		WHERE d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
+		AND d.local_category_code=#{local}
+		AND d.shop_code=#{shop}
+		AND daily_sales_date BETWEEN '2017-12-04' AND '2017-12-10'
+		ORDER BY daily_sales_code asc
+	</select>
+	<select id="selectMonthlyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
+		SELECT  s.shop_name, monthly_sales_date,  monthly_sales_amount
+		FROM monthly_sales m, shop s
+		WHERE m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
+		AND m.local_category_code=#{local}
+		AND m.shop_code=#{shop}
+		AND monthly_sales_date BETWEEN '2017-01-01' AND '2017-12-31'
+		ORDER BY monthly_sales_code asc
+	</select>
 	<select id="selectFeeList" resultMap="resultFee">
 		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
 		FROM fee f, monthly_sales m, shop s
 		WHERE f.monthly_sales_code=m.monthly_sales_code
 				AND m.local_category_code=s.local_category_code
 				AND m.shop_code=s.shop_code
+		ORDER BY fee_code desc
+	</select>
+	<select id="selectFeeListByShop" parameterType="java.util.Map" resultMap="resultFee">
+		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
+		FROM fee f, monthly_sales m, shop s
+		WHERE f.monthly_sales_code=m.monthly_sales_code
+		AND m.local_category_code=s.local_category_code
+		AND m.shop_code=s.shop_code
+		AND m.local_category_code=#{local}
+		AND m.shop_code=#{shop}
 		ORDER BY fee_code desc
 	</select>
 </mapper>
