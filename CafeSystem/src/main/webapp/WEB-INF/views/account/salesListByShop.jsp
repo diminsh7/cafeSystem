@@ -232,7 +232,29 @@
 									</div>
 									<div class="clearfix"></div>
 									<br/>
-									<div class="form-group" style="float: right;">
+									<div class="ln_solid"></div>
+									
+									<div class="col-md-4" style="margin-left: 500px;">
+				                        	날짜 검색
+				                        <form class="form-horizontal">
+				                          <fieldset>
+				                            <div class="control-group">
+				                              <div class="controls">
+				                                <div class="input-prepend input-group">
+				                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+				                                  <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="12/03/2017 - 12/09/2017" />
+				                                  &nbsp; &nbsp;
+													<button type="submit" class="btn btn-primary btn-sm" id="searchButton">
+														검색
+													</button>
+				                                </div>
+				                              </div>
+				                            </div>
+				                          </fieldset>
+				                        </form>
+				                      </div>
+									
+									<%-- <div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/#" method="get">
 											<select class="input-sm" style="float: left;">
 												<option value="">날짜</option>
@@ -245,7 +267,7 @@
 												style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
 												검색</button>
 										</form>
-									</div>
+									</div> --%>
 									<table id="dailySalesTable"
 										class="table table-striped table-bordered">
 										<thead>
@@ -273,6 +295,7 @@
 									</div>
 									<div class="clearfix"></div>
 									<br/>
+									<div class="ln_solid"></div>
 									<div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/#" method="get">
 											<select class="input-sm" style="float: left;">

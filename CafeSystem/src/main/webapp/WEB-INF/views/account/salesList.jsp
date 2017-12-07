@@ -214,6 +214,7 @@
 									</div>
 									<div class="clearfix"></div>
 									<br/>
+									<div class="ln_solid"></div>
 									<div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/dailySalesSearch" method="get">
 											<select class="input-sm" style="float: left;">
@@ -255,6 +256,7 @@
 									</div>
 									<div class="clearfix"></div>
 									<br/>
+									<div class="ln_solid"></div>
 									<div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/monthlySalesSearch" method="get">
 											<select class="input-sm" style="float: left;">
