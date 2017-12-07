@@ -20,7 +20,10 @@ $(document).ready(function(){
 					 alert('정상 처리되었습니다');
 				}
 			}      
-		});		
+		});	
+		
+		
+		
 });          
 </script>
 

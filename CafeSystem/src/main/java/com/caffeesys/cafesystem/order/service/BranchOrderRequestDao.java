@@ -1,5 +1,6 @@
 package com.caffeesys.cafesystem.order.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,6 @@ public class BranchOrderRequestDao {
 	
 	//리스트(2) 리스트 가져오기
 	public List<BranchOrderRequestVO> selectOderRequestList(BranchOrderRequestVO localShopCode, Map<String, String> map) {
-		
 		logger.debug("[seleteOderRequestList] 매장에 따른 발주리스트 가져오기");	
 		return  sqlSessionTemplate.selectList(NS + "selectOderRequestList",localShopCode);
 	}
@@ -35,8 +35,12 @@ public class BranchOrderRequestDao {
 	//선택전표번호 상세조회
 	public List<BranchOrderRequestVO> selectOrderRequestDetail(String statementNumber) {
 		logger.debug("[selectOrderRequestDetail] 선택 전표번호 상세내용 가져오기 실행");
-		
 		return sqlSessionTemplate.selectList(NS + "selectOrderRequestDetail",statementNumber);		
 	}
 
+	//전표번호 가격 구하기
+	public List<HashMap<String,Object>> selectPrice(String statementNumber) {
+		logger.debug("[selectPrice] 전표번호 가격 구하기 실행");
+		return sqlSessionTemplate.selectList(NS + "selectPrice",statementNumber);		
+	}
 }

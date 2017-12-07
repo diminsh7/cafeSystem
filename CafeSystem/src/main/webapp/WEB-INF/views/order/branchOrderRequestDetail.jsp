@@ -45,7 +45,6 @@ $(document).ready(function(){
 									<th>품명명</th>
 									<th>수량</th>
 									<th>가격</th>
-									<th>발주금액</th>
 									<th>신청일</th>
 									<th>승인일</th>
 									<th>출고일</th>
@@ -65,7 +64,6 @@ $(document).ready(function(){
 									<td>${detail.itemName}</td><!-- 품목명 -->
 									<td>${detail.orderAmount}</td><!-- 수량 -->
 									<td>${detail.orderPrice}</td><!-- 가격 -->
-									<td>${detail.cal}</td><!-- 발주금액 -->
 									<td>${detail.orderRequest}</td><!-- 신청일 -->
 									<td>${detail.orderApproval}</td><!-- 승인일 -->
 									<td>${detail.orderRelease}</td><!-- 출고일 -->

@@ -51,9 +51,11 @@ public class BranchOrderService {
 		String currentDate = commonservice.dateSelect();
 		//전표번호의 지역매장 코드에 해당하는 부분 생성
 		List<HashMap<String, Object>> localShopCode = commonservice.localShopCodeSelect();		
+		System.out.println("localShopCode : " + localShopCode);
 		String localCode = (String) localShopCode.get(0).get("local_category_code"); //지역코드
+		System.out.println("localCode : " + localCode);
 		String shopCode = (String) localShopCode.get(0).get("shop_code"); //매장코드
-		
+		System.out.println("shopCode : " + shopCode);
 		//전표번호 생성
 		String satatementNumber = currentDate + "-" + localCode + shopCode + "-C" + "-01";
 		

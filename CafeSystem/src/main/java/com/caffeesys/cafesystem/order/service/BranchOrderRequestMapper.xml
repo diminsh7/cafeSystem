@@ -95,7 +95,6 @@
 			it.item_name as itemName,
 			od.order_amount, 
 			od.order_price,
-			(order_amount * order_price)as cal,
 			od.receipt_category_code,
 			catereceipt.category_small as cateReceipt,
 			od.order_category_code, 
@@ -121,5 +120,9 @@
 	
 	</select>
 	
-	
+	<select id="selectPrice" resultType="java.util.HashMap" parameterType="String">
+		SELECT order_price
+		FROM `order`
+		WHERE statement_number = #{statementNumber}
+	</select>
 </mapper>

@@ -53,9 +53,11 @@ public class BranchOrderRequestService {
 				map = allService.paging(model,map);
 				
 				String branchEmployeeCode = login.getEmpCode();
-				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode);
-				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map);
+				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode); //지역 매장코드 구하기
+				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map); 
+				
 				System.out.println("orderRequestList : " + orderRequestList);
+				
 				return orderRequestList;
 				
 			}else{
