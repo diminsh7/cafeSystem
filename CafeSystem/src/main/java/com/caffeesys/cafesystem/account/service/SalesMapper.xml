@@ -98,6 +98,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND monthly_sales_date BETWEEN '2017-01-01' AND '2017-12-31'
 		ORDER BY monthly_sales_code asc
 	</select>
+	<select id="selectDailyDateSearchByShop" parameterType="java.util.Map" resultMap="resultDailySales">
+		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
+		FROM daily_sales d, shop s
+		WHERE d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
+		AND d.local_category_code=#{local}
+		AND d.shop_code=#{shop}
+		AND daily_sales_date BETWEEN #{start} AND #{end}
+		ORDER BY daily_sales_code desc
+	</select>
 	<select id="selectFeeList" resultMap="resultFee">
 		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
 		FROM fee f, monthly_sales m, shop s

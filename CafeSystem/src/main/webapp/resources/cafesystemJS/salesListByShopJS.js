@@ -1,3 +1,4 @@
+var dailySalesTable;
 $(document).ready(
 		function() {
 			// 일매출, 월매출 리스트 시작
@@ -13,7 +14,7 @@ $(document).ready(
 				success : function(data) {
 					var list = JSON.parse(data);
 					console.log(data);
-					$('#dailySalesTable').DataTable({
+					dailySalesTable = $('#dailySalesTable').DataTable({
 						processing : true,
 						serverSide : false,
 						data : list,
@@ -198,37 +199,28 @@ $(document).ready(
 				    endDate: '2017-12-09'
 				    },
 				    function(start, end, label) {
-				    	$.ajax({
-				    		url : "/dailyDateSearchJson",
-							type : "json",
-							method : "GET",
-							data : {start : start.format('YYYY-MM-DD'), end : end.format('YYYY-MM-DD')},
-							success : function(data) {
-								console.log("일매출 날짜 검색 에이젝스진입");
-								/*var list = JSON.parse(data);
-								console.log(data);*/
-								/*$('#dailySalesTable').DataTable({
-									processing : true,
-									serverSide : false,
-									data : list,
-									columns : [ {
-										"data" : "dailySalesCode"
-									}, {
-										"data" : "statementNum"
-									}, {
-										"data" : "shopName"
-									}, {
-										"data" : "dailySalesDate"
-									}, {
-										"data" : "dailySalesAmount"
-									} ],
-									order : [ 0, "desc" ]
-								});*/
-							},
-							error : function(request, status, error) {
-								alert('지점 일매출 날짜 검색 실패');
-							}
-				    	});
+				    	console.log("New date range selected: " + start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD') + " (predefined range: " + label + ")");
 				    }
 			);
+			$('input[id="dailyDate"]').on('apply.daterangepicker', function(ev, picker) {
+				$.ajax({
+		    		url : "/dailyDateSearchByShopJson",
+					type : "json",
+					method : "GET",
+					data : {start : picker.startDate.format('YYYY-MM-DD'), end : picker.endDate.format('YYYY-MM-DD')},
+					success : function(data) {
+						var list = JSON.parse(data);
+						dailySalesTable.clear();
+						console.log(list);
+						for(var i=0; i < list.length; i++){
+							var dailySales = list[i];
+							dailySalesTable.row.add(dailySales);
+						}
+						dailySalesTable.draw();
+					},
+					error : function(request, status, error) {
+						alert('지점 일매출 날짜 검색 실패');
+					}
+		    	});
+			  });
 		});

@@ -8,9 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.caffeesys.cafesystem.CommonService;
@@ -118,10 +118,15 @@ public class SalesController {
 	}
 	//지점의 일매출 날짜 검색 json
 	@ResponseBody
-	@RequestMapping(value="/dailyDateSearchJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String jsonDailyDateSearch(@RequestBody String start, @RequestBody String end) {
-		logger.debug("jsonDailyDateSearch method startDate : " + start + ", endDate : " + end);
-		return "";
+	@RequestMapping(value="/dailyDateSearchByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonDailyDateSearchByShop(@RequestParam(value="start", required=true) String start, @RequestParam(value="end", required=true) String end) {
+		logger.debug("jsonDailyDateSearchByShop method startDate : " + start + ", endDate : " + end);
+		Map<String, Object> param = getLocalShopCode();
+		param.put("start", start);
+		param.put("end", end);
+		String list = salesService.selectDailyDateSearchByShop(param);
+		logger.debug("jsonDailyDateSearchByShop method list : " + list);
+		return list;
 	}
 	//지점의 월매출 날짜 검색 json
 	
