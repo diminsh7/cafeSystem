@@ -37,7 +37,13 @@ public class BranchOrderDao {
 		return sqlSessionTemplate.update(NS + "branchOrderCancel", map);
 	}
 	
-	////DB order_cancel에 취소요청한 전표번호 등록(전표번호,취소요청상태,취소신청일)
+	////DB order_cancel에 취소요청한 전표번호 등록(전표번호,취소요청상태,취소신청일)/승인전 취소
+	public int insertBranchOrderDirectCancel(Map<String, String> map) {
+		System.out.println("insertBranchOrderCancel 실행");
+		return sqlSessionTemplate.update(NS + "insertBranchOrderDirectCancel", map);
+	}
+	
+	////DB order_cancel에 취소요청한 전표번호 등록(전표번호,취소요청상태,취소신청일)/승인후 취소
 	public int insertBranchOrderCancel(Map<String, String> map) {
 		System.out.println("insertBranchOrderCancel 실행");
 		return sqlSessionTemplate.update(NS + "insertBranchOrderCancel", map);

@@ -86,12 +86,16 @@
 	</update>
 	
 	<!-- DB order_cancel에 취소 하고싶은전표번호 등록 -->
+	<insert id="insertBranchOrderDirectCancel" parameterType="java.util.Map">
+		INSERT INTO order_cancel
+			(statement_number, receipt_category_code, order_cancel_request, order_refund_able)
+		VALUES (#{statementNumber}, #{receiptCategoryCode}, NOW(), 'N')
+	</insert>
 	<insert id="insertBranchOrderCancel" parameterType="java.util.Map">
 		INSERT INTO order_cancel
 			(statement_number, receipt_category_code, order_cancel_request, order_refund_able)
-		VALUES (#{statementNumber}, '704', NOW(), 'N')
+		VALUES (#{statementNumber}, #{receiptCategoryCode}, NOW(), 'N')
 	</insert>
-	
 	
 	
 </mapper>

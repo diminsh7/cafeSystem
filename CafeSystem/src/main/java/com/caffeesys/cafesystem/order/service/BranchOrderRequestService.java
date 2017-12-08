@@ -70,14 +70,10 @@ public class BranchOrderRequestService {
 					System.out.println("price : " + price);
 					//포문 하다더 만들기 한전표번호에 대해 여러개
 					for(int j = 0; j < price.size(); j++ ) {
-						System.out.println("price.size();" +price.size());
 						int total = 0;
 						Integer sum = (Integer) price.get(j).get("order_price");
-						System.out.println("sum : " + sum);
 						total = total + sum;
-						System.out.println("total : " + total);
 						int cal = orderRequestList.get(i).setCal(total);
-						
 						orderRequestList.get(i).setCalComma(commonService.comma(cal));
 					}
 					/*orderRequestList.add(i, vo);*/
