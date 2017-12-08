@@ -39,11 +39,11 @@
 									for="name">품목명<span>*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<select id="itemCode" name="itemCode">
-										<c:forEach var="ItemNameList" items="${ItemNameList}">
-											<option value='${ItemNameList.itemCode}'>${ItemNameList.itemName}</option>
-										</c:forEach>
-									</select>
+									<input id="itemCode"
+										class="form-control col-md-7 col-xs-12"
+										data-validate-length-range="6" data-validate-words="2"
+										name="itemCode" type="text"
+										value='${ItemName.itemName}' readonly="readonly">
 								</div>
 							</div>
 							<div class="item form-group">

@@ -68,10 +68,12 @@
 		WHERE order_code = #{orderCode}
     </select>
 	<!-- 불량품목등록 item명 가져오는 select(지점) -->
-	<select id="selectFaultyItemName" resultMap="resultFaulty">
-		SELECT item_code, item_name
-		FROM item
-		ORDER BY item_code ASC
+	<select id="selectFaultyItemName" parameterType="int" resultMap="resultFaulty">
+		SELECT o.order_code, i.item_name
+		FROM `order` o
+		INNER JOIN item i
+		ON o.item_code = i.item_code
+		WHERE order_code = #{orderCode}
 	</select>
 	<!-- 불량품목등록 category에서 소분류 가져오는 select(지점) -->
 	<select id="selectFaultyCategorySmall" resultMap="resultFaulty">
