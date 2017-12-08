@@ -27,6 +27,7 @@ public class BranchOrderRequestVO {
 	private String divideName; //발주상태명
 	private String headName; //승인담당자명
 	private String itemName; //품목명
+	private String calComma; //돈에 ,찍기
 	public int getOrderCode() {
 		return orderCode;
 	}
@@ -78,8 +79,8 @@ public class BranchOrderRequestVO {
 	public int getCal() {
 		return cal;
 	}
-	public void setCal(int cal) {
-		this.cal = cal;
+	public int setCal(int cal) {
+		return this.cal = cal;
 	}
 	public String getReceiptCategoryCode() {
 		return receiptCategoryCode;
@@ -165,7 +166,12 @@ public class BranchOrderRequestVO {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	
+	public String getCalComma() {
+		return calComma;
+	}
+	public void setCalComma(String calComma) {
+		this.calComma = calComma;
+	}
 	@Override
 	public String toString() {
 		return "BranchOrderRequestVO [orderCode=" + orderCode + ", statementNumber=" + statementNumber
@@ -176,15 +182,14 @@ public class BranchOrderRequestVO {
 				+ ", orderRelease=" + orderRelease + ", headEmployeeCode=" + headEmployeeCode + ", orderFaultyAble="
 				+ orderFaultyAble + ", branchEmployeeCode=" + branchEmployeeCode + ", cateReceipt=" + cateReceipt
 				+ ", cateOrder=" + cateOrder + ", shopName=" + shopName + ", divideName=" + divideName + ", headName="
-				+ headName + ", itemName=" + itemName + "]";
+				+ headName + ", itemName=" + itemName + ", calComma=" + calComma + "]";
 	}
-	
 	public BranchOrderRequestVO(int orderCode, String statementNumber, String orderFaultyDivide,
 			String localCategoryCode, String shopCode, String itemCode, int orderAmount, int orderPrice, int cal,
 			String receiptCategoryCode, String orderCategoryCode, Date orderRequest, Date orderApproval,
 			Date orderRelease, String headEmployeeCode, char orderFaultyAble, String branchEmployeeCode,
-			String cateReceipt, String cateOrder, String shopName, String divideName, String headName,
-			String itemName) {
+			String cateReceipt, String cateOrder, String shopName, String divideName, String headName, String itemName,
+			String calComma) {
 		super();
 		this.orderCode = orderCode;
 		this.statementNumber = statementNumber;
@@ -209,10 +214,12 @@ public class BranchOrderRequestVO {
 		this.divideName = divideName;
 		this.headName = headName;
 		this.itemName = itemName;
+		this.calComma = calComma;
 	}
-	
 	public BranchOrderRequestVO() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
+	
 	
 }

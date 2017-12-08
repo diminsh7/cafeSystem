@@ -23,7 +23,7 @@ public class BranchOrderRequestController {
 
 	
 	//지점에  따른 리스트 출력
-	@RequestMapping(value = "/branchOrderRequestList", method = RequestMethod.GET)
+	@RequestMapping(value = "/branchOrderRequestList")
 	public String seleteBranchOrderRequestList(Model model,HttpSession session
 			, @RequestParam(value="cate", required=false) String cate
 			, @RequestParam(value="input", required=false) String input) throws IOException{

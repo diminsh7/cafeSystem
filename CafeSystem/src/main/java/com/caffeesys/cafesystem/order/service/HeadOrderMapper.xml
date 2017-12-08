@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.order.service.HeadOrderMapper">
+	<!-- HeadOrderVO -->
 	<resultMap type="com.caffeesys.cafesystem.order.service.HeadOrderVO" id="resultHeadOrder">
 		<result property="orderCode" column="order_code"/>
 		<result property="statementNumber" column="statement_number"/>
@@ -26,8 +27,23 @@
 		<result property="orderCateName" column="orderCateName"/>
 	</resultMap>
 
+	<!-- HeadOrderCancelVO -->
+	<resultMap type="com.caffeesys.cafesystem.order.service.HeadOrderCancelVO" id="resultHeadOrderCancel">
+		<result property="orderCancelCode" column="order_cancel_code"/>
+		<result property="statementNumber" column="statement_number"/>
+		<result property="receiptCateCode" column="receipt_category_code"/>
+		<result property="orderRefundStatement" column="order_refund_statement"/>
+		<result property="orderCancelRequest" column="order_cancel_request"/>
+		<result property="orderCancelApproval" column="order_cancel_approval"/>
+		<result property="headEmployeeCode" column="head_employee_code"/>
+		<result property="orderRefundAble" column="order_refund_able"/>
+		<result property="orderRefundDate" column="order_refund_date"/>
+		<result property="orderRefundAdmin" column="order_refund_admin"/>
+		<result property="receiptCateName" column="receiptCateName"/>
+	</resultMap>
+
 	<!-- 본사 입장에서의 발주 리스트 페이지 요청 (취소신청, 취소승인 건 제외) -->
-	<select id="headOrderList" resultMap="resultHeadOrder">
+	<select id="headOrderList" resultMap="resultHeadOrder" parameterType="java.util.Map">
 		SELECT
 			order_code
 			, statement_number
@@ -68,6 +84,9 @@
 			statement_number
 		ORDER BY
 			order_code DESC
+		<if test="start != null">
+			LIMIT ${start}, ${pagePerRow}
+		</if>		
 	</select>
 	
 	<!-- headOrderList 페이징을 위한 글 갯수 -->
@@ -115,6 +134,67 @@
 			statement_number = #{statementNumber}	
 	</select>
 	
+	<!-- 본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함) -->
+	<select id="headOrderCancelList" resultMap="resultHeadOrderCancel" parameterType="java.util.Map">
+		SELECT
+			order_cancel_code
+			, statement_number
+			, receipt_category_code
+			, order_refund_statement
+			, order_cancel_request
+			, order_cancel_approval
+			, head_employee_code
+			, order_refund_able
+			, order_refund_date
+			, order_refund_admin
+			, CATE.category_small AS receiptCateName
+		FROM
+			order_cancel AS OC
+			INNER JOIN category AS CATE
+			ON OC.receipt_category_code = CATE.category_code
+		GROUP BY 
+			statement_number
+		ORDER BY
+			order_cancel_code DESC
+		<if test="start != null">
+			LIMIT ${start}, ${pagePerRow}
+		</if>
+	</select>
+	
+	<!-- 발주취소 내용 정보를 함께 표시하기 위한 정보 요청 -->
+	<select id="headOrderCancelDetail" parameterType="String" resultMap="resultHeadOrderCancel">
+		SELECT
+				order_cancel_code
+				, statement_number
+				, receipt_category_code
+				, order_refund_statement
+				, order_cancel_request
+				, order_cancel_approval
+				, head_employee_code
+				, order_refund_able
+				, order_refund_date
+				, order_refund_admin
+				, CATE.category_small AS receiptCateName
+			FROM
+				order_cancel AS OC
+				INNER JOIN category AS CATE
+				ON OC.receipt_category_code = CATE.category_code
+			WHERE
+				statement_number = #{statementNumber}	
+			GROUP BY 
+				statement_number
+			ORDER BY
+				order_cancel_code DESC
+	</select>
+	
+	<!-- headOrderCancelList 페이징을 위한 글 갯수 -->
+	<select id="headOrderCancelCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT
+			COUNT(DISTINCT statement_number)
+		FROM 
+			order_cancel
+	</select>
+	
 	<!-- 발주승인 -->
 	<update id="headOrderPro" parameterType="java.util.Map">
 		UPDATE
@@ -133,7 +213,7 @@
 			order_cancel
 		SET
 			receipt_category_code = #{receiptCategoryCode}
-			, order_cancel_approval = now();
+			, order_cancel_approval = now()
 			, head_employee_code = #{headEmployeeCode}
 		WHERE
 			statement_number = #{statementNumber}
@@ -146,11 +226,20 @@
 		SET
 			order_refund_statement = #{refundStatementNumber}
 			, order_refund_able = #{orderRefundAble}
-			, order_refund_date = now();
+			, order_refund_date = now()
 			, order_refund_admin = #{orderRefundAdmin}
 		WHERE
 			statement_number = #{statementNumber}
 	</update>
+	
+	<select id="localShopCode" parameterType="String" resultType="String">
+		SELECT DISTINCT
+			CONCAT(local_category_code, shop_code)
+		FROM
+			`order`
+		WHERE
+			statement_number = #{statementNumber}
+	</select>
 	
 	<!-- 배송상태 변경 -->
 	<update id="headOrderDelivery" parameterType="java.util.Map">
@@ -158,6 +247,7 @@
 			`order`
 		SET
 			order_category_code = #{orderDeliveryCode}
+			, order_release = now()
 		WHERE
 			statement_number = #{statementNumber}
 	</update>

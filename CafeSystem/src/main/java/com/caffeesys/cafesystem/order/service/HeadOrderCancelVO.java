@@ -4,11 +4,11 @@ public class HeadOrderCancelVO {
 	private int orderCancelCode; // 발주취소 관리코드
 	private String statementNumber; // 전표번호
 	private String receiptCateCode; // 접수상태번호
-	private String orderRefundStatement; // 환불전표번호
 	private String orderCancelRequest; // 취소신청일
 	private String orderCancelApproval; // 취소승인일
 	private String headEmployeeCode; // 취소승인 담당자
 	private String orderRefundAble; // 환불여부
+	private String orderRefundStatement; // 환불전표번호
 	private String orderRefundDate; // 환불날짜
 	private String orderRefundAdmin; // 환불승인 담당자
 	// ---------↑DB용↑-----↓View용↓-------------
