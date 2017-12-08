@@ -21,7 +21,22 @@ public class HeadSalaryDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
-	
+	//상세데이터 select //수정하기위해 select
+	public HeadSalaryVO selectHeadSalaryDetail(String headSalaryCode) {
+		logger.debug("selectHeadSalaryDetail 메소드의 headSalaryCode :{}",headSalaryCode);
+		logger.debug("selectHeadSalaryDetail 리턴 확인 :{}",sqlSessionTemplate.selectOne(NS +"selectHeadSalaryDetail", headSalaryCode));
+		return sqlSessionTemplate.selectOne(NS +"selectHeadSalaryDetail", headSalaryCode);
+	}
+			
+	//삭제처리
+	public int headSalaryDelete(String headSalaryCode) {
+		return sqlSessionTemplate.delete(NS +"headSalaryDelete",headSalaryCode);
+	}
+	//수정처리
+	public int headSalaryUpdate(HeadSalaryVO headSalary) {
+		logger.debug("headSalaryUpdate 메소드의 headSalary :{}",headSalary);
+		return sqlSessionTemplate.update(NS + "headSalaryUpdate",headSalary);
+	}
 	//검색된 레코드 개수
 	public int headSalaryCount(Map<String, String> map) {
 		logger.debug("headSalaryCount메소드 확인");

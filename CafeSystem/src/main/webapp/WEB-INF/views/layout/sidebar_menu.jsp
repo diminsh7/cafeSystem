@@ -25,12 +25,11 @@
 					<li><a href="${pageContext.request.contextPath}/MaterialList">메뉴재료원가</a></li>
 					<li><a href="${pageContext.request.contextPath}/menuPriceList">메뉴가격관리</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span
-					class="fa fa-chevron-down"></span></a>
+			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">발주품목</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">발주신청내역</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">발주취소내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/item">발주품목</a></li>
+					<li><a href="${pageContext.request.contextPath}/headOrderList">발주신청내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/headOrderCancelList">발주취소내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">불량품목신청내역</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-krw"></i> 매출 및 회계관리 <span

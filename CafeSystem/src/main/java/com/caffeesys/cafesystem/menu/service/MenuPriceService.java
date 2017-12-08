@@ -60,10 +60,10 @@ public class MenuPriceService {
 		}
 		
 		map = commonService.paging(model, currentPage, 2, menuPriceDao.menuPriceCount(map), map);
-		System.out.println("[MenuPriceService.java / menuPriceList.method] Paging 완료");
+		//System.out.println("[MenuPriceService.java / menuPriceList.method] Paging 완료");
 		List<MenuPriceVO> list = menuPriceDao.menuPriceList(map);
 		model.addAttribute("menuPriceList", list);
-		System.out.println("[MenuPriceService.java / menuPriceList.method] Complete");
+		//System.out.println("[MenuPriceService.java / menuPriceList.method] Complete");
 		//session.setAttribute("top", "menuPrice");
 	}
 	

@@ -17,7 +17,8 @@ public class HeadOrderVO {
 	private String headEmployeeCode; // 발주승인담당자
 	private String orderFaultyAble; // 불량여부
 	// ----↑DB↑---------↓VIEW↓--------
-	private String shopName; // 지역매장 번호
+	private String shopName; // 지역매장명
+	private String localShopCode; // 환불전표번호 생산용
 	private String faultyDivideName; // 발주,불량 구분명
 	private String itemName; // 품목명
 	private String receiptCateName; // 접수상태코드명
@@ -32,8 +33,17 @@ public class HeadOrderVO {
 				+ ", receiptCateCode=" + receiptCateCode + ", orderCateCode=" + orderCateCode + ", orderRequest="
 				+ orderRequest + ", orderApproval=" + orderApproval + ", orderRelease=" + orderRelease
 				+ ", headEmployeeCode=" + headEmployeeCode + ", orderFaultyAble=" + orderFaultyAble + ", shopName="
-				+ shopName + ", faultyDivideName=" + faultyDivideName + ", itemName=" + itemName + ", receiptCateName="
-				+ receiptCateName + ", orderCateName=" + orderCateName + ", orderPriceComma=" + orderPriceComma + "]";
+				+ shopName + ", localShopCode=" + localShopCode + ", faultyDivideName=" + faultyDivideName
+				+ ", itemName=" + itemName + ", receiptCateName=" + receiptCateName + ", orderCateName=" + orderCateName
+				+ ", orderPriceComma=" + orderPriceComma + "]";
+	}
+
+	public String getLocalShopCode() {
+		return localShopCode;
+	}
+
+	public void setLocalShopCode(String localShopCode) {
+		this.localShopCode = localShopCode;
 	}
 
 	public int getOrderCode() {

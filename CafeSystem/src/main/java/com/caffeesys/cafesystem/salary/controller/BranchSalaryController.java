@@ -69,10 +69,10 @@ public class BranchSalaryController {
 	
 	//지점직원 급여명세서 수정 폼
 	@RequestMapping(value="branchSalaryUpdate")
-	public String selectbranchSalaryUpdate(Model model
+	public String selectBranchSalaryUpdate(Model model
 			,@RequestParam(value="branchSalaryCode", required=true) String branchSalaryCode) {
 		logger.debug("branchSalaryUpdate메소드의 branchSalaryCode 확인 :{}",branchSalaryCode);
-		branchSalaryService.selectbranchSalaryUpdate(model, branchSalaryCode);
+		branchSalaryService.selectBranchSalaryUpdate(model, branchSalaryCode);
 		return "/salary/branchSalaryUpdateForm";
 	}
 	//지점직원 급여명세서 수정 처리
@@ -81,13 +81,22 @@ public class BranchSalaryController {
 		logger.debug("branchSalaryUpdate 메소드의 branchSalary :{}",branchSalary);
 		branchSalaryService.branchSalaryUpdate(branchSalary);
 		return "redirect:/branchSalaryList";	
+	}	
+	
+	//삭제하기위해 로그인정보 갖고오기
+	@ResponseBody
+	@RequestMapping(value="SelectLoginInfoForDelete")
+	public String SelectLoginInfoForDelete() {
+		logger.debug("SelectLoginInfoForDelete메소드 확인");
+		return branchSalaryService.SelectLoginInfoForDelete();
 	}
-
-	//지점직원 급여명세서 수정처리
 	
-	//지점직원 급여명세서 삭제
-	
-	
-	
-
+	//삭제처리
+	@RequestMapping(value="branchSalaryDelete")
+	public String branchSalaryDelete(@RequestParam(value="branchSalaryCode", required=true)String branchSalaryCode) {
+		logger.debug("branchSalaryDelete 메소드 확인");
+		logger.debug("branchSalaryDelete 메소드 branchSalaryCode :{}",branchSalaryCode);
+		branchSalaryService.branchSalaryDelete(branchSalaryCode);
+		return"redirect:/branchSalaryList";
+	}
 }

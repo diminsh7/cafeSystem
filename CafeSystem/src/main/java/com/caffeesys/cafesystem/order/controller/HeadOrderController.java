@@ -38,14 +38,14 @@ public class HeadOrderController {
 		return "order/headOrderDetail";
 	}
 	
-	//본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함) -> Service부터 작업해야함 Controller만 있는 상태
+	//본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함)
 	@RequestMapping("headOrderCancelList")
 	public String headOrderCancelList(Model model
 			, @RequestParam(value="cate", required=false) String cate
 			, @RequestParam(value="input", required=false) String input
 			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
-		logger.debug("[HeadOrderController.java / headOrderList.method] Access");
-		//headOrderService.headOrderList(model, currentPage, cate, input);
+		logger.debug("[HeadOrderController.java / headOrderCancelList.method] Access");
+		headOrderService.headOrderCancelList(model, currentPage, cate, input);
 		return "order/headOrderCancelList";
 	}
 	
@@ -54,16 +54,15 @@ public class HeadOrderController {
 	public String headOrderPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / headOrderPro.method] Access");
 		headOrderService.headOrderPro(statementNumber);
-		return "redirect:/headOrderList";
-		//return "redirect:/headOrderList";
+		return "redirect:/headOrderDetail?statementNumber="+statementNumber;
 	}
 	
-	//취소승인(order_cancel 테이블로 입력)
+	//취소승인
 	@RequestMapping("headOrderCancel")
 	public String orderCancelPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / orderCancelPro.method] Access");
 		headOrderService.headOrderCancelPro(statementNumber);
-		return "redirect:/headOrderList";
+		return "redirect:/headOrderDetail?statementNumber="+statementNumber;
 	}
 	
 	//환불승인
@@ -71,17 +70,15 @@ public class HeadOrderController {
 	public String orderRefundPro(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / orderRefundPro.method] Access");
 		headOrderService.headOrderRefundPro(statementNumber);
-		return "redirect:/headOrderList";
+		return "redirect:/headOrderDetail?statementNumber="+statementNumber;
 	}
 	
 	//배송상태 변경 || orderDeliveryCode 변수명 주의 !! DB에는 order_category_code로 되어있음!
 	@RequestMapping("headOrderDelivery")
-	public String orderDelivery(@RequestParam(value="statementNumber", required=true) String statementNumber
-			,@RequestParam(value="orderDeliveryCode", required=true) String orderDeliveryCode) {
+	public String orderDelivery(@RequestParam(value="statementNumber", required=true) String statementNumber) {
 		logger.debug("[HeadOrderController.class / orderDelivery.method] Access");
-		headOrderService.orderDelivery(statementNumber, orderDeliveryCode);
+		headOrderService.orderDelivery(statementNumber);
 		return "redirect:/headOrderList";
 	}
 	
-	//불량처리(Order 테이블에 새로운 전표번호가 발급되면서 Insert 되는 형식?)
 }

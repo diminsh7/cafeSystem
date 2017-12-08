@@ -38,11 +38,6 @@
 							</li>
 						</ul>
 						<input type="submit" value="조회">
-						<%-- <!-- <div name="searchOption"> -->
-						직원 코드 검색: <input name="keyword" value="${keyword}"> 
-						<input type="submit" value="조회">
-						<div value="searchOption" value="head_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
-						<input type="submit" value="조회">	 --%>			
 					</form>
 					<!-- 레코드의 갯수를 출력 -->
 					${headSalaryCount}개의 게시물이 있습니다.
@@ -68,7 +63,7 @@
 								<td>${headSalaryList.headSalaryPayments}</td>
 								<td>${headSalaryList.headSalaryDeduction}</td>
 								<td>${headSalaryList.headSalaryReceipts}</td>
-								<td><a href="${pageContext.request.contextPath}/headSalaryDetail?headEmployeeCode=${headSalaryList.headEmployeeCode}">상세보기</a></td>
+								<td><a href="${pageContext.request.contextPath}/headSalaryDetail?headSalaryCode=${headSalaryList.headSalaryCode}">상세보기</a></td>
 							</tr>
 						</c:forEach>
 					</table>
