@@ -67,9 +67,9 @@
 		FROM `order`
 		WHERE order_code = #{orderCode}
     </select>
-	<!-- 불량품목등록 item명 가져오는 select(지점) -->
-	<select id="selectFaultyItemName" parameterType="int" resultMap="resultFaulty">
-		SELECT o.order_code, i.item_name
+	<!-- 불량품목등록 item코드 가져오는 select(지점) -->
+	<select id="selectFaultyItemCode" parameterType="int" resultMap="resultFaulty">
+		SELECT o.order_code, i.item_code
 		FROM `order` o
 		INNER JOIN item i
 		ON o.item_code = i.item_code
