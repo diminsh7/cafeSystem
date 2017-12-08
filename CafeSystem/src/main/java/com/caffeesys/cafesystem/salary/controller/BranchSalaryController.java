@@ -81,13 +81,6 @@ public class BranchSalaryController {
 		logger.debug("branchSalaryUpdate 메소드의 branchSalary :{}",branchSalary);
 		branchSalaryService.branchSalaryUpdate(branchSalary);
 		return "redirect:/branchSalaryList";	
-	}
-
-	//지점직원 급여명세서 수정처리
-	
+	}	
 	//지점직원 급여명세서 삭제
-	
-	
-	
-
 }

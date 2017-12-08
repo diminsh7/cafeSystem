@@ -33,22 +33,42 @@ public class HeadSalaryService {
 	
 	Gson gson = new Gson();
 	
+	//급여명세서 수정하기위해 select
+	public HeadSalaryVO selectHeadSalaryUpdate(Model model, String headSalaryCode) {
+		logger.debug("selectHeadSalaryUpdate메소드의 headEmployeeCode :{}",headSalaryCode);
+		HeadSalaryVO headSalary = headSalaryDao.selectHeadSalaryDetail(headSalaryCode);
+		model.addAttribute("headSalary",headSalary);
+		return headSalary;
+	}
+	//급여명세서 수정 처리
+	public void headSalaryUpdate(HeadSalaryVO headSalary) {
+		logger.debug("headSalaryInsert 메소드의 headSalary :{}",headSalary);
+		headSalaryDao.headSalaryUpdate(headSalary);
+	}
+	
+	//급여명세서 상세데이터 보여주기위해 select
+	public HeadSalaryVO selectHeadSalaryDetail(Model model, String headSalaryCode) {
+		logger.debug("selectHeadSalaryDetail메소드의 headEmployeeCode :{}",headSalaryCode);
+		HeadSalaryVO headSalary = headSalaryDao.selectHeadSalaryDetail(headSalaryCode);
+		model.addAttribute("headSalary",headSalary);
+		return headSalary;
+	}
 	//검색한 급여명세서 list 
-		public void headSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
-			logger.debug("headSalaryList메소드 확인");
-			Map<String, String> map;
-			if(keyword1 != "") {
-				map = new HashMap<String, String>();
-				map.put("keyword1", keyword1);
-				map.put("keyword2", keyword2);			
-			}else {
-				map = null;
-			}
-			logger.debug("headSalaryList 메소드의  map :{}",map);//{keyword=2017-09, searchOption=head_salary_workmonth}
-			map = pasingService.paging(model, currentPage, 10, headSalaryDao.headSalaryCount(map), map);
-			model.addAttribute("headSalaryCount",headSalaryDao.headSalaryCount(map));
-			model.addAttribute("headSalaryList",headSalaryDao.headSalaryList(map));
+	public void headSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
+		logger.debug("headSalaryList메소드 확인");
+		Map<String, String> map;
+		if(keyword1 != "") {
+			map = new HashMap<String, String>();
+			map.put("keyword1", keyword1);
+			map.put("keyword2", keyword2);			
+		}else {
+			map = null;
 		}
+		logger.debug("headSalaryList 메소드의  map :{}",map);//{keyword=2017-09, searchOption=head_salary_workmonth}
+		map = pasingService.paging(model, currentPage, 10, headSalaryDao.headSalaryCount(map), map);
+		model.addAttribute("headSalaryCount",headSalaryDao.headSalaryCount(map));
+		model.addAttribute("headSalaryList",headSalaryDao.headSalaryList(map));
+	}
 	
 	//본사 직원 급여명세서 등록 폼에 쓸 직원 코드 가져오는 메소드
 	public void headCodeList(Model model){

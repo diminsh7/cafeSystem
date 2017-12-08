@@ -21,7 +21,36 @@
 		<result column="head_employee_birth" property="headEmployeeBirth"/>		<!-- 본사직원 생년월일 -->
 		<result column="category_small"	property="categoryDepartment"/>			<!-- 부서 -->
   	</resultMap>
-  	
+  	<!--수정 update  -->
+  	<update id="headSalaryUpdate" parameterType="com.caffeesys.cafesystem.salary.service.HeadSalaryVO">
+  		UPDATE head_salary 
+		SET head_employee_salary = #{headEmployeeSalary}
+			,head_salary_health = #{headSalaryHealth}
+			,head_salary_insurance = #{headSalaryInsurance}
+			,head_salary_persion = #{headSalaryPersion}
+			,head_salary_payments= #{headSalaryPayments}
+			,head_salary_deduction= #{headSalaryDeduction}
+			,head_salary_receipts= #{headSalaryReceipts}
+			,head_salary_paydate= #{headSalaryPaydate}
+		WHERE 	head_salary_code = #{headSalaryCode}
+  	</update>
+  	<!-- 디테일 select, 수정하기위해 select -->
+  	<select id="selectHeadSalaryDetail" parameterType="String" resultMap="resultHeadSalary">
+  		select head_salary_code
+			, head_employee_code
+			, DATE_FORMAT(head_salary_workmonth,'%Y-%m') as head_salary_workmonth
+			, head_employee_salary
+			, head_salary_bonus
+			, head_salary_health
+			, head_salary_insurance
+			, head_salary_persion
+			, head_salary_payments
+			, head_salary_deduction
+			, head_salary_receipts
+			, head_salary_paydate
+		FROM head_salary
+		WHERE head_salary_code = #{headSalaryCode}
+  	</select>
   	
   	<!-- 계정과목의 head_salary_code컬럼에서 글자말고, 오른쪽 숫자의 최대값 select -->
 	<select id="headSalaryCodeMax" resultType="Integer">
@@ -68,6 +97,7 @@
 			, hs.head_salary_payments
 			, hs.head_salary_deduction
 			, hs.head_salary_receipts	
+			, hs.head_salary_code
 	    FROM head_salary hs 
 	    INNER JOIN head_employee he
 			ON hs.head_employee_code = he.head_employee_code

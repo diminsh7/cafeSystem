@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-	
+
 import com.caffeesys.cafesystem.salary.service.HeadSalaryService;
 import com.caffeesys.cafesystem.salary.service.HeadSalaryVO;
 
@@ -61,5 +61,29 @@ public class HeadSalaryController {
 		return headSalaryService.headEmployeeSalaryInsert(headCodeList);
 	}
 	
+	//본사직원 급여명세서 상세정보 보여주기 form
+	@RequestMapping(value="headSalaryDetail")
+	public String headSalaryDetail(Model model
+			,@RequestParam(value="headSalaryCode", required=true)String headSalaryCode) {
+		logger.debug("headSalaryDetail메소드 확인 headSalaryCode :{}",headSalaryCode);
+		headSalaryService.selectHeadSalaryDetail(model,headSalaryCode);
+		return "/salary/headSalaryDetailForm";
+	}
 	
+	//본사직원 급여명세서 수정 폼
+	@RequestMapping(value="headSalaryUpdate")
+	public String selectHeadSalaryUpdate(Model model
+			,@RequestParam(value="headSalaryCode", required=true) String headSalaryCode) {
+		logger.debug("selectHeadSalaryUpdate메소드의 headSalaryCode 확인 :{}",headSalaryCode);
+		headSalaryService.selectHeadSalaryUpdate(model, headSalaryCode);
+		return "/salary/headSalaryUpdateForm";
+	}
+	//본사직원 급여명세서 수정 처리
+	@RequestMapping(value="headSalaryUpdate", method = RequestMethod.POST )
+	public String headSalaryUpdate(HeadSalaryVO headSalary) {
+		logger.debug("headSalaryUpdate 메소드의 headSalary :{}",headSalary);
+		headSalaryService.headSalaryUpdate(headSalary);
+		return "redirect:/headSalaryList";	
+	}
+
 }
