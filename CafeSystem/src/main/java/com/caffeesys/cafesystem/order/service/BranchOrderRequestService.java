@@ -39,10 +39,9 @@ public class BranchOrderRequestService {
 	public List<BranchOrderRequestVO> selectBranchOrderRequestList(Model model,HttpSession session, String cate, String input) throws IOException{
 		System.out.println("BranchOrderRequestService.seleteBranchOrderRequestList 실행");
 		System.out.println("session : " + session.getAttribute("loginInfo"));
-		Object se = session.getAttribute("loginInfo");
-		if(se != null) {
-			LoginVO login = (LoginVO) session.getAttribute("loginInfo");
-			System.out.println("login.getPosition() : " + login.getPosition());
+		
+		LoginVO login = (LoginVO) session.getAttribute("loginInfo");
+	
 			if(login.getPosition().equals("201") || login.getPosition().equals("202")) {
 				System.out.println("점주 또는 매니져 권한으로 발주주문내역 확인 가능");
 				Map<String, String> map;
@@ -74,9 +73,8 @@ public class BranchOrderRequestService {
 						Integer sum = (Integer) price.get(j).get("order_price");
 						total = total + sum;
 						int cal = orderRequestList.get(i).setCal(total);
-						orderRequestList.get(i).setCalComma(commonService.comma(cal));
+						orderRequestList.get(j).setCalComma(commonService.comma(cal));
 					}
-					/*orderRequestList.add(i, vo);*/
 				};
 				
 				
@@ -91,13 +89,6 @@ public class BranchOrderRequestService {
 				out.println("<script>alert('각 지점의 점주,매니져만 확인이 가능합다.'); history.go(-1);</script>");
 				out.flush();
 			}
-		}else {
-			System.out.println("로그인이 되어 있지 않음");
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인이 되어 있지 않습니다.'); history.go(-1);</script>");
-			out.flush();
-		}
 		return null;
 	}
 	

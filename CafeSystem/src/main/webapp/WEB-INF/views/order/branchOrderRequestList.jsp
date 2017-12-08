@@ -56,7 +56,7 @@ $(document).ready(function(){
 										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
 										<option value="statement_number" class="input-sm">전표번호</option>
 										<option value="aa" class="input-sm">제품명</option>
-										<option value="order_request" class="input-sm">발주신청일</option>
+										<!-- <option value="order_request" class="input-sm">발주신청일</option> -->
 										<option value="divideName" class="input-sm">발주상태명</option>
 										<option value="" class="input-sm">배송상태</option>
 									</select>
