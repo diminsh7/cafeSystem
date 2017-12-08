@@ -3,14 +3,125 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.caffeesys.cafesystem.order.service.HeadOrderMapper">
+	<resultMap type="com.caffeesys.cafesystem.order.service.HeadOrderVO" id="resultHeadOrder">
+		<result property="orderCode" column="order_code"/>
+		<result property="statementNumber" column="statement_number"/>
+		<result property="orderFaultyDivide" column="order_faulty_divide"/>
+		<result property="localCategoryCode" column="local_category_code"/>
+		<result property="shopCode" column="shop_code"/>
+		<result property="itemCode" column="item_code"/>
+		<result property="orderAmount" column="order_amount"/>
+		<result property="orderPrice" column="order_price"/>
+		<result property="receiptCateCode" column="receipt_category_code"/>
+		<result property="orderCateCode" column="order_category_code"/>
+		<result property="orderRequest" column="order_request"/>
+		<result property="orderApproval" column="order_approval"/>
+		<result property="orderRelease" column="order_release"/>
+		<result property="headEmployeeCode" column="head_employee_code"/>
+		<result property="orderFaultyAble" column="order_faulty_able"/>
+		<result property="shopName" column="shopName"/>
+		<result property="faultyDivideName" column="faultyDivideName"/>
+		<result property="itemName" column="itemName"/>
+		<result property="receiptCateName" column="receiptCateName"/>
+		<result property="orderCateName" column="orderCateName"/>
+	</resultMap>
+
+	<!-- 본사 입장에서의 발주 리스트 페이지 요청 (취소신청, 취소승인 건 제외) -->
+	<select id="headOrderList" resultMap="resultHeadOrder">
+		SELECT
+			order_code
+			, statement_number
+			, order_faulty_divide
+			, `order`.local_category_code
+			, `order`.shop_code
+			, `order`.item_code
+			, order_amount
+			, order_price
+			, receipt_category_code
+			, order_category_code
+			, order_request
+			, order_approval
+			, order_release
+			, head_employee_code
+			, order_faulty_able
+			, statement.statement_name AS faultyDivideName
+			, shop.shop_name AS shopName
+			, item.item_name AS itemName
+			, receiptCate.category_small AS receiptCateName
+			, orderCate.category_small AS orderCateName
+		FROM 
+			`order`
+			INNER JOIN statement
+				ON `order`.order_faulty_divide = statement.statement_code
+			INNER JOIN shop
+				ON `order`.local_category_code = shop.local_category_code 
+					AND `order`.shop_code = shop.shop_code	
+			INNER JOIN item
+				ON `order`.item_code = item.item_code
+			INNER JOIN category AS receiptCate
+				ON `order`.receipt_category_code = receiptCate.category_code
+			INNER JOIN category AS orderCate
+				ON	`order`.order_category_code = orderCate.category_code
+		WHERE
+			receipt_category_code &lt;&gt; '704' AND '705'
+		GROUP BY 
+			statement_number
+		ORDER BY
+			order_code DESC
+	</select>
+	
+	<!-- headOrderList 페이징을 위한 글 갯수 -->
+	<select id="headOrderCount" parameterType="java.util.Map" resultType="Integer">
+		SELECT
+			COUNT(DISTINCT statement_number)
+		FROM 
+			`order`
+		WHERE
+			receipt_category_code &lt;&gt; '704' AND '705'
+	</select>
+	
+	<!-- 본사 입장의 발주 내용 상세보기 페이지 요청 -->
+	<select id="headOrderDetail" parameterType="String" resultMap="resultHeadOrder">
+		SELECT
+			statement_number
+			, order_amount
+			, order_price
+			, receipt_category_code
+			, order_category_code
+			, order_request
+			, order_approval
+			, order_release
+			, head_employee_code
+			, order_faulty_able
+			, statement.statement_name AS faultyDivideName
+			, shop.shop_name AS shopName
+			, item.item_name AS itemName
+			, receiptCate.category_small AS receiptCateName
+			, orderCate.category_small AS orderCateName
+		FROM 
+			`order`
+			INNER JOIN statement
+				ON `order`.order_faulty_divide = statement.statement_code
+			INNER JOIN shop
+				ON `order`.local_category_code = shop.local_category_code 
+					AND `order`.shop_code = shop.shop_code	
+			INNER JOIN item
+				ON `order`.item_code = item.item_code
+			INNER JOIN category AS receiptCate
+				ON `order`.receipt_category_code = receiptCate.category_code
+			INNER JOIN category AS orderCate
+				ON	`order`.order_category_code = orderCate.category_code
+		WHERE
+			statement_number = #{statementNumber}	
+	</select>
 	
 	<!-- 발주승인 -->
 	<update id="headOrderPro" parameterType="java.util.Map">
 		UPDATE
-			'order'
+			`order`
 		SET
 			receipt_category_code = #{receiptCategoryCode} <!-- 발주승인/결제완료 = 703 -->
-			, order_approval = now(); <!-- 승인일 입력 -->
+			, order_approval = now() <!-- 승인일 입력 -->
 			, head_employee_code = #{headEmployeeCode} <!-- 발주승인 담당자 입력 -->
 		WHERE
 			statement_number = #{statementNumber}
@@ -44,7 +155,7 @@
 	<!-- 배송상태 변경 -->
 	<update id="headOrderDelivery" parameterType="java.util.Map">
 		UPDATE
-			'order'
+			`order`
 		SET
 			order_category_code = #{orderDeliveryCode}
 		WHERE

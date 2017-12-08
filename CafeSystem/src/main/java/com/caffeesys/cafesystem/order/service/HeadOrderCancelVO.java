@@ -3,7 +3,7 @@ package com.caffeesys.cafesystem.order.service;
 public class HeadOrderCancelVO {
 	private int orderCancelCode; // 발주취소 관리코드
 	private String statementNumber; // 전표번호
-	private String receiptCategoryCode; // 접수상태번호
+	private String receiptCateCode; // 접수상태번호
 	private String orderRefundStatement; // 환불전표번호
 	private String orderCancelRequest; // 취소신청일
 	private String orderCancelApproval; // 취소승인일
@@ -17,7 +17,7 @@ public class HeadOrderCancelVO {
 	@Override
 	public String toString() {
 		return "HeadOrderCancelVO [orderCancelCode=" + orderCancelCode + ", statementNumber=" + statementNumber
-				+ ", receiptCategoryCode=" + receiptCategoryCode + ", orderRefundStatement=" + orderRefundStatement
+				+ ", receiptCateCode=" + receiptCateCode + ", orderRefundStatement=" + orderRefundStatement
 				+ ", orderCancelRequest=" + orderCancelRequest + ", orderCancelApproval=" + orderCancelApproval
 				+ ", headEmployeeCode=" + headEmployeeCode + ", orderRefundAble=" + orderRefundAble
 				+ ", orderRefundDate=" + orderRefundDate + ", orderRefundAdmin=" + orderRefundAdmin
@@ -40,12 +40,12 @@ public class HeadOrderCancelVO {
 		this.statementNumber = statementNumber;
 	}
 
-	public String getReceiptCategoryCode() {
-		return receiptCategoryCode;
+	public String getReceiptCateCode() {
+		return receiptCateCode;
 	}
 
-	public void setReceiptCategoryCode(String receiptCategoryCode) {
-		this.receiptCategoryCode = receiptCategoryCode;
+	public void setReceiptCateCode(String receiptCateCode) {
+		this.receiptCateCode = receiptCateCode;
 	}
 
 	public String getOrderRefundStatement() {

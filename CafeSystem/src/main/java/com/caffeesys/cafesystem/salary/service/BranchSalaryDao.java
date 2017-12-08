@@ -22,6 +22,18 @@ public class BranchSalaryDao {
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
 	
+	//상세데이터 select //수정하기위해 select
+	public BranchSalaryVO selectBranchSalaryDetail(String branchSalaryCode) {
+		logger.debug("selectBranchSalaryDetail 메소드의 branchSalaryCode :{}",branchSalaryCode);
+		logger.debug("selectBranchSalaryDetail 리턴 확인 :{}",sqlSessionTemplate.selectOne(NS +"selectBranchSalaryDetail", branchSalaryCode));
+		return sqlSessionTemplate.selectOne(NS +"selectBranchSalaryDetail", branchSalaryCode);
+	}
+	
+	//수정처리
+	public int branchSalaryUpdate(BranchSalaryVO branchSalary) {
+		logger.debug("branchSalaryUpdate 메소드의 branchSalary :{}",branchSalary);
+		return sqlSessionTemplate.update(NS + "branchSalaryUpdate",branchSalary);
+	}
 	//검색된 리스트
 	public List<BranchSalaryVO> branchSalaryList(Map<String,String> map){
 		logger.debug("branchSalaryList메소드 확인");
@@ -82,5 +94,12 @@ public class BranchSalaryDao {
 		logger.debug("bEmployeeLocalShop메소드 확인");
 		logger.debug("bEmployeeLocalShop메소드 확인 :{}",sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode));
 		return sqlSessionTemplate.selectOne(NS +"bEmployeeLocalShop", bEmployeeCode);
+	}
+	
+	//전표번호의 최대값select
+	public HashMap<String, Object> getStatementMax(String statementNumber) {
+		logger.debug("getStatementMax메소드 확인");
+		logger.debug("getStatementMax메소드 리턴 :{}",sqlSessionTemplate.selectOne(NS+"getStatementMax", statementNumber));	//숫자 또는 null값이 리턴됨
+		return sqlSessionTemplate.selectOne(NS+"getStatementMax", statementNumber);
 	}
 }

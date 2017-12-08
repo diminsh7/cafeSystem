@@ -30,8 +30,8 @@
 						<ul>
 							<li>
 								<label>직원코드 검색</label>
-							</li>
 								<input type="text" name="keyword1" value="${keyword1}">
+							</li>
 							<li>
 								<label>기간검색</label>
 								<input type="Date" name="keyword2" value="${keyword2}">
@@ -68,7 +68,7 @@
 								<td>${branchSalaryList.branchSalaryPayments}</td>
 								<td>${branchSalaryList.branchSalaryDeduction}</td>
 								<td>${branchSalaryList.branchSalaryReceipts}</td>
-								<td><a href="${pageContext.request.contextPath}/branchSalaryDetail?branchEmployeeCode=${branchSalaryList.branchEmployeeCode}">상세보기</a></td>
+								<td><a href="${pageContext.request.contextPath}/branchSalaryDetail?branchSalaryCode=${branchSalaryList.branchSalaryCode}">상세보기</a></td>
 							</tr>
 						</c:forEach>
 					</table>
