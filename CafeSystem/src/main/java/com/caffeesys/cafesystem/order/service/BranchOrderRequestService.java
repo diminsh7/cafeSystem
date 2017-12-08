@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
+import com.caffeesys.cafesystem.CommonService;
 import com.caffeesys.cafesystem.employee.controller.AllService;
 import com.caffeesys.cafesystem.login.service.LoginVO;
 
@@ -29,6 +30,9 @@ public class BranchOrderRequestService {
 	
 	@Autowired
 	private AllService allService;
+	
+	@Autowired
+	CommonService commonService;
 
 	
 	//발주리스트 & 권한 확인
@@ -55,6 +59,30 @@ public class BranchOrderRequestService {
 				String branchEmployeeCode = login.getEmpCode();
 				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode); //지역 매장코드 구하기
 				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map); 
+				
+				// 전표번호에 대한 총 합계 구하기
+				
+				
+				for(int i = 0; i < orderRequestList.size(); i++) {
+					String statementNumber = orderRequestList.get(i).getStatementNumber();
+					System.out.println("statementNumber : " + statementNumber);
+					List<HashMap<String,Object>> price = RequestDao.selectPrice(statementNumber); //한 전표번호 물품 각각의 발주금액
+					System.out.println("price : " + price);
+					//포문 하다더 만들기 한전표번호에 대해 여러개
+					for(int j = 0; j < price.size(); j++ ) {
+						System.out.println("price.size();" +price.size());
+						int total = 0;
+						Integer sum = (Integer) price.get(j).get("order_price");
+						System.out.println("sum : " + sum);
+						total = total + sum;
+						System.out.println("total : " + total);
+						int cal = orderRequestList.get(i).setCal(total);
+						
+						orderRequestList.get(i).setCalComma(commonService.comma(cal));
+					}
+					/*orderRequestList.add(i, vo);*/
+				};
+				
 				
 				System.out.println("orderRequestList : " + orderRequestList);
 				

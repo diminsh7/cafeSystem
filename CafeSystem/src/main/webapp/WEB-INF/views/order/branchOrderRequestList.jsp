@@ -87,7 +87,7 @@ $(document).ready(function(){
 								<c:forEach var="request" items="${orderRequestList}">
 									<tr>
 										<td class="statementNumber"><a href="${pageContext.request.contextPath}/branchOrderRequestDetail?statementNumber=${request.statementNumber}">${request.statementNumber}</a></td>
-										<td>${request.cal}</td>
+										<td>${request.calComma}원</td>
 										<td><input class="receiptCate"type="hidden" value="${request.receiptCategoryCode}">${request.cateReceipt}</td>
 										<td><input class="orderCate" type="hidden" value="${request.orderCategoryCode}" >${request.orderRequest}</td>
 										<td>${request.cateOrder}</td>

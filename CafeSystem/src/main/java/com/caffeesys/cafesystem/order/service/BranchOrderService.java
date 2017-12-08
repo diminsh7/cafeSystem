@@ -121,7 +121,6 @@ public class BranchOrderService {
 			map.put("statementNumber", statementNumber);
 			map.put("receiptCategoryCode", receiptCategoryCode);
 			branchOrderDao.branchOrderCancel(map);
-			////취소테이블(order_cancel)로 들어가게 함 관리코드,전표번호,요청상태,취소신청일
 		} 
 	}
 }
