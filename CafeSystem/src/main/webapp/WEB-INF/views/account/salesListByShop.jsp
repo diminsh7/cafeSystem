@@ -56,7 +56,7 @@
 				                              <div class="controls">
 				                                <div class="input-prepend input-group">
 				                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
-				                                  <input type="text" style="width: 200px" name="reservation" id="reservation" class="form-control" value="12/03/2017 - 12/09/2017" />
+				                                  <input type="text" style="width: 200px" name="dailyDate" id="dailyDate" class="form-control" />
 				                                  &nbsp; &nbsp;
 													<button type="submit" class="btn btn-primary btn-sm" id="searchButton">
 														검색

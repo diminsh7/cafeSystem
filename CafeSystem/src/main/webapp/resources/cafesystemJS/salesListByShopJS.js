@@ -188,4 +188,47 @@ $(document).ready(
 				});
 			}
 			// 일매출, 월매출 그래프 끝
+			
+			// 일매출 날짜 검색
+			$('input[id="dailyDate"]').daterangepicker(
+					{ locale: {
+					      format: 'YYYY-MM-DD'
+				    	},
+				    startDate: '2017-12-03',
+				    endDate: '2017-12-09'
+				    },
+				    function(start, end, label) {
+				    	$.ajax({
+				    		url : "/dailyDateSearchJson",
+							type : "json",
+							method : "GET",
+							data : {start : start.format('YYYY-MM-DD'), end : end.format('YYYY-MM-DD')},
+							success : function(data) {
+								console.log("일매출 날짜 검색 에이젝스진입");
+								/*var list = JSON.parse(data);
+								console.log(data);*/
+								/*$('#dailySalesTable').DataTable({
+									processing : true,
+									serverSide : false,
+									data : list,
+									columns : [ {
+										"data" : "dailySalesCode"
+									}, {
+										"data" : "statementNum"
+									}, {
+										"data" : "shopName"
+									}, {
+										"data" : "dailySalesDate"
+									}, {
+										"data" : "dailySalesAmount"
+									} ],
+									order : [ 0, "desc" ]
+								});*/
+							},
+							error : function(request, status, error) {
+								alert('지점 일매출 날짜 검색 실패');
+							}
+				    	});
+				    }
+			);
 		});
