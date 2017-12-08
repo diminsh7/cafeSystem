@@ -1,5 +1,6 @@
 package com.caffeesys.cafesystem;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,16 +33,23 @@ public class CommonService {
 		} else {
 			map = new HashMap<String, String>();
 		}
-		System.out.println("count: " + count);
+		//System.out.println("count: " + count);
+		//System.out.println("pagePerRow: " + pagePerRow);
 		int page = 1;
 		int maxPage = (int)((double)count/pagePerRow+0.95);
 		int startPage = (((int)((double)page / 10 + 0.9)) - 1 ) * 10 + 1;
 		int endPage = startPage+10-1;
 		if(endPage > maxPage) endPage = maxPage;
 		int lastPage = count / pagePerRow;
+		//System.out.println("lastPage: " + lastPage);
 		if ((count % pagePerRow) != 0) {
 			lastPage += 1;
 		}
+		
+		//System.out.println("currentPage: " + currentPage);
+		//System.out.println("lastPage: " + lastPage);
+		//System.out.println("startPage: " + startPage);
+		//System.out.println("endPage: " + endPage);
 		
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("lastPage", lastPage);
@@ -65,12 +73,18 @@ public class CommonService {
 	}
 	
 	//지역, 매장 코드 불러오기
-	public List<HashMap<String, Object>> localShopCodeSelect(){
+	public List<HashMap<String, Object>> localShopCodeSelect() {
 		LoginVO login = (LoginVO) session.getAttribute("loginInfo");
 		String employeeCode = login.getEmpCode();
 		//System.out.println("employeeCode: " + employeeCode);
 
 		return commonDao.localShopCodeSelect(employeeCode);
+	}
+	
+	//돈 3자리 마다 , 찍기
+	public String comma(int val) {
+		NumberFormat format = NumberFormat.getNumberInstance();
+		return format.format(val);
 	}
 
 }

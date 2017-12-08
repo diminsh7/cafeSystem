@@ -101,8 +101,8 @@ public class BranchOrderService {
 		/*receiptCategoryCode 접수상태코드: 702발주신청완료, 703발주승인/결제완료, 704발주취소신청, 705발주취소승인
 		orderCategoryCode 배송상태코드: 709배송준비중, 710배송중, 711배송완료*/
 		
-		//발주 승인 전&배송준비중(Default)에는 발주 바로 취소 시킴
-		if(receiptCategoryCode.equals("702") && orderCategoryCode.equals("709")) {
+		////발주 승인 전  발주 바로 취소 시킴
+		if(receiptCategoryCode.equals("702")) {
 			////취소테이블(order_cancel)로 들어가게 함 관리코드,전표번호,요청상태,취소신청일
 			
 			System.out.println("바로 발주 취소 시키는 상황");
@@ -110,18 +110,19 @@ public class BranchOrderService {
 			map.put("statementNumber", statementNumber);
 			map.put("receiptCategoryCode", receiptCategoryCode);
 			branchOrderDao.branchOrderCancel(map);
-			branchOrderDao.insertBranchOrderCancel(map);
+			branchOrderDao.insertBranchOrderDirectCancel(map);
 			
-		//발주승인은 했지만 배송준비중인 경우에는 본사담당직원의 승인 후 취소 처리
-		} else if(receiptCategoryCode.equals("703") && orderCategoryCode.equals("709")) {
-			////버튼을 누르면 지점이보는 발주 리스트에서 접수상태가 취소신청으로 변경
-				
+		////발주승인이 되었고 배송준비중이 아니거나 배송준비중인 경우에는 본사담당직원의 승인 후 취소 처리
+		} else if(receiptCategoryCode.equals("703")
+				||(receiptCategoryCode.equals("703") && orderCategoryCode.equals("709"))) {
+			
 			System.out.println("발주취소신청으로 상태만 변경(취소신청이 들어간 상태)");
 			receiptCategoryCode = "704"; //발주취소신청
 			map.put("statementNumber", statementNumber);
 			map.put("receiptCategoryCode", receiptCategoryCode);
+			////버튼을 누르면 본사가 보는 발주 취소 테이블에 들어감
+			branchOrderDao.insertBranchOrderCancel(map);
 			branchOrderDao.branchOrderCancel(map);
-			////취소테이블(order_cancel)로 들어가게 함 관리코드,전표번호,요청상태,취소신청일
 		} 
 	}
 }

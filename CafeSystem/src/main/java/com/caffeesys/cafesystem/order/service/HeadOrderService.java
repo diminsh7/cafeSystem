@@ -45,11 +45,52 @@ public class HeadOrderService {
 			map.put("input", input);
 		} else {
 			map = null;
-		}		
+		}
+		
 		map = commonService.paging(model, currentPage, 2, headOrderdao.headOrderCount(map), map);	
-		List<HeadOrderVO> headOrderList =  headOrderdao.headOrderList();
+		List<HeadOrderVO> headOrderList =  headOrderdao.headOrderList(map);
 		logger.debug("[HeadOrderService.class / headOrderList.method] headOrderList param: " + headOrderList);
 		model.addAttribute("headOrderList", headOrderList);
+	}
+	
+	//본사 입장의 발주 내용 상세보기 페이지 요청
+	public void headOrderDetail(Model model, String statementNumber) {
+		List<HeadOrderVO> headOrder = headOrderdao.headOrderDetail(statementNumber);
+		//해당 발주의 총계를 구하기 위해 각 품목의 수량대비 가격을 산출해 전부 합산
+		int orderPriceAdd = 0;
+		for(int i=0; i<headOrder.size(); i++) {
+			int itemPrice = headOrder.get(i).getOrderPrice(); //품목별 가격 itemPrice
+			orderPriceAdd += itemPrice;
+			headOrder.get(i).setOrderPriceComma(commonService.comma(itemPrice)); //
+		}	
+		//3자리수마다 ,
+		String orderAllPrice = commonService.comma(orderPriceAdd);
+		
+		//발주취소 내용 정보를 함께 표시하기 위한 정보 요청
+		HeadOrderCancelVO headOrderCancel = headOrderdao.headOrderCancelDetail(statementNumber);
+		System.out.println("--------------------------------------------" + headOrderCancel);
+
+		model.addAttribute("headOrder", headOrder);
+		model.addAttribute("statementNumber", statementNumber);
+		model.addAttribute("orderAllPrice", orderAllPrice);
+		model.addAttribute("headOrderCancel", headOrderCancel);
+	}
+	
+	//본사 입장에서의 발주 취소 신청 리스트 페이지 요청 (취소건을 따로 관리하기 위함)
+	public void headOrderCancelList(Model model, int currentPage, String cate, String input) {
+		Map<String, String> map;
+		if(cate != "") {
+			map = new HashMap<String, String>();
+			map.put("cate", cate);
+			map.put("input", input);
+		} else {
+			map = null;
+		}
+		
+		map = commonService.paging(model, currentPage, 2, headOrderdao.headOrderCancelCount(map), map);	
+		List<HeadOrderCancelVO> headOrderCancelList =  headOrderdao.headOrderCancelList(map);
+		logger.debug("[HeadOrderService.class / headOrderList.method] headOrderList param: " + headOrderCancelList);
+		model.addAttribute("headOrderCancelList", headOrderCancelList);
 	}
 	
 	//발주승인
@@ -88,14 +129,13 @@ public class HeadOrderService {
 		//전표번호의 날짜에 해당하는 부분 생성
 		String currentDate = commonService.dateSelect();
 		//전표번호의 지역매장 코드에 해당하는 부분 생성
-		List<HashMap<String, Object>> localShopCode = commonService.localShopCodeSelect();		
-		String localCode = (String) localShopCode.get(0).get("local_category_code"); //지역코드
-		String shopCode = (String) localShopCode.get(0).get("shop_code"); //매장코드
+		String localShopCode = headOrderdao.localShopCode(statementNumber);
 		
 		//전표번호 생성
-		String refundStatementNumber = currentDate + "-" + localCode + shopCode + "-D" + "-01";
+		String refundStatementNumber = currentDate + "-" + localShopCode + "-D" + "-01";
+		System.out.println("-----------------------------------" + refundStatementNumber);
 		
-		String orderRefundAble = "Y"; //환불완료 혹시 안들어가면 DB에 Char로 되어있는거 VarChar로 변경하기!!!!!!!!!!!!!!!!!!
+		String orderRefundAble = "Y";
 		map.put("orderRefundAble", orderRefundAble);
 		map.put("refundStatementNumber", refundStatementNumber);
 		map.put("statementNumber", statementNumber);
@@ -104,9 +144,8 @@ public class HeadOrderService {
 	}
 	
 	//배송상태 변경
-	public void orderDelivery(String statementNumber, String orderDeliveryCode) {
-		logger.debug("[HeadOrderService.class / orderDelivery.method] statementNumber param: " + statementNumber);
-		logger.debug("[HeadOrderService.class / orderDelivery.method] orderDeliveryCode param: " + orderDeliveryCode);
+	public void orderDelivery(String statementNumber) {
+		String orderDeliveryCode = "710";
 		map.put("statementNumber", statementNumber);
 		map.put("orderDeliveryCode", orderDeliveryCode);
 		headOrderdao.headOrderDelivery(map);
