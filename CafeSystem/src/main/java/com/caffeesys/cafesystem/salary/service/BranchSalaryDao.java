@@ -21,12 +21,17 @@ public class BranchSalaryDao {
 	private final String NS = "com.caffeesys.cafesystem.salary.service.BranchSalaryMapper.";
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
-	
+		
 	//상세데이터 select //수정하기위해 select
 	public BranchSalaryVO selectBranchSalaryDetail(String branchSalaryCode) {
 		logger.debug("selectBranchSalaryDetail 메소드의 branchSalaryCode :{}",branchSalaryCode);
 		logger.debug("selectBranchSalaryDetail 리턴 확인 :{}",sqlSessionTemplate.selectOne(NS +"selectBranchSalaryDetail", branchSalaryCode));
 		return sqlSessionTemplate.selectOne(NS +"selectBranchSalaryDetail", branchSalaryCode);
+	}
+	
+	//삭제처리
+	public int branchSalaryDelete(String branchSalaryCode) {
+		return sqlSessionTemplate.delete(NS +"branchSalaryDelete",branchSalaryCode);
 	}
 	
 	//수정처리

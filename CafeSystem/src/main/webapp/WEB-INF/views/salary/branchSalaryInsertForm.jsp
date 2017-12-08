@@ -2,6 +2,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <script>
+function branchSalaryInsertBtn(btn){
+	if(btn == "list"){
+		result = confirm('등록을 취소하시겠습니까?');
+		if(result){
+			$(location).attr('href', '${pageContext.request.contextPath}/branchSalaryList');
+		}else{
+			
+		}
+	}
+	if(btn == "insert"){
+		result = confirm('등록 하시겠습니까?');
+		if(result){
+			$('#branchSalaryInsertForm').submit();
+		}else{
+			
+		}
+	}
+}
 	$(document).ready(function(){		
 		//급여 자동 입력
 		$('#branchEmployeeSalarySearch').click(function(){
@@ -42,6 +60,7 @@
 					});
 				}
 		});
+		//급여변경등록버튼
 		$('#branchEmployeeSalaryChange').click(function(){
 			var branchSalaryChange = $('#branchEmployeeSalary').val();
 			var Health2= branchSalaryChange*0.03
@@ -62,9 +81,8 @@
 				$('#branchSalaryReceipts').val(Receipts2);
 			}
 		})
-			
-	});
 
+	});
 </script>
 <div class="right_col" role="main">
 	<div class="">
@@ -86,15 +104,15 @@
 						<form id="branchSalaryInsertForm" action="${pageContext.request.contextPath}/branchSalaryInsert" method="post" data-parsley-validate class="form-horizontal form-label-left">
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">직원코드</label>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<select class="form-control selectBox" id="branchEmployeeCode" name="branchEmployeeCode">
-											<option value="empty">선택하세요</option>
-											<c:forEach var="branchCodeList" items="${branchCodeList}">
-												<option value="${branchCodeList}">${branchCodeList}</option>
-											</c:forEach>
-										 </select>
-									</div>
-									<button class="btn btn-primary" type="button" id="branchEmployeeSalarySearch" >검색</button>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<select class="form-control selectBox" id="branchEmployeeCode" name="branchEmployeeCode">
+										<option value="empty">선택하세요</option>
+										<c:forEach var="branchCodeList" items="${branchCodeList}">
+											<option value="${branchCodeList}">${branchCodeList}</option>
+										</c:forEach>
+									 </select>
+								</div>
+								<button class="btn btn-primary" type="button" id="branchEmployeeSalarySearch" >검색</button>
 							</div>
 	                   		<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryWorkmonth" required="required">귀속년월</label>
@@ -109,7 +127,6 @@
 								</div>
 								<button class="btn btn-primary" type="button" id="branchEmployeeSalaryChange" >급여 변경</button>
 							</div>
-							
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="branchSalaryHealth">건강보험</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
@@ -155,9 +172,8 @@
 							<div class="ln_solid"></div>
 							<div class="form-group">
 								<div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-									<button class="btn btn-primary" id="branchSalaryInsertCancelBtn" type="button">Cancel</button>
-									<button class="btn btn-primary" id="branchSalaryInsertResetBtn" type="reset">Reset</button>
-									<button class="btn btn-success" id="branchSalaryInsertBtn" type="submit">등록</button>
+									<input type="button" class="btn btn-primary" value="목록" onclick="branchSalaryInsertBtn('list')" name="list">
+									<input type="button" class="btn btn-success" value="등록" onclick="branchSalaryInsertBtn('insert')" name="insert">
 								</div>
 							</div>
 						</form>

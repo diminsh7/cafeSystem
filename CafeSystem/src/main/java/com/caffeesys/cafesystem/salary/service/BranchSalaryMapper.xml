@@ -25,6 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="shop_code" property="shopCode"  /><!-- 매장코드 -->
 	</resultMap>
 	
+	<!--계정과목 delete  -->
+	<delete id="branchSalaryDelete" parameterType="String">
+		DELETE FROM branch_salary 
+		WHERE branch_salary_code = #{branchSalaryCode}
+	</delete>
 	<!--수정 update  -->
 	<update id="branchSalaryUpdate" parameterType="com.caffeesys.cafesystem.salary.service.BranchSalaryVO">
 		UPDATE branch_salary 

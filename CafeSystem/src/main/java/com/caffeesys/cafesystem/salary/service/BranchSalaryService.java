@@ -1,5 +1,6 @@
 package com.caffeesys.cafesystem.salary.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +33,8 @@ public class BranchSalaryService {
 	Gson gson = new Gson();
 	
 	private static final Logger logger = LoggerFactory.getLogger(BranchSalaryService.class);
+	
+	
 	//급여명세서 상세데이터 보여주기위해 select
 	public BranchSalaryVO selectBranchSalaryDetail(Model model, String branchSalaryCode) {
 		logger.debug("selectBranchSalaryDetail메소드의 branchEmployeeCode :{}",branchSalaryCode);
@@ -41,7 +44,7 @@ public class BranchSalaryService {
 	}
 	
 	//급여명세서 수정하기위해 select
-	public BranchSalaryVO selectbranchSalaryUpdate(Model model, String branchSalaryCode) {
+	public BranchSalaryVO selectBranchSalaryUpdate(Model model, String branchSalaryCode) {
 		logger.debug("selectbranchSalaryUpdate메소드의 branchEmployeeCode :{}",branchSalaryCode);
 		BranchSalaryVO branchSalary = branchSalaryDao.selectBranchSalaryDetail(branchSalaryCode);
 		model.addAttribute("branchSalary",branchSalary);
@@ -76,16 +79,30 @@ public class BranchSalaryService {
 		LoginVO loginInfo = (LoginVO)session.getAttribute("loginInfo");
 		logger.debug("branchCodeList 메소드의 loginInfo :{}",loginInfo); //로그인 정보 갖고오기
 		String empCode = loginInfo.getEmpCode();
-		//String position = loginInfo.getPosition();
-		logger.debug("branchCodeList 메소드의 empCode :{}",empCode); //직원코드 갖고오기
-		/*Map<String, String> map;
-		map = new HashMap<String, String>();
-		map.put("empCode", empCode);
-		map.put("position", position);*/
+		logger.debug("branchCodeList 메소드의 empCode :{}",empCode); //로그인 되어있는 직원코드 갖고오기
 		List<LoginVO> branchCodeList = branchSalaryDao.branchCodeList(empCode);
 		logger.debug("branchCodeList 메소드의 branchCodeList :{}",branchCodeList);
 		model.addAttribute("branchCodeList", branchCodeList);	//로그인한 매장의 직원코드 갖고오기
 	}	
+	//삭제하기위해 login정보 갖고오기
+	public String SelectLoginInfoForDelete() {
+		logger.debug("SelectLoginInfoForDelete메소드 확인");
+		LoginVO loginInfo = (LoginVO)session.getAttribute("loginInfo");
+		logger.debug("SelectLoginInfoForDelete 메소드의 loginInfo :{}",loginInfo); //로그인 정보 갖고오기
+		String empCode = loginInfo.getEmpCode();
+		logger.debug("SelectLoginInfoForDelete 메소드의 empCode :{}",empCode);//로그인 되어있는 직원코드 갖고오기
+		String pw=loginInfo.getPw();
+		logger.debug("SelectLoginInfoForDelete 메소드의 pw :{}",pw);//로그인 되어있는 직원pw갖고오기
+		List<String> loginList = new ArrayList<String>();
+		loginList.add(empCode);
+		loginList.add(pw);
+		logger.debug("SelectLoginInfoForDelete 메소드 확인 :{}",loginList);
+		return gson.toJson(loginList);
+	}
+	//삭제처리
+	public void branchSalaryDelete(String branchSalaryCode) {
+		branchSalaryDao.branchSalaryDelete(branchSalaryCode);
+	}
 	
 	//지점직원 급여명세서 등록 폼에 쓸 직원 급여 가져오는 메소드 직원코드를 눌렀을때 자동으로 입력
 	public String branchEmployeeSalaryInsert(String branchEmployeeCode) {		
