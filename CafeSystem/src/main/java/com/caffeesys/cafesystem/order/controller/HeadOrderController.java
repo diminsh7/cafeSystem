@@ -81,5 +81,4 @@ public class HeadOrderController {
 		return "redirect:/headOrderList";
 	}
 	
-	//불량처리(Order 테이블에 새로운 전표번호가 발급되면서 Insert 되는 형식?)
 }

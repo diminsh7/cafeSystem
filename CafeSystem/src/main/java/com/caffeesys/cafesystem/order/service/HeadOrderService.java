@@ -135,7 +135,7 @@ public class HeadOrderService {
 		String refundStatementNumber = currentDate + "-" + localShopCode + "-D" + "-01";
 		System.out.println("-----------------------------------" + refundStatementNumber);
 		
-		String orderRefundAble = "Y"; //환불완료 혹시 안들어가면 DB에 Char로 되어있는거 VarChar로 변경하기!!!!!!!!!!!!!!!!!!
+		String orderRefundAble = "Y";
 		map.put("orderRefundAble", orderRefundAble);
 		map.put("refundStatementNumber", refundStatementNumber);
 		map.put("statementNumber", statementNumber);
