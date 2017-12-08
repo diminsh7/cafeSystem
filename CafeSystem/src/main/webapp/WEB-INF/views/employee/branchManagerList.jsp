@@ -22,19 +22,22 @@
                   <div class="x_content">
                     <p class="text-muted font-13 m-b-30">  </p>
                      	전 매장별 점주 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-                     	<form name="search" method="post" action="${pageContext.request.contextPath}/branchManagerList">
-							<select name="searchOption">
-								<!-- 검색조건을 검색처리후 결과화면에 보여주기위해  c:out 출력태그 사용, 삼항연산자 -->
-								<option value="all"
-									<c:out value="${searchOption == 'all'?'selected':''}"/>>관련검색어</option>
-								<option value="account_title_name"
-									<c:out value="${searchOption == 'branch_employee_code'?'selected':''}"/>>직원코드</option>
-								<option value="account_title_content"
-									<c:out value="${searchOption == 'branch_employee_name'?'selected':''}"/>>이름</option>
-								<option value="account_title_content"
-									<c:out value="${searchOption == 'shopName'?'selected':''}"/>>매장명</option>
-							</select> 
-							<input name="keyword" value="${keyword}"> <input type="submit" value="조회">
+                     	<form id="SearchForm" action="${pageContext.request.contextPath}/branchPersonnelList" method="post">
+							<div>
+								<div>
+									<select name="cate" id="cate" required class="input-sm">
+										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
+										<option value="branch_employee_code" class="input-sm">직원코드</option>
+										<option value="branch_employee_name" class="input-sm">이름</option>
+										<option value="shop_name" class="input-sm">매장</option>
+									</select>
+									<div class="input-group">
+										<input type="text" name="input" id="input" value="${input}" required class="input-sm"> <span>
+		 								<input type="submit" class="btn btn-default" id="SearchBtn" value="검색">
+										</span>
+									</div>
+								</div>
+							</div>
 						</form>
 					
 					

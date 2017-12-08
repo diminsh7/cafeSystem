@@ -23,9 +23,7 @@
 					<div class="x_content">
 						<p class="text-muted font-13 m-b-30"></p>
 						전 매장 직원 리스트[직원 코드 클릭 시 상세자료 확인 가능]
-						<form id="SearchForm"
-							action="${pageContext.request.contextPath}/branchPersonnelList"
-							method="post">
+						<form id="SearchForm" action="${pageContext.request.contextPath}/branchPersonnelList" method="post">
 							<div>
 								<div>
 									<select name="cate" id="cate" required class="input-sm">

@@ -101,8 +101,21 @@
 			
 		FROM branch_employee INNER JOIN category
 		ON branch_employee.position_category_code = category.category_code
-		WHERE branch_employee.position_category_code = '202'
-		OR branch_employee.position_category_code = '203'
+		
+		WHERE
+ 		<if test="input == null">
+			branch_employee.position_category_code = '202'
+			OR branch_employee.position_category_code = '203'
+		</if>
+		<if test="input != null">
+			<if test="cate == category_small">
+				category.${cate} = #{input}
+			</if>
+			<if  test="cate != category_small">
+			  branch_employee.${cate} = #{input}
+			</if>  
+		</if>  
+		
 		ORDER BY branch_employee.branch_employee_code asc
 	</select>
 	
