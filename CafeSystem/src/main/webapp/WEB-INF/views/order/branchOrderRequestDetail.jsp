@@ -16,6 +16,12 @@ $(document).ready(function(){
 			 $(location).attr('href','${pageContext.request.contextPath}/insertFaulty?orderCode='+orderCode+'');
 		 }
 	})	 
+	$('#DeliveryOkBtn').click(function(){
+		var result = confirm('배송이 도착하였습니까?');	
+		if(result){
+			$(location).attr('href', '${pageContext.request.contextPath}/DeliveryOk?statementNumber=${statementNumber}');
+		}
+	}) 
 })
 
 </script>
@@ -26,6 +32,7 @@ $(document).ready(function(){
 			<div class="title_left">
 				<h3>발주관리</h3>
 				<a class="btn btn-default" href="${pageContext.request.contextPath}/branchOrderRequestList">발주목록</a>
+							
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -37,6 +44,8 @@ $(document).ready(function(){
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
+					
+				
 						<table id="datatable" class="table table-striped table-bordered">
 							<thead>
 								<tr>
@@ -54,12 +63,13 @@ $(document).ready(function(){
 									<th>불량여부</th>
 									<th>불량신청</th>
 									<th style="display: none"> </th>
+									
 								</tr>
 							</thead>
 							<tbody>
 							 <c:forEach var="detail" items="${orderDetail}">
 								<tr>
-									<td>${detail.statementNumber}</td><!-- 전표번호 -->
+									<td> ${detail.statementNumber}</td><!-- 전표번호 -->
 									<td>${detail.divideName}</td><!-- 발주상태 -->
 									<td>${detail.itemName}</td><!-- 품목명 -->
 									<td>${detail.orderAmount}</td><!-- 수량 -->
@@ -77,6 +87,7 @@ $(document).ready(function(){
 								</c:forEach>
 							</tbody>
 						</table>
+						<button type="button" class="btn btn-default" id="DeliveryOkBtn">배송완료</button>
 					</div>
 				</div>
 			</div>
