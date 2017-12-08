@@ -9,13 +9,45 @@
 		if(btn == "update"){
 			$(location).attr('href', '${pageContext.request.contextPath}/headSalaryUpdate?headSalaryCode=${headSalary.headSalaryCode}');
 		}
-		if(btn == "delete"){
+		/* if(btn == "delete"){
 			result = confirm('정말 삭제하시겠습니까?');
 			if(result){
 				$(location).attr('href', '${pageContext.request.contextPath}/headSalaryDelete?headSalaryCode=${headSalary.headSalaryCode}');
 			}	
-		}
+		} */
 	}
+	
+	$(document).ready(function(){
+		$('#headSalaryDelete').click(function(){
+			$.ajax({
+				url:"getLoginInfoForDelete"
+				, type:"GET"
+				, data:{}
+				, success:function(data){
+					var loginList = []
+					loginList = JSON.parse(data);	//로그인정보<직원코드, 비번>
+					console.log(loginList)
+					var empCode = loginList[0]	//<직원코드>
+					var pw = loginList[1]		//<비번>
+						if(empCode != null){
+							var pw2 = prompt('삭제하시려면 비밀번호를 입력해 주세요',"");
+							console.log(pw2)
+							if(pw == pw2){
+								alert("비번일치")
+								$(location).attr('href', '${pageContext.request.contextPath}/headSalaryDelete?headSalaryCode=${headSalary.headSalaryCode}');
+							}else{
+								alert("비번불일치")
+							}
+						}else{
+							return false;
+						}
+					}
+				, error:function(request, status, error){
+					alert('삭제실패');
+				}
+			});
+		});
+	});
 </script>
 <!-- page content -->
 <div class="right_col" role="main">
@@ -125,7 +157,7 @@
 								<div class="col-md-6 col-md-offset-3">
 									<input type="button" class="btn btn-primary" value="목록" onclick="headSalaryBtn('list')" name="list">
 									<input type="button" class="btn btn-success" value="수정" onclick="headSalaryBtn('update')" name="update">
-									<input type="button" class="btn btn-primary" value="삭제" onclick="headSalaryBtn('delete')" name="delete">
+									<button class="btn btn-primary" type="button" id="headSalaryDelete" >삭제</button>
 								</div>
 							</div>
 						</div>

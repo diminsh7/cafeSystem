@@ -27,7 +27,11 @@ public class HeadSalaryDao {
 		logger.debug("selectHeadSalaryDetail 리턴 확인 :{}",sqlSessionTemplate.selectOne(NS +"selectHeadSalaryDetail", headSalaryCode));
 		return sqlSessionTemplate.selectOne(NS +"selectHeadSalaryDetail", headSalaryCode);
 	}
-		
+			
+	//삭제처리
+	public int headSalaryDelete(String headSalaryCode) {
+		return sqlSessionTemplate.delete(NS +"headSalaryDelete",headSalaryCode);
+	}
 	//수정처리
 	public int headSalaryUpdate(HeadSalaryVO headSalary) {
 		logger.debug("headSalaryUpdate 메소드의 headSalary :{}",headSalary);

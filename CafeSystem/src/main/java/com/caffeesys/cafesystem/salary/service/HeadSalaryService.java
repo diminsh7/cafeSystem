@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.account.controller.PasingService;
 import com.caffeesys.cafesystem.employee.service.HeadEmployeeVO;
+import com.caffeesys.cafesystem.login.service.LoginVO;
 import com.google.gson.Gson;
 
 @Service
@@ -32,6 +33,26 @@ public class HeadSalaryService {
 	private HeadSalaryDao headSalaryDao;
 	
 	Gson gson = new Gson();
+	//삭제하기위해 login정보 갖고오기
+	public String SelectLoginInfoForDelete() {
+		logger.debug("SelectLoginInfoForDelete메소드 확인");
+		LoginVO loginInfo = (LoginVO)session.getAttribute("loginInfo");
+		logger.debug("SelectLoginInfoForDelete 메소드의 loginInfo :{}",loginInfo); //로그인 정보 갖고오기
+		String empCode = loginInfo.getEmpCode();
+		logger.debug("SelectLoginInfoForDelete 메소드의 empCode :{}",empCode);//로그인 되어있는 직원코드 갖고오기
+		String pw=loginInfo.getPw();
+		logger.debug("SelectLoginInfoForDelete 메소드의 pw :{}",pw);//로그인 되어있는 직원pw갖고오기
+		List<String> loginList = new ArrayList<String>();
+		loginList.add(empCode);
+		loginList.add(pw);
+		logger.debug("SelectLoginInfoForDelete 메소드 확인 :{}",loginList);
+		return gson.toJson(loginList);
+	}
+	//삭제처리
+	public void headSalaryDelete(String headSalaryCode) {
+		headSalaryDao.headSalaryDelete(headSalaryCode);
+	}
+	
 	
 	//급여명세서 수정하기위해 select
 	public HeadSalaryVO selectHeadSalaryUpdate(Model model, String headSalaryCode) {

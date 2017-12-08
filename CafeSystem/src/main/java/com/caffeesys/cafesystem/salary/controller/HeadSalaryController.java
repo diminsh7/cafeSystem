@@ -20,7 +20,22 @@ public class HeadSalaryController {
 	@Autowired 
 	private HeadSalaryService headSalaryService;
 	
+	//삭제하기위해 로그인정보 갖고오기
+	@ResponseBody
+	@RequestMapping(value="getLoginInfoForDelete")
+	public String SelectLoginInfoForDelete() {
+		logger.debug("SelectLoginInfoForDelete메소드 확인");
+		return headSalaryService.SelectLoginInfoForDelete();
+	}
 	
+	//삭제처리
+	@RequestMapping(value="headSalaryDelete")
+	public String headSalaryDelete(@RequestParam(value="headSalaryCode", required=true)String headSalaryCode) {
+		logger.debug("headSalaryDelete 메소드 확인");
+		logger.debug("headSalaryDelete 메소드 headSalaryCode :{}",headSalaryCode);
+		headSalaryService.headSalaryDelete(headSalaryCode);
+		return"redirect:/headSalaryList";
+	}
 	
 	//본사직원 급여명세서 목록
 	@RequestMapping(value="/headSalaryList")
