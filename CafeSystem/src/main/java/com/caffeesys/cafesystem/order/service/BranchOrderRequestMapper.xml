@@ -74,12 +74,26 @@
 	LEFT JOIN item as it
 		ON OD.item_code = it.item_code
 	
+	<if test="input == null">
 	WHERE OD.local_category_code = #{localCategoryCode} AND OD.shop_code = #{shopCode}
 		AND (OD.order_faulty_divide = 'C' 
 		OR OD.order_faulty_divide = 'D' 
 		OR OD.order_faulty_divide = 'E')
 	
-	GROUP BY OD.statement_number		
+	GROUP BY OD.statement_number	
+	</if>
+	
+	<if test="input != null">
+		<if test="cate == statement_number">
+			WHERE OD.${cate} = #{input}	
+		</if>
+		
+		<if  test="cate == cateOrder">
+			WHERE it.${cate} = #{input}
+		</if>
+	</if>
+	
+		
 	</select>
 	
 	<!-- DB order에서 매장에 따른 상세발주내용  select -->
@@ -120,6 +134,7 @@
 	
 	</select>
 	
+	
 	<select id="selectPrice" resultType="java.util.HashMap" parameterType="String">
 		SELECT order_price
 		FROM `order`
@@ -129,9 +144,8 @@
 	<!-- 배송상태를 배송완료로 업데이트 -->
 	<update id="upadateDeliveryOk" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderRequestVO">
 		UPDATE `order`
-	SET
-		order_category_code='711'
-	WHERE  statement_number = #{statementNumber}
+		SET	order_category_code='711'
+		WHERE  statement_number = #{statementNumber}
 	</update>
 
 </mapper>

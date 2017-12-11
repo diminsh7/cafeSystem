@@ -58,7 +58,11 @@ public class BranchOrderRequestService {
 				
 				String branchEmployeeCode = login.getEmpCode();
 				BranchOrderRequestVO localShopCode = RequestDao.selectLocalShopCode(branchEmployeeCode); //지역 매장코드 구하기
-				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map); 
+				String local = localShopCode.getLocalCategoryCode();
+				String Shop = localShopCode.getShopCode();
+				map.put("localCategoryCode", local);
+				map.put("shopCode", Shop);
+				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(map); 
 				
 				// 전표번호에 대한 총 합계 구하기
 				for(int i = 0; i < orderRequestList.size(); i++) {

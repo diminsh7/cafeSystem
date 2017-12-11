@@ -27,9 +27,9 @@ public class BranchOrderRequestDao {
 	}
 	
 	//리스트(2) 리스트 가져오기
-	public List<BranchOrderRequestVO> selectOderRequestList(BranchOrderRequestVO localShopCode, Map<String, String> map) {
+	public List<BranchOrderRequestVO> selectOderRequestList(Map<String, String> map) {
 		logger.debug("[seleteOderRequestList] 매장에 따른 발주리스트 가져오기");	
-		return  sqlSessionTemplate.selectList(NS + "selectOderRequestList",localShopCode);
+		return  sqlSessionTemplate.selectList(NS + "selectOderRequestList",map);
 	}
 	
 	//선택전표번호 상세조회
