@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 
 import com.caffeesys.cafesystem.account.controller.PasingService;
 import com.caffeesys.cafesystem.employee.service.HeadEmployeeVO;
+import com.caffeesys.cafesystem.login.service.LoginVO;
 import com.google.gson.Gson;
 
 @Service
@@ -32,23 +33,63 @@ public class HeadSalaryService {
 	private HeadSalaryDao headSalaryDao;
 	
 	Gson gson = new Gson();
+	//삭제하기위해 login정보 갖고오기
+	public String SelectLoginInfoForDelete() {
+		logger.debug("SelectLoginInfoForDelete메소드 확인");
+		LoginVO loginInfo = (LoginVO)session.getAttribute("loginInfo");
+		logger.debug("SelectLoginInfoForDelete 메소드의 loginInfo :{}",loginInfo); //로그인 정보 갖고오기
+		String empCode = loginInfo.getEmpCode();
+		logger.debug("SelectLoginInfoForDelete 메소드의 empCode :{}",empCode);//로그인 되어있는 직원코드 갖고오기
+		String pw=loginInfo.getPw();
+		logger.debug("SelectLoginInfoForDelete 메소드의 pw :{}",pw);//로그인 되어있는 직원pw갖고오기
+		List<String> loginList = new ArrayList<String>();
+		loginList.add(empCode);
+		loginList.add(pw);
+		logger.debug("SelectLoginInfoForDelete 메소드 확인 :{}",loginList);
+		return gson.toJson(loginList);
+	}
+	//삭제처리
+	public void headSalaryDelete(String headSalaryCode) {
+		headSalaryDao.headSalaryDelete(headSalaryCode);
+	}
 	
+	
+	//급여명세서 수정하기위해 select
+	public HeadSalaryVO selectHeadSalaryUpdate(Model model, String headSalaryCode) {
+		logger.debug("selectHeadSalaryUpdate메소드의 headEmployeeCode :{}",headSalaryCode);
+		HeadSalaryVO headSalary = headSalaryDao.selectHeadSalaryDetail(headSalaryCode);
+		model.addAttribute("headSalary",headSalary);
+		return headSalary;
+	}
+	//급여명세서 수정 처리
+	public void headSalaryUpdate(HeadSalaryVO headSalary) {
+		logger.debug("headSalaryInsert 메소드의 headSalary :{}",headSalary);
+		headSalaryDao.headSalaryUpdate(headSalary);
+	}
+	
+	//급여명세서 상세데이터 보여주기위해 select
+	public HeadSalaryVO selectHeadSalaryDetail(Model model, String headSalaryCode) {
+		logger.debug("selectHeadSalaryDetail메소드의 headEmployeeCode :{}",headSalaryCode);
+		HeadSalaryVO headSalary = headSalaryDao.selectHeadSalaryDetail(headSalaryCode);
+		model.addAttribute("headSalary",headSalary);
+		return headSalary;
+	}
 	//검색한 급여명세서 list 
-		public void headSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
-			logger.debug("headSalaryList메소드 확인");
-			Map<String, String> map;
-			if(keyword1 != "") {
-				map = new HashMap<String, String>();
-				map.put("keyword1", keyword1);
-				map.put("keyword2", keyword2);			
-			}else {
-				map = null;
-			}
-			logger.debug("headSalaryList 메소드의  map :{}",map);//{keyword=2017-09, searchOption=head_salary_workmonth}
-			map = pasingService.paging(model, currentPage, 10, headSalaryDao.headSalaryCount(map), map);
-			model.addAttribute("headSalaryCount",headSalaryDao.headSalaryCount(map));
-			model.addAttribute("headSalaryList",headSalaryDao.headSalaryList(map));
+	public void headSalaryList(Model model,String keyword1, String keyword2, int currentPage) {
+		logger.debug("headSalaryList메소드 확인");
+		Map<String, String> map;
+		if(keyword1 != "") {
+			map = new HashMap<String, String>();
+			map.put("keyword1", keyword1);
+			map.put("keyword2", keyword2);			
+		}else {
+			map = null;
 		}
+		logger.debug("headSalaryList 메소드의  map :{}",map);//{keyword=2017-09, searchOption=head_salary_workmonth}
+		map = pasingService.paging(model, currentPage, 10, headSalaryDao.headSalaryCount(map), map);
+		model.addAttribute("headSalaryCount",headSalaryDao.headSalaryCount(map));
+		model.addAttribute("headSalaryList",headSalaryDao.headSalaryList(map));
+	}
 	
 	//본사 직원 급여명세서 등록 폼에 쓸 직원 코드 가져오는 메소드
 	public void headCodeList(Model model){

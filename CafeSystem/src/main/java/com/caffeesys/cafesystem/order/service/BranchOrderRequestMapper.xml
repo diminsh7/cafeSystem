@@ -125,4 +125,13 @@
 		FROM `order`
 		WHERE statement_number = #{statementNumber}
 	</select>
+	
+	<!-- 배송상태를 배송완료로 업데이트 -->
+	<update id="upadateDeliveryOk" parameterType="com.caffeesys.cafesystem.order.service.BranchOrderRequestVO">
+		UPDATE `order`
+	SET
+		order_category_code='711'
+	WHERE  statement_number = #{statementNumber}
+	</update>
+
 </mapper>

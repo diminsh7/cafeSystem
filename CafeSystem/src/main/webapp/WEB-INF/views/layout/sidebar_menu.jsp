@@ -12,7 +12,7 @@
 				</ul></li>
 			<li><a><i class="fa fa-users"></i> 직원관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">본사직원정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/headEmployeeList">본사직원정보</a></li>
 					<li><a
 						href="${pageContext.request.contextPath}/branchManagerList">점주정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/branchPersonnelList">지점직원정보</a></li>
@@ -22,15 +22,14 @@
 			<li><a><i class="fa fa-coffee"></i> 메뉴관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/menuInfoList">카페메뉴</a></li>
-					<li><a href="${pageContext.request.contextPath}/MaterialList">메뉴재료원가</a></li>
+					<li><a href="${pageContext.request.contextPath}/materialList">메뉴재료원가</a></li>
 					<li><a href="${pageContext.request.contextPath}/menuPriceList">메뉴가격관리</a></li>
 				</ul></li>
-			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span
-					class="fa fa-chevron-down"></span></a>
+			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">발주품목</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">발주신청내역</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">발주취소내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/item">발주품목</a></li>
+					<li><a href="${pageContext.request.contextPath}/headOrderList">발주신청내역</a></li>
+					<li><a href="${pageContext.request.contextPath}/headOrderCancelList">발주취소내역</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">불량품목신청내역</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-krw"></i> 매출 및 회계관리 <span
@@ -54,8 +53,8 @@
 			<li><a><i class="fa fa-users"></i> 직원관리 <span
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/#">점주정보</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">지점직원정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/selectBranchManager">점주정보</a></li>
+					<li><a href="${pageContext.request.contextPath}/branchPersonnelInfoList">지점직원정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">지점직원근태정보</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">지점직원급여명세서</a></li>
 				</ul></li>
@@ -63,7 +62,7 @@
 					class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/#">카페메뉴조회</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">메뉴재료원가조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/branchMaterialList">메뉴재료원가조회</a></li>
 					<li><a href="${pageContext.request.contextPath}/#">메뉴총원가조회</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span

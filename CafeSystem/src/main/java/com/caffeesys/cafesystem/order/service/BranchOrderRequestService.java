@@ -61,25 +61,20 @@ public class BranchOrderRequestService {
 				List<BranchOrderRequestVO> orderRequestList = RequestDao.selectOderRequestList(localShopCode,map); 
 				
 				// 전표번호에 대한 총 합계 구하기
-				
-				
 				for(int i = 0; i < orderRequestList.size(); i++) {
 					String statementNumber = orderRequestList.get(i).getStatementNumber();
 					System.out.println("statementNumber : " + statementNumber);
 					List<HashMap<String,Object>> price = RequestDao.selectPrice(statementNumber); //한 전표번호 물품 각각의 발주금액
 					System.out.println("price : " + price);
 					//포문 하다더 만들기 한전표번호에 대해 여러개
+					int total = 0;
 					for(int j = 0; j < price.size(); j++ ) {
-						int total = 0;
 						Integer sum = (Integer) price.get(j).get("order_price");
 						total = total + sum;
 						int cal = orderRequestList.get(i).setCal(total);
 						orderRequestList.get(i).setCalComma(commonService.comma(cal));
 					}
-					/*orderRequestList.add(i, vo);*/
 				};
-				
-				
 				System.out.println("orderRequestList : " + orderRequestList);
 				
 				return orderRequestList;

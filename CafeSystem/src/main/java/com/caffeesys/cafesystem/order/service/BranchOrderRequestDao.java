@@ -43,4 +43,10 @@ public class BranchOrderRequestDao {
 		logger.debug("[selectPrice] 전표번호 가격 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectPrice",statementNumber);		
 	}
+	
+	//배송상태를 배송완료로 바꾸기
+	public int upadateDeliveryOk (String statementNumber) {
+		logger.debug("[upadateDeliveryOk] 배송상태 수정 ");
+		return sqlSessionTemplate.update(NS + "upadateDeliveryOk",statementNumber);		
+	}
 }

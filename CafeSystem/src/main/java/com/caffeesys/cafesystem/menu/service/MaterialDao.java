@@ -53,7 +53,7 @@ public class MaterialDao {
 	}
 	
 	//리스트
-	public List<MaterialVO> selectBranchPersonnelList(Map<String, String> map){
+	public List<MaterialVO> selectMateriallList(Map<String, String> map){
 		logger.debug("[selectBranchPersonnelList] 지점리스트 가져오기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectMaterialList",map);
 	}
