@@ -223,4 +223,22 @@ $(document).ready(
 					}
 		    	});
 			  });
+			// 월매출 날짜 검색
+			$( "#monthlySales-tab" ).tabs({
+			      load: function(event, ui) {
+			    	  
+			     }
+			 });
+			$('input[id="monthlyDate"]').daterangepicker(
+					{ locale: {
+					      format: 'YYYY-MM-DD'
+				    	},
+				    startDate: '2017-05-11',
+				    endDate: '2017-11-11'
+				    },
+				    function(start, end, label) {
+				    	console.log("New date range selected: " + start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD') + " (predefined range: " + label + ")");
+				    }
+			);
+			
 		});

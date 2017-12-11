@@ -47,7 +47,6 @@
 									<div class="clearfix"></div>
 									<br/>
 									<div class="ln_solid"></div>
-									
 									<div class="col-md-4" style="margin-left: 450px;">
 										날짜 검색
 				                        <form class="form-horizontal">
@@ -64,21 +63,6 @@
 				                          </fieldset>
 				                        </form>
 				                      </div>
-									
-									<%-- <div class="form-group" style="float: right;">
-										<form action="${pageContext.request.contextPath}/#" method="get">
-											<select class="input-sm" style="float: left;">
-												<option value="">날짜</option>
-												<option value="">매장</option>
-											</select>
-											<input type="search" name="search" class="input-sm" style="text-align: center; float: left;"
-												placeholder="검색어 입력" aria-controls="datatable">
-											&nbsp; &nbsp;
-											<button type="submit" class="btn btn-primary btn-sm" id="searchButton"
-												style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
-												검색</button>
-										</form>
-									</div> --%>
 									<table id="dailySalesTable"
 										class="table table-striped table-bordered">
 										<thead>
@@ -107,20 +91,22 @@
 									<div class="clearfix"></div>
 									<br/>
 									<div class="ln_solid"></div>
-									<div class="form-group" style="float: right;">
-										<form action="${pageContext.request.contextPath}/#" method="get">
-											<select class="input-sm" style="float: left;">
-												<option value="">날짜</option>
-												<option value="">매장</option>
-											</select>
-											<input type="search" name="search" class="input-sm" style="text-align: center; float: left;"
-												placeholder="검색어 입력" aria-controls="datatable">
-											&nbsp; &nbsp;
-											<button type="submit" class="btn btn-primary btn-sm" id="searchButton"
-												style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
-												검색</button>
-										</form>
-									</div>
+									<div class="col-md-4" style="margin-left: 450px;">
+										날짜 검색
+				                        <form class="form-horizontal">
+				                          <fieldset>
+				                            <div class="control-group">
+				                              <div class="controls">
+				                                <div class="input-prepend input-group">
+				                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
+				                                  <input type="text" style="width: 200px" name="monthlyDate" id="monthlyDate" class="form-control" value="01/01/2015 - 01/31/2015" />
+				                                  &nbsp; &nbsp;
+				                                </div>
+				                              </div>
+				                            </div>
+				                          </fieldset>
+				                        </form>
+				                      </div>
 									<table id="monthlySalesTable"
 										class="table table-striped table-bordered">
 										<thead>

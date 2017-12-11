@@ -32,6 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="feeReal" column="fee_realdate"/>
 		<result property="feeRemain" column="fee_remain"/>
 	</resultMap>
+	<!-- 본사의 지점 일매출 조회 -->
 	<select id="selectDailySalesList" resultMap="resultDailySales">
 		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
 		FROM daily_sales d
@@ -39,6 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON d.local_category_code=s.local_category_code AND d.shop_code=s.shop_code
 		ORDER BY daily_sales_code desc
 	</select>
+	<!-- 본사의 지점 월매출 조회 -->
 	<select id="selectMonthlySalesList" resultMap="resultMonthlySales">
 		SELECT monthly_sales_code,  statement_number,  m.local_category_code,  m.shop_code, s.shop_name, monthly_sales_date,  monthly_sales_amount, monthly_sales_moneydue
 		FROM monthly_sales m
@@ -46,6 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ON m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
 		ORDER BY monthly_sales_code desc
 	</select>
+	<!-- 본사의 지점 일매출 top5 -->
 	<select id="selectDailyTop" resultType="java.util.HashMap">
 		SELECT shop_name, daily_sales_amount
 		FROM daily_sales d
@@ -55,6 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY daily_sales_amount desc
 		LIMIT 5;
 	</select>
+	<!-- 본사의 지점 월매출 top5 -->
 	<select id="selectMonthlyTop" resultType="java.util.HashMap">
 		SELECT shop_name, monthly_sales_amount
 		FROM monthly_sales m
@@ -64,6 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY monthly_sales_amount desc
 		LIMIT 5;
 	</select>
+	<!-- 지점의 일매출 조회 -->
 	<select id="selectDailySalesListByShop" parameterType="java.util.Map" resultMap="resultDailySales">
 		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
 		FROM daily_sales d, shop s
@@ -72,6 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND d.shop_code=#{shop}
 		ORDER BY daily_sales_code desc
 	</select>
+	<!-- 지점의 월매출 조회 -->
 	<select id="selectMonthlySalesListByShop" parameterType="java.util.Map" resultMap="resultMonthlySales">
 		SELECT monthly_sales_code,  statement_number,  m.local_category_code,  m.shop_code, s.shop_name, monthly_sales_date,  monthly_sales_amount, monthly_sales_moneydue
 		FROM monthly_sales m, shop s
@@ -80,6 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND m.shop_code=#{shop}
 		ORDER BY monthly_sales_code desc
 	</select>
+	<!-- 지점의 일매출 그래프 -->
 	<select id="selectDailyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
 		SELECT shop_name, daily_sales_date,  daily_sales_amount
 		FROM daily_sales d, shop s
@@ -89,6 +96,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND daily_sales_date BETWEEN '2017-12-04' AND '2017-12-10'
 		ORDER BY daily_sales_code asc
 	</select>
+	<!-- 지점의 월매출 그래프 -->
 	<select id="selectMonthlyGraph" parameterType="java.util.Map" resultType="java.util.HashMap">
 		SELECT  s.shop_name, monthly_sales_date,  monthly_sales_amount
 		FROM monthly_sales m, shop s
@@ -98,6 +106,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND monthly_sales_date BETWEEN '2017-01-01' AND '2017-12-31'
 		ORDER BY monthly_sales_code asc
 	</select>
+	<!-- 지점의 일매출 날짜 검색 -->
 	<select id="selectDailyDateSearchByShop" parameterType="java.util.Map" resultMap="resultDailySales">
 		SELECT daily_sales_code,  statement_number,  d.local_category_code,  d.shop_code, s.shop_name, daily_sales_date,  daily_sales_amount
 		FROM daily_sales d, shop s
@@ -107,6 +116,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND daily_sales_date BETWEEN #{start} AND #{end}
 		ORDER BY daily_sales_code desc
 	</select>
+	<!-- 지점의 월매출 날짜 검색 -->
+	<select id="">
+	
+	</select>
+	<!-- 본사의 가맹수수료 조회 -->
 	<select id="selectFeeList" resultMap="resultFee">
 		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
 		FROM fee f, monthly_sales m, shop s
@@ -115,6 +129,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				AND m.shop_code=s.shop_code
 		ORDER BY fee_code desc
 	</select>
+	<!-- 지점의 가맹수수료 조회 -->
 	<select id="selectFeeListByShop" parameterType="java.util.Map" resultMap="resultFee">
 		SELECT fee_code, f.statement_number, shop_name, fee_month, fee_price, fee_autodate, fee_realdate, fee_remain
 		FROM fee f, monthly_sales m, shop s
