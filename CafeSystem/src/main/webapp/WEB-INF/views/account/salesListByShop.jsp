@@ -48,8 +48,8 @@
 									<br/>
 									<div class="ln_solid"></div>
 									
-									<div class="col-md-4" style="margin-left: 500px;">
-				                        	날짜 검색
+									<div class="col-md-4" style="margin-left: 450px;">
+										날짜 검색
 				                        <form class="form-horizontal">
 				                          <fieldset>
 				                            <div class="control-group">
@@ -58,9 +58,6 @@
 				                                  <span class="add-on input-group-addon"><i class="glyphicon glyphicon-calendar fa fa-calendar"></i></span>
 				                                  <input type="text" style="width: 200px" name="dailyDate" id="dailyDate" class="form-control" />
 				                                  &nbsp; &nbsp;
-													<button type="submit" class="btn btn-primary btn-sm" id="searchButton">
-														검색
-													</button>
 				                                </div>
 				                              </div>
 				                            </div>
