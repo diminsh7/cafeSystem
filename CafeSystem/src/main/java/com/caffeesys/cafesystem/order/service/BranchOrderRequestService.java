@@ -45,6 +45,8 @@ public class BranchOrderRequestService {
 			System.out.println("login.getPosition() : " + login.getPosition());
 			if(login.getPosition().equals("201") || login.getPosition().equals("202")) {
 				System.out.println("점주 또는 매니져 권한으로 발주주문내역 확인 가능");
+				
+				//검색
 				Map<String, String> map;
 				if(cate != "") {
 					map = new HashMap<String, String>();
@@ -70,7 +72,6 @@ public class BranchOrderRequestService {
 					System.out.println("statementNumber : " + statementNumber);
 					List<HashMap<String,Object>> price = RequestDao.selectPrice(statementNumber); //한 전표번호 물품 각각의 발주금액
 					System.out.println("price : " + price);
-					//포문 하다더 만들기 한전표번호에 대해 여러개
 					int total = 0;
 					for(int j = 0; j < price.size(); j++ ) {
 						Integer sum = (Integer) price.get(j).get("order_price");
@@ -80,7 +81,6 @@ public class BranchOrderRequestService {
 					}
 				};
 				System.out.println("orderRequestList : " + orderRequestList);
-				
 				return orderRequestList;
 				
 			}else{

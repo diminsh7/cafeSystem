@@ -84,16 +84,19 @@
 	</if>
 	
 	<if test="input != null">
-		<if test="cate == statement_number">
+	WHERE OD.local_category_code = #{localCategoryCode} AND OD.shop_code = #{shopCode}
+		AND (OD.order_faulty_divide = 'C' 
+		OR OD.order_faulty_divide = 'D' 
+		OR OD.order_faulty_divide = 'E')
+		<if test="cate==statement_number">
 			WHERE OD.${cate} = #{input}	
+			GROUP BY OD.statement_number
 		</if>
 		
-		<if  test="cate == cateOrder">
+		<if  test="cate==cateOrder">
 			WHERE it.${cate} = #{input}
 		</if>
-	</if>
-	
-		
+	</if>		
 	</select>
 	
 	<!-- DB order에서 매장에 따른 상세발주내용  select -->
