@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+	<div class="menu_section">
+		<h3>소개</h3>
+		<ul class="nav side-menu">
+			<li><a><i class="fa fa-building-o"></i> 프로젝트 &amp; 팀 소개 <span class="fa fa-chevron-down"></span></a>
+				<ul class="nav child_menu">
+					<li><a href="${pageContext.request.contextPath}/">프로젝트 소개</a></li>
+					<li><a href="${pageContext.request.contextPath}/team">팀 소개</a></li>
+				</ul></li>
+		</ul>
+	</div>
+<c:if test="${not empty sessionScope.loginInfo }">
 	<div class="menu_section">
 		<h3>본사</h3>
 		<ul class="nav side-menu">
@@ -92,4 +104,5 @@
 					class="fa fa-phone-square"></i> 매장연락망</a></li>
 		</ul>
 	</div>
+</c:if>
 </div>

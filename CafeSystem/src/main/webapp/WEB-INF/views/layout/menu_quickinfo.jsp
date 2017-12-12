@@ -6,7 +6,7 @@
 	<c:choose>
 		<c:when test="${empty sessionScope.loginInfo }">
 			<div class="profile_pic">
-				<img src="resources/production/images/login.PNG" alt="로그인안함"
+				<img src="resources/img/login.PNG" alt="로그인안함"
 					class="img-circle profile_img">
 			</div>
 			<div class="profile_info">
@@ -19,7 +19,7 @@
 		</c:when>
 		<c:otherwise>
 			<div class="profile_pic">
-				<img src="resources/production/images/loging.jpg" alt="로그인중"
+				<img src="resources/img/loging.jpg" alt="로그인중"
 					class="img-circle profile_img">
 			</div>
 			<div class="profile_info">
