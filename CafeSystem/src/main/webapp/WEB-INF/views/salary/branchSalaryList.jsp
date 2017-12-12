@@ -24,7 +24,6 @@
 					<p class="text-muted font-13 m-b-30">
 						<h2>급여명세서 목록</h2>
 					</p>
-					
 					<form name="search" method="post" action="${pageContext.request.contextPath}/branchSalaryList">
 						<legend>검색</legend>
 						<ul>
@@ -33,16 +32,11 @@
 								<input type="text" name="keyword1" value="${keyword1}">
 							</li>
 							<li>
-								<label>기간검색</label>
-								<input type="Date" name="keyword2" value="${keyword2}">
+								<label>월 검색</label>
+								<input type="MONTH" name="keyword2" value="${keyword2}">
 							</li>
 						</ul>
 						<input type="submit" value="조회">
-						<%-- <!-- <div name="searchOption"> -->
-						직원 코드 검색: <input name="keyword" value="${keyword}"> 
-						<input type="submit" value="조회">
-						<div value="searchOption" value="branch_salary_workmonth">날짜 검색<input type="Date" name="keyword"  value="${keyword}" required></div>
-						<input type="submit" value="조회">		 --%>		
 					</form>
 					<!-- 레코드의 갯수를 출력 -->
 					${branchSalaryCount}개의 게시물이 있습니다.

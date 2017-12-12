@@ -36,7 +36,7 @@
 						}
 					}
 				, error:function(request, status, error){
-					alert('삭제실패');
+					alert('로그인 안했음 삭제실패');
 				}
 			});
 		});

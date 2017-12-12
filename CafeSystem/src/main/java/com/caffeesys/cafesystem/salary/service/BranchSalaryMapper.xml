@@ -110,12 +110,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		<!-- 날짜 검색만 할 경우 -->
 		<if test='keyword1 == "" and  keyword2 != null and keyword2 != ""'>
-			WHERE date_format(bs.branch_salary_workmonth,'%Y-%m-%d') = #{keyword2}
+			WHERE date_format(bs.branch_salary_workmonth,'%Y-%m') = #{keyword2}
 		</if>
 		<!-- 직원코드 & 날짜검색 둘다 할경우 -->
 		<if test='keyword1 != "" and keyword2 != ""'> 
 			WHERE bs.branch_employee_code like CONCAT('%',#{keyword1},'%') 
-			and date_format(bs.branch_salary_workmonth,'%Y-%m-%d') =  #{keyword2}
+			and date_format(bs.branch_salary_workmonth,'%Y-%m') =  #{keyword2}
 		</if>
 	</sql>	
 	

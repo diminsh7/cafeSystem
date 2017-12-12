@@ -19,12 +19,10 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					
 					<div class="x_content">
 					<p class="text-muted font-13 m-b-30">
 						<h2>급여명세서 목록</h2>
 					</p>
-					
 					<form name="search" method="post" action="${pageContext.request.contextPath}/headSalaryList">
 						<legend>검색</legend>
 						<ul>
@@ -72,7 +70,7 @@
 								<li class="previous"><a
 									href="${pageContext.request.contextPath}/headSalaryList?currentPage=${currentPage-1}">이전</a></li>
 							</c:if>
-							<c:if test="${currentPage<=lastPage}">
+							<c:if test="${currentPage<lastPage}">
 								<li class="next"><a
 									href="${pageContext.request.contextPath}/headSalaryList?currentPage=${currentPage+1}">다음</a></li>
 							</c:if>
