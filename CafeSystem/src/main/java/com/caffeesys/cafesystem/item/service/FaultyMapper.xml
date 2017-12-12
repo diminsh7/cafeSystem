@@ -120,6 +120,7 @@
 		ON o.local_category_code = b.local_category_code 
 		AND o.shop_code = b.shop_code
 		WHERE branch_employee_code = #{branchEmployeeCode}
+		GROUP BY i.item_name HAVING count(*) > 1
         ORDER BY f.statement_number DESC
     </select>
 </mapper>
