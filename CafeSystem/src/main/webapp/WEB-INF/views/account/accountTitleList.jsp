@@ -9,7 +9,6 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>	
-
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
@@ -20,7 +19,6 @@
 						</div>
 						<div class="clearfix"></div>
 					</div>
-					
 					<div class="x_content">
 					<p class="text-muted font-13 m-b-30">
 						<h2>게시글 목록</h2>
@@ -37,8 +35,6 @@
 						</select> 
 						<input name="keyword" value="${keyword}"> <input type="submit" value="조회">
 					</form>
-
-
 					<!-- 레코드의 갯수를 출력 -->
 					${count}개의 게시물이 있습니다.
 					<table id="datatable" class="table table-striped table-bordered">
@@ -56,21 +52,25 @@
 								<td>${accountTitleList.accountTitleContent}</td>
 								<td><a id="accountTitleUpdateButton"
 									href="${pageContext.request.contextPath}/accountTitleUpdate?accountTitleCode=${accountTitleList.accountTitleCode}">
-										수정</a></td>
+										수정</a>
+								</td>
 								<td><a onclick="button_event()" id="accountTitleDeleteButton"
 									href="${pageContext.request.contextPath}/accountTitleDelete?accountTitleCode=${accountTitleList.accountTitleCode}">
-										삭제</a></td>
+										삭제</a>
+								</td>
 							</tr>
 						</c:forEach>
 					</table>
 						<ul class="pager">
 							<c:if test="${currentPage>1}">
-								<li class="previous"><a
-									href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage-1}">이전</a></li>
+								<li class="previous">
+									<a href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage-1}">이전</a>
+								</li>
 							</c:if>
-							<c:if test="${currentPage<=lastPage}">
-								<li class="next"><a
-									href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage+1}">다음</a></li>
+							<c:if test="${currentPage<lastPage}">
+								<li class="next">
+									<a href="${pageContext.request.contextPath}/accountTitleList?currentPage=${currentPage+1}">다음</a>
+								</li>
 							</c:if>
 						</ul>
 					</div>

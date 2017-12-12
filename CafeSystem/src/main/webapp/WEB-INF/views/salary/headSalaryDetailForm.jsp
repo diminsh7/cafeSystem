@@ -9,14 +9,7 @@
 		if(btn == "update"){
 			$(location).attr('href', '${pageContext.request.contextPath}/headSalaryUpdate?headSalaryCode=${headSalary.headSalaryCode}');
 		}
-		/* if(btn == "delete"){
-			result = confirm('정말 삭제하시겠습니까?');
-			if(result){
-				$(location).attr('href', '${pageContext.request.contextPath}/headSalaryDelete?headSalaryCode=${headSalary.headSalaryCode}');
-			}	
-		} */
 	}
-	
 	$(document).ready(function(){
 		$('#headSalaryDelete').click(function(){
 			$.ajax({
@@ -43,7 +36,7 @@
 						}
 					}
 				, error:function(request, status, error){
-					alert('삭제실패');
+					alert('로그인 안했음 삭제실패');
 				}
 			});
 		});
