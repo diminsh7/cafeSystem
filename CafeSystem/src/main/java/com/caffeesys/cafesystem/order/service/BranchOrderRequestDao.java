@@ -27,9 +27,10 @@ public class BranchOrderRequestDao {
 	}
 	
 	//리스트(2) 리스트 가져오기
-	public List<BranchOrderRequestVO> selectOderRequestList(BranchOrderRequestVO localShopCode, Map<String, String> map) {
+	public List<BranchOrderRequestVO> selectOderRequestList(Map<String, String> map) {
 		logger.debug("[seleteOderRequestList] 매장에 따른 발주리스트 가져오기");	
-		return  sqlSessionTemplate.selectList(NS + "selectOderRequestList",localShopCode);
+		System.out.println("map : " + map);
+		return  sqlSessionTemplate.selectList(NS + "selectOderRequestList",map);
 	}
 	
 	//선택전표번호 상세조회
@@ -42,5 +43,11 @@ public class BranchOrderRequestDao {
 	public List<HashMap<String,Object>> selectPrice(String statementNumber) {
 		logger.debug("[selectPrice] 전표번호 가격 구하기 실행");
 		return sqlSessionTemplate.selectList(NS + "selectPrice",statementNumber);		
+	}
+	
+	//배송상태를 배송완료로 바꾸기
+	public int upadateDeliveryOk (String statementNumber) {
+		logger.debug("[upadateDeliveryOk] 배송상태 수정 ");
+		return sqlSessionTemplate.update(NS + "upadateDeliveryOk",statementNumber);		
 	}
 }

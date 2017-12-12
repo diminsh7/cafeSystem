@@ -44,10 +44,10 @@ public class FaultyController {
 	public String insertFaulty(Model model, @RequestParam(value = "orderCode", required = true) int orderCode) {
 		System.out.println("FaultyController.java / insertFaulty method GET방식 ");
 		FaultyVO StatementNumber = faultyDao.selectFaultyStatementNumber(orderCode);
-		List<FaultyVO> ItemNameList = faultyDao.selectFaultyItemName();
+		FaultyVO ItemCode = faultyDao.selectFaultyItemCode(orderCode);
 		List<FaultyVO> CategoryFaultyList = faultyDao.selectFaultyCategorySmall();
 		model.addAttribute("StatementNumber",StatementNumber);
-		model.addAttribute("ItemNameList",ItemNameList);
+		model.addAttribute("ItemCode",ItemCode);
 		model.addAttribute("CategoryFaultyList",CategoryFaultyList);
 		return "/item/faultyInsertForm";
 	}

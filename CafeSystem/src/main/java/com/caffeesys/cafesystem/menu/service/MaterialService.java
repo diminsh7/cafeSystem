@@ -47,7 +47,7 @@ public class MaterialService {
 	}
 	
 	//selectBranchPersonnelList 조회검색
-	public void selectBranchPersonnelList(Model model, String cate, String input) {
+	public void selectMateriallList(Model model, String cate, String input) {
 		logger.debug("selectBranchPersonnelList 실행 ");
 		System.out.println("cate :" + cate);
 		System.out.println("input :" + input);
@@ -60,7 +60,7 @@ public class MaterialService {
 			map = null;
 		}
 		map = allService.paging(model,map);
-		List<MaterialVO> materialList = materialDao.selectBranchPersonnelList(map);
+		List<MaterialVO> materialList = materialDao.selectMateriallList(map);
 		model.addAttribute("materialList",materialList);
 	}
 }

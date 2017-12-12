@@ -36,10 +36,10 @@ public class FaultyDao {
 		System.out.println("FaultyDao.java / selectFaultyStatementNumber Param orderCode: "+orderCode);
 		return sqlSessionTemplate.selectOne(NS+"selectFaultyStatementNumber", orderCode);
 	}
-	// 불량품목등록 item명 가져오는 select(지점)
-	public List<FaultyVO> selectFaultyItemName(){
-		System.out.println("FaultyDao.java / selectFaultyItemName method 확인");
-		return sqlSessionTemplate.selectList(NS + "selectFaultyItemName");
+	// 불량품목등록 item코드 가져오는 select(지점)
+	public FaultyVO selectFaultyItemCode(int orderCode){
+		System.out.println("FaultyDao.java / selectFaultyItemCode Param orderCode: "+orderCode);
+		return sqlSessionTemplate.selectOne(NS + "selectFaultyItemCode", orderCode);
 	}
 	// 불량품목등록 category에서 소분류 가져오는 select(지점)
 	public List<FaultyVO> selectFaultyCategorySmall(){
