@@ -13,6 +13,7 @@ public interface SalesDaoInter {
 	public List<MonthlySalesVO> selectMonthlySalesListByShop(Map<String, Object> param);
 	public List<HashMap<String, Object>> selectDailyGraph(Map<String, Object> param);
 	public List<HashMap<String, Object>> selectMonthlyGraph(Map<String, Object> param);
+	public List<DailySalesVO> selectDailyDateSearchByShop(Map<String, Object> param);
 	public List<FeeVO> selectFeeList();
 	public List<FeeVO> selectFeeListByShop(Map<String, Object> param);
 }
