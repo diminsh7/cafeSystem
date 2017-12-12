@@ -137,8 +137,8 @@
 										data-validate-length-range="8,20"
 										class="form-control col-md-7 col-xs-12" type="text"
 										value="${item.itemAble}">
-										<option value='Y'>(Y)발주가능으로 변경</option>
-										<option value='N'>(N)발주불가능으로 변경</option>
+										<option value='Y'>(Y) 발주가능으로 변경</option>
+										<option value='N'>(N) 발주불가능으로 변경</option>
 									</select>
 								</div>
 							</div>
