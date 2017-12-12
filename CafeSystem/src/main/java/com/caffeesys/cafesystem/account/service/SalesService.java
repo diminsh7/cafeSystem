@@ -70,6 +70,15 @@ public class SalesService implements SalesServiceInter {
 		Gson gson = new Gson();
 		return gson.toJson(list);
 	}
+	//지점의 일매출 날짜 검색
+	@Override
+	public String selectDailyDateSearchByShop(Map<String, Object> param) {
+		List<DailySalesVO> list = salesDao.selectDailyDateSearchByShop(param);
+		Gson gson = new Gson();
+		return gson.toJson(list);
+	}
+	//지점의 월매출 날짜 검색
+	
 	//본사의 가맹수수료 조회
 	@Override
 	public String selectFeeList() {
