@@ -33,7 +33,8 @@
 							</ul>
 							<div id="myTabContent" class="tab-content">
 								<div role="tabpanel" class="tab-pane fade active in" id="dailySales" aria-labelledby="dailySales-tab">
-									<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-8 col-sm-8 col-xs-8">
 										<div class="x_panel">
 											<div class="x_title">
 												<h2>2017-12-04 ~ 2017-12-10  매출<small>Weekly Sales</small></h2>
@@ -77,7 +78,8 @@
 									</table>
 								</div>
 								<div role="tabpanel" class="tab-pane fade active" id="monthlySales" aria-labelledby="monthlySales-tab">
-									<div class="col-md-6 col-sm-6 col-xs-12">
+									<div class="col-md-2 col-sm-2 col-xs-2"></div>
+									<div class="col-md-8 col-sm-8 col-xs-8">
 										<div class="x_panel">
 											<div class="x_title">
 												<h2>2017년 월별 매출<small>2017 Monthly Sales</small></h2>

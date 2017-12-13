@@ -5,11 +5,12 @@
 	<div class="menu_section">
 		<h3>소개</h3>
 		<ul class="nav side-menu">
-			<li><a><i class="fa fa-building-o"></i> 프로젝트 &amp; 팀 소개 <span class="fa fa-chevron-down"></span></a>
+			<li><a><i class="fa fa-exclamation-circle"></i> 프로젝트 &amp; 팀 소개 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/">프로젝트 소개</a></li>
 					<li><a href="${pageContext.request.contextPath}/team">팀 소개</a></li>
 				</ul></li>
+			<li><a href="${pageContext.request.contextPath}/start"><i class="fa fa-arrow-circle-right"></i> 프로젝트 시작하기 </a></li>
 		</ul>
 	</div>
 <c:if test="${not empty sessionScope.loginInfo }">

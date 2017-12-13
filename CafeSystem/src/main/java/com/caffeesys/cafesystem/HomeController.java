@@ -20,4 +20,9 @@ public class HomeController {
 		logger.info("team introduction page");
 		return "/home/homeTeam";
 	}
+	@RequestMapping(value = "/start", method = RequestMethod.GET)
+	public String projectStart() {
+		logger.info("project start page");
+		return "/home/projectStart";
+	}
 }
