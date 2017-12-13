@@ -51,7 +51,7 @@ public class LoginController {
 			loginInfo.setDivision(loginDiv);
 			session.setAttribute("loginInfo", loginInfo);
 			logger.debug("login method(POST) session : {}", session.getAttribute("loginInfo"));
-			return "redirect:/";
+			return "redirect:/start";
 		}else {	// 로그인 정보가 틀린 경우
 			logger.debug("login method(POST) 로그인 정보 틀림");
 			response.setContentType("text/html; charset=UTF-8");
