@@ -4,11 +4,11 @@
 	<a data-toggle="tooltip" data-placement="top" title="Home"
 		href="${pageContext.request.contextPath}/"> <span
 		class="glyphicon glyphicon-home" aria-hidden="true"></span>
-	</a> <a data-toggle="tooltip" data-placement="top" title="Infomation"
-		href="${pageContext.request.contextPath}/#"> <span
+	</a> <a data-toggle="tooltip" data-placement="top" title="TEAM Info"
+		href="${pageContext.request.contextPath}/team"> <span
 		class="glyphicon glyphicon-user" aria-hidden="true"></span>
 	</a> <a data-toggle="tooltip" data-placement="top" title="Contact Network"
-		href="${pageContext.request.contextPath}/#"> <span
+		href="${pageContext.request.contextPath}/branchCallList"> <span
 		class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
 	</a> <a data-toggle="tooltip" data-placement="top" title="Logout"
 		href="${pageContext.request.contextPath}/logout"> <span
