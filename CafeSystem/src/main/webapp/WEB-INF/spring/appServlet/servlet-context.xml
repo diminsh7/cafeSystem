@@ -36,7 +36,38 @@
     <!-- Interceptor 설정 -->
     <mvc:interceptors>
         <mvc:interceptor>
+        	<mvc:mapping path="/start"/>
+        	<mvc:mapping path="/shopList"/>
             <mvc:mapping path="/contractList"/>
+            <mvc:mapping path="/feeList"/>
+            <mvc:mapping path="/headEmployeeList"/>
+            <mvc:mapping path="/branchManagerList"/>
+            <mvc:mapping path="/branchPersonnelList"/>
+            <mvc:mapping path="/headSalaryList"/>
+            <mvc:mapping path="/menuInfoList"/>
+            <mvc:mapping path="/materialList"/>
+            <mvc:mapping path="/menuPriceList"/>
+            <mvc:mapping path="/itemList"/>
+            <mvc:mapping path="/headOrderList"/>
+            <mvc:mapping path="/headOrderCancelList"/>
+            <mvc:mapping path="/faultyList"/>
+            <mvc:mapping path="/accountTitleList"/>
+            <mvc:mapping path="/salesList"/>
+            <mvc:mapping path="/branchShopList"/>
+            <mvc:mapping path="/branchContractList"/>
+            <mvc:mapping path="/feeListByShop"/>
+            <mvc:mapping path="/selectBranchManager"/>
+            <mvc:mapping path="/branchPersonnelInfoList"/>
+            <mvc:mapping path="/branchSalaryList"/>
+            <mvc:mapping path="/branchMenuInfoList"/>
+            <mvc:mapping path="/branchMaterialList"/>
+            <mvc:mapping path="/menuPriceList"/>
+            <mvc:mapping path="/branchOrderForm"/>
+            <mvc:mapping path="/branchOrderRequestList"/>
+            <mvc:mapping path="/salesListByShop"/>
+            <mvc:mapping path="/claimList"/>
+            <mvc:mapping path="/boardList"/>
+            <mvc:mapping path="/branchCallList"/>
             <ref bean="authenticationInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
