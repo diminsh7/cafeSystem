@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 	
 <script type="text/javascript">
-	
 	$(document).ready(function(){
+		$("#branchDiv").prop("checked", true);
 		$('#loginButton').click(function(){
 			var lenDiv = $('input[name="division"]:checked').length;
 			var lenId = $('input[name="id"]').val().length;
@@ -29,7 +29,6 @@
 			}
 		});
 	});
-	
 </script>
 
 <div class="right_col" role="main">
@@ -43,12 +42,12 @@
 							<div id="division" class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default" data-toggle-class="btn-primary"
 									data-toggle-passive-class="btn-default">
-									<input type="radio" name="division" value="head"> &nbsp; 본사
+									<input type="radio" name="division" id="headDiv" value="head"> &nbsp; 본사
 									&nbsp;
 								</label>
 								<label class="btn btn-default" data-toggle-class="btn-primary"
 									data-toggle-passive-class="btn-default">
-									<input type="radio" name="division" value="branch"> &nbsp; 지점
+									<input type="radio" name="division" id="branchDiv" value="branch"> &nbsp; 지점
 									&nbsp;
 								</label>
 							</div>
@@ -56,11 +55,11 @@
 					</div>
 					<br/>
 					<div>
-						<input type="text" name="id" class="form-control" placeholder="ID" />
+						<input type="text" name="id" class="form-control" placeholder="ID" value="worud"/>
 					</div>
 					<div>
 						<input type="password" name="pw" class="form-control"
-							placeholder="Password" />
+							placeholder="Password" value="980328"/>
 					</div>
 					<div>
 						<button type="button" class="btn btn-primary" id="loginButton" >log in</button>
@@ -71,7 +70,6 @@
 					<div class="separator">
 						<div class="clearfix"></div>
 						<br />
-
 						<div>
 							<h1>
 								<i class="fa fa-coffee"></i> Bean Place
