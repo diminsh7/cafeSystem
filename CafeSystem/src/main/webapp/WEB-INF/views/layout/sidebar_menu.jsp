@@ -75,7 +75,6 @@
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/branchOrderForm">발주</a></li>
 					<li><a href="${pageContext.request.contextPath}/branchOrderRequestList">발주신청내역</a></li>
-					<li><a href="${pageContext.request.contextPath}/#">불량품목신청</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-krw"></i> 매출 관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
