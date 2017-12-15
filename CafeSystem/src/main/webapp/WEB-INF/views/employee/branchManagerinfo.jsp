@@ -23,39 +23,56 @@
  					 <c:forEach var="branchManager" items="${branchManager}">
  					<div class="x_content">
  						<table id="datatable" class="table table-striped table-bordered">
- 							<thead>
+ 							
  								<tr>
  									<th>직원코드</th>
- 									<th>점포명</th>
- 									<th>아이디</th>
- 									<th>이름</th>
- 									<th>생년월일</th>
- 									<th>연락처</th>
- 									<th>주소</th>
- 									<th>보건증</th>
- 									<th>사업자번호</th>
- 									<th>사업시작일</th>
- 									<th>사업계좌은행명</th>
- 									<th>사업계좌</th>
- 								</tr>
- 							</thead>
- 							<tbody>
- 								<tr>
  									<td>${branchManager.branchEmployeeCode}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>점포명</th>
  									<td>${branchManager.shopName}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>아이디</th>
  									<td>${branchManager.branchEmployeeId}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>이름</th>
  									<td>${branchManager.branchEmployeeName}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>생년월일</th>
  									<td>${branchManager.branchEmployeeBirth}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>연락처</th>
  									<td>${branchManager.branchEmployeePhone}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>주소</th>
  									<td>${branchManager.branchEmployeeAddress}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>보건증</th>
  									<td>${branchManager.branchEmployeeCetificate}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>사업자번호</th>
  									<td>${branchManager.branchManagerWorknum}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>사업시작일</th>
  									<td>${branchManager.branchManagerStart}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>사업계좌은행명</th>
  									<td>${branchManager.branchManagerBank}</td>
+ 								</tr>
+ 								<tr>	
+ 									<th>사업계좌</th>
  									<td>${branchManager.branchManagerBanknum}</td>
  								</tr>
  							
- 							</tbody>
  						</table>
  						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchManager?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
  				</div>
