@@ -129,7 +129,19 @@ public class SalesController {
 		return list;
 	}
 	//지점의 월매출 날짜 검색 json
-	
+	@ResponseBody
+	@RequestMapping(value="/monthlyDateSearchByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	public String jsonMonthlyDateSearchByShop(@RequestParam(value="start", required=true) String start, @RequestParam(value="end", required=true) String end) {
+		logger.debug("jsonMonthlyDateSearchByShop method startDate : " + start + ", endDate : " + end);
+		start+="-01";
+		end+="-01";
+		Map<String, Object> param = getLocalShopCode();
+		param.put("start", start);
+		param.put("end", end);
+		String list = salesService.selectMonthlyDateSearchByShop(param);
+		logger.debug("jsonMonthlyDateSearchByShop method list : " + list);
+		return list;
+	}
 	//본사의 가맹수수료 조회 page
 	@RequestMapping(value="/feeList", method=RequestMethod.GET)
 	public String listFee() {
