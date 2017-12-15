@@ -31,38 +31,55 @@ function deleteb(){
 					</div>
 					<div class="x_content">
 						<table id="datatable" class="table table-striped table-bordered">
-							<thead>
 								<tr>
 									<th>직원코드</th>
-									<th>부서명</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>생년월일</th>
-									<th>연락처</th>
-									<th>주소</th>
-									<th>입사일</th>
-									<th>월급</th>
-									<th>상여금</th>
-									<th>월급계좌번호</th>
-									<th>근로계약서</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
 									<td>${headEmployeeDetail.headEmployeeCode}</td>
+								</tr>
+								<tr>	
+									<th>부서명</th>
 									<td>${headEmployeeDetail.cateDepartment}</td>
+								</tr>
+								<tr>
+									<th>아이디</th>
 									<td>${headEmployeeDetail.headEmployeeId}</td>
+								</tr>
+								<tr>
+									<th>이름</th>
 									<td>${headEmployeeDetail.headEmployeeName}</td>
+								</tr>
+								<tr>
+									<th>생년월일</th>
 									<td>${headEmployeeDetail.headEmployeeBirth}</td>
+								</tr>
+								<tr>
+									<th>연락처</th>
 									<td>${headEmployeeDetail.headEmployeePhone}</td>
+								</tr>
+								<tr>
+									<th>주소</th>
 									<td>${headEmployeeDetail.headEmployeeAddress}</td>
+								</tr>
+								<tr>
+									<th>입사일</th>
 									<td>${headEmployeeDetail.headEmployeeJoin}</td>
+								</tr>
+								<tr>
+									<th>월급</th>
 									<td>${headEmployeeDetail.headEmployeeSalary}</td>
+								</tr>
+								<tr>	
+									<th>상여금</th>
 									<td>${headEmployeeDetail.cateBonus}</td>
+								</tr>
+								<tr>	
+									<th>월급계좌번호</th>
 									<td>${headEmployeeDetail.headEmployeeBanknum}</td>
+								</tr>
+								<tr>	
+									<th>근로계약서</th>
 									<td>${headEmployeeDetail.headEmployeeContract}</td>
 								</tr>
-							</tbody>
+							
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/headEmployeeUpdate?headEmployeeCode=${headEmployeeDetail.headEmployeeCode}">수정</a>
 						<a class="btn btn-default" onclick="deleteb()" id="DeleteButton" href ="${pageContext.request.contextPath}/headEmployeeDelete?headEmployeeCode=${headEmployeeDetail.headEmployeeCode}">삭제</a>
