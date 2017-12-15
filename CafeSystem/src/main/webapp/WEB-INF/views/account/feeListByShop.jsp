@@ -49,7 +49,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<div class="form-group" style="float: right;">
+						<%-- <div class="form-group" style="float: right;">
 							<form
 								action="${pageContext.request.contextPath}/#" method="get">
 								<select class="input-sm" style="float: left;">
@@ -63,7 +63,7 @@
 									style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
 									검색</button>
 							</form>
-						</div>
+						</div> --%>
 						<table id="feeTable" class="table table-striped table-bordered">
 							<thead>
 								<tr>

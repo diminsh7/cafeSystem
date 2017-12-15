@@ -48,7 +48,7 @@
 									<div class="clearfix"></div>
 									<br/>
 									<div class="ln_solid"></div>
-									<div class="form-group" style="float: right;">
+									<%-- <div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/dailySalesSearch" method="get">
 											<select class="input-sm" style="float: left;">
 												<option value="">날짜</option>
@@ -61,7 +61,7 @@
 												style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
 												검색</button>
 										</form>
-									</div>
+									</div> --%>
 									<table id="dailySalesTable"
 										class="table table-striped table-bordered">
 										<thead>
@@ -91,7 +91,7 @@
 									<div class="clearfix"></div>
 									<br/>
 									<div class="ln_solid"></div>
-									<div class="form-group" style="float: right;">
+									<%-- <div class="form-group" style="float: right;">
 										<form action="${pageContext.request.contextPath}/monthlySalesSearch" method="get">
 											<select class="input-sm" style="float: left;">
 												<option value="">날짜</option>
@@ -104,7 +104,7 @@
 												style="float: right; padding: 0.75mm 1.2mm 0.75mm 1.2mm;">
 												검색</button>
 										</form>
-									</div>
+									</div> --%>
 									<table id="monthlySalesTable"
 										class="table table-striped table-bordered">
 										<thead>
