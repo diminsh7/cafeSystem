@@ -100,11 +100,13 @@
 		ON he.bonus_category_code = cate2.category_code
 
 	<if test="input != null">
-			<if test="cate == cateDepartment">
-			WHERE cate1.${cate} = #{input}
+			<!-- 부서 -->
+			<if test="cate=='cateDepartment'">
+			WHERE cate1.category_small like CONCAT('%',#{input},'%')WHERE menu.menu_name like CONCAT('%',#{input},'%')
 			</if>
-			<if  test="cate != cateDepartment">
-			WHERE he.${cate} = #{input}
+			<!-- 이름, 코드 -->	
+			<if  test="cate!='cateDepartment'">
+			WHERE he.${cate} like CONCAT('%',#{input},'%')
 			</if>
 	</if>	
 	</select>

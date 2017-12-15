@@ -88,14 +88,22 @@
 		AND (OD.order_faulty_divide = 'C' 
 		OR OD.order_faulty_divide = 'D' 
 		OR OD.order_faulty_divide = 'E')
-		<if test="cate==statement_number">
-			WHERE OD.${cate} = #{input}	
-			GROUP BY OD.statement_number
-		</if>
 		
-		<if  test="cate==cateOrder">
-			WHERE it.${cate} = #{input}
+		<!-- 전표번호 -->
+		<if test="cate=='statement_number'">
+			AND OD.statement_number like CONCAT('%',#{input},'%')
 		</if>
+		<!-- 접수상태  -->
+		<if  test="cate=='divideName'">
+			AND OD.order_category_code
+			AND cate.category_small like CONCAT('%',#{input},'%') 
+		</if>
+		<!-- 배송상태  -->
+		<if  test="cate=='cateOrder'">
+			AND OD.receipt_category_code
+			AND cate.category_small like CONCAT('%',#{input},'%') 
+		</if>
+	GROUP BY OD.statement_number	
 	</if>		
 	</select>
 	

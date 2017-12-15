@@ -32,40 +32,60 @@ function deleteb(){
 					 <c:forEach var="Detail" items="${branchPersonnelDetail}">
 					<div class="x_content">
 						<table id="datatable" class="table table-striped table-bordered">
-							<thead>
+						
 								<tr>
 									<th>직원코드</th>
-									<th>직급명</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>생년월일</th>
-									<th>연락처</th>
-									<th>주소</th>
-									<th>보건증</th>
-									<th>입사일</th>
-									<th>월급</th>
-									<th>월급계좌은행명</th>
-									<th>월급계좌번호</th>
-									<th>근로계약서</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
 									<td>${Detail.branchEmployeeCode}</td>
+								</tr>
+								<tr>	
+									<th>직급명</th>
 									<td>${Detail.categorySmall}</td>
+								</tr>
+								<tr>
+									<th>아이디</th>
 									<td>${Detail.branchEmployeeId}</td>
+								</tr>
+								<tr>	
+									<th>이름</th>
 									<td>${Detail.branchEmployeeName}</td>
+								</tr>
+								<tr>	
+									<th>생년월일</th>
 									<td>${Detail.branchEmployeeBirth}</td>
+								</tr>
+								<tr>	
+									<th>연락처</th>
 									<td>${Detail.branchEmployeePhone}</td>
+								</tr>
+								<tr>	
+									<th>주소</th>
 									<td>${Detail.branchEmployeeAddress}</td>
+								</tr>
+								<tr>	
+									<th>보건증</th>
 									<td>${Detail.branchEmployeeCetificate}</td>
+								</tr>
+								<tr>	
+									<th>입사일</th>
 									<td>${Detail.branchPersonnelJoin}</td>
+								</tr>
+								<tr>	
+									<th>월급</th>
 									<td>${Detail.branchPersonnelSalary}</td>
+								</tr>
+								<tr>	
+									<th>월급계좌은행명</th>
 									<td>${Detail.branchPersonnelBank}</td>
+								</tr>
+								<tr>
+									<th>월급계좌번호</th>
 									<td>${Detail.branchPersonnelBanknum}</td>
+								</tr>
+								<tr>
+									<th>근로계약서</th>
 									<td>${Detail.branchPersonnelContract}</td>
 								</tr>
-							</tbody>
+							
 						</table>
 						<a class="btn btn-default" href="${pageContext.request.contextPath}/updateBranchPersonnelForm?branchEmployeeCode=${Detail.branchEmployeeCode}">수정</a>
 						<a class="btn btn-default" onclick="deleteb()" id="DeleteButton" href ="${pageContext.request.contextPath}/deleteBranchPersonnel?branchEmployeeCode=${Detail.branchEmployeeCode}">삭제</a>

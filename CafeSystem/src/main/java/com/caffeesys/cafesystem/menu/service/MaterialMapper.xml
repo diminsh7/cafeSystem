@@ -105,16 +105,13 @@
 			ON material.size_category_code = sizecategory.category_code
 	
 		<if test="input != null">
-			<if test="cate == menu_code">
-			WHERE
-				(SELECT menu_code as c
-				FROM menu
-				WHERE menu_name  = #{input})
-				material.${cate} = c
-				
+			<!-- 메뉴명 -->
+			<if  test="cate =='menu_name'">
+				WHERE menu.menu_name like CONCAT('%',#{input},'%')
 			</if>
-			<if  test="cate == item_name">
-			WHERE item.${cate} = #{input}
+			<!-- 품목명 -->
+			<if  test="cate =='item_name'">
+				WHERE item.item_name like CONCAT('%',#{input},'%')
 			</if>
 		</if>
 	</select> 

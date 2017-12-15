@@ -30,7 +30,7 @@
 										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
 										<option value="branch_employee_code" class="input-sm">직원코드</option>
 										<option value="branch_employee_name" class="input-sm">이름</option>
-										<option value="category_small" class="input-sm">직급</option>
+										<option value="category_small" class="input-sm">직급명</option>
 									</select>
 									<div class="input-group">
 										<input type="text" name="input" id="input" value="${input}" required class="input-sm"> <span>

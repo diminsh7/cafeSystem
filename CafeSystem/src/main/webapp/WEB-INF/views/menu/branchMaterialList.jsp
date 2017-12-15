@@ -32,7 +32,7 @@
 									<select name="cate" id="cate" required class="input-sm">
 										<option id="opt" value="${cate}" class="input-sm">검색 조건 선택</option>
 										<option value="menu_code" class="input-sm">메뉴명</option>
-										<option value="item_name" class="input-sm">품목코드</option>
+										<option value="item_name" class="input-sm">품목명</option>
 									</select>
 									<div class="input-group">
 										<input type="text" name="input" id="input" value="${input}" required class="input-sm"> <span>

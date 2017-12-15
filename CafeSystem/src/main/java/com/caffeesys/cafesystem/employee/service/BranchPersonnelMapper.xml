@@ -108,11 +108,15 @@
 			OR branch_employee.position_category_code = '203'
 		</if>
 		<if test="input != null">
-			<if test="cate == category_small">
-				category.${cate} = #{input}
+			<!-- 직급 -->
+			<if test="cate =='category_small'">
+				category.category_small  like CONCAT('%',#{input},'%')
 			</if>
-			<if  test="cate != category_small">
-			  branch_employee.${cate} = #{input}
+			<!-- 이름, 직원 코드 -->
+			<if  test="cate !='category_small'">
+				(branch_employee.position_category_code = '202'
+				OR branch_employee.position_category_code = '203')
+				AND branch_employee.${cate} like CONCAT('%',#{input},'%')
 			</if>  
 		</if>  
 		
