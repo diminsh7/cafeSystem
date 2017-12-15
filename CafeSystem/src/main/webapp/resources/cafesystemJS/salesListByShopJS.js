@@ -1,4 +1,5 @@
 var dailySalesTable;
+var monthlySalesTable;
 $(document).ready(
 		function() {
 			// 일매출, 월매출 리스트 시작
@@ -42,7 +43,7 @@ $(document).ready(
 				success : function(data) {
 					var list = JSON.parse(data);
 					console.log(data);
-					$('#monthlySalesTable').DataTable({
+					monthlySalesTable = $('#monthlySalesTable').DataTable({
 						processing : true,
 						serverSide : false,
 						data : list,
@@ -224,21 +225,29 @@ $(document).ready(
 		    	});
 			  });
 			// 월매출 날짜 검색
-			/*$( "#monthlySales-tab" ).tabs({
-			      load: function(event, ui) {
-			    	  
-			     }
-			 });
-			$('input[id="monthlyDate"]').daterangepicker(
-					{ locale: {
-					      format: 'YYYY-MM-DD'
-				    	},
-				    startDate: '2017-05-11',
-				    endDate: '2017-11-11'
-				    },
-				    function(start, end, label) {
-				    	console.log("New date range selected: " + start.format('YYYY-MM-DD') + " to " + end.format('YYYY-MM-DD') + " (predefined range: " + label + ")");
-				    }
-			);*/
-			
+			$('#searchButton').click(function(){
+				var start = $('input[name="mSearch1"]').val();
+				var end = $('input[name="mSearch2"]').val();
+				console.log("start : " + start + ", end : " + end);
+				$.ajax({
+					url : "/monthlyDateSearchByShopJson",
+					type : "json",
+					method : "GET",
+					data : {start : start, end : end},
+					success : function(data) {
+						console.log("월매출검색");
+						var list = JSON.parse(data);
+						monthlySalesTable.clear();
+						console.log(list);
+						for(var i=0; i < list.length; i++){
+							var monthlySales = list[i];
+							monthlySalesTable.row.add(monthlySales);
+						}
+						monthlySalesTable.draw();
+					},
+					error : function(request, status, error) {
+						alert('지점 월매출 날짜 검색 실패');
+					}
+				});
+			});
 		});

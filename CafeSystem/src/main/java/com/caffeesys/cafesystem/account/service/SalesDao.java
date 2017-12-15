@@ -70,7 +70,11 @@ public class SalesDao implements SalesDaoInter {
 		return result;
 	}
 	//지점의 월매출 날짜 검색
-	
+	@Override
+	public List<MonthlySalesVO> selectMonthlyDateSearchByShop(Map<String, Object> param) {
+		List<MonthlySalesVO> result = sqlSession.selectList(NS+"selectMonthlyDateSearchByShop", param);
+		return result;
+	}
 	//본사의 가맹수수료 조회
 	@Override
 	public List<FeeVO> selectFeeList() {

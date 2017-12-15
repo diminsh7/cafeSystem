@@ -12,6 +12,7 @@ public interface SalesServiceInter {
 	public String selectDailyGraph(Map<String, Object> param);
 	public String selectMonthlyGraph(Map<String, Object> param);
 	public String selectDailyDateSearchByShop(Map<String, Object> param);
+	public String selectMonthlyDateSearchByShop(Map<String, Object> param);
 	public String selectFeeList();
 	public String selectFeeListByShop(Map<String, Object> param);
 }	

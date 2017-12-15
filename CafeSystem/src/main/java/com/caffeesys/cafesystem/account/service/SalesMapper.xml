@@ -117,8 +117,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY daily_sales_code desc
 	</select>
 	<!-- 지점의 월매출 날짜 검색 -->
-	<select id="">
-	
+	<select id="selectMonthlyDateSearchByShop" parameterType="java.util.Map" resultMap="resultMonthlySales">
+		SELECT monthly_sales_code,  statement_number,  m.local_category_code,  m.shop_code, s.shop_name, monthly_sales_date,  monthly_sales_amount, monthly_sales_moneydue
+		FROM monthly_sales m, shop s
+		WHERE m.local_category_code=s.local_category_code AND m.shop_code=s.shop_code
+		AND m.local_category_code=#{local}
+		AND m.shop_code=#{shop}
+		AND DATE_FORMAT(monthly_sales_date,'%Y-%m') BETWEEN DATE_FORMAT(#{start},'%Y-%m') AND DATE_FORMAT(#{end},'%Y-%m')
+		ORDER BY monthly_sales_code desc
 	</select>
 	<!-- 본사의 가맹수수료 조회 -->
 	<select id="selectFeeList" resultMap="resultFee">
