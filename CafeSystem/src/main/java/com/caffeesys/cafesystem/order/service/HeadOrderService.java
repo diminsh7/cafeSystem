@@ -47,7 +47,7 @@ public class HeadOrderService {
 			map = null;
 		}
 		
-		map = commonService.paging(model, currentPage, 2, headOrderdao.headOrderCount(map), map);	
+		map = commonService.paging(model, currentPage, 4, headOrderdao.headOrderCount(map), map);	
 		List<HeadOrderVO> headOrderList =  headOrderdao.headOrderList(map);
 		logger.debug("[HeadOrderService.class / headOrderList.method] headOrderList param: " + headOrderList);
 		model.addAttribute("headOrderList", headOrderList);
