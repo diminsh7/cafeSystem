@@ -75,7 +75,6 @@ $(document).ready(function(){
 									<th>배송상태</th>
 									<th>발주승인 담당자</th>
 									<th>발주/불량구분</th>
-									<th>환불 신청</th>
 									<th>취소 신청</th>
 								</tr>
 							</thead>
@@ -89,7 +88,6 @@ $(document).ready(function(){
 										<td>${request.cateOrder}</td>
 										<td>${request.headName}</td>
 										<td>${request.divideName}</td>
-										<td><a href="${pageContext.request.contextPath}/?statementNumber=${request.statementNumber}">환불신청</a></td>
 										<td><button class="cancelBtn" type="button">취소신청</button></td>
 									</tr>
 								</c:forEach>
