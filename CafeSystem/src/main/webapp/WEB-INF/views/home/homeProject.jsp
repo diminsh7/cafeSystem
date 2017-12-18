@@ -124,6 +124,10 @@
 						<table class="table">
 							<tbody>
 								<tr>
+									<td></td>
+									<td>▼ 클릭하세요 ▼</td>
+								</tr>
+								<tr>
 									<td><strong>GITHUB 주소</strong></td>
 									<td><a href="https://github.com/Jeon-Yoo-jin/cafe-system">
 											https://github.com/Jeon-Yoo-jin/cafe-system </a></td>
