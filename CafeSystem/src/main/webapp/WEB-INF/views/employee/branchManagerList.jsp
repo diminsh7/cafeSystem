@@ -16,7 +16,7 @@
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>점주 리스트 <small></small></h2>
-                    
+                    <a class="btn btn-default" href="${pageContext.request.contextPath}/insertformbranchManager">점주등록</a> 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
