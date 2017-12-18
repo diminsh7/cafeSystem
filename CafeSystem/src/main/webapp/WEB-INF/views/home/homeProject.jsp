@@ -18,7 +18,7 @@
 				<div class="well" style="padding-bottom: 0px; padding-top: 10px;">
 					<h5><strong>프로젝트 주제</strong></h5>
 					<h3>
-						프랜차이즈 통합관리 전산 시스템 (Franchise Integrated Management System) &nbsp;
+						프랜차이즈카페 통합관리 전산 시스템 (Franchise Integrated Management System) &nbsp;
 						<a href="${pageContext.request.contextPath}/start" class="btn btn-app"><i class="fa fa-play"></i> 프로젝트 시작 </a>
 					</h3>
 				</div>
@@ -29,7 +29,7 @@
 						<h2>프로젝트 목표</h2>
 						<div class="clearfix"></div>
 					</div>
-					<div class="x_content">프랜차이즈 전사적 자원, 경영 전략을 위한 소프트웨어 개발</div>
+					<div class="x_content">프랜차이즈카페 전사적 자원, 경영 전략을 위한 소프트웨어 개발</div>
 				</div>
 			</div>
 			<div class="col-md-12 col-sm-12 col-xs-10">
