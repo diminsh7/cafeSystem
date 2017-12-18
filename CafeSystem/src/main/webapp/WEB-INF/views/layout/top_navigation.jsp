@@ -21,7 +21,7 @@
 								${sessionScope.loginInfo.name} 님 <span class=" fa fa-angle-down"></span>
 							</a>
 							<ul class="dropdown-menu dropdown-usermenu pull-right">
-								<li><a href="${pageContext.request.contextPath}/#"> Profile</a></li>
+								<%-- <li><a href="${pageContext.request.contextPath}/#"> Profile</a></li> --%>
 								<li><a href="${pageContext.request.contextPath}/logout"> <i
 										class="fa fa-sign-out pull-right"> </i> Log Out
 								</a></li>
