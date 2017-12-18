@@ -28,6 +28,17 @@ public class MenuPriceController {
 		return "menu/menuPriceList";
 	}
 	
+	//메뉴 가격 리스트, 검색, 카테고리 세션 SET (지정용)
+	@RequestMapping("/branchMenuPriceList")
+	public String branchMenuPriceList(Model model
+			, @RequestParam(value="cate", required=false) String cate
+			, @RequestParam(value="input", required=false) String input
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage) {
+		System.out.println("[MenuPriceController.java / branchMenuPriceList.method] Loading");
+		menuPriceService.menuPriceList(model, currentPage, cate, input);
+		return "menu/branchMenuPriceList";
+	}
+	
 	//메뉴 가격 입력 폼 요청
 	@RequestMapping("menuPriceInsert")
 	public String menuPriceInsert(Model model) {
