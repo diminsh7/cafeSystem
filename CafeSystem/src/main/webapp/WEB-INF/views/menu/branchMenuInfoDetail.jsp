@@ -13,35 +13,52 @@
 		</div>
 		<div class="clearfix"></div>
 		<div class="row">
-			<div class="col-md-12 col-sm-12 col-xs-12">
+			<div class="col-md-6 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>메뉴상세조회</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>메뉴코드</th>
-									<th>메뉴카테고리명</th>
-									<th>메뉴명</th>
-									<th>출시일</th>
-									<!-- <th>메뉴이미지</th>
-									<th>레시피이미지</th> -->
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>${menuInfo.menuCode}</td>
-									<td>${menuInfo.categorySmall}</td>
-									<td>${menuInfo.menuName}</td>
-									<td>${menuInfo.menuStart}</td>
-									<%-- <td>${menuInfo.menuImage}</td>
-									<td>${menuInfo.menuRecipe}</td> --%>
-								</tr>
-							</tbody>
-						</table>
+						<br />
+						<form class="form-horizontal form-label-left">
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">메뉴코드</label>
+								<div class="col-md-9 col-sm-9 col-xs-12">
+									<div class="form-control">${menuInfo.menuCode}</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">메뉴카테고리명</label>
+								<div class="col-md-9 col-sm-9 col-xs-12">
+									<div class="form-control">${menuInfo.categorySmall}</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">메뉴명</label>
+								<div class="col-md-9 col-sm-9 col-xs-12">
+									<div class="form-control">${menuInfo.menuName}</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3 col-sm-3 col-xs-12">출시일</label>
+								<div class="col-md-9 col-sm-9 col-xs-12">
+									<div class="form-control">${menuInfo.menuStart}</div>
+								</div>
+							</div>
+							<%-- <div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">메뉴이미지</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${menuInfo.menuImage}</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-md-3 col-sm-3 col-xs-12">레시피이미지</label>
+									<div class="col-md-9 col-sm-9 col-xs-12">
+										<div class="form-control">${menuInfo.menuRecipe}</div>
+									</div>
+								</div> --%>
+						</form>
 					</div>
 				</div>
 			</div>
