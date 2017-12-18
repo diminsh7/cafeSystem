@@ -69,7 +69,7 @@
 				<ul class="nav child_menu">
 					<li><a href="${pageContext.request.contextPath}/branchMenuInfoList">카페메뉴조회</a></li>
 					<li><a href="${pageContext.request.contextPath}/branchMaterialList">메뉴재료원가조회</a></li>
-					<li><a href="${pageContext.request.contextPath}/menuPriceList">메뉴총원가조회</a></li>
+					<li><a href="${pageContext.request.contextPath}/branchMenuPriceList">메뉴가격조회</a></li>
 				</ul></li>
 			<li><a><i class="fa fa-shopping-cart"></i> 발주관리 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
