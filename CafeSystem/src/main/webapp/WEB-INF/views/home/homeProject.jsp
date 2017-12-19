@@ -6,7 +6,7 @@
 			var answer = confirm("다운로드 하시겠습니까 ?")
 			if (answer) {
 				 e.preventDefault();
-		         window.open("/resources/files/프랜차이즈카페통합관리전산시스템_개발문서.xlsx", "_blank");
+				 window.open("/resources/files/CafeSystem.docx", "_blank");
 			}
 		});
 	});
