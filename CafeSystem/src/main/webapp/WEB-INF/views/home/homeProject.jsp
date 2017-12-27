@@ -3,7 +3,7 @@
 <script>
 	$(document).ready(function() {
 		$(document).on('click', '#filedown', function(e) {
-			var answer = confirm("다운로드 하시겠습니까 ?")
+			var answer = confirm("文書をダウンロードしますか？")
 			if (answer) {
 				 e.preventDefault();
 				 window.open("/resources/files/CafeSystem.docx", "_blank");
@@ -15,27 +15,32 @@
 	<div>
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-10">
-				<div class="well" style="padding-bottom: 0px; padding-top: 10px;">
-					<h5><strong>프로젝트 주제</strong></h5>
-					<h3>
-						프랜차이즈카페 통합관리 전산 시스템 (Franchise Integrated Management System) &nbsp;
-						<a href="${pageContext.request.contextPath}/start" class="btn btn-app"><i class="fa fa-play"></i> 프로젝트 시작 </a>
-					</h3>
-				</div>
-			</div>
-			<div class="col-md-12 col-sm-12 col-xs-10">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>프로젝트 목표</h2>
+						<h2>Project Title &nbsp;</h2>
+						<button id="filedown" type="button">開発文書 Download</button>
 						<div class="clearfix"></div>
 					</div>
-					<div class="x_content">프랜차이즈카페 전사적 자원, 경영 전략을 위한 소프트웨어 개발</div>
+					<div class="x_content">
+						<h4>
+							フランチャイズカフェ統合管理電算システム - Franchise Integrated Management System &nbsp;
+						</h4>
+					</div>
+				</div>		
+			</div>
+			<div class="col-md-12 col-sm-12 col-xs-10">
+				<div class="x_panel">
+					<div class="x_title">
+						<h2>Project Goal</h2>
+						<div class="clearfix"></div>
+					</div>
+					<div class="x_content">フランチャイズカフェの全社的な資源、経営戦略のためのソフトウェア開発</div>
 				</div>
 			</div>
 			<div class="col-md-12 col-sm-12 col-xs-10">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>기대효과</h2>
+						<h2>Expectancy Effects</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -43,15 +48,15 @@
 							<tbody>
 								<tr>
 									<td>1</td>
-									<td>본사에서의 직원 관리 편의성 증진 및 지점 관리 용의성 확보</td>
+									<td>本社での社員管理の便利性増進、また支店管理の容易性確保</td>
 								</tr>
 								<tr>
 									<td>2</td>
-									<td>지점에서의 직원 관리 편의성 증진 및 매장 관리 용의성 확보</td>
+									<td>支店での社員管理の便利性増進、また店舗管理の容易性確保</td>
 								</tr>
 								<tr>
 									<td>3</td>
-									<td>본사와 지점 간의 업무 전산화에 따른 업무 효율성 증진</td>
+									<td>本社と支店間の業務電算化による業務の効率性増進</td>
 								</tr>
 							</tbody>
 						</table>
@@ -61,7 +66,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-10">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>개발환경</h2>
+						<h2>Development Environment</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -117,7 +122,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-10">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>프로젝트 관련 자료</h2>
+						<h2>Related Data</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -125,21 +130,21 @@
 							<tbody>
 								<tr>
 									<td></td>
-									<td>▼ 클릭하세요 ▼</td>
+									<td>▼ Click ▼</td>
 								</tr>
 								<tr>
-									<td><strong>GITHUB 주소</strong></td>
+									<td><strong>GITHUB Address</strong></td>
 									<td><a href="https://github.com/Jeon-Yoo-jin/cafe-system">
 											https://github.com/Jeon-Yoo-jin/cafe-system </a></td>
 								</tr>
 								<tr>
 									<td><strong>ERD</strong></td>
-									<td><a href="/resources/img/ERD_logical.png">논리ERD</a> / <a
-										href="/resources/img/ERD_physical.png">물리ERD</a></td>
+									<td><a href="/resources/img/ERD_logical.png">論理ERD</a> / <a
+										href="/resources/img/ERD_physical.png">物理ERD</a></td>
 								</tr>
 								<tr>
-									<td><strong>개발문서</strong></td>
-									<td><a id="filedown">개발문서 다운로드</a></td>
+									<td><strong>開発文書</strong></td>
+									<td><a id="filedown">Download</a></td>
 								</tr>
 							</tbody>
 						</table>

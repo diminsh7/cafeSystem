@@ -5,33 +5,34 @@
 			<div class="col-md-12 col-sm-12 col-xs-10">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>교육 과정</h2>
+						<h2>Education Program</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<table class="table">
 							<tbody>
 								<tr>
-									<td><strong>교육 기관</strong></td>
-									<td><a href="http://ksmart.or.kr/">
-											한국스마트정보교육원</a></td>
+									<td><strong>教育機関</strong></td>
+									<td><a href="http://ksmart.or.kr/" target="_blank">
+											韓国スマート情報教育院</a></td>
 								</tr>
 								<tr>
-									<td><strong>교육명</strong></td>
-									<td>국가 기간/전략 산업 직종 훈련 (NCS) - 웹/어플 제품 SW개발자양성 (응용SW 및 DB엔지니어링 융합)</td>
+									<td><strong>教育名</strong></td>
+									<td>国家基幹/戦略産業職種訓練(NCS) － ウェブ/アプリ製品SW開発者養成(応用SW及びエンジニアリング融合)</td>
 								</tr>
 								<tr>
-									<td><strong>교육 내용</strong></td>
+									<td><strong>教育内容</strong></td>
 									<td>
-										1. 웹/모바일웹 화면 개발언어 : HTML5, JavaScript, JQuery, JQuery Mobile, Json 등 <br/>
-										2. 웹/모바일웹 서버측 개발언어 : Java, JSP, Servlet 등 <br/>
-										3. Framework : Spring, Mybatis 등 <br/>
-										4. Model : Model1, Model2, MVC <br/>
-										5. 팀프로젝트 실무
+										1. ウェブ/モバイルウェブ画面開発言語：HTML5, JavaScript, JQuery, JQuery Mobile, Json など<br/>
+										2. ウェブ/モバイルウェブサーバー側開発言語： Java, JSP, Servlet など<br/>
+										3. Database: Mysql, Oracle<br/>
+										4. Framework : Spring, Mybatis など<br/>
+										5. Model : Model1, Model2, MVC<br/>
+										6. チームプロジェクト実務
 									</td>
 								</tr>
 								<tr>
-									<td><strong>교육 기간</strong></td>
+									<td><strong>教育期間</strong></td>
 									<td>2017.06.19 ~ 2017.12.27</td>
 								</tr>
 							</tbody>
@@ -45,33 +46,33 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							김재경 <small>팀원</small>
-						</h2>
+						<h5>
+							Kim Jae kyoung <small> member</small>
+						</h5>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<center><a href="http://blog.naver.com/jaekyung9803" class="btn btn-success btn-sm">김재경 블로그</a></center>
+						<center><a href="http://blog.naver.com/jaekyung9803" class="btn btn-success btn-sm" target="_blank">BLOG</a></center>
 						<br/>
 						<div>
 							<ul class="list-inline widget_tally">
 								<li>
-									<strong>담당업무</strong>
+									<strong>担当</strong>
 								</li>
 								<li>
-									메뉴 재료 원가 관리
+									材料の原価管理
 								</li>
 								<li>
-									본사 직원 신상 관리
+									本社社員情報管理
 								</li>
 								<li>
-									지점 직원 신상 관리
+									支店社員情報管理
 								</li>
 								<li>
-									지점 발주 취소 신청
+									支店発注取消申請
 								</li>
 								<li>
-									지점별 발주 내역 관리
+									支店別発注内訳管理
 								</li>
 							</ul>
                         </div>
@@ -81,33 +82,33 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							송정훈 <small>팀원</small>
-						</h2>
+						<h5>
+							Song Jeonghun <small> member</small>
+						</h5>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-                        <center><a href="http://blog.naver.com/synths" class="btn btn-danger btn-sm">송정훈 블로그</a></center>
+                        <center><a href="http://blog.naver.com/synths" class="btn btn-danger btn-sm" target="_blank">BLOG</a></center>
                         <br/>
 						<div>
 							<ul class="list-inline widget_tally">
 								<li>
-									<strong>담당업무</strong>
+									<strong>担当</strong>
 								</li>
 								<li>
-									고객 클레임 관리
+									クレーム管理
 								</li>
 								<li>
-									본사 발주 관리
+									本社の発注管理
 								</li>
 								<li>
-									지점 발주 관리
+									支店の発注管理
 								</li>
 								<li>
-									메뉴 가격 관리
+									メニュー価格管理
 								</li>
 								<li>
-									공통 로직 관리
+									共通ロジック管理
 								</li>
 							</ul>
                         </div>
@@ -117,36 +118,33 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							전유진 <small>팀장</small>
-						</h2>
+						<h5>
+							Jun Yujin <small> leader</small>
+						</h5>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<center><a href="http://blog.naver.com/ahqjatod79" class="btn btn-info btn-sm">전유진 블로그</a></center>
+						<center><a href="http://blog.naver.com/ahqjatod79" class="btn btn-info btn-sm" target="_blank">BLOG</a></center>
 						<br/>
 						<div>
 							<ul class="list-inline widget_tally">
 								<li>
-									<strong>담당업무</strong>
+									<strong>担当</strong>
 								</li>
 								<li>
-									팀장 업무 및 호스팅 관리
+									LayOut、Tiles 設定
 								</li>
 								<li>
-									레이아웃 및 타일즈 설정
+									プロジェクトセット
 								</li>
 								<li>
-									프로젝트 환경설정
+									ログイン管理
 								</li>
 								<li>
-									로그인 관리
+									日・月売上管理
 								</li>
 								<li>
-									본사/지점 일·월매출 관리
-								</li>
-								<li>
-									가맹수수료 관리
+									ロイヤルティー管理
 								</li>
 							</ul>
                         </div>
@@ -156,36 +154,36 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							탁현수 <small>팀원</small>
-						</h2>
+						<h5>
+							Tak Hyunsu <small> member</small>
+						</h5>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-                        <center><a href="http://blog.naver.com/tag0066" class="btn btn-primary btn-sm">탁현수 블로그</a></center>
+                        <center><a href="http://blog.naver.com/tag0066" class="btn btn-primary btn-sm" target="_blank">BLOG</a></center>
                         <br/>
 						<div>
 							<ul class="list-inline widget_tally">
 								<li>
-									<strong>담당업무</strong>
+									<strong>担当</strong>
 								</li>
 								<li>
-									매장 기초 정보 관리
+									店舗情報管理
 								</li>
 								<li>
-									매장 및 가맹계약서 관리
+									店舗・契約書管理
 								</li>
 								<li>
-									매장 연락망
+									店舗連絡網管理
 								</li>
 								<li>
-									발주 품목/금지품목 관리
+									発注品目管理
 								</li>
 								<li>
-									메뉴 정보 관리
+									メニュー情報管理
 								</li>
 								<li>
-									불량 품목 관리
+									不良品目管理
 								</li>
 							</ul>
                         </div>
@@ -195,30 +193,30 @@
 			<div class="col-md-2 col-sm-2 col-xs-2">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>
-							황다솜 <small>팀원</small>
-						</h2>
+						<h5>
+							Hwang Dasom <small> member</small>
+						</h5>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-                        <center><a href="http://blog.naver.com/confidence2015" class="btn btn-warning btn-sm">황다솜 블로그</a></center>
+                        <center><a href="http://blog.naver.com/confidence2015" class="btn btn-warning btn-sm" target="_blank">BLOG</a></center>
                         <br/>
 						<div>
 							<ul class="list-inline widget_tally">
 								<li>
-									<strong>담당업무</strong>
+									<strong>担当</strong>
 								</li>
 								<li>
-									계정 과목 관리
+									勘定科目管理
 								</li>
 								<li>
-									본사 직원 급여 관리
+									本社社員給料管理
 								</li>
 								<li>
-									지점 직원 급여 관리
+									支店社員給料管理
 								</li>
 								<li>
-									통합 게시판
+									提示版
 								</li>
 							</ul>
                         </div>
