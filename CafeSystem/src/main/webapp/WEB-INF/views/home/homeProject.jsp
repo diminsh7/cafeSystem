@@ -18,7 +18,8 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h2>Project Title &nbsp;</h2>
-						<button id="filedown" type="button">開発文書 Download</button>
+						<button id="filedown" type="button" class="btn btn-default btn-sm">開発文書 Download</button>
+						<small> * 開発文書とプロジェクトの内容はまだ翻訳していますので韓国語になっています。</small>					
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -134,13 +135,13 @@
 								</tr>
 								<tr>
 									<td><strong>GITHUB Address</strong></td>
-									<td><a href="https://github.com/Jeon-Yoo-jin/cafe-system">
-											https://github.com/Jeon-Yoo-jin/cafe-system </a></td>
+									<td><a href="https://github.com/diminsh7/cafeSystem" target="_blank">
+											https://github.com/diminsh7/cafeSystem </a></td>
 								</tr>
 								<tr>
 									<td><strong>ERD</strong></td>
-									<td><a href="/resources/img/ERD_logical.png">論理ERD</a> / <a
-										href="/resources/img/ERD_physical.png">物理ERD</a></td>
+									<td><a href="/resources/img/ERD_logical.png" target="_blank">論理ERD</a> / <a
+										href="/resources/img/ERD_physical.png" target="_blank">物理ERD</a></td>
 								</tr>
 								<tr>
 									<td><strong>開発文書</strong></td>

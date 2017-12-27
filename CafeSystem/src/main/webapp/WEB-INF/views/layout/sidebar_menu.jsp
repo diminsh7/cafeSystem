@@ -7,7 +7,8 @@
 		<ul class="nav side-menu">
 			<li><a><i class="fa fa-exclamation-circle"></i> Project &amp; Team <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
-					<li><a href="${pageContext.request.contextPath}/">About Project</a></li>
+					<li><a href="${pageContext.request.contextPath}/">About Me</a></li>
+					<li><a href="${pageContext.request.contextPath}/project">About Project</a></li>
 					<li><a href="${pageContext.request.contextPath}/team">About Team</a></li>
 				</ul></li>
 			<li><a href="${pageContext.request.contextPath}/start"><i class="fa fa-arrow-circle-right"></i> Project START </a></li>

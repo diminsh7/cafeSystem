@@ -88,7 +88,7 @@
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-                        <center><a href="http://blog.naver.com/synths" class="btn btn-danger btn-sm" target="_blank">BLOG</a></center>
+                        <center><a href="http://blog.naver.com/synths" class="btn btn-danger btn-sm" target="_blank">BLOG</a><a href="https://github.com/diminsh7/cafeSystem" class="btn btn-danger btn-sm" target="_blank">Git Hub</a></center>
                         <br/>
 						<div>
 							<ul class="list-inline widget_tally">

@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String me() {
+		logger.info("self-introduction page");
+		return "/home/homeMyInfo";
+	}
+	@RequestMapping(value = "/project", method = RequestMethod.GET)
 	public String project() {
 		logger.info("project introduction page");
 		return "/home/homeProject";
