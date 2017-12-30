@@ -6,7 +6,7 @@
 			var answer = confirm("文書をダウンロードしますか？")
 			if (answer) {
 				 e.preventDefault();
-				 window.open("/resources/files/CafeSystem.docx", "_blank");
+				 window.open("/resources/files/CafeSystem_Report.docx", "_blank");
 			}
 		});
 	});

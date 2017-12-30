@@ -83,7 +83,7 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h5>
-							Song Jeonghun <small> member</small>
+							Song Jeonghun <small> sub leader</small>
 						</h5>
 						<div class="clearfix"></div>
 					</div>
@@ -96,7 +96,10 @@
 									<strong>担当</strong>
 								</li>
 								<li>
-									クレーム管理
+									Hosting管理
+								</li>					
+								<li>
+									発注品目管理
 								</li>
 								<li>
 									本社の発注管理
@@ -107,8 +110,12 @@
 								<li>
 									メニュー価格管理
 								</li>
+								
 								<li>
 									共通ロジック管理
+								</li>
+								<li>
+									クレーム管理
 								</li>
 							</ul>
                         </div>
