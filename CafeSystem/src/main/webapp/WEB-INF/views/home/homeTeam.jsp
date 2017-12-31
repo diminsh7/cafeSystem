@@ -83,7 +83,7 @@
 				<div class="x_panel">
 					<div class="x_title">
 						<h5>
-							Song Jeonghun <small> sub leader</small>
+							Song Jeonghun <br/><small> sub leader</small>
 						</h5>
 						<div class="clearfix"></div>
 					</div>
