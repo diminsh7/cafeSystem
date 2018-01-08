@@ -6,6 +6,22 @@
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script>
+	$(document).ready(function(){
+		$('#cancelBtn').click(function(){
+			var result = confirm('登録をキャンセルしますか？');
+			if(result){
+				$(location).attr('href', '${pageContext.request.contextPath}/contractList');
+			}
+		});
+		
+		$('#insertBtn').click(function(){
+			var result = confirm('登録しますか？');
+			if(result){
+				$('form').submit();
+			}
+		})
+	});
+
 	// 소유자연락처 번호 자르기
 	function OnCheckPhone(oTa) {
 		var oForm = oTa.form;
@@ -305,8 +321,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>가맹계약서관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/contractList">계약서(전체리스트)</a>
+				<h3>加盟契約書管理</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -314,16 +329,13 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>계약서등록</h2>
+						<h2>契約書登録</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
-						<form action="./insertContract" method="post"
-							class="form-horizontal form-label-left" novalidate>
+						<form action="./insertContract" method="post" class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">소유자명<span class="required">*</span>
-								</label>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">所有主名<span class="required">*</span> </label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractOwnerName"
 										class="form-control col-md-7 col-xs-12"
@@ -332,8 +344,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포명<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">店舗名<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractShopName"
@@ -343,19 +354,14 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">소유자연락처<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">所有主連絡先<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractOwnerPhone"
-										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="contractOwnerPhone" required="required" type="text" onfocus="OnCheckPhone(this)" onKeyup="OnCheckPhone(this)">
+									<input id="contractOwnerPhone" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contractOwnerPhone" required="required" type="text" onfocus="OnCheckPhone(this)" onKeyup="OnCheckPhone(this)">
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약일<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">契約日<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractStartDate"
@@ -366,31 +372,25 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약만료일<span class="required">*</span>
+									for="name">契約終了日<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractEndDate"
-										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="contractEndDate" required="required" type="text">
+									<input id="contractEndDate" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contractEndDate" required="required" type="text">
 								</div>
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약서사진<span class="required">*</span>
+									for="name">契約書添付<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
-									<input id="contractPhoto"
-										class="form-control col-md-7 col-xs-12"
-										data-validate-length-range="6" data-validate-words="2"
-										name="contractPhoto" required="required" type="file">
+									<input id="contractPhoto" class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2" name="contractPhoto" required="required" type="file">
 								</div>
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
-								<div class="col-md-6 col-md-offset-3">
-									<a type="submit" class="btn btn-primary" href="${pageContext.request.contextPath}/contractList">취소</a>
-									<button id="send" type="submit" class="btn btn-success">등록</button>
+								<div class="col-md-6 col-md-offset-5">
+									<button id="cancelBtn" class="btn btn-primary" type="button">Cancel</button>
+									<button id="insertBtn" type="button" class="btn btn-success">Insert</button>
 								</div>
 							</div>
 						</form>

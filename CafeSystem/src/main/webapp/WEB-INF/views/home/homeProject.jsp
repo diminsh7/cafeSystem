@@ -19,7 +19,7 @@
 					<div class="x_title">
 						<h2>Project Title &nbsp;</h2>
 						<button id="filedown" type="button" class="btn btn-default btn-sm">開発文書 Download</button>
-						<small> * 開発文書とプロジェクトの内容はまだ翻訳していますので韓国語になっています。</small>					
+						<small> * 開発文書とプロジェクトの内容はまだ翻訳していますので韓国語になっているところがあります。</small>					
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">

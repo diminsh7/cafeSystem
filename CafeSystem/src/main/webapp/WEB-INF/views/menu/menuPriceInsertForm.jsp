@@ -107,14 +107,14 @@
 						<form id="menuPriceInsertForm" action="${pageContext.request.contextPath}/menuPriceInsert" method="post" data-parsley-validate class="form-horizontal form-label-left">
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="tempCate">Menu Name</label>
-									<div class="col-md-6 col-sm-6 col-xs-12">
-										<select class="form-control selectBox" id="menuName" name="menuName">
-											<option value="empty">선택하세요</option>
-											<c:forEach var="menuNameList" items="${menuNameList}">
-												<option value="${menuNameList}">${menuNameList}</option>
-											</c:forEach>
-										 </select>
-									</div>
+								<div class="col-md-6 col-sm-6 col-xs-12">
+									<select class="form-control selectBox" id="menuName" name="menuName">
+										<option value="empty">선택하세요</option>
+										<c:forEach var="menuNameList" items="${menuNameList}">
+											<option value="${menuNameList}">${menuNameList}</option>
+										</c:forEach>
+									 </select>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="menuCode">Menu Code</label>
