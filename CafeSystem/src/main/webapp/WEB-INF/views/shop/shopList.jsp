@@ -1,15 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!-- page content -->
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>매장기초정보관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a> 
-				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
+				<h3>
+					店舗基礎情報管理
+					<a class="btn btn-primary btn-sm" href="${pageContext.request.contextPath}/shopList">店舗リスト</a> 
+					<a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/insertShop">店舗登録</a>
+				</h3>			
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -17,33 +17,32 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>매장전체조회</h2>
+						<h2>店舗情報照会 <small>* 契約コードをクリックして詳細照会</small></h2>
 						<div class="clearfix"></div>
 					</div>
 					<form action="./shopList" method="post" name="search">
 						<select name="searchOption">
 							<option value="all"
-								<c:out value="${searchOption == 'all'?'selected':''}"/>>점포명+점포주소</option>
+								<c:out value="${searchOption == 'all'?'selected':''}"/>>店舗名+店舗住所</option>
 							<option value="shop_name"
-								<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>점포명</option>
+								<c:out value="${map.searchOption == 'shopName'?'selected':''}"/>>店舗名</option>
 							<option value="contract_owner_name"
-									<c:out value="${map.searchOption == 'contractOwnerName'?'selected':''}"/>>소유자명</option>
+									<c:out value="${map.searchOption == 'contractOwnerName'?'selected':''}"/>>所有主名</option>
 							<option value="shop_address"
-								<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>점포주소</option>
+								<c:out value="${map.searchOption == 'shopAddress'?'selected':''}"/>>店舗住所</option>
 						</select>
 						<input name="keyword" value="${keyword}"> 
-						<input type="submit" value="조회">
+						<input type="submit" value="検索">
 					</form>
 					<div class="x_content">
-						<p class="text-muted font-13 m-b-30">계약코드클릭-상세조회</p>
-						<div align="right">전체행의 수 : ${shopCount}</div>
+						<div align="right">店舗数 : ${shopCount}</div>
 						<table class="table table-hover">
 							<thead>
 								<tr>
-									<th>계약코드</th>
-									<th>점포명</th>
-									<th>소유자명</th>
-									<th>점포주소</th>
+									<th>契約コード</th>
+									<th>店舗名</th>
+									<th>所有主名</th>
+									<th>店舗住所</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -61,11 +60,11 @@
 						<ul class="pager">
 							<c:if test="${currentPage > 1}">
 								<li class="previous"><a
-									href="${pageContext.request.contextPath}/shopList?currentPage=${currentPage-1}">이전</a></li>
+									href="${pageContext.request.contextPath}/shopList?currentPage=${currentPage-1}">Prev</a></li>
 							</c:if>
 							<c:if test="${currentPage < lastPage}">
 								<li class="next"><a
-									href="${pageContext.request.contextPath}/shopList?currentPage=${currentPage+1}">다음</a></li>
+									href="${pageContext.request.contextPath}/shopList?currentPage=${currentPage+1}">Next</a></li>
 							</c:if>
 						</ul>
 					</div>
@@ -74,4 +73,3 @@
 		</div>
 	</div>
 </div>
-<!-- /page content -->

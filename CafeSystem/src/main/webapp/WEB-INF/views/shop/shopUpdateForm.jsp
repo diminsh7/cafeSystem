@@ -1,14 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- page content -->
+<script>
+	$(document).ready(function(){
+		$('#cancelBtn').click(function(){
+			var result = confirm('修正をキャンセルしますか？');
+			if(result){
+				$(location).attr('href', '${pageContext.request.contextPath}/shopDetail?contractCode=${shop.contractCode}');
+			}
+		});
+		
+		$('#modifyBtn').click(function(){
+			var result = confirm('修正しますか？');
+			if(result){
+				$('form').submit();
+			}
+		});
+		
+	});
+</script>
 <div class="right_col" role="main">
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>매장기초정보관리</h3>
-				<a class="btn btn-primary" href="${pageContext.request.contextPath}/shopList">매장(전체리스트)</a>
-				<a class="btn btn-success" href="${pageContext.request.contextPath}/insertShop">매장(등록)</a>
+				<h3>店舗基礎情報管理</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -16,7 +31,7 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>매장수정</h2>
+						<h2>店舗情報修正</h2>
 						<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
@@ -24,7 +39,7 @@
 							class="form-horizontal form-label-left" novalidate>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">계약코드<span class="required">*</span>
+									for="name">契約コード<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="contractCode"
@@ -36,7 +51,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포명<span class="required">*</span>
+									for="name">店舗名<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopName"
@@ -48,7 +63,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포주소<span class="required">*</span>
+									for="name">住所<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopAddress"
@@ -60,7 +75,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포연락처<span class="required">*</span>
+									for="name">連絡先<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopCall"
@@ -72,7 +87,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포우편번호<span class="required">*</span>
+									for="name">郵便番号<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopPostcode"
@@ -84,7 +99,7 @@
 							</div>
 							<div class="item form-group">
 								<label class="control-label col-md-3 col-sm-3 col-xs-12"
-									for="name">점포규모<span class="required">*</span>
+									for="name">店舗サイズ(㎡)<span class="required">*</span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="shopSize"
@@ -96,8 +111,9 @@
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
-								<div class="col-md-6 col-md-offset-3">
-									<button id="send" type="submit" class="btn btn-warning">수정</button>
+								<div class="col-md-6 col-md-offset-5">
+									<button id="cancelBtn" type="button" class="btn btn-primary">Cancel</button>
+									<button id="modifyBtn" type="button" class="btn btn-warning">Modify</button>									
 								</div>
 							</div>
 						</form>

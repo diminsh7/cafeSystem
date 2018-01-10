@@ -13,17 +13,17 @@
 					if(lenPw > 0) {
 						$('#login').submit();
 					}else{
-						alert('비밀번호를 입력하세요.');
+						alert('パスワードを入力して下さい。');
 						$('input[name="pw"]').focus();
 						return false;
 					}
 				}else{
-					alert('아이디를 입력하세요.');
+					alert('IDを入力して下さい。');
 					$('input[name="id"]').focus();
 					return false;
 				}
 			}else{
-				alert('본사 혹은 지점을 선택하세요.');
+				alert('本社、または支店を選択して下さい');
 				$('input[name="division"]').eq(0).focus();
 				return false;
 			}
@@ -37,17 +37,21 @@
 			<section class="login_content">
 				<form id="login" action="${pageContext.request.contextPath}/login" method="post" >
 					<h1>Login</h1>
+					<small>
+						自動的に入力されているIDは支店のアカウントですが <br/>
+						ポートフォリオのため本社の機能まで使えるようになっています。<br/><br/>
+					</small>
 					<div>
 						<div>
 							<div id="division" class="btn-group" data-toggle="buttons">
 								<label class="btn btn-default" data-toggle-class="btn-primary"
 									data-toggle-passive-class="btn-default">
-									<input type="radio" name="division" id="headDiv" value="head"> &nbsp; 본사
+									<input type="radio" name="division" id="headDiv" value="head"> &nbsp; 本社
 									&nbsp;
 								</label>
 								<label class="btn btn-default" data-toggle-class="btn-primary"
 									data-toggle-passive-class="btn-default">
-									<input type="radio" name="division" id="branchDiv" value="branch"> &nbsp; 지점
+									<input type="radio" name="division" id="branchDiv" value="branch"> &nbsp; 支店
 									&nbsp;
 								</label>
 							</div>
@@ -62,7 +66,7 @@
 							placeholder="Password" value="980328"/>
 					</div>
 					<div>
-						<button type="button" class="btn btn-primary" id="loginButton" >log in</button>
+						<button type="button" class="btn btn-primary" id="loginButton" >ログイン</button>
 					</div>
 
 					<div class="clearfix"></div>
