@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -28,6 +30,8 @@ public class BranchOrderService {
 	@Autowired
 	HttpSession session;
 	
+	private static final Logger logger = LoggerFactory.getLogger(BranchOrderService.class);
+	
 	Gson gson = new Gson();
 	
 	Map<String, String> map = new HashMap<String, String>();
@@ -44,22 +48,22 @@ public class BranchOrderService {
 		model.addAttribute("branchOrderList", branchOrderList);
 	}
 	
-	//지점 발주 처리
+	//支店発注処理
 	public void branchOrderInsert(BranchOrderCommand branchOrderCommand) {	
-		//전표번호 규칙: 101205-001001-C-01 (연월일-지역매장코드-분류-숫자) *같은 날의 발주는 하나로 묶이기 때문에 마지막 숫자는 무조건 01이 된다. 
-		//전표번호의 날짜에 해당하는 부분 생성
+		//伝票番号の規則: 101205-001001-C-01 (年月日-地域店舗コード-分流-順番) *同じ日の発注は1つにまとめるので最後の数字は必ず01になる。 
+		//伝票の年月日生成
 		String currentDate = commonservice.dateSelect();
-		//전표번호의 지역매장 코드에 해당하는 부분 생성
+		//伝票の地域店舗コード生成
 		List<HashMap<String, Object>> localShopCode = commonservice.localShopCodeSelect();		
-		System.out.println("localShopCode : " + localShopCode);
-		String localCode = (String) localShopCode.get(0).get("local_category_code"); //지역코드
-		System.out.println("localCode : " + localCode);
-		String shopCode = (String) localShopCode.get(0).get("shop_code"); //매장코드
-		System.out.println("shopCode : " + shopCode);
-		//전표번호 생성
+		logger.debug("localShopCode : " + localShopCode);
+		String localCode = (String) localShopCode.get(0).get("local_category_code"); //地域コード
+		logger.debug("localCode : " + localCode);
+		String shopCode = (String) localShopCode.get(0).get("shop_code"); //店舗コード
+		logger.debug("shopCode : " + shopCode);
+		//伝票番号生成
 		String satatementNumber = currentDate + "-" + localCode + shopCode + "-C" + "-01";
 		
-		//발주 품목별로 가져와서 Insert
+		//発注品目別に持ってきてInsert
 		List<String> itemCodeList = branchOrderCommand.getItemCode();
 		List<Integer> orderAmountList = branchOrderCommand.getOrderAmount();
 		List<Integer> orderPriceList = branchOrderCommand.getOrderPrice();

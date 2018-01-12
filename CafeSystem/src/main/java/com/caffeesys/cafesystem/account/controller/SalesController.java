@@ -19,66 +19,72 @@ import com.caffeesys.cafesystem.account.service.SalesService;
 @Controller
 public class SalesController {
 	private static final Logger logger = LoggerFactory.getLogger(SalesController.class);
-	
+
 	@Autowired
 	private SalesService salesService;
 	@Autowired
 	private CommonService commonService;
-	
-	@RequestMapping(value="/dailySalesInsertForm", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/dailySalesInsertForm", method = RequestMethod.GET)
 	public String insertDailySales() {
 		logger.debug("insertDailySales method");
 		return "/account/dailySalesInsertForm";
 	}
-	//본사의 지점매출조회 page
-	@RequestMapping(value="/salesList", method=RequestMethod.GET)
+
+	// 본사의 지점매출조회 page
+	@RequestMapping(value = "/salesList", method = RequestMethod.GET)
 	public String listSales() {
 		logger.debug("listSales method");
 		return "/account/salesList";
 	}
-	//본사의 지점 일매출 json
+
+	// 본사의 지점 일매출 json
 	@ResponseBody
-	@RequestMapping(value="/dailySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/dailySalesListJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonDailySalesList() {
 		String list = salesService.selectDailySalesList();
 		logger.debug("jsonDailySalesList method list : " + list);
 		return list;
 	}
-	//본사의 지점 월매출 json
+
+	// 本社と支店の月売上 json
 	@ResponseBody
-	@RequestMapping(value="/monthlySalesListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/monthlySalesListJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonMonthlySalesList() {
 		String list = salesService.selectMonthlySalesList();
 		logger.debug("jsonMonthlySalesList method list : " + list);
 		return list;
 	}
-	//본사의 지점 일매출 top5 json
+
+	// 본사의 지점 일매출 top5 json
 	@ResponseBody
-	@RequestMapping(value="/dailyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/dailyTopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonDailyTop() {
 		String list = salesService.selectDailyTop();
 		logger.debug("jsonDailyTop method list : " + list);
 		return list;
 	}
-	//본사의 지점 월매출 top5 json
+
+	// 본사의 지점 월매출 top5 json
 	@ResponseBody
-	@RequestMapping(value="/monthlyTopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/monthlyTopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonMonthlyTop() {
 		String list = salesService.selectMonthlyTop();
 		logger.debug("jsonMonthlyTop method list : " + list);
 		return list;
 	}
-	//본사 일매출 월매출 검색기능 부분
-	
-	//지점의 매출조회 page
-	@RequestMapping(value="/salesListByShop", method=RequestMethod.GET)
+	// 본사 일매출 월매출 검색기능 부분
+
+	// 지점의 매출조회 page
+	@RequestMapping(value = "/salesListByShop", method = RequestMethod.GET)
 	public String listSalesByShop() {
 		logger.debug("listSalesByShop method");
 		return "/account/salesListByShop";
 	}
-	//지점의 일매출 json
+
+	// 지점의 일매출 json
 	@ResponseBody
-	@RequestMapping(value="/dailySalesListByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/dailySalesListByShopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonDailySalesListByShop() {
 		logger.debug("jsonDailySalesListByShop method");
 		Map<String, Object> param = getLocalShopCode();
@@ -86,9 +92,10 @@ public class SalesController {
 		logger.debug("jsonFeeListByShop method list : " + list);
 		return list;
 	}
-	//지점의 월매출 json
+
+	// 지점의 월매출 json
 	@ResponseBody
-	@RequestMapping(value="/monthlySalesListByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/monthlySalesListByShopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonMonthlySalesListByShop() {
 		logger.debug("jsonMonthlySalesListByShop method");
 		Map<String, Object> param = getLocalShopCode();
@@ -96,9 +103,10 @@ public class SalesController {
 		logger.debug("jsonFeeListByShop method list : " + list);
 		return list;
 	}
-	//지점의 일매출 그래프 json
+
+	// 지점의 일매출 그래프 json
 	@ResponseBody
-	@RequestMapping(value="/dailyGraphJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/dailyGraphJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonDailyGraph() {
 		logger.debug("jsonDailyGraph method");
 		Map<String, Object> param = getLocalShopCode();
@@ -106,9 +114,10 @@ public class SalesController {
 		logger.debug("jsonDailyGraph method list : " + list);
 		return list;
 	}
-	//지점의 월매출 그래프 json
+
+	// 지점의 월매출 그래프 json
 	@ResponseBody
-	@RequestMapping(value="/monthlyGraphJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/monthlyGraphJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonMonthlyGraph() {
 		logger.debug("jsonMonthlyGraph method");
 		Map<String, Object> param = getLocalShopCode();
@@ -116,10 +125,12 @@ public class SalesController {
 		logger.debug("jsonMonthlyGraph method list : " + list);
 		return list;
 	}
-	//지점의 일매출 날짜 검색 json
+
+	// 지점의 일매출 날짜 검색 json
 	@ResponseBody
-	@RequestMapping(value="/dailyDateSearchByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String jsonDailyDateSearchByShop(@RequestParam(value="start", required=true) String start, @RequestParam(value="end", required=true) String end) {
+	@RequestMapping(value = "/dailyDateSearchByShopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
+	public String jsonDailyDateSearchByShop(@RequestParam(value = "start", required = true) String start,
+			@RequestParam(value = "end", required = true) String end) {
 		logger.debug("jsonDailyDateSearchByShop method startDate : " + start + ", endDate : " + end);
 		Map<String, Object> param = getLocalShopCode();
 		param.put("start", start);
@@ -128,13 +139,15 @@ public class SalesController {
 		logger.debug("jsonDailyDateSearchByShop method list : " + list);
 		return list;
 	}
-	//지점의 월매출 날짜 검색 json
+
+	// 지점의 월매출 날짜 검색 json
 	@ResponseBody
-	@RequestMapping(value="/monthlyDateSearchByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
-	public String jsonMonthlyDateSearchByShop(@RequestParam(value="start", required=true) String start, @RequestParam(value="end", required=true) String end) {
+	@RequestMapping(value = "/monthlyDateSearchByShopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
+	public String jsonMonthlyDateSearchByShop(@RequestParam(value = "start", required = true) String start,
+			@RequestParam(value = "end", required = true) String end) {
 		logger.debug("jsonMonthlyDateSearchByShop method startDate : " + start + ", endDate : " + end);
-		start+="-01";
-		end+="-01";
+		start += "-01";
+		end += "-01";
 		Map<String, Object> param = getLocalShopCode();
 		param.put("start", start);
 		param.put("end", end);
@@ -142,29 +155,33 @@ public class SalesController {
 		logger.debug("jsonMonthlyDateSearchByShop method list : " + list);
 		return list;
 	}
-	//본사의 가맹수수료 조회 page
-	@RequestMapping(value="/feeList", method=RequestMethod.GET)
+
+	// 본사의 가맹수수료 조회 page
+	@RequestMapping(value = "/feeList", method = RequestMethod.GET)
 	public String listFee() {
 		logger.debug("listFee method");
 		return "/account/feeList";
 	}
-	//본사의 가맹수수료 json
+
+	// 본사의 가맹수수료 json
 	@ResponseBody
-	@RequestMapping(value="/feeListJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/feeListJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonFeeList() {
 		String list = salesService.selectFeeList();
 		logger.debug("jsonFeeList method list : " + list);
 		return list;
 	}
-	//지점의 가맹수수료 조회 page
-	@RequestMapping(value="/feeListByShop", method=RequestMethod.GET)
+
+	// 지점의 가맹수수료 조회 page
+	@RequestMapping(value = "/feeListByShop", method = RequestMethod.GET)
 	public String listFeeByShop() {
 		logger.debug("listFeeByShop method");
 		return "/account/feeListByShop";
 	}
-	//지점의 가맹수수료 json
+
+	// 지점의 가맹수수료 json
 	@ResponseBody
-	@RequestMapping(value="/feeListByShopJson", produces = "application/text; charset=utf8", method=RequestMethod.GET)
+	@RequestMapping(value = "/feeListByShopJson", produces = "application/text; charset=utf8", method = RequestMethod.GET)
 	public String jsonFeeListByShop() {
 		logger.debug("jsonFeeListByShop method");
 		Map<String, Object> param = getLocalShopCode();
@@ -172,8 +189,9 @@ public class SalesController {
 		logger.debug("jsonFeeListByShop method list : " + list);
 		return list;
 	}
-	//로그인한 사람 소속지점의 지역코드, 매장코드 가져오는 method
-	public Map<String, Object> getLocalShopCode(){
+
+	// 로그인한 사람 소속지점의 지역코드, 매장코드 가져오는 method
+	public Map<String, Object> getLocalShopCode() {
 		List<HashMap<String, Object>> localshopCode = commonService.localShopCodeSelect();
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("local", localshopCode.get(0).get("local_category_code"));

@@ -23,20 +23,20 @@
 					var empCode = loginList[0]	//<직원코드>
 					var pw = loginList[1]		//<비번>
 						if(empCode != null){
-							var pw2 = prompt('삭제하시려면 비밀번호를 입력해 주세요',"");
+							var pw2 = prompt('暗所番号を入力して下さい。',"");
 							console.log(pw2)
 							if(pw == pw2){
-								alert("비번일치")
+								alert("暗証番号一致")
 								$(location).attr('href', '${pageContext.request.contextPath}/branchSalaryDelete?branchSalaryCode=${branchSalary.branchSalaryCode}');
 							}else{
-								alert("비번불일치")
+								alert("暗証番号不一致")
 							}
 						}else{
 							return false;
 						}
 					}
 				, error:function(request, status, error){
-					alert('로그인 안했음 삭제실패');
+					alert('ログインをして下さい。');
 				}
 			});
 		});
@@ -48,7 +48,7 @@
 	<div class="">
 		<div class="page-title">
 			<div class="title_left">
-				<h3>급여명세서관리</h3>
+				<h3>給与明細書管理</h3>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -56,14 +56,14 @@
 			<div class="col-md-12 col-sm-12 col-xs-12">
 				<div class="x_panel">
 					<div class="x_title">
-						<h2>급여명세서 상세정보</h2>
+						<h2>給与明細書詳細照会</h2>
 					<div class="clearfix"></div>
 					</div>
 					<div class="x_content">
 						<div class="form-horizontal form-label-left">
 						
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">명세서 코드<span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="code">明細書コード<span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryCode" value="${branchSalary.branchSalaryCode}" 
@@ -71,7 +71,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">전표번호 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">伝票番号 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="statementNumber" value="${branchSalary.statementNumber}" 
@@ -79,7 +79,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="detail">직원코드 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="detail">社員コード <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input type="text" id="branchEmployeeCode"  value="${branchSalary.branchEmployeeCode}" 
@@ -87,7 +87,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">귀속 년월 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">帰属年月 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id=" branchSalaryWorkmonth" value="${branchSalary.branchSalaryWorkmonth}" 
@@ -95,7 +95,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">월급 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">月給 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchEmployeeSalary" value="${branchSalary.branchEmployeeSalary}" 
@@ -103,7 +103,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">건강보험 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">健康保険 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryHealth" value="${branchSalary.branchSalaryHealth}" 
@@ -111,7 +111,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">고용보험 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">雇用保険 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryInsurance" value="${branchSalary.branchSalaryInsurance}"  
@@ -119,7 +119,7 @@
 								</div> 
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">국민연금 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">国民年金 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryPersion" value="${branchSalary.branchSalaryPersion}" 
@@ -127,7 +127,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">지급합계 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">支払い合計 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryPayments" value="${branchSalary.branchSalaryPayments}" 
@@ -135,7 +135,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">공제합계 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">控除合計 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryDeduction" value="${branchSalary.branchSalaryDeduction}" 
@@ -143,7 +143,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">실 수령액 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">手取り額 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryReceipts" value="${branchSalary.branchSalaryReceipts}" 
@@ -151,7 +151,7 @@
 								</div>
 							</div>
 							<div class="item form-group">
-								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">실 지급일자 <span class="required">*</span>
+								<label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">実支払い合計 <span class="required"></span>
 								</label>
 								<div class="col-md-6 col-sm-6 col-xs-12">
 									<input id="branchSalaryPaydate" value="${branchSalary.branchSalaryPaydate}"  
@@ -160,10 +160,10 @@
 							</div>
 							<div class="ln_solid"></div>
 							<div class="form-group">
-								<div class="col-md-6 col-md-offset-3">
-									<input type="button" class="btn btn-primary" value="목록" onclick="branchSalaryBtn('list')" name="list">
-									<input type="button" class="btn btn-success" value="수정" onclick="branchSalaryBtn('update')" name="update">
-									<button class="btn btn-primary" type="button" id="branchSalaryDelete" >삭제</button>
+								<div class="col-md-6 col-md-offset-4">
+									<input type="button" class="btn btn-primary" value="List" onclick="branchSalaryBtn('list')" name="list">
+									<input type="button" class="btn btn-success" value="Modify" onclick="branchSalaryBtn('update')" name="update">
+									<button class="btn btn-primary" type="button" id="branchSalaryDelete" >Delete</button>
 								</div>
 							</div>
 						</div>
