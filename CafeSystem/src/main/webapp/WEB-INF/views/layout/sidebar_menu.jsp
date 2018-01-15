@@ -10,13 +10,15 @@
 					<li><a href="${pageContext.request.contextPath}/">About Me</a></li>
 					<li><a href="${pageContext.request.contextPath}/project">About Project</a></li>
 					<li><a href="${pageContext.request.contextPath}/team">About Team</a></li>
+					
 				</ul></li>
+			<li><a href="https://blog.naver.com/synths" target="_black"><i class="fa fa-arrow-circle-right"></i> Owner's BLOG </a></li>	
 			<li><a href="${pageContext.request.contextPath}/start"><i class="fa fa-arrow-circle-right"></i> Project START </a></li>
 		</ul>
 	</div>
 <c:if test="${not empty sessionScope.loginInfo }">
 	<div class="menu_section">
-		<h3>본사</h3>
+		<h3>本社</h3>
 		<ul class="nav side-menu">
 			<li><a><i class="fa fa-building-o"></i> 店舗管理 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
@@ -52,7 +54,7 @@
 		</ul>
 	</div>
 	<div class="menu_section">
-		<h3>지점</h3>
+		<h3>支店</h3>
 		<ul class="nav side-menu">
 			<li><a><i class="fa fa-building-o"></i> 店舗管理 <span class="fa fa-chevron-down"></span></a>
 				<ul class="nav child_menu">
